@@ -187,15 +187,6 @@ summary_df <-
 # write_excel_csv(summary_df,"tmi_summary.csv")
 ```
 
-```{r, include=F}
-summary_df %>%
-  select(ends_with("_name"),n) %>%
-  collapsibleTree::collapsibleTreeSummary(
-    c("chapter_name","level_0_name","level_1_name"),
-    root = "Motifs",
-    attribute = "n",
-    width = 1000
-  )
-```
+
 
 
