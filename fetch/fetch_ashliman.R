@@ -97,5 +97,9 @@ aat <-
   df %>%
   filter(text != "") %>%
   filter(!is.na(tale_title)) %>%
-  filter(!str_detect(text,"^Return to D. L. Ashliman's folktexts|^Return to:$"))
+  filter(!str_detect(text,"^Return to D. L. Ashliman's folktexts|^Return to:$")) %>%
+  mutate(tale_title = str_squish(tale_title))
 
+write_csv(aat,"data/aat.csv")
+
+rm(list = c("df","pg","x","i","site_url","links"))
