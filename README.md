@@ -14,10 +14,16 @@ Replication
 ===========
 
 For the purposes of reproducibility and continual methodological
-improvement, we have made available the scripts used to obtain these
-datasets from online in the `fetch/` subfolder. The `tmi` dataset was
-built with the `fetch_motifs.R` script, the `atu` with the
-`fetch_taletypes.R` script, and the `aat` with the
-`fetch_ashliman.R`script. If you find issues with any of the datasets or
-scripts, please file an issue on this repository. If you make
-improvements to the scripts, please consider submitting a pull request.
+improvement, we have shared the scripts used to obtain and clean these
+datasets in the `fetch/` subfolder. The `tmi` dataset was built with the
+`fetch_motifs.R` script, the `atu` with the `fetch_taletypes.R` script,
+and the `aat` with the `fetch_ashliman.R`script. If you find issues with
+any of the datasets or scripts, please file an issue on this repository.
+If you make improvements to the scripts, please consider submitting a
+pull request.
+
+Please use, remix, and cite
+===========================
+
+This work is licensed under [CC BY-NC
+4.0](https://creativecommons.org/licenses/by-nc/4.0/).
