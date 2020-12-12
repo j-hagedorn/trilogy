@@ -1,0 +1,101 @@
+library(tidyverse); library(httr); library(rvest)
+
+site_url <- "http://www.pitt.edu/~dash/folktexts.html"
+
+pg <-
+  read_html(site_url) %>%
+  html_nodes("a") 
+
+links <- 
+  tibble(
+    type_name = pg %>% html_text(),
+    url = pg %>% html_attr("href")
+  ) %>%
+  filter(!is.na(url)) %>%
+  mutate(
+    rev_url = case_when(
+      str_detect(url,"^http") ~ url,
+      T ~ paste0("http://www.pitt.edu/~dash/",url)
+    ),
+    short_name = str_remove(url,".html")
+  ) %>%
+  filter(!str_detect(url,"^http")) %>%
+  # Only single letter
+  filter(!str_detect(url,"#[a-z]$")) %>%
+  filter(!str_detect(url,"^ashliman.html$|^folktexts.html$|^folktexts2.html$|^folklinks.html$")) %>%
+  filter(!str_detect(type_name,regex("essay",ignore_case = T))) %>%
+  filter(str_detect(short_name,regex("^type",ignore_case = T))) %>%
+  mutate(
+    atu_id = str_remove(short_name,"^type"),
+    atu_id = str_remove(atu_id,"jack$|#longfellow$|ast$")
+  ) %>%
+  select(type_name,atu_id,url = rev_url)
+  
+
+# for each sub-page...
+
+df <- tibble()
+
+for (i in 1:length(links$url)) {
+  
+  print(i)
+  
+  try(
+    {
+      pg <- 
+        read_html(links$url[i]) %>%
+        html_nodes("li , p, h3, a")
+      
+      x <-
+        tibble(
+          text = pg %>% html_text(),
+          name = pg %>% html_name(),
+          class = pg %>% html_attrs()
+        ) %>%
+        mutate(
+          type_name = links$type_name[i],
+          atu_id = links$atu_id[i],
+          type = case_when(
+            name == "a" & str_detect(class,"href") ~ "links",
+            name == "p"  ~ "text",
+            name == "a"  ~ "title",
+            str_detect(text,regex("^source",ignore_case = T))     ~ "source",
+            str_detect(text,regex("copyright|©",ignore_case = T)) ~ "copyright",
+            name == "h3" ~ "provenance",
+            name == "li" ~ "notes"
+          )
+        ) %>%
+        # remove TOC links
+        filter(!str_detect(text,regex("table of contents",ignore_case = T))) %>%
+        # divide front matter from tales
+        mutate(
+          div   = str_detect(class,"folktexts.html"),
+          div_n = cumsum(div)
+        ) %>%
+        filter(div_n == 1) %>%
+        filter(!str_detect(class,"folktexts.html")) %>%
+        # Exclude links to sources
+        filter(type != "links") %>%
+        select(-div,-div_n,-name,-class) %>%
+        mutate(tale_title = if_else(type == "title",text,NA_character_)) %>%
+        fill(tale_title,.direction = "down") %>%
+        filter(type != "title") %>%
+        group_by(type_name,atu_id,tale_title,type) %>%
+        summarize(text = paste(text,collapse = " ")) %>%
+        mutate(text = str_squish(text)) %>%
+        group_by(type_name,atu_id,tale_title) %>%
+        pivot_wider(names_from = "type",values_from = "text") %>%
+        select(type_name,atu_id,tale_title,text,everything())
+      
+      df <- bind_rows(df,x)
+    }
+  )
+  
+}
+
+aat <-
+  df %>%
+  filter(text != "") %>%
+  filter(!is.na(tale_title)) %>%
+  filter(!str_detect(text,"^Return to D. L. Ashliman's folktexts|^Return to:$"))
+
