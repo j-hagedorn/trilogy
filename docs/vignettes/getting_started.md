@@ -1,0 +1,49 @@
+``` r
+library(tidyverse)
+```
+
+    ## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+
+    ## v ggplot2 3.3.2     v purrr   0.3.4
+    ## v tibble  3.0.4     v dplyr   1.0.2
+    ## v tidyr   1.1.2     v stringr 1.4.0
+    ## v readr   1.4.0     v forcats 0.5.0
+
+    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+    ## x dplyr::filter() masks stats::filter()
+    ## x dplyr::lag()    masks stats::lag()
+
+It is assumed that users of this data may have different levels of
+proficiency with different data tools. Below are a few quick notes on
+how to access the data and start using it.
+
+# Cloning the repo locally
+
+If you cloned the GitHub repository on your local machine and have R
+installed, you can simply run the following:
+
+``` r
+tmi <- read_csv("data/tmi.csv")
+# atu <- read_csv("data/atu.csv")
+aat <- read_csv("data/aat.csv")
+```
+
+# Pulling from GitHub
+
+If you want to pull the raw flat files from the web using another coding
+language (e.g. Python), use the following steps:
+
+1.  Go to the [data folder of this
+    repo](https://github.com/j-hagedorn/trilogy/tree/master/data)
+2.  Select the data file you want to access (e.g. `tmi.csv`)
+3.  Click the “View raw” button to display the raw data format.
+4.  Copy the URL from the browser.
+
+You can then read the data into R, Python, or other tools.
+
+# Downloading to Excel
+
+Users who are comfortable using MS Excel can access the raw flat files
+using the URLs mentioned above and [import them into
+Excel](https://support.office.com/en-za/article/Import-or-export-text-txt-or-csv-files-5250ac4c-663c-47ce-937b-339e391393ba)
+using the steps outlined in the link.
