@@ -2,7 +2,7 @@
 title: "TMI Dataset Structure"
 output: 
   md_document:
-    variant: markdown_github
+    variant: gfm
 ---
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
