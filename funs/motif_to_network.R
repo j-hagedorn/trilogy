@@ -2,7 +2,7 @@
 library(tidyverse); library(tidygraph)
 
 # Clean up messiness
-df <- motifs %>% filter(!duplicated(id)) 
+df <- tmi %>% filter(!duplicated(id)) 
 
 chapter_df <- df %>% select(chapter_id,motif_name = chapter_name) %>% distinct()
 
