@@ -67,6 +67,8 @@ recode_links <-
     )
   )
 
+write_csv(recode_links,"ashliman_links.csv")
+
 ```
 
 The following still need a type identified:

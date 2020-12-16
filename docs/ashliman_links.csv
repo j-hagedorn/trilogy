@@ -1,268 +1,261 @@
-type_name,url,rev_url,short_name
-Abducted by Aliens,abduct.html,http://www.pitt.edu/~dash/abduct.html,abduct
-Advice Well Taken,type0910b.html,http://www.pitt.edu/~dash/type0910b.html,type0910b
-Aesop's Children,aesopskids.html,http://www.pitt.edu/~dash/aesopskids.html,aesopskids
+type_name,url,rev_url,short_name,rev_name
+Abducted by Aliens,abduct.html,http://www.pitt.edu/~dash/abduct.html,abduct,abduct
+Advice Well Taken,type0910b.html,http://www.pitt.edu/~dash/type0910b.html,type0910b,type0910b
+Aesop's Children,aesopskids.html,http://www.pitt.edu/~dash/aesopskids.html,aesopskids,aesopskids
 "Old Folks in Aesop's 
-Fables",aesopold.html,http://www.pitt.edu/~dash/aesopold.html,aesopold
+Fables",aesopold.html,http://www.pitt.edu/~dash/aesopold.html,aesopold,aesopold
 "Aging and Death 
-in Folklore",aging.html,http://www.pitt.edu/~dash/aging.html,aging
-Air Castles,type1430.html,http://www.pitt.edu/~dash/type1430.html,type1430
-Ali Baba and the Forty Thieves,alibaba.html,http://www.pitt.edu/~dash/alibaba.html,alibaba
-"Amleth, Prince of Denmark,",amleth.html,http://www.pitt.edu/~dash/amleth.html,amleth
-Androcles and the Lion,type0156.html,http://www.pitt.edu/~dash/type0156.html,type0156
-Animal Brides,type0402.html,http://www.pitt.edu/~dash/type0402.html,type0402
+in Folklore",aging.html,http://www.pitt.edu/~dash/aging.html,aging,aging
+Air Castles,type1430.html,http://www.pitt.edu/~dash/type1430.html,type1430,type1430
+Ali Baba and the Forty Thieves,alibaba.html,http://www.pitt.edu/~dash/alibaba.html,alibaba,type0676
+"Amleth, Prince of Denmark,",amleth.html,http://www.pitt.edu/~dash/amleth.html,amleth,amleth
+Androcles and the Lion,type0156.html,http://www.pitt.edu/~dash/type0156.html,type0156,type0156
+Animal Brides,type0402.html,http://www.pitt.edu/~dash/type0402.html,type0402,type0402
 "Animal Brides
-and Animal Bridegrooms: Tales Told by North American Indians",animalindian.html,http://www.pitt.edu/~dash/animalindian.html,animalindian
-Ant and Grasshopper,type0280a.html,http://www.pitt.edu/~dash/type0280a.html,type0280a
+and Animal Bridegrooms: Tales Told by North American Indians",animalindian.html,http://www.pitt.edu/~dash/animalindian.html,animalindian,type0402
+Ant and Grasshopper,type0280a.html,http://www.pitt.edu/~dash/type0280a.html,type0280a,type0280a
 "Anti-Semitic 
-Legends",antisemitic.html,http://www.pitt.edu/~dash/antisemitic.html,antisemitic
-witchcraft analogs,folktexts2.html#witchcraft,http://www.pitt.edu/~dash/folktexts2.html#witchcraft,folktexts2#witchcraft
+Legends",antisemitic.html,http://www.pitt.edu/~dash/antisemitic.html,antisemitic,antisemitic
+witchcraft analogs,folktexts2.html#witchcraft,http://www.pitt.edu/~dash/folktexts2.html#witchcraft,folktexts2#witchcraft,folktexts2#witchcraft
 "Arthur, Legendary King of Britain: 
-Excerpts from his Life Story",arthur.html,http://www.pitt.edu/~dash/arthur.html,arthur
+Excerpts from his Life Story",arthur.html,http://www.pitt.edu/~dash/arthur.html,arthur,arthur
 "Bald Stories: Folktales
-about Hairless Men",bald.html,http://www.pitt.edu/~dash/bald.html,bald
-The Bear Trainer and His Cat,type1161.html,http://www.pitt.edu/~dash/type1161.html,type1161
-Bearskin,type0361.html,http://www.pitt.edu/~dash/type0361.html,type0361
-Beauty and the Beast,type0425c.html,http://www.pitt.edu/~dash/type0425c.html,type0425c
-The Bell of Justice,type0207c.html,http://www.pitt.edu/~dash/type0207c.html,type0207c
-Sunken Bells,type7070.html,http://www.pitt.edu/~dash/type7070.html,type7070
-Beowulf: A Summary in English Prose,beowulf.html,http://www.pitt.edu/~dash/beowulf.html,beowulf
-Big Peter and Little Peter,norway133.html,http://www.pitt.edu/~dash/norway133.html,norway133
-The Bird's Three Precepts,type0150.html,http://www.pitt.edu/~dash/type0150.html,type0150
-The Birthmarks of the Princess,type0850.html,http://www.pitt.edu/~dash/type0850.html,type0850
-The Black School,type3000.html,http://www.pitt.edu/~dash/type3000.html,type3000
-The Blind Men and the Elephant,type1317.html,http://www.pitt.edu/~dash/type1317.html,type1317
-The Blood Brothers,type0303.html,http://www.pitt.edu/~dash/type0303.html,type0303
+about Hairless Men",bald.html,http://www.pitt.edu/~dash/bald.html,bald,bald
+The Bear Trainer and His Cat,type1161.html,http://www.pitt.edu/~dash/type1161.html,type1161,type1161
+Bearskin,type0361.html,http://www.pitt.edu/~dash/type0361.html,type0361,type0361
+Beauty and the Beast,type0425c.html,http://www.pitt.edu/~dash/type0425c.html,type0425c,type0425c
+The Bell of Justice,type0207c.html,http://www.pitt.edu/~dash/type0207c.html,type0207c,type0207c
+Sunken Bells,type7070.html,http://www.pitt.edu/~dash/type7070.html,type7070,type7070
+Beowulf: A Summary in English Prose,beowulf.html,http://www.pitt.edu/~dash/beowulf.html,beowulf,beowulf
+Big Peter and Little Peter,norway133.html,http://www.pitt.edu/~dash/norway133.html,norway133,type0133
+The Bird's Three Precepts,type0150.html,http://www.pitt.edu/~dash/type0150.html,type0150,type0150
+The Birthmarks of the Princess,type0850.html,http://www.pitt.edu/~dash/type0850.html,type0850,type0850
+The Black School,type3000.html,http://www.pitt.edu/~dash/type3000.html,type3000,type3000
+The Blind Men and the Elephant,type1317.html,http://www.pitt.edu/~dash/type1317.html,type1317,type1317
+The Blood Brothers,type0303.html,http://www.pitt.edu/~dash/type0303.html,type0303,type0303
 "The Blue Light by Jacob and Wilhelm Grimm: 
-A Comparison of the Versions of 1815 and 1857",grimm116a.html,http://www.pitt.edu/~dash/grimm116a.html,grimm116a
-The Blue Light,type0562.html,http://www.pitt.edu/~dash/type0562.html,type0562
-Bluebeard,type0312.html,http://www.pitt.edu/~dash/type0312.html,type0312
-The Blue Belt,bluebelt.html,http://www.pitt.edu/~dash/bluebelt.html,bluebelt
-The Boy Who Had Never Seen a Woman,type1678.html,http://www.pitt.edu/~dash/type1678.html,type1678
-The Enchanted Pear Tree,type1423.html,http://www.pitt.edu/~dash/type1423.html,type1423
-The Three-Ring Parable,type0972.html,http://www.pitt.edu/~dash/type0972.html,type0972
-Griselda,griselda.html,http://www.pitt.edu/~dash/griselda.html,griselda
-The Boy Who Had Never Seen a Woman,type1678.html,http://www.pitt.edu/~dash/type1678.html,type1678
-Breaking Wind: Legendary Farts,fart.html,http://www.pitt.edu/~dash/fart.html,fart
-The Bremen Town Musicians,type0130.html,http://www.pitt.edu/~dash/type0130.html,type0130
-Bride Tests,type1451.html,http://www.pitt.edu/~dash/type1451.html,type1451
-The Blood Brothers,type0303.html,http://www.pitt.edu/~dash/type0303.html,type0303
-The Brothers Who Were Turned into Birds,type0451.html,http://www.pitt.edu/~dash/type0451.html,type0451
-Bump in the Night,bump.html,http://www.pitt.edu/~dash/bump.html,bump
-Cain and Abel,cain.html,http://www.pitt.edu/~dash/cain.html,cain
-The Place Where There Were No Graves,nograves.html,http://www.pitt.edu/~dash/nograves.html,nograves
-Cat and Mouse,cat.html,http://www.pitt.edu/~dash/cat.html,cat
-Cattarinetta,type0333a.html,http://www.pitt.edu/~dash/type0333a.html,type0333a
-"Censorship in Folklore: 
-An Essay by D. L. Ashliman",censor.html,http://www.pitt.edu/~dash/censor.html,censor
-Type 2015: Nanny Who Wouldn't Go Home to Supper,type2015.html,http://www.pitt.edu/~dash/type2015.html,type2015
-Type 2022: Mourning the Death of a Spouse,type2022.html,http://www.pitt.edu/~dash/type2022.html,type2022
-Type 2025: The Runaway Pancake,type2025.html,http://www.pitt.edu/~dash/type2025.html,type2025
-Type 2030,type2030.html,http://www.pitt.edu/~dash/type2030.html,type2030
-Type 2031C: The Mouse Who Was to Marry the Sun,type2031c.html,http://www.pitt.edu/~dash/type2031c.html,type2031c
-Type 2032,type2032.html,http://www.pitt.edu/~dash/type2032.html,type2032
-Type 20C (formerly type 2033): The End of the World (The Sky Is Falling In),type2033.html,http://www.pitt.edu/~dash/type2033.html,type2033
-Type 2034D,type2034d.html,http://www.pitt.edu/~dash/type2034d.html,type2034d
-Type 2035: The House That Jack Built,type2035.html,http://www.pitt.edu/~dash/type2035.html,type2035
-Type 2043: What Have You Got There?,type2043.html,http://www.pitt.edu/~dash/type2043.html,type2043
-Tikki Tikki Tembo,tikki.html,http://www.pitt.edu/~dash/tikki.html,tikki
-"Changelings: An
-Essay by D. L. Ashliman",changeling.html,http://www.pitt.edu/~dash/changeling.html,changeling
-The Changeling,lowell.html,http://www.pitt.edu/~dash/lowell.html,lowell
+A Comparison of the Versions of 1815 and 1857",grimm116a.html,http://www.pitt.edu/~dash/grimm116a.html,grimm116a,type0116a
+The Blue Light,type0562.html,http://www.pitt.edu/~dash/type0562.html,type0562,type0562
+Bluebeard,type0312.html,http://www.pitt.edu/~dash/type0312.html,type0312,type0312
+The Blue Belt,bluebelt.html,http://www.pitt.edu/~dash/bluebelt.html,bluebelt,bluebelt
+The Boy Who Had Never Seen a Woman,type1678.html,http://www.pitt.edu/~dash/type1678.html,type1678,type1678
+The Enchanted Pear Tree,type1423.html,http://www.pitt.edu/~dash/type1423.html,type1423,type1423
+The Three-Ring Parable,type0972.html,http://www.pitt.edu/~dash/type0972.html,type0972,type0972
+Griselda,griselda.html,http://www.pitt.edu/~dash/griselda.html,griselda,griselda
+Breaking Wind: Legendary Farts,fart.html,http://www.pitt.edu/~dash/fart.html,fart,fart
+The Bremen Town Musicians,type0130.html,http://www.pitt.edu/~dash/type0130.html,type0130,type0130
+Bride Tests,type1451.html,http://www.pitt.edu/~dash/type1451.html,type1451,type1451
+The Brothers Who Were Turned into Birds,type0451.html,http://www.pitt.edu/~dash/type0451.html,type0451,type0451
+Bump in the Night,bump.html,http://www.pitt.edu/~dash/bump.html,bump,bump
+Cain and Abel,cain.html,http://www.pitt.edu/~dash/cain.html,cain,cain
+The Place Where There Were No Graves,nograves.html,http://www.pitt.edu/~dash/nograves.html,nograves,nograves
+Cat and Mouse,cat.html,http://www.pitt.edu/~dash/cat.html,cat,cat
+Cattarinetta,type0333a.html,http://www.pitt.edu/~dash/type0333a.html,type0333a,type0333a
+Type 2015: Nanny Who Wouldn't Go Home to Supper,type2015.html,http://www.pitt.edu/~dash/type2015.html,type2015,type2015
+Type 2022: Mourning the Death of a Spouse,type2022.html,http://www.pitt.edu/~dash/type2022.html,type2022,type2022
+Type 2025: The Runaway Pancake,type2025.html,http://www.pitt.edu/~dash/type2025.html,type2025,type2025
+Type 2030,type2030.html,http://www.pitt.edu/~dash/type2030.html,type2030,type2030
+Type 2031C: The Mouse Who Was to Marry the Sun,type2031c.html,http://www.pitt.edu/~dash/type2031c.html,type2031c,type2031c
+Type 2032,type2032.html,http://www.pitt.edu/~dash/type2032.html,type2032,type2032
+Type 20C (formerly type 2033): The End of the World (The Sky Is Falling In),type2033.html,http://www.pitt.edu/~dash/type2033.html,type2033,type0020c
+Type 2034D,type2034d.html,http://www.pitt.edu/~dash/type2034d.html,type2034d,type2034d
+Type 2035: The House That Jack Built,type2035.html,http://www.pitt.edu/~dash/type2035.html,type2035,type2035
+Type 2043: What Have You Got There?,type2043.html,http://www.pitt.edu/~dash/type2043.html,type2043,type2043
+Tikki Tikki Tembo,tikki.html,http://www.pitt.edu/~dash/tikki.html,tikki,tikki
+The Changeling,lowell.html,http://www.pitt.edu/~dash/lowell.html,lowell,lowell
 "The 
-Changeling",whittier.html#changeling,http://www.pitt.edu/~dash/whittier.html#changeling,whittier#changeling
+Changeling",whittier.html#changeling,http://www.pitt.edu/~dash/whittier.html#changeling,whittier#changeling,whittier#changeling
 "Changeling 
-Legends from the British Isles",britchange.html,http://www.pitt.edu/~dash/britchange.html,britchange
+Legends from the British Isles",britchange.html,http://www.pitt.edu/~dash/britchange.html,britchange,britchange
 "German Changeling
-Legends",gerchange.html,http://www.pitt.edu/~dash/gerchange.html,gerchange
-Scandinavian  Changeling Legends,scanchange.html,http://www.pitt.edu/~dash/scanchange.html,scanchange
-Charms against Sprains,spraincharm.html,http://www.pitt.edu/~dash/spraincharm.html,spraincharm
-Merseburg Incantation,merseburg.html#2,http://www.pitt.edu/~dash/merseburg.html#2,merseburg#2
-The Enchanted Pear Tree,type1423.html,http://www.pitt.edu/~dash/type1423.html,type1423
-Child Custody,type0926.html,http://www.pitt.edu/~dash/type0926.html,type0926
- A Chinese Creation and Flood Myth,chinaflood.html,http://www.pitt.edu/~dash/chinaflood.html,chinaflood
-Cinderella,type0510a.html,http://www.pitt.edu/~dash/type0510a.html,type0510a
-The Green Knight,greenknight.html,http://www.pitt.edu/~dash/greenknight.html,greenknight
+Legends",gerchange.html,http://www.pitt.edu/~dash/gerchange.html,gerchange,gerchange
+Scandinavian  Changeling Legends,scanchange.html,http://www.pitt.edu/~dash/scanchange.html,scanchange,scanchange
+Charms against Sprains,spraincharm.html,http://www.pitt.edu/~dash/spraincharm.html,spraincharm,spraincharm
+Merseburg Incantation,merseburg.html#2,http://www.pitt.edu/~dash/merseburg.html#2,merseburg#2,merseburg#2
+Child Custody,type0926.html,http://www.pitt.edu/~dash/type0926.html,type0926,type0926
+ A Chinese Creation and Flood Myth,chinaflood.html,http://www.pitt.edu/~dash/chinaflood.html,chinaflood,chinaflood
+Cinderella,type0510a.html,http://www.pitt.edu/~dash/type0510a.html,type0510a,type0510a
+The Green Knight,greenknight.html,http://www.pitt.edu/~dash/greenknight.html,greenknight,greenknight
 "The
-Father Who Wanted to Marry His Daughter",type0510b.html,http://www.pitt.edu/~dash/type0510b.html,type0510b
-Clothes Make the Man,type1558.html,http://www.pitt.edu/~dash/type1558.html,type1558
-A Corpse Claims Its Property,type0366.html,http://www.pitt.edu/~dash/type0366.html,type0366
-"The Crane, the Crab, and the Fish",type0231.html,http://www.pitt.edu/~dash/type0231.html,type0231
-Blackfoot Creation and Origin Myths,blkftcreation.html,http://www.pitt.edu/~dash/blkftcreation.html,blkftcreation
-A Chinese Creation and Flood Myth,chinaflood.html,http://www.pitt.edu/~dash/chinaflood.html,chinaflood
-Creation Myths from the Philippines,creation-phil.html,http://www.pitt.edu/~dash/creation-phil.html,creation-phil
+Father Who Wanted to Marry His Daughter",type0510b.html,http://www.pitt.edu/~dash/type0510b.html,type0510b,type0510b
+Clothes Make the Man,type1558.html,http://www.pitt.edu/~dash/type1558.html,type1558,type1558
+A Corpse Claims Its Property,type0366.html,http://www.pitt.edu/~dash/type0366.html,type0366,type0366
+"The Crane, the Crab, and the Fish",type0231.html,http://www.pitt.edu/~dash/type0231.html,type0231,type0231
+Blackfoot Creation and Origin Myths,blkftcreation.html,http://www.pitt.edu/~dash/blkftcreation.html,blkftcreation,blkftcreation
+A Chinese Creation and Flood Myth,chinaflood.html,http://www.pitt.edu/~dash/chinaflood.html,chinaflood,chinaflood
+Creation Myths from the Philippines,creation-phil.html,http://www.pitt.edu/~dash/creation-phil.html,creation-phil,creation-phil
 "The Raelian Creation of Life on 
-Earth",rael.html,http://www.pitt.edu/~dash/rael.html,rael
+Earth",rael.html,http://www.pitt.edu/~dash/rael.html,rael,rael
 "In the beginning God created 
-the heaven and the earth",genesis01-03.html,http://www.pitt.edu/~dash/genesis01-03.html,genesis01-03
-Legendary Origins,origins.html,http://www.pitt.edu/~dash/origins.html,origins
-The Origin of Underground People,originunder.html,http://www.pitt.edu/~dash/originunder.html,originunder
-Paiute Creation and Origin Legends,paiute.html,http://www.pitt.edu/~dash/paiute.html,paiute
-Crop Division between Man and Ogre,type1030.html,http://www.pitt.edu/~dash/type1030.html,type1030
-Cupid and Psyche,cupid.html,http://www.pitt.edu/~dash/cupid.html,cupid
-Dancing in Thorns,type0592.html,http://www.pitt.edu/~dash/type0592.html,type0592
+the heaven and the earth",genesis01-03.html,http://www.pitt.edu/~dash/genesis01-03.html,genesis01-03,genesis01-03
+Legendary Origins,origins.html,http://www.pitt.edu/~dash/origins.html,origins,origins
+The Origin of Underground People,originunder.html,http://www.pitt.edu/~dash/originunder.html,originunder,originunder
+Paiute Creation and Origin Legends,paiute.html,http://www.pitt.edu/~dash/paiute.html,paiute,paiute
+Crop Division between Man and Ogre,type1030.html,http://www.pitt.edu/~dash/type1030.html,type1030,type1030
+Cupid and Psyche,cupid.html,http://www.pitt.edu/~dash/cupid.html,cupid,cupid
+Dancing in Thorns,type0592.html,http://www.pitt.edu/~dash/type0592.html,type0592,type0592
 "Death of a Child:
-Folktales about Excessive Mourning",mourn.html,http://www.pitt.edu/~dash/mourn.html,mourn
-"Death of an Underground Person, or of the King of the Cats",type6070b.html,http://www.pitt.edu/~dash/type6070b.html,type6070b
-Death of the Seven Dwarfs,dwarfs.html,http://www.pitt.edu/~dash/dwarfs.html,dwarfs
-Death's Messengers,type0335.html,http://www.pitt.edu/~dash/type0335.html,type0335
-How the Devil Married Three Sisters,type0311.html,http://www.pitt.edu/~dash/type0311.html,type0311
-The Devil (or Ogre) and the Gun,type1157.html,http://www.pitt.edu/~dash/type1157.html,type1157
-Deceiving the Devil with a Rope of Sand,type1174.html,http://www.pitt.edu/~dash/type1174.html,type1174
-Straightening a Curly Hair,type1175.html,http://www.pitt.edu/~dash/type1175.html,type1175
-Deceiving the Devil by Breaking Wind,type1176.html,http://www.pitt.edu/~dash/type1176.html,type1176
-Devil's Bridge Legends,type1191.html,http://www.pitt.edu/~dash/type1191.html,type1191
-Dividing Souls in the Graveyard,type1791.html,http://www.pitt.edu/~dash/type1791.html,type1791
-Doctor Know-All,type1641.html,http://www.pitt.edu/~dash/type1641.html,type1641
-Dragon Slayers: An Index Page,dragonslayers.html,http://www.pitt.edu/~dash/dragonslayers.html,dragonslayers
-Dream Bread,type1626.html,http://www.pitt.edu/~dash/type1626.html,type1626
-Dream Treasure Turns to Filth,type1645b.html,http://www.pitt.edu/~dash/type1645b.html,type1645b
+Folktales about Excessive Mourning",mourn.html,http://www.pitt.edu/~dash/mourn.html,mourn,mourn
+"Death of an Underground Person, or of the King of the Cats",type6070b.html,http://www.pitt.edu/~dash/type6070b.html,type6070b,type6070b
+Death of the Seven Dwarfs,dwarfs.html,http://www.pitt.edu/~dash/dwarfs.html,dwarfs,dwarfs
+Death's Messengers,type0335.html,http://www.pitt.edu/~dash/type0335.html,type0335,type0335
+How the Devil Married Three Sisters,type0311.html,http://www.pitt.edu/~dash/type0311.html,type0311,type0311
+The Devil (or Ogre) and the Gun,type1157.html,http://www.pitt.edu/~dash/type1157.html,type1157,type1157
+Deceiving the Devil with a Rope of Sand,type1174.html,http://www.pitt.edu/~dash/type1174.html,type1174,type1174
+Straightening a Curly Hair,type1175.html,http://www.pitt.edu/~dash/type1175.html,type1175,type1175
+Deceiving the Devil by Breaking Wind,type1176.html,http://www.pitt.edu/~dash/type1176.html,type1176,type1176
+Devil's Bridge Legends,type1191.html,http://www.pitt.edu/~dash/type1191.html,type1191,type1191
+Dividing Souls in the Graveyard,type1791.html,http://www.pitt.edu/~dash/type1791.html,type1791,type1791
+Doctor Know-All,type1641.html,http://www.pitt.edu/~dash/type1641.html,type1641,type1641
+Dragon Slayers: An Index Page,dragonslayers.html,http://www.pitt.edu/~dash/dragonslayers.html,dragonslayers,dragonslayers
+Dream Bread,type1626.html,http://www.pitt.edu/~dash/type1626.html,type1626,type1626
+Dream Treasure Turns to Filth,type1645b.html,http://www.pitt.edu/~dash/type1645b.html,type1645b,type1645b
 "The Man Who Became Rich
-through a Dream",type1645.html,http://www.pitt.edu/~dash/type1645.html,type1645
+through a Dream",type1645.html,http://www.pitt.edu/~dash/type1645.html,type1645,type1645
 "East of the Sun and West
-of the Moon",norway034.html,http://www.pitt.edu/~dash/norway034.html,norway034
-Eat Me When I'm Fatter,type0122f.html,http://www.pitt.edu/~dash/type0122f.html,type0122f
-"Edenhall, The Luck of",edenhall.html,http://www.pitt.edu/~dash/edenhall.html,edenhall
-The Emperor's New Clothes,type1620.html,http://www.pitt.edu/~dash/type1620.html,type1620
-End of the World,type2033.html,http://www.pitt.edu/~dash/type2033.html,type2033
+of the Moon",norway034.html,http://www.pitt.edu/~dash/norway034.html,norway034,norway034
+Eat Me When I'm Fatter,type0122f.html,http://www.pitt.edu/~dash/type0122f.html,type0122f,type0122f
+"Edenhall, The Luck of",edenhall.html,http://www.pitt.edu/~dash/edenhall.html,edenhall,edenhall
+The Emperor's New Clothes,type1620.html,http://www.pitt.edu/~dash/type1620.html,type1620,type1620
+End of the World,type2033.html,http://www.pitt.edu/~dash/type2033.html,type2033,type0020c
 "Folklore, Folktales, and Fairy 
-Tales from England",england.html,http://www.pitt.edu/~dash/england.html,england
+Tales from England",england.html,http://www.pitt.edu/~dash/england.html,england,england
 "Ertha, the Germanic
-Earth Goddess",ertha.html,http://www.pitt.edu/~dash/ertha.html,ertha
-Fairies' Hope for Christian Salvation,type5050.html,http://www.pitt.edu/~dash/type5050.html,type5050
-A Fairy Captured,type6010.html,http://www.pitt.edu/~dash/type6010.html,type6010
-Fairy Cup Legends,type6045.html,http://www.pitt.edu/~dash/type6045.html,type6045
-The Fairy Flag of Dunraven Castle,dunvegan.html,http://www.pitt.edu/~dash/dunvegan.html,dunvegan
-Fairy Gifts,type0503.html,http://www.pitt.edu/~dash/type0503.html,type0503
-Fairy Theft,fairytheft.html,http://www.pitt.edu/~dash/fairytheft.html,fairytheft
-The Faithful Wife,type0888.html,http://www.pitt.edu/~dash/type0888.html,type0888
-Andreas Grein of Purbach,purbach.html,http://www.pitt.edu/~dash/purbach.html,purbach
+Earth Goddess",ertha.html,http://www.pitt.edu/~dash/ertha.html,ertha,ertha
+Fairies' Hope for Christian Salvation,type5050.html,http://www.pitt.edu/~dash/type5050.html,type5050,type5050
+A Fairy Captured,type6010.html,http://www.pitt.edu/~dash/type6010.html,type6010,type6010
+Fairy Cup Legends,type6045.html,http://www.pitt.edu/~dash/type6045.html,type6045,type6045
+The Fairy Flag of Dunraven Castle,dunvegan.html,http://www.pitt.edu/~dash/dunvegan.html,dunvegan,dunvegan
+Fairy Gifts,type0503.html,http://www.pitt.edu/~dash/type0503.html,type0503,type0503
+Fairy Theft,fairytheft.html,http://www.pitt.edu/~dash/fairytheft.html,fairytheft,fairytheft
+The Faithful Wife,type0888.html,http://www.pitt.edu/~dash/type0888.html,type0888,type0888
+Andreas Grein of Purbach,purbach.html,http://www.pitt.edu/~dash/purbach.html,purbach,purbach
 "The Father Who Wanted to Marry His
-Daughter",type0510b.html,http://www.pitt.edu/~dash/type0510b.html,type0510b
-Faust Legends,faust.html,http://www.pitt.edu/~dash/faust.html,faust
-The Fisherman and His Wife,type0555.html,http://www.pitt.edu/~dash/type0555.html,type0555
-Flood Myths from the Philippines,flood-phil.html,http://www.pitt.edu/~dash/flood-phil.html,flood-phil
-The Flying Dutchman,type0777ast.html,http://www.pitt.edu/~dash/type0777ast.html,type0777ast
-The Foolish Friend,type1586.html,http://www.pitt.edu/~dash/type1586.html,type1586
-Foolish Wishes,type0750a.html,http://www.pitt.edu/~dash/type0750a.html,type0750a
+Daughter",type0510b.html,http://www.pitt.edu/~dash/type0510b.html,type0510b,type0510b
+Faust Legends,faust.html,http://www.pitt.edu/~dash/faust.html,faust,faust
+The Fisherman and His Wife,type0555.html,http://www.pitt.edu/~dash/type0555.html,type0555,type0555
+Flood Myths from the Philippines,flood-phil.html,http://www.pitt.edu/~dash/flood-phil.html,flood-phil,flood-phil
+The Flying Dutchman,type0777ast.html,http://www.pitt.edu/~dash/type0777ast.html,type0777ast,type0777ast
+The Foolish Friend,type1586.html,http://www.pitt.edu/~dash/type1586.html,type1586,type1586
+Foolish Wishes,type0750a.html,http://www.pitt.edu/~dash/type0750a.html,type0750a,type0750a
 "A Fool Does Not Count the 
-Animal He Is Riding",type1288a.html,http://www.pitt.edu/~dash/type1288a.html,type1288a
-The Fool Whose Wishes All Came True,type0675.html,http://www.pitt.edu/~dash/type0675.html,type0675
-Fools Cannot Count Themselves,type1287.html,http://www.pitt.edu/~dash/type1287.html,type1287
-Forgiveness and Redemption,type0756.html,http://www.pitt.edu/~dash/type0756.html,type0756
-The Fox and the Cat,type0105.html,http://www.pitt.edu/~dash/type0105.html,type0105
-The Fox and the Crow,type0057.html,http://www.pitt.edu/~dash/type0057.html,type0057
-The Fox (or Jackal) and the Fleas,type0063.html,http://www.pitt.edu/~dash/type0063.html,type0063
-The Fox Steals the Butter,type0015.html,http://www.pitt.edu/~dash/type0015.html,type0015
-"The Fox, the Wolf, and the Horse",type0047e.html,http://www.pitt.edu/~dash/type0047e.html,type0047e
-Frau Holle,grimm024a.html,http://www.pitt.edu/~dash/grimm024a.html,grimm024a
-Frau Holle and Other Tales of Type 480,type0480.html,http://www.pitt.edu/~dash/type0480.html,type0480
-Friday,friday.html,http://www.pitt.edu/~dash/friday.html,friday
-Fridleif the Dragon Slayer,fridleif.html,http://www.pitt.edu/~dash/fridleif.html,fridleif
-Frog Kings,frog.html,http://www.pitt.edu/~dash/frog.html,frog
+Animal He Is Riding",type1288a.html,http://www.pitt.edu/~dash/type1288a.html,type1288a,type1288a
+The Fool Whose Wishes All Came True,type0675.html,http://www.pitt.edu/~dash/type0675.html,type0675,type0675
+Fools Cannot Count Themselves,type1287.html,http://www.pitt.edu/~dash/type1287.html,type1287,type1287
+Forgiveness and Redemption,type0756.html,http://www.pitt.edu/~dash/type0756.html,type0756,type0756
+The Fox and the Cat,type0105.html,http://www.pitt.edu/~dash/type0105.html,type0105,type0105
+The Fox and the Crow,type0057.html,http://www.pitt.edu/~dash/type0057.html,type0057,type0057
+The Fox (or Jackal) and the Fleas,type0063.html,http://www.pitt.edu/~dash/type0063.html,type0063,type0063
+The Fox Steals the Butter,type0015.html,http://www.pitt.edu/~dash/type0015.html,type0015,type0015
+"The Fox, the Wolf, and the Horse",type0047e.html,http://www.pitt.edu/~dash/type0047e.html,type0047e,type0047e
+Frau Holle,grimm024a.html,http://www.pitt.edu/~dash/grimm024a.html,grimm024a,grimm024a
+Frau Holle and Other Tales of Type 480,type0480.html,http://www.pitt.edu/~dash/type0480.html,type0480,type0480
+Friday,friday.html,http://www.pitt.edu/~dash/friday.html,friday,type0779j*
+Fridleif the Dragon Slayer,fridleif.html,http://www.pitt.edu/~dash/fridleif.html,fridleif,fridleif
+Frog Kings,frog.html,http://www.pitt.edu/~dash/frog.html,frog,type0440
 "The Frog King 
-by the brothers Grimm",frogking.html,http://www.pitt.edu/~dash/frogking.html,frogking
+by the brothers Grimm",frogking.html,http://www.pitt.edu/~dash/frogking.html,frogking,type0440
 "Der Froschkönig von den 
-Brüdern Grimm",froschkoenig.html,http://www.pitt.edu/~dash/froschkoenig.html,froschkoenig
-The Two Frogs,type0278a.html,http://www.pitt.edu/~dash/type0278a.html,type0278a
+Brüdern Grimm",froschkoenig.html,http://www.pitt.edu/~dash/froschkoenig.html,froschkoenig,froschkoenig
+The Two Frogs,type0278a.html,http://www.pitt.edu/~dash/type0278a.html,type0278a,type0278a
 "Gambara and the
-Longbeards (Langobards)",gambara.html,http://www.pitt.edu/~dash/gambara.html,gambara
+Longbeards (Langobards)",gambara.html,http://www.pitt.edu/~dash/gambara.html,gambara,gambara
 "Gefion's Home
-Page",gefion.html,http://www.pitt.edu/~dash/gefion.html,gefion
-Haunted by the Ghost of a Murdered Child,type4025.html,http://www.pitt.edu/~dash/type4025.html,type4025
+Page",gefion.html,http://www.pitt.edu/~dash/gefion.html,gefion,gefion
+Haunted by the Ghost of a Murdered Child,type4025.html,http://www.pitt.edu/~dash/type4025.html,type4025,type4025
 "The Girl with 
-White Hands",whitehands.html,http://www.pitt.edu/~dash/whitehands.html,whitehands
-The Girl without Hands,type0706.html,http://www.pitt.edu/~dash/type0706.html,type0706
-Godfather Death,type0332.html,http://www.pitt.edu/~dash/type0332.html,type0332
-Godiva,godiva.html,http://www.pitt.edu/~dash/godiva.html,godiva
-Golden Fowls,goldfowl.html,http://www.pitt.edu/~dash/goldfowl.html,goldfowl
-The Golden Key,grimm200.html,http://www.pitt.edu/~dash/grimm200.html,grimm200
-The Grateful Animals and the Ungrateful Man,type0160.html,http://www.pitt.edu/~dash/type0160.html,type0160
-The Grateful Dead,type0505.html,http://www.pitt.edu/~dash/type0505.html,type0505
-Greed,type0068a.html,http://www.pitt.edu/~dash/type0068a.html,type0068a
-Grimm Brothers' Home Page,grimm.html,http://www.pitt.edu/~dash/grimm.html,grimm
+White Hands",whitehands.html,http://www.pitt.edu/~dash/whitehands.html,whitehands,whitehands
+The Girl without Hands,type0706.html,http://www.pitt.edu/~dash/type0706.html,type0706,type0706
+Godfather Death,type0332.html,http://www.pitt.edu/~dash/type0332.html,type0332,type0332
+Godiva,godiva.html,http://www.pitt.edu/~dash/godiva.html,godiva,godiva
+Golden Fowls,goldfowl.html,http://www.pitt.edu/~dash/goldfowl.html,goldfowl,goldfowl
+The Golden Key,grimm200.html,http://www.pitt.edu/~dash/grimm200.html,grimm200,grimm200
+The Grateful Animals and the Ungrateful Man,type0160.html,http://www.pitt.edu/~dash/type0160.html,type0160,type0160
+The Grateful Dead,type0505.html,http://www.pitt.edu/~dash/type0505.html,type0505,type0505
+Greed,type0068a.html,http://www.pitt.edu/~dash/type0068a.html,type0068a,type0068a
+Grimm Brothers' Home Page,grimm.html,http://www.pitt.edu/~dash/grimm.html,grimm,grimm
 "Grimms' Children's and Household 
 Tales
-",grimmtales.html,http://www.pitt.edu/~dash/grimmtales.html,grimmtales
+",grimmtales.html,http://www.pitt.edu/~dash/grimmtales.html,grimmtales,grimmtales
 "The Grimms' Fairy
-Tales",grimmtales.html,http://www.pitt.edu/~dash/grimmtales.html,grimmtales
-Grimms' Fairy Tales in English,grimm-engl.html,http://www.pitt.edu/~dash/grimm-engl.html,grimm-engl
-Hand from the Grave,type0779.html,http://www.pitt.edu/~dash/type0779.html,type0779
-Hand of Glory,hand.html,http://www.pitt.edu/~dash/hand.html,hand
-Hands,#girlwithouthands,http://www.pitt.edu/~dash/#girlwithouthands,#girlwithouthands
-Hanging Game,type1066.html,http://www.pitt.edu/~dash/type1066.html,type1066
-Hansel and Gretel,grimm015a.html,http://www.pitt.edu/~dash/grimm015a.html,grimm015a
+Tales",grimmtales.html,http://www.pitt.edu/~dash/grimmtales.html,grimmtales,grimmtales
+Grimms' Fairy Tales in English,grimm-engl.html,http://www.pitt.edu/~dash/grimm-engl.html,grimm-engl,grimm-engl
+Hand from the Grave,type0779.html,http://www.pitt.edu/~dash/type0779.html,type0779,type0779
+Hand of Glory,hand.html,http://www.pitt.edu/~dash/hand.html,hand,type0958e*
+Hands,#girlwithouthands,http://www.pitt.edu/~dash/#girlwithouthands,#girlwithouthands,#girlwithouthands
+Hanging Game,type1066.html,http://www.pitt.edu/~dash/type1066.html,type1066,type1343
+Hansel and Gretel,grimm015a.html,http://www.pitt.edu/~dash/grimm015a.html,grimm015a,grimm015a
 "Hansel and Gretel, and 
 other type 
 327 folktales about 
-abandoned children",type0327.html,http://www.pitt.edu/~dash/type0327.html,type0327
+abandoned children",type0327.html,http://www.pitt.edu/~dash/type0327.html,type0327,type0327
 "Hávamál:  
-The Words of Odin the High One",havamal.html,http://www.pitt.edu/~dash/havamal.html,havamal
-"Hello, House!",type0066a.html,http://www.pitt.edu/~dash/type0066a.html,type0066a
-Hertha Lake,hertha.html,http://www.pitt.edu/~dash/hertha.html,hertha
-Hildebrandslied,hildebrand.html,http://www.pitt.edu/~dash/hildebrand.html,hildebrand
-The Himphamp,type0571b.html,http://www.pitt.edu/~dash/type0571b.html,type0571b
+The Words of Odin the High One",havamal.html,http://www.pitt.edu/~dash/havamal.html,havamal,havamal
+"Hello, House!",type0066a.html,http://www.pitt.edu/~dash/type0066a.html,type0066a,type0066a
+Hertha Lake,hertha.html,http://www.pitt.edu/~dash/hertha.html,hertha,hertha
+Hildebrandslied,hildebrand.html,http://www.pitt.edu/~dash/hildebrand.html,hildebrand,hildebrand
+The Himphamp,type0571b.html,http://www.pitt.edu/~dash/type0571b.html,type0571b,type0571b
 "Nasreddin Hodja: 
-Tales of the Turkish Trickster",folktexts2.html#nasreddin,http://www.pitt.edu/~dash/folktexts2.html#nasreddin,folktexts2#nasreddin
-Hog Bridegrooms,hog.html,http://www.pitt.edu/~dash/hog.html,hog
-Catching a Horse by Its Tail,type0047a.html,http://www.pitt.edu/~dash/type0047a.html,type0047a
-Hot and Cold with the Same Breath,type1342.html,http://www.pitt.edu/~dash/type1342.html,type1342
-The Husband Who Was to Mind the House,norway010.html,http://www.pitt.edu/~dash/norway010.html,norway010
+Tales of the Turkish Trickster",folktexts2.html#nasreddin,http://www.pitt.edu/~dash/folktexts2.html#nasreddin,folktexts2#nasreddin,folktexts2#nasreddin
+Hog Bridegrooms,hog.html,http://www.pitt.edu/~dash/hog.html,hog,hog
+Catching a Horse by Its Tail,type0047a.html,http://www.pitt.edu/~dash/type0047a.html,type0047a,type0047a
+Hot and Cold with the Same Breath,type1342.html,http://www.pitt.edu/~dash/type1342.html,type1342,type1342
+The Husband Who Was to Mind the House,norway010.html,http://www.pitt.edu/~dash/norway010.html,norway010,norway010
 "Human Sacrifice in
-Legends and Myths",sacrifice.html,http://www.pitt.edu/~dash/sacrifice.html,sacrifice
-Iceland Accepts Christianity,njal100.html,http://www.pitt.edu/~dash/njal100.html,njal100
-Ingratitude Is the World's Reward,type0155.html,http://www.pitt.edu/~dash/type0155.html,type0155
+Legends and Myths",sacrifice.html,http://www.pitt.edu/~dash/sacrifice.html,sacrifice,sacrifice
+Iceland Accepts Christianity,njal100.html,http://www.pitt.edu/~dash/njal100.html,njal100,njal100
+Ingratitude Is the World's Reward,type0155.html,http://www.pitt.edu/~dash/type0155.html,type0155,type0155
 "Folklore, Folktales, and Fairy 
-Tales from Ireland",ireland.html,http://www.pitt.edu/~dash/ireland.html,ireland
-Jack and the Beanstalk,type0328jack.html,http://www.pitt.edu/~dash/type0328jack.html,type0328jack
-The Jackal and the Farmer,type0154.html,http://www.pitt.edu/~dash/type0154.html,type0154
-"Folklore, Folktales, and Fairy Tales from Japan",japantales.html,http://www.pitt.edu/~dash/japantales.html,japantales
+Tales from Ireland",ireland.html,http://www.pitt.edu/~dash/ireland.html,ireland,ireland
+Jack and the Beanstalk,type0328jack.html,http://www.pitt.edu/~dash/type0328jack.html,type0328jack,type0328jack
+The Jackal and the Farmer,type0154.html,http://www.pitt.edu/~dash/type0154.html,type0154,type0154
+"Folklore, Folktales, and Fairy Tales from Japan",japantales.html,http://www.pitt.edu/~dash/japantales.html,japantales,japantales
 "Japanese 
-Folktales",japan.html,http://www.pitt.edu/~dash/japan.html,japan
+Folktales",japan.html,http://www.pitt.edu/~dash/japan.html,japan,japan
 "Japanese Legends
-about Supernatural Sweethearts",japanlove.html,http://www.pitt.edu/~dash/japanlove.html,japanlove
-Jataka Tales,jataka.html,http://www.pitt.edu/~dash/jataka.html,jataka
-Jephthah and His Daughter,jephthah.html,http://www.pitt.edu/~dash/jephthah.html,jephthah
-Kora and His Sister,kora.html,http://www.pitt.edu/~dash/kora.html,kora
-The Lambton Worm,lambton.html,http://www.pitt.edu/~dash/lambton.html,lambton
-Andrew Lang's Colored Fairy Books,lang.html,http://www.pitt.edu/~dash/lang.html,lang
-The Language of Animals,type0670.html,http://www.pitt.edu/~dash/type0670.html,type0670
-The Leprechaun: Ireland's Fairy Shoemaker,leprechaun.html,http://www.pitt.edu/~dash/leprechaun.html,leprechaun
-The Lion in the Water,type0092.html,http://www.pitt.edu/~dash/type0092.html,type0092
-The Sick Lion,type0050.html,http://www.pitt.edu/~dash/type0050.html,type0050
-Llewellyn and His Dog Gellert,type0178a.html,http://www.pitt.edu/~dash/type0178a.html,type0178a
-The Bell of Atri,type0207c.html#longfellow,http://www.pitt.edu/~dash/type0207c.html#longfellow,type0207c#longfellow
+about Supernatural Sweethearts",japanlove.html,http://www.pitt.edu/~dash/japanlove.html,japanlove,japanlove
+Jataka Tales,jataka.html,http://www.pitt.edu/~dash/jataka.html,jataka,jataka
+Jephthah and His Daughter,jephthah.html,http://www.pitt.edu/~dash/jephthah.html,jephthah,jephthah
+Kora and His Sister,kora.html,http://www.pitt.edu/~dash/kora.html,kora,kora
+The Lambton Worm,lambton.html,http://www.pitt.edu/~dash/lambton.html,lambton,lambton
+Andrew Lang's Colored Fairy Books,lang.html,http://www.pitt.edu/~dash/lang.html,lang,lang
+The Language of Animals,type0670.html,http://www.pitt.edu/~dash/type0670.html,type0670,type0670
+The Leprechaun: Ireland's Fairy Shoemaker,leprechaun.html,http://www.pitt.edu/~dash/leprechaun.html,leprechaun,leprechaun
+The Lion in the Water,type0092.html,http://www.pitt.edu/~dash/type0092.html,type0092,type0092
+The Sick Lion,type0050.html,http://www.pitt.edu/~dash/type0050.html,type0050,type0050
+Llewellyn and His Dog Gellert,type0178a.html,http://www.pitt.edu/~dash/type0178a.html,type0178a,type0178a
+The Bell of Atri,type0207c.html#longfellow,http://www.pitt.edu/~dash/type0207c.html#longfellow,type0207c#longfellow,type0207c#longfellow
 "Norse Ballads of Henry Wadsworth
-Longfellow",longfellow.html,http://www.pitt.edu/~dash/longfellow.html,longfellow
-Doctor Luther at the Wartburg,legend562.html,http://www.pitt.edu/~dash/legend562.html,legend562
-Lying Tales,type1965.html,http://www.pitt.edu/~dash/type1965.html,type1965
+Longfellow",longfellow.html,http://www.pitt.edu/~dash/longfellow.html,longfellow,longfellow
+Doctor Luther at the Wartburg,legend562.html,http://www.pitt.edu/~dash/legend562.html,legend562,legend562
+Lying Tales,type1965.html,http://www.pitt.edu/~dash/type1965.html,type1965,type1965
 "The Magdeburg Bridge -- 
-Die Magdeburger Brücke",magdeburg.html,http://www.pitt.edu/~dash/magdeburg.html,magdeburg
-Magic Books,magicbook.html,http://www.pitt.edu/~dash/magicbook.html,magicbook
-Man and Serpent,type0285d.html,http://www.pitt.edu/~dash/type0285d.html,type0285d
-"The Man, the Boy, and the Donkey",type1215.html,http://www.pitt.edu/~dash/type1215.html,type1215
-"Folklore, Folktales, and Fairy Tales from the Isle of Man",man.html,http://www.pitt.edu/~dash/man.html,man
-Mastermaid,norway120.html,http://www.pitt.edu/~dash/norway120.html,norway120
-Master Builder Legends,mbuilder.html,http://www.pitt.edu/~dash/mbuilder.html,mbuilder
-"Melusina (Mélusine, Melusine)",melusina.html,http://www.pitt.edu/~dash/melusina.html,melusina
+Die Magdeburger Brücke",magdeburg.html,http://www.pitt.edu/~dash/magdeburg.html,magdeburg,magdeburg
+Magic Books,magicbook.html,http://www.pitt.edu/~dash/magicbook.html,magicbook,magicbook
+Man and Serpent,type0285d.html,http://www.pitt.edu/~dash/type0285d.html,type0285d,type0285d
+"The Man, the Boy, and the Donkey",type1215.html,http://www.pitt.edu/~dash/type1215.html,type1215,type1215
+"Folklore, Folktales, and Fairy Tales from the Isle of Man",man.html,http://www.pitt.edu/~dash/man.html,man,man
+Mastermaid,norway120.html,http://www.pitt.edu/~dash/norway120.html,norway120,norway120
+Master Builder Legends,mbuilder.html,http://www.pitt.edu/~dash/mbuilder.html,mbuilder,mbuilder
+"Melusina (Mélusine, Melusine)",melusina.html,http://www.pitt.edu/~dash/melusina.html,melusina,melusina
 "Merlin the Magician Rescues King Vortigern: 
-Why the Red Dragon Is the Emblem of Wales",merlin.html,http://www.pitt.edu/~dash/merlin.html,merlin
-The Mermaid Wife,type4080.html,http://www.pitt.edu/~dash/type4080.html,type4080
+Why the Red Dragon Is the Emblem of Wales",merlin.html,http://www.pitt.edu/~dash/merlin.html,merlin,merlin
+The Mermaid Wife,type4080.html,http://www.pitt.edu/~dash/type4080.html,type4080,type4080
 "
-The Merseburg Incantations",merseburg.html,http://www.pitt.edu/~dash/merseburg.html,merseburg
+The Merseburg Incantations",merseburg.html,http://www.pitt.edu/~dash/merseburg.html,merseburg,merseburg
 "charms
-against sprains",spraincharm.html,http://www.pitt.edu/~dash/spraincharm.html,spraincharm
-Midas,type0782.html,http://www.pitt.edu/~dash/type0782.html,type0782
-Midwife (or Godparent) for the Elves,midwife.html,http://www.pitt.edu/~dash/midwife.html,midwife
-Monkey Bridegrooms,monkey.html,http://www.pitt.edu/~dash/monkey.html,monkey
-The Monkey's Heart,type0091.html,http://www.pitt.edu/~dash/type0091.html,type0091
-The Moon in the Well,type1335a.html,http://www.pitt.edu/~dash/type1335a.html,type1335a
+against sprains",spraincharm.html,http://www.pitt.edu/~dash/spraincharm.html,spraincharm,spraincharm
+Midas,type0782.html,http://www.pitt.edu/~dash/type0782.html,type0782,type0782
+Midwife (or Godparent) for the Elves,midwife.html,http://www.pitt.edu/~dash/midwife.html,midwife,midwife
+Monkey Bridegrooms,monkey.html,http://www.pitt.edu/~dash/monkey.html,monkey,monkey
+The Monkey's Heart,type0091.html,http://www.pitt.edu/~dash/type0091.html,type0091,type0091
+The Moon in the Well,type1335a.html,http://www.pitt.edu/~dash/type1335a.html,type1335a,type1335a
 "Every Mother Thinks Her Child Is the Most
-Beautiful",type0247.html,http://www.pitt.edu/~dash/type0247.html,type0247
+Beautiful",type0247.html,http://www.pitt.edu/~dash/type0247.html,type0247,type0247
 "Mother Killed Me, Father 
-Ate Me",type0720.html,http://www.pitt.edu/~dash/type0720.html,type0720
-The Iron-Eating Mice,type1592.html,http://www.pitt.edu/~dash/type1592.html,type1592
-The Mouse Who Was to Marry the Sun,type2031c.html,http://www.pitt.edu/~dash/type2031c.html,type2031c
-Town Mouse and Country Mouse,type0112.html,http://www.pitt.edu/~dash/type0112.html,type0112
+Ate Me",type0720.html,http://www.pitt.edu/~dash/type0720.html,type0720,type0720
+The Iron-Eating Mice,type1592.html,http://www.pitt.edu/~dash/type1592.html,type1592,type1592
+The Mouse Who Was to Marry the Sun,type2031c.html,http://www.pitt.edu/~dash/type2031c.html,type2031c,type2031c
+Town Mouse and Country Mouse,type0112.html,http://www.pitt.edu/~dash/type0112.html,type0112,type0112
 "Multiple Births in
-Legend and Folklore",manykids.html,http://www.pitt.edu/~dash/manykids.html,manykids
+Legend and Folklore",manykids.html,http://www.pitt.edu/~dash/manykids.html,manykids,manykids
