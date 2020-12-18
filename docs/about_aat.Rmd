@@ -75,11 +75,6 @@ write_csv(recode_links,"ashliman_links.csv")
 
 ```
 
-The following still need a type identified:
-
-- Girl Without Hands
-- Nasreddin Hodja: Tales of the Turkish Trickster
-
 The following pages can be linked to multiple tale types, and we will need to determine how to manage these.  Are they combinations of the types, etc.?  These are retained with a single type, if that type was explicitly noted in the URL
 
 - Bald Stories: Folktales about Hairless Men
