@@ -24,6 +24,24 @@ links <-
   filter(!str_detect(url,"#[a-z]$")) %>%
   filter(!str_detect(url,"^ashliman.html$|^folktexts.html$|^folktexts2.html$|^folklinks.html$")) %>%
   filter(!str_detect(type_name,regex("essay",ignore_case = T))) %>%
+  distinct() %>%
+  mutate(
+    rev_name = recode(
+      short_name,
+      `alibaba`      = "type0676",
+      `animalindian` = "type0402",
+      `norway133`    = "type0133",
+      `type2033`     = "type0020c",
+      `friday`       = "type0779j*",
+      `frog`         = "type0440",
+      `hand`         = "type0958e*",
+      `type1066`     = "type1343",
+      `hog`          = "type0441",
+      `norway010`    = "type1408",
+      `norway120`    = "type0313",
+      `midwife`      = "type5070"
+    )
+  ) %>%
   filter(str_detect(short_name,regex("^type",ignore_case = T))) %>%
   mutate(
     atu_id = str_remove(short_name,"^type"),
