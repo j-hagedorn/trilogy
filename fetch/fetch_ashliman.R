@@ -27,7 +27,7 @@ links <-
   filter(str_detect(short_name,regex("^type",ignore_case = T))) %>%
   mutate(
     atu_id = str_remove(short_name,"^type"),
-    atu_id = str_remove(atu_id,"jack$|#longfellow$|ast$")
+    atu_id = str_remove(atu_id,"jack$|ast$")
   ) %>%
   select(type_name,atu_id,url = rev_url)
   
