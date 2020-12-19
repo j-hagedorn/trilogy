@@ -55,21 +55,24 @@ links <-
 
 df <- tibble()
 
+# i = 2
+
 for (i in 1:length(links$url)) {
   
   print(i)
   
   try(
     {
-      pg <- 
+      sub_pg <- 
         read_html(links$url[i]) %>%
         html_nodes("li , p, h3, a")
+        # html_nodes("body, li , p, h3, a")
       
       x <-
         tibble(
-          text = pg %>% html_text(),
-          name = pg %>% html_name(),
-          class = pg %>% html_attrs()
+          text = sub_pg %>% html_text(),
+          name = sub_pg %>% html_name(),
+          class = sub_pg %>% html_attrs()
         ) %>%
         mutate(
           type_name = links$type_name[i],
