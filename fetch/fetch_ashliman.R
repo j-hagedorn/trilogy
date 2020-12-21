@@ -1,4 +1,4 @@
-library(tidyverse); library(httr); library(rvest)
+library(tidyverse); library(httr); library(rvest); library(tidytext)
 
 site_url <- "http://www.pitt.edu/~dash/folktexts.html"
 
@@ -65,15 +65,31 @@ for (i in 1:length(links$url)) {
     {
       sub_pg <- 
         read_html(links$url[i]) %>%
-        html_nodes("li , p, h3, a")
-        # html_nodes("body, li , p, h3, a")
+        # html_nodes("li , p, h3, a")
+        html_nodes("body, li , p, h3, a")
       
       x <-
         tibble(
           text = sub_pg %>% html_text(),
           name = sub_pg %>% html_name(),
           class = sub_pg %>% html_attrs()
-        ) %>%
+        ) 
+      
+      body <-
+        x %>%
+        filter(name == "body") %>%
+        select(-class) %>%
+        unnest_tokens(line,text,token = "lines",to_lower = F) %>%
+        full_join(x, by = c("line" = "text"))
+      
+      nobody <- x %>% filter(name != "body") 
+      
+      for (n in 1:nrow(nobody)) {
+        b
+      }
+      
+      
+      %>%
         mutate(
           type_name = links$type_name[i],
           atu_id = links$atu_id[i],
