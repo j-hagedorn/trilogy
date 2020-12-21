@@ -79,13 +79,36 @@ for (i in 1:length(links$url)) {
         x %>%
         filter(name == "body") %>%
         select(-class) %>%
-        unnest_tokens(line,text,token = "lines",to_lower = F) %>%
-        full_join(x, by = c("line" = "text"))
+        mutate(
+          text = str_squish(text),
+          text = str_replace_all(text,'\\\\',"")
+        )
       
-      nobody <- x %>% filter(name != "body") 
+      nobody <- 
+        x %>% 
+        filter(name != "body") %>%
+        mutate(
+          text = str_squish(text),
+          text = str_replace_all(text,'\\\\',""),
+          len = str_length(text)
+        ) %>%
+        filter(text != "") %>%
+        arrange(desc(len))
       
       for (n in 1:nrow(nobody)) {
-        b
+        print(paste0(n,": ",nobody$text[n]))
+        try(
+          {
+            body <- 
+              body %>% 
+              mutate(
+                text = str_replace_all(
+                  text,regex(nobody$text[n],ignore_case = T),"@"
+                )
+              )
+          }
+        )
+        
       }
       
       
