@@ -59,7 +59,7 @@ df <- tibble()
 # i = 70
 range <- 1:length(links$url)
 
-# errors: c(7,20)
+# errors: c(7,20,36,40,47,49,50,51,70,73,74,78,79,81,83,94,97)
 
 for (i in range[!range %in% c(70)]) {
   
