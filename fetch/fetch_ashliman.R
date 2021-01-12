@@ -1,4 +1,4 @@
-library(tidyverse); library(httr); library(rvest); library(tidytext)
+library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin)
 
 site_url <- "http://www.pitt.edu/~dash/folktexts.html"
 
@@ -25,6 +25,7 @@ links <-
   filter(!str_detect(url,"^ashliman.html$|^folktexts.html$|^folktexts2.html$|^folklinks.html$")) %>%
   filter(!str_detect(type_name,regex("essay",ignore_case = T))) %>%
   distinct() %>%
+  # Recode html names which do not contain their tale types
   mutate(
     rev_name = recode(
       short_name,
@@ -55,9 +56,12 @@ links <-
 
 df <- tibble()
 
-# i = 2
+# i = 70
+range <- 1:length(links$url)
 
-for (i in 1:length(links$url)) {
+# errors: c(7,20)
+
+for (i in range[!range %in% c(70)]) {
   
   print(i)
   
@@ -65,7 +69,6 @@ for (i in 1:length(links$url)) {
     {
       sub_pg <- 
         read_html(links$url[i]) %>%
-        # html_nodes("li , p, h3, a")
         html_nodes("body, li , p, h3, a")
       
       x <-
@@ -74,6 +77,8 @@ for (i in 1:length(links$url)) {
           name = sub_pg %>% html_name(),
           class = sub_pg %>% html_attrs()
         ) 
+      
+      # Split into a table for the unstructured 'body' text...
       
       body <-
         x %>%
@@ -84,6 +89,8 @@ for (i in 1:length(links$url)) {
           text = str_replace_all(text,'\\\\',"")
         )
       
+      # and another for the structured .html tags
+      
       nobody <- 
         x %>% 
         filter(name != "body") %>%
@@ -93,24 +100,6 @@ for (i in 1:length(links$url)) {
           len = str_length(text)
         ) %>%
         filter(text != "") 
-      
-      for (n in 1:nrow(nobody)) {
-        print(paste0(n,": ",nobody$text[n]))
-        try(
-          {
-            body <- 
-              body %>% 
-              mutate(
-                text = str_replace_all(
-                  text,regex(nobody$text[n],ignore_case = T),"@"
-                )
-              )
-          }
-        )
-        
-      }
-      
-      library(fuzzyjoin)
       
       # Clean the 'body' of the .html, which has paragraphs of unstructured text
       # and associate these, when possible, with structured sections using fuzzy matching
@@ -228,7 +217,14 @@ for (i in 1:length(links$url)) {
         pivot_wider(names_from = "type",values_from = "text") %>%
         select(type_name,atu_id,tale_title,text,everything())
       
-      # Then join 'body_df' and 'clean_df', privileging columns from each...
+      # Then join 'body_df' and 'clean_df'
+      
+      x <-
+        clean_df %>%
+        full_join(
+          body_df %>% ungroup() %>% select(-type_name, -atu_id), 
+          by = "tale_title"
+        )
       
       df <- bind_rows(df,x)
     }
@@ -237,7 +233,16 @@ for (i in 1:length(links$url)) {
 }
 
 aat <-
-  df %>%
+  df  %>%
+  # Privilege columns based on source (.y = messy body text, .x = structured html)
+  mutate(
+    text = if_else(!is.na(text.y),text.y,text.x),
+    provenance = if_else(!is.na(provenance.x),provenance.x,provenance.y),
+    source = if_else(!is.na(source.x),source.x,source.y),
+    notes = if_else(!is.na(notes.x),notes.x,notes.y),
+    copyright = if_else(!is.na(copyright.x),copyright.x,copyright.y)
+  ) %>%
+  select_at(vars(!matches(".x$|.y$"))) %>%
   filter(text != "") %>%
   filter(!is.na(tale_title)) %>%
   filter(!str_detect(text,"^Return to D. L. Ashliman's folktexts|^Return to:$")) %>%
