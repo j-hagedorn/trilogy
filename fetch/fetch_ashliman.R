@@ -56,12 +56,13 @@ links <-
 
 df <- tibble()
 
-# i = 70
+# i = 47
 range <- 1:length(links$url)
 
-# errors: c(7,20,36,40,47,49,50,51,70,73,74,78,79,81,83,94,97)
+# errors: c(50,51,70,73,74,78,79,81,83,94,97)
 
-for (i in range[!range %in% c(70)]) {
+# for (i in range[!range %in% c(70)]) {
+for (i in 1:49) {
   
   print(i)
   
@@ -175,7 +176,10 @@ for (i in range[!range %in% c(70)]) {
         group_by(type_name,atu_id,tale_title) %>%
         pivot_wider(names_from = "type",values_from = "text") %>%
         select(type_name,atu_id,tale_title,text,everything()) %>%
-        filter(!is.na(tale_title))
+        filter(!is.na(tale_title)) %>%
+        ungroup() %>%
+        # Some nested lists remain; paste these together
+        mutate_all(list(~paste(.,sep = " ")))
       
       clean_df <-
         nobody %>%
@@ -197,9 +201,10 @@ for (i in range[!range %in% c(70)]) {
           !str_detect(text,regex("table of contents",ignore_case = T))
           | is.na(text)
         ) %>%
+        slice(-(1:2)) %>% # remove top two rows, which contain dup "folktexts.html"
         # divide front matter from tales
         mutate(
-          div   = str_detect(class,"folktexts.html"),
+          div   = str_detect(class,"folktexts.html"), # for {36, 40, 47} there is another "folktexts.html" earlier; breaks
           div_n = cumsum(div)
         ) %>%
         filter(div_n == 1) %>%
