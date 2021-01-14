@@ -56,14 +56,13 @@ links <-
 
 df <- tibble()
 
-# i = 47
+# i = 5
 range <- 1:length(links$url)
 
 # errors: c(50,51,70,73,74,78,79,81,83,94,97)
 
-# for (i in range[!range %in% c(70)]) {
-for (i in 1:49) {
-  
+for (i in range[!range %in% c(70)]) {
+
   print(i)
   
   try(
@@ -237,6 +236,11 @@ for (i in 1:49) {
   
 }
 
+# To resolve:
+#   tale_title different so longer text isn't selected (e.g. "buttermilk jack","King Bluebeard")
+#   No 'type_name' or 'atu_id' due to clean_df not containing text, need to rely on body_df and get ids from there (e.g. "Ant and GrassHopper","The Birthmarks of the Princess")
+#   No 'source' or 'provenance' fields coming through (e.g. "Animal Brides")
+
 aat <-
   df  %>%
   # Privilege columns based on source (.y = messy body text, .x = structured html)
@@ -250,8 +254,16 @@ aat <-
   select_at(vars(!matches(".x$|.y$"))) %>%
   filter(text != "") %>%
   filter(!is.na(tale_title)) %>%
+  filter(
+    !str_detect(
+      tale_title,
+      regex("contents|links to related sites|related links|^footnote$|notes and bibliography",ignore_case = T)
+    )
+  ) %>%
   filter(!str_detect(text,"^Return to D. L. Ashliman's folktexts|^Return to:$")) %>%
-  mutate(tale_title = str_squish(tale_title))
+  mutate(tale_title = str_squish(tale_title)) %>%
+  mutate_all(list(~if_else(str_detect(.,"^NA$|^NULL$"),NA_character_,.))) %>%
+  filter(!is.na(type_name))
 
 write_csv(aat,"data/aat.csv")
 
