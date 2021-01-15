@@ -56,7 +56,7 @@ links <-
 
 df <- tibble()
 
-# i = 5
+# i = 70
 range <- 1:length(links$url)
 
 # errors: c(50,51,70,73,74,78,79,81,83,94,97)
@@ -126,7 +126,7 @@ for (i in range[!range %in% c(70)]) {
         ungroup() %>%
         # divide front matter from tales
         mutate(
-          div   = str_detect(mess_text,"Return to D. L. Ashliman's folktexts"),
+          div   = str_detect(mess_text,"folktexts, a library of folktales"),
           div_n = cumsum(div)
         ) %>%
         filter(div_n == 1) %>%
@@ -240,7 +240,6 @@ for (i in range[!range %in% c(70)]) {
 
 # To resolve:
 #   tale_title different so longer text isn't selected (e.g. "buttermilk jack","King Bluebeard")
-#   No 'source' or 'provenance' fields coming through (e.g. "Animal Brides")
 
 aat <-
   df  %>%
