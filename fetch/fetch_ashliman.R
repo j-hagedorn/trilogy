@@ -203,7 +203,9 @@ for (i in range[!range %in% c(70)]) {
         slice(-(1:2)) %>% # remove top two rows, which contain dup "folktexts.html"
         # divide front matter from tales
         mutate(
-          div   = str_detect(class,"folktexts.html"), # for {36, 40, 47} there is another "folktexts.html" earlier; breaks
+          div   = str_detect(class,"folktexts.html"), 
+          div   = if_else(atu_id == "0850", str_detect(class,"#bibliography$"),div), # one-off coding due to html mess
+          div   = if_else(atu_id == "0280a", str_detect(class,"#links$"),div), # one-off coding due to html mess
           div_n = cumsum(div)
         ) %>%
         filter(div_n == 1) %>%
@@ -238,7 +240,6 @@ for (i in range[!range %in% c(70)]) {
 
 # To resolve:
 #   tale_title different so longer text isn't selected (e.g. "buttermilk jack","King Bluebeard")
-#   No 'type_name' or 'atu_id' due to clean_df not containing text, need to rely on body_df and get ids from there (e.g. "Ant and GrassHopper","The Birthmarks of the Princess")
 #   No 'source' or 'provenance' fields coming through (e.g. "Animal Brides")
 
 aat <-
