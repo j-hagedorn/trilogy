@@ -257,7 +257,8 @@ aat <-
   filter(
     !str_detect(
       tale_title,
-      regex("contents|links to related sites|related links|^footnote$|notes and bibliography",ignore_case = T)
+      regex(
+        "contents|^links to |^links$|related links|^footnote$|^\\{footnote|notes and bibliography",ignore_case = T)
     )
   ) %>%
   filter(!str_detect(text,"^Return to D. L. Ashliman's folktexts|^Return to:$")) %>%
@@ -266,5 +267,14 @@ aat <-
   filter(!is.na(type_name))
 
 write_csv(aat,"data/aat.csv")
+
+complete <-
+  aat %>%
+  group_by(type_name, atu_id) %>%
+  summarise(
+    n = n_distinct(tale_title),
+    tales = paste(tale_title,collapse = "; ")
+  ) %>%
+  full_join(links, by = c("type_name","atu_id"))
 
 rm(list = c("df","pg","x","i","site_url","links"))
