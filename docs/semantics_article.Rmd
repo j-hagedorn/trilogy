@@ -1,0 +1,46 @@
+---
+title: "The Next Step: Folk Narrative Studies Meet Data Science"
+author:
+  - Joshua Hagedorn, Institution 
+  - Sándor Darányi, Swedish School of Library and Information Science, University of Borås
+output: 
+  pdf_document:
+    keep_tex:  true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Abstract. --
+
+# Keywords. --
+
+# 1. Introduction
+
+We believe that a rendezvous between folk narrative studies and data science is already taking place on the Semantic Web as its venue. Limited in its scope for now, a next step in the evolution of Digital Humanities, this event has been long overdue, and will include more and more cultural artifacts of all ages and regions worldwide.
+
+Regardless of how long it will take, and if one or more generations of multidisciplinary science will have to be called in, our professional vision and political stance is that there is one single body of facts about antiquity, including narratives in the realm of intangible cultural heritage. For common good, neither mankind nor the Semantic Web can afford to overlook this bulk of information about the past, independent of the attitude of funding agencies with other priorities. Therefore this single body of knowledge must be captured in its entirety and complexity. If a respective multidisciplinary top ontology will consist of a number of domain-specific knowledge graphs, only time will tell. But at this point in time and to this end, one needs a two-pronged strategy: the first effort is to convert the semantics inherent in those narratives to logical representations, the second one is to extract a complete set of facts by statistically robust relations. In other words, whichever way we want to proceed, research must address the relative lack of respective datasets.
+
+We anticipate that, due to shortcomings on the funding side of the above equation, and to reduce any further delays, crowdsourcing of the problem via Github can be a legitimate approach, calling in data science for toolkit development. We will argue for this development below. When it comes to data science, missing folktale and myth datasets for machine learning, in English, and with semantic markup either by ATU or TMI tags, are a major bottleneck though. Likewise, for ontology building, ultimately one might need to convert the equivalents of a Roscher, a Pauly-Wissova, or respective monographs with specialist field knowledge over time. We [will] report
+related developments and considerations elsewhere (papers: Olympians, Burkert).
+
+On the other hand, the methodology aspect of the above has seen progress. Recently, Yarlott &amp;Finlayson have published a comprehensive overview of tale research (2016). Our vision subscribes to and includes their statements but notes the potential for more accomplishments. Further, we welcome and acknowledge results and proposals by (d’Huy, Tehrani, Berezhkin, Thangerlini, Meder, Karsdorp etc) who have been active in the dataset building and text analytics arena, or the ontology building efforts of (Declerck, Lendvai etc) as another research track. However, apparently these approaches and toolkits can be considerably extended as shown e.g. by Lendvai et al (Verona), and the direction we suggest points at the integration of more and more sophisticated NLP solutions, combined with evolving datasets in a data science framework, where the respective semantics is increasingly modelled by evolving ontologies and vector spaces (practically vector fields) vs. dynamic graphs, instead of static ones (D4.5, arXiv 1 &amp; 2). Such developments will have to be extended to knowledge graphs as well. We also note in passing that, as suggested by Ofek et al and Darányi et al, the analysis of tale types as motif strings in the framework of text variation invites the metaphor of narrative genomics (refs).
+
+Our research problem for the current paper is as follows. Regarding folk narrative research, consider the case of two standard reference tools, the TMI and the ATU. The TMI has x_1 motifs (or, cf Yarlott & Finlayson, x_2), whereas the ATU uses y of them to model tale structures as motif strings on a global scale. It is justified to ask, where have w % of those motifs in the TMI disappeared by the time they were applied to the ATU; or, how can an important monograph acquire canonical status with such a discrepancy in its background? In our eyes, the explanation goes back to the very different comparison capacities of the human mind vs the computer, leading to differently robust deductions, and to remedy this situation is to call in data science.
+
+The structure of this paper is as follows. In Section 2, we bring examples of research results relevant to our proposal, including a tentative overview of -- mostly non-available -- datasets in the field (Linked Open Data?). In Section 3, we discuss Ashliman’s publicly available Folktexts dataset. In Section 4 data cleaning and data restructuring aspects are presented which lead to a dataset for machine learning. Section 5 lists a spectrum of first results, Section 6 ideas for future research.  Section 7 is acknowledgements, Section 8 is the bibliography, followed by an appendix.
+
+# 2. Relevant related research
+
+# 3. The Ashliman Folktexts collection
+
+# 4. Steps of dataset normalization
+
+# 5. Test results by ML via R
+
+# 6. Conclusion and future research
+
+By providing different communities with a machine learning-conform dataset version of Ashliman
+Folktexts, our above suggestions and preliminary results were meant to be both inspirational and
+trailblazing.
