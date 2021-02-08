@@ -240,8 +240,6 @@ for (i in range[!range %in% c(70)]) {
   
 }
 
-# To resolve:
-#   tale_title different so longer text isn't selected (e.g. "buttermilk jack","King Bluebeard")
 
 aat <-
   df  %>%
