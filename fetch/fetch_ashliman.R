@@ -58,7 +58,7 @@ links <-
 
 df <- tibble()
 
-# i = 70
+# i = 18
 range <- 1:length(links$url)
 
 # errors: c(23,70,74,78)
@@ -71,7 +71,7 @@ for (i in range[!range %in% c(70,74)]) {
     {
       sub_pg <- 
         read_html(links$url[i]) %>%
-        html_nodes("body, li , p, h3, a")
+        html_nodes("body, h1, li , p, h3, a")
       
       x <-
         tibble(
@@ -190,6 +190,7 @@ for (i in range[!range %in% c(70,74)]) {
           type = case_when(
             name == "a" & str_detect(class,"href") ~ "links",
             name == "p"  ~ "text",
+            name == "h1" ~ "title",
             name == "a"  ~ "title",
             str_detect(text,regex("^source",ignore_case = T))     ~ "source",
             str_detect(text,regex("copyright|©",ignore_case = T)) ~ "copyright",
@@ -257,7 +258,8 @@ aat <-
     !str_detect(
       tale_title,
       regex(
-        "contents|^links to |^links$|related links|^footnote$|^\\{footnote|notes and bibliography",ignore_case = T)
+        "contents|^links to |^links$|related links|^footnote$|^\\{footnote|notes and bibliography",ignore_case = T
+      )
     )
   ) %>%
   filter(!str_detect(text,"^Return to D. L. Ashliman's folktexts|^Return to:$")) %>%
