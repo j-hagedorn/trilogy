@@ -31,6 +31,7 @@ links <-
       short_name,
       `alibaba`      = "type0676",
       `animalindian` = "type0402",
+      `norway034`    = "type0402",
       `norway133`    = "type0133",
       `type2033`     = "type0020c",
       `friday`       = "type0779j*",
@@ -38,16 +39,17 @@ links <-
       `hand`         = "type0958e*",
       `type1066`     = "type1343",
       `hog`          = "type0441",
+      `monkey`       = "type0441",
+      `melusina`     = "type4080",
       `norway010`    = "type1408",
       `norway120`    = "type0313",
       `midwife`      = "type5070"
     )
   ) %>%
-  filter(str_detect(short_name,regex("^type",ignore_case = T))) %>%
-  filter(!str_detect(short_name,"0207c#longfellow")) %>%
+  filter(str_detect(rev_name,regex("^type",ignore_case = T))) %>%
   mutate(
-    atu_id = str_remove(short_name,"^type"),
-    atu_id = str_remove(atu_id,"jack$|ast$")
+    atu_id = str_remove(rev_name,"^type"),
+    atu_id = str_remove(atu_id,"jack$|ast$|#longfellow$")
   ) %>%
   select(type_name,atu_id,url = rev_url)
   
