@@ -61,9 +61,9 @@ df <- tibble()
 # i = 70
 range <- 1:length(links$url)
 
-# errors: c(50,51,70,73,74,78,79,81,83,94,97)
+# errors: c(23,70,74,78)
 
-for (i in range[!range %in% c(70)]) {
+for (i in range[!range %in% c(70,74)]) {
 
   print(i)
   
@@ -239,7 +239,6 @@ for (i in range[!range %in% c(70)]) {
   )
   
 }
-
 
 aat <-
   df  %>%
