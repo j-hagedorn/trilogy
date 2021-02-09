@@ -61,6 +61,8 @@ df <- tibble()
 # i = 2
 range <- 1:length(links$url)
 
+# errors c(39,43,50,52,78,82,85,87,88): Error : Can't subset columns that don't exist. x Column `text` doesn't exist.
+
 # errors: c(23,70,74,78)
 
 for (i in range[!range %in% c(70,74)]) {
