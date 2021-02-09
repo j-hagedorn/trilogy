@@ -58,7 +58,7 @@ links <-
 
 df <- tibble()
 
-# i = 18
+# i = 2
 range <- 1:length(links$url)
 
 # errors: c(23,70,74,78)
@@ -125,13 +125,23 @@ for (i in range[!range %in% c(70,74)]) {
           list(~ifelse(dist > 0.21,NA,.))
         ) %>%
         distinct(mess_text,text,.keep_all = T) %>%
-        ungroup() %>%
-        # divide front matter from tales
-        mutate(
-          div   = str_detect(mess_text,"folktexts, a library of folktales"),
-          div_n = cumsum(div)
-        ) %>%
-        filter(div_n == 1) %>%
+        ungroup() 
+      
+      # If there is a TOC, locate and remove it
+      if (sum(str_detect(body_df$mess_text,regex("table of contents|^contents$",ignore_case = T)), na.rm = T) > 0) {
+        body_df <- 
+          body_df %>%
+          # divide front matter from tales
+          mutate(
+            div   = str_detect(mess_text,"folktexts, a library of folktales"),
+            div_n = cumsum(div)
+          ) %>%
+          filter(div_n == 1) %>%
+          select(-div,-div_n)
+      } else body_df <- body_df
+      
+      body_df <- 
+        body_df %>%
         mutate(
           type_name = links$type_name[i],
           atu_id = links$atu_id[i],
@@ -147,7 +157,7 @@ for (i in range[!range %in% c(70,74)]) {
           )
         ) %>%
         mutate(mess_text = str_replace(mess_text,"^Return to the table of contents.","")) %>%
-        select(-div,-div_n,-name,-class) %>%
+        select(-name,-class) %>%
         mutate(tale_title = if_else(type == "title",mess_text,NA_character_)) %>%
         fill(tale_title,.direction = "down") %>%
         filter(type != "title" | is.na(type)) %>%
@@ -189,33 +199,44 @@ for (i in range[!range %in% c(70,74)]) {
           atu_id = links$atu_id[i],
           type = case_when(
             name == "a" & str_detect(class,"href") ~ "links",
+            name == "a" & str_detect(class,".html$") ~ "links",
             name == "p"  ~ "text",
-            name == "h1" ~ "title",
             name == "a"  ~ "title",
+            name == "h1" ~ "title",
             str_detect(text,regex("^source",ignore_case = T))     ~ "source",
             str_detect(text,regex("copyright|©",ignore_case = T)) ~ "copyright",
             name == "h3" ~ "provenance",
             name == "li" ~ "notes"
           )
-        ) %>%
-        # remove TOC links
-        filter(
-          !str_detect(text,regex("table of contents",ignore_case = T))
-          | is.na(text)
-        ) %>%
-        slice(-(1:2)) %>% # remove top two rows, which contain dup "folktexts.html"
-        # divide front matter from tales
-        mutate(
-          div   = str_detect(class,"folktexts.html"), 
-          div   = if_else(atu_id == "0850", str_detect(class,"#bibliography$"),div), # one-off coding due to html mess
-          div   = if_else(atu_id == "0280a", str_detect(class,"#links$"),div), # one-off coding due to html mess
-          div_n = cumsum(div)
-        ) %>%
-        filter(div_n == 1) %>%
+        ) 
+      
+      # If there is a TOC, locate and remove it
+      if (sum(str_detect(clean_df$text,regex("table of contents|^contents$",ignore_case = T))) > 0) {
+        clean_df <- 
+          clean_df %>%
+          # remove TOC links
+          filter(
+            !str_detect(text,regex("table of contents",ignore_case = T))
+            | is.na(text)
+          ) %>%
+          slice(-(1:2)) %>% # remove top two rows, which contain dup "folktexts.html"
+          # divide front matter from tales
+          mutate(
+            div   = str_detect(class,"folktexts.html"),
+            div   = if_else(atu_id == "0850", str_detect(class,"#bibliography$"),div), # one-off coding due to html mess
+            div   = if_else(atu_id == "0280a", str_detect(class,"#links$"),div), # one-off coding due to html mess
+            div_n = cumsum(div)
+          ) %>%
+          filter(div_n == 1) %>%
+          select(-div,-div_n)
+      } else clean_df <- clean_df
+      
+      clean_df <- 
+        clean_df %>%
         filter(!str_detect(class,"folktexts.html")) %>%
         # Exclude links to sources
         filter(type != "links") %>%
-        select(-div,-div_n,-name,-class) %>%
+        select(-name,-class) %>%
         mutate(tale_title = if_else(type == "title",text,NA_character_)) %>%
         fill(tale_title,.direction = "down") %>%
         filter(type != "title") %>%
