@@ -58,7 +58,7 @@ links <-
 
 df <- tibble()
 
-# i = 2
+# i = 74
 range <- 1:length(links$url)
 
 # errors c(39,43,50,52,78,82,85,87,88): Error : Can't subset columns that don't exist. x Column `text` doesn't exist.
@@ -221,7 +221,7 @@ for (i in range[!range %in% c(70,74)]) {
             !str_detect(text,regex("table of contents",ignore_case = T))
             | is.na(text)
           ) %>%
-          slice(-(1:2)) %>% # remove top two rows, which contain dup "folktexts.html"
+          slice(-(1:3)) %>% # remove top two rows, which contain dup "folktexts.html"
           # divide front matter from tales
           mutate(
             div   = str_detect(class,"folktexts.html"),
