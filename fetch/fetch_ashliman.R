@@ -58,7 +58,7 @@ links <-
 
 df <- tibble()
 
-# i = 1
+# i = 9
 
 range <- 1:length(links$url)
 
@@ -232,19 +232,22 @@ for (i in range[!range %in% c(70,74)]) {
           select(-div,-div_n)
       } else clean_df <- clean_df
       
-      clean_df <- 
+      clean_df <-
         clean_df %>%
         filter(!str_detect(class,"folktexts.html")) %>%
         # Exclude links to sources
         filter(type != "links") %>%
+        mutate(
+          tale_title = if_else(type == "title",text,  NA_character_),
+          title_tag  = if_else(type == "title",paste(class,sep = " "), NA_character_)
+        ) %>%
         select(-name,-class) %>%
-        mutate(tale_title = if_else(type == "title",text,NA_character_)) %>%
-        fill(tale_title,.direction = "down") %>%
+        fill(tale_title,title_tag,.direction = "down") %>%
         filter(type != "title") %>%
-        group_by(type_name,atu_id,tale_title,type) %>%
+        group_by(type_name,atu_id,tale_title,title_tag,type) %>%
         summarize(text = paste(text,collapse = " ")) %>%
         mutate(text = str_squish(text)) %>%
-        group_by(type_name,atu_id,tale_title) %>%
+        group_by(type_name,atu_id,tale_title,title_tag) %>%
         pivot_wider(names_from = "type",values_from = "text") %>%
         select(type_name,atu_id,tale_title,text,everything())
       
