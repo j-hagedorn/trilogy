@@ -58,7 +58,7 @@ links <-
 
 df <- tibble()
 
-# i = 9
+# i = 1
 
 range <- 1:length(links$url)
 
@@ -80,29 +80,6 @@ for (i in range[!range %in% c(70,74)]) {
           name = sub_pg %>% html_name(),
           class = sub_pg %>% html_attrs()
         ) 
-      
-      # Split into a table for the unstructured 'body' text...
-      
-      body <-
-        x %>%
-        filter(name == "body") %>%
-        select(-class) %>%
-        mutate(
-          text = str_squish(text),
-          text = str_replace_all(text,'\\\\',"")
-        )
-      
-      # and another for the structured .html tags
-      
-      nobody <- 
-        x %>% 
-        filter(name != "body") %>%
-        mutate(
-          text = str_squish(text),
-          text = str_replace_all(text,'\\\\',""),
-          len = str_length(text)
-        ) %>%
-        filter(text != "") 
       
       # Clean the 'body' of the .html, which has paragraphs of unstructured text
       # and associate these, when possible, with structured sections using fuzzy matching
@@ -193,8 +170,20 @@ for (i in range[!range %in% c(70,74)]) {
         # Some nested lists remain; paste these together
         mutate_all(list(~paste(.,sep = " ")))
       
+      # Add 'provenance' col for join if necessary
+      if(is.null(body_df$provenance)){
+        body_df <- body_df %>% mutate(provenance = NA_character_)
+      } 
+      
       clean_df <-
-        nobody %>%
+        x %>% 
+        filter(name != "body") %>%
+        mutate(
+          text = str_squish(text),
+          text = str_replace_all(text,'\\\\',""),
+          len = str_length(text)
+        ) %>%
+        filter(text != "") %>%
         mutate(
           type_name = links$type_name[i],
           atu_id = links$atu_id[i],
@@ -249,7 +238,12 @@ for (i in range[!range %in% c(70,74)]) {
         mutate(text = str_squish(text)) %>%
         group_by(type_name,atu_id,tale_title,title_tag) %>%
         pivot_wider(names_from = "type",values_from = "text") %>%
-        select(type_name,atu_id,tale_title,text,everything())
+        select(type_name,atu_id,tale_title,title_tag,text,everything()) 
+      
+      # Add 'provenance' col for join if necessary
+      if(is.null(clean_df$provenance)){
+        clean_df <- clean_df %>% mutate(provenance = NA_character_)
+      }
       
       # Then join 'body_df' and 'clean_df'
       
@@ -257,14 +251,28 @@ for (i in range[!range %in% c(70,74)]) {
         clean_df %>%
         full_join(
           body_df %>% ungroup() %>% select(-type_name, -atu_id), 
-          by = "tale_title"
-        )
+          by = c("tale_title","provenance")
+        ) 
       
       df <- bind_rows(df,x)
     }
   )
   
 }
+
+
+%>%
+  # If a title is duplicated, append parenthetical tag
+  ungroup() %>%
+  mutate(
+    dup_title = duplicated(tale_title,fromLast = T) | duplicated(tale_title,fromLast = F),
+    tale_title = if_else(
+      dup_title, 
+      paste0(tale_title," (",str_to_title(title_tag),")"),
+      tale_title
+    )
+  ) %>%
+  select(-dup_title)
 
 aat <-
   df  %>%
