@@ -58,7 +58,7 @@ links <-
 
 df <- tibble()
 
-# i = 1
+# i = 2
 
 range <- 1:length(links$url)
 
@@ -80,6 +80,16 @@ for (i in range[!range %in% c(70,74)]) {
           name = sub_pg %>% html_name(),
           class = sub_pg %>% html_attrs()
         ) 
+      
+      nobody <-
+        x %>% 
+        filter(name != "body") %>%
+        mutate(
+          text = str_squish(text),
+          text = str_replace_all(text,'\\\\',""),
+          len = str_length(text)
+        ) %>%
+        filter(text != "")
       
       # Clean the 'body' of the .html, which has paragraphs of unstructured text
       # and associate these, when possible, with structured sections using fuzzy matching
@@ -176,14 +186,7 @@ for (i in range[!range %in% c(70,74)]) {
       } 
       
       clean_df <-
-        x %>% 
-        filter(name != "body") %>%
-        mutate(
-          text = str_squish(text),
-          text = str_replace_all(text,'\\\\',""),
-          len = str_length(text)
-        ) %>%
-        filter(text != "") %>%
+        nobody %>%
         mutate(
           type_name = links$type_name[i],
           atu_id = links$atu_id[i],
@@ -261,25 +264,17 @@ for (i in range[!range %in% c(70,74)]) {
 }
 
 
-%>%
-  # If a title is duplicated, append parenthetical tag
-  ungroup() %>%
-  mutate(
-    dup_title = duplicated(tale_title,fromLast = T) | duplicated(tale_title,fromLast = F),
-    tale_title = if_else(
-      dup_title, 
-      paste0(tale_title," (",str_to_title(title_tag),")"),
-      tale_title
-    )
-  ) %>%
-  select(-dup_title)
+
 
 aat <-
   df  %>%
   # Privilege columns based on source (.y = messy body text, .x = structured html)
   mutate(
-    text = if_else(!is.na(text.y),text.y,text.x),
-    provenance = if_else(!is.na(provenance.x),provenance.x,provenance.y),
+    text = if_else(
+      !is.na(text.y) & str_length(text.y) > str_length(text.x),
+      text.y,text.x
+    ),
+    # provenance = if_else(!is.na(provenance.x),provenance.x,provenance.y),
     source = if_else(!is.na(source.x),source.x,source.y),
     notes = if_else(!is.na(notes.x),notes.x,notes.y),
     copyright = if_else(!is.na(copyright.x),copyright.x,copyright.y)
@@ -291,14 +286,27 @@ aat <-
     !str_detect(
       tale_title,
       regex(
-        "contents|^links to |^links$|related links|^footnote$|^\\{footnote|notes and bibliography",ignore_case = T
+        "contents|^links to |^links$|related links|^footnote$|^\\{footnote|notes and bibliography",
+        ignore_case = T
       )
     )
   ) %>%
   filter(!str_detect(text,"^Return to D. L. Ashliman's folktexts|^Return to:$")) %>%
   mutate(tale_title = str_squish(tale_title)) %>%
   mutate_all(list(~if_else(str_detect(.,"^NA$|^NULL$"),NA_character_,.))) %>%
-  filter(!is.na(type_name))
+  filter(!is.na(type_name)) %>%
+  # If a title is duplicated, append parenthetical tag
+  group_by(atu_id) %>%
+  mutate(
+    dup_title = duplicated(tale_title,fromLast = T) | duplicated(tale_title,fromLast = F),
+    tale_title = if_else(
+      dup_title, 
+      paste0(tale_title," (",str_to_title(title_tag),")"),
+      tale_title
+    )
+  ) %>%
+  select(-dup_title) %>%
+  distinct(.keep_all = T)
 
 write_csv(aat,"data/aat.csv")
 
