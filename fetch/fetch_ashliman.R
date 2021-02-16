@@ -58,10 +58,11 @@ links <-
 
 df <- tibble()
 
-# i = 3
+# i = 10
 
 range <- 1:length(links$url)
 
+# remain: 23, 36, 70, 74, 78, 83
 # errors: c(70,74)
 
 for (i in range[!range %in% c(70,74)]) {
@@ -123,7 +124,7 @@ for (i in range[!range %in% c(70,74)]) {
           mutate(
             div   = case_when(
               str_detect(mess_text,"folktexts, a library of folktales") ~ T,
-              str_detect(mess_text,"Links to related sites") ~ T,
+              sum(str_detect(mess_text,"folktexts, a library of folktales")) == 0 & str_detect(mess_text,"Links to related sites") ~ T,
               T ~ F
             ),
             div_n = cumsum(div)
@@ -269,7 +270,6 @@ for (i in range[!range %in% c(70,74)]) {
   )
   
 }
-
 
 aat <-
   df  %>%
