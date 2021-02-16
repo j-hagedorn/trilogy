@@ -58,7 +58,7 @@ links <-
 
 df <- tibble()
 
-# i = 10
+# i = 78
 
 range <- 1:length(links$url)
 
@@ -114,11 +114,26 @@ for (i in range[!range %in% c(70,74)]) {
           list(~ifelse(dist > 0.21,NA,.))
         ) %>%
         distinct(mess_text,text,.keep_all = T) %>%
-        ungroup() 
+        ungroup() %>%
+        mutate(
+          type_name = links$type_name[i],
+          atu_id = links$atu_id[i],
+          type = case_when(
+            name == "a" & str_detect(class,"href") ~ "links",
+            name == "p"  ~ "text",
+            name == "a"  ~ "title",
+            name == "h1" ~ "title",
+            str_detect(mess_text,regex("^Return to the table of contents.",ignore_case = T)) ~ "title",
+            str_detect(mess_text,regex("^source",ignore_case = T))     ~ "source",
+            str_detect(mess_text,regex("copyright|©",ignore_case = T)) ~ "copyright",
+            name == "h3" ~ "provenance",
+            name == "li" ~ "notes"
+          )
+        )
       
       # If there is a TOC, locate and remove it
       if (sum(str_detect(body_df$mess_text,regex("table of contents|^contents$",ignore_case = T)), na.rm = T) > 0) {
-        body_df <- 
+        body_df  <- 
           body_df %>%
           # divide front matter from tales
           mutate(
@@ -135,21 +150,8 @@ for (i in range[!range %in% c(70,74)]) {
       
       body_df <- 
         body_df %>%
-        mutate(
-          type_name = links$type_name[i],
-          atu_id = links$atu_id[i],
-          type = case_when(
-            name == "a" & str_detect(class,"href") ~ "links",
-            name == "p"  ~ "text",
-            name == "a"  ~ "title",
-            str_detect(mess_text,regex("^Return to the table of contents.",ignore_case = T)) ~ "title",
-            str_detect(mess_text,regex("^source",ignore_case = T))     ~ "source",
-            str_detect(mess_text,regex("copyright|©",ignore_case = T)) ~ "copyright",
-            name == "h3" ~ "provenance",
-            name == "li" ~ "notes"
-          )
-        ) %>%
         mutate(mess_text = str_replace(mess_text,"^Return to the table of contents.","")) %>%
+        filter(!str_detect(mess_text,regex("^D. L. Ashliman$",ignore_case = T))) %>%
         select(-name,-class) %>%
         mutate(tale_title = if_else(type == "title",mess_text,NA_character_)) %>%
         fill(tale_title,.direction = "down") %>%
