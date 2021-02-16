@@ -58,10 +58,11 @@ links <-
 
 df <- tibble()
 
-# i = 1
+# i = 10
 
 range <- 1:length(links$url)
 
+# remain: 23, 36, 70, 74, 78, 83
 # errors: c(70,74)
 
 for (i in range[!range %in% c(70,74)]) {
@@ -81,20 +82,7 @@ for (i in range[!range %in% c(70,74)]) {
           class = sub_pg %>% html_attrs()
         ) 
       
-      # Split into a table for the unstructured 'body' text...
-      
-      body <-
-        x %>%
-        filter(name == "body") %>%
-        select(-class) %>%
-        mutate(
-          text = str_squish(text),
-          text = str_replace_all(text,'\\\\',"")
-        )
-      
-      # and another for the structured .html tags
-      
-      nobody <- 
+      nobody <-
         x %>% 
         filter(name != "body") %>%
         mutate(
@@ -102,7 +90,7 @@ for (i in range[!range %in% c(70,74)]) {
           text = str_replace_all(text,'\\\\',""),
           len = str_length(text)
         ) %>%
-        filter(text != "") 
+        filter(text != "")
       
       # Clean the 'body' of the .html, which has paragraphs of unstructured text
       # and associate these, when possible, with structured sections using fuzzy matching
@@ -134,7 +122,11 @@ for (i in range[!range %in% c(70,74)]) {
           body_df %>%
           # divide front matter from tales
           mutate(
-            div   = str_detect(mess_text,"folktexts, a library of folktales"),
+            div   = case_when(
+              str_detect(mess_text,"folktexts, a library of folktales") ~ T,
+              sum(str_detect(mess_text,"folktexts, a library of folktales")) == 0 & str_detect(mess_text,"Links to related sites") ~ T,
+              T ~ F
+            ),
             div_n = cumsum(div)
           ) %>%
           filter(div_n == 1) %>%
@@ -193,6 +185,11 @@ for (i in range[!range %in% c(70,74)]) {
         # Some nested lists remain; paste these together
         mutate_all(list(~paste(.,sep = " ")))
       
+      # Add 'provenance' col for join if necessary
+      if(is.null(body_df$provenance)){
+        body_df <- body_df %>% mutate(provenance = NA_character_)
+      } 
+      
       clean_df <-
         nobody %>%
         mutate(
@@ -223,30 +220,41 @@ for (i in range[!range %in% c(70,74)]) {
           slice(-(1:3)) %>% # remove top two rows, which contain dup "folktexts.html"
           # divide front matter from tales
           mutate(
-            div   = str_detect(class,"folktexts.html"),
-            div   = if_else(atu_id == "0850", str_detect(class,"#bibliography$"),div), # one-off coding due to html mess
-            div   = if_else(atu_id == "0280a", str_detect(class,"#links$"),div), # one-off coding due to html mess
+            div   = case_when(
+              str_detect(class,"folktexts.html")                          ~ T,
+              atu_id %in% c("0850") & str_detect(class,"#bibliography$")  ~ T, # one-off coding due to html mess
+              atu_id %in% c("0280a","0676") & str_detect(class,"#links$") ~ T,
+              T ~ F
+            ),
             div_n = cumsum(div)
           ) %>%
           filter(div_n == 1) %>%
           select(-div,-div_n)
       } else clean_df <- clean_df
       
-      clean_df <- 
+      clean_df <-
         clean_df %>%
         filter(!str_detect(class,"folktexts.html")) %>%
         # Exclude links to sources
         filter(type != "links") %>%
+        mutate(
+          tale_title = if_else(type == "title",text,  NA_character_),
+          title_tag  = if_else(type == "title",paste(class,sep = " "), NA_character_)
+        ) %>%
         select(-name,-class) %>%
-        mutate(tale_title = if_else(type == "title",text,NA_character_)) %>%
-        fill(tale_title,.direction = "down") %>%
+        fill(tale_title,title_tag,.direction = "down") %>%
         filter(type != "title") %>%
-        group_by(type_name,atu_id,tale_title,type) %>%
+        group_by(type_name,atu_id,tale_title,title_tag,type) %>%
         summarize(text = paste(text,collapse = " ")) %>%
         mutate(text = str_squish(text)) %>%
-        group_by(type_name,atu_id,tale_title) %>%
+        group_by(type_name,atu_id,tale_title,title_tag) %>%
         pivot_wider(names_from = "type",values_from = "text") %>%
-        select(type_name,atu_id,tale_title,text,everything())
+        select(type_name,atu_id,tale_title,title_tag,text,everything()) 
+      
+      # Add 'provenance' col for join if necessary
+      if(is.null(clean_df$provenance)){
+        clean_df <- clean_df %>% mutate(provenance = NA_character_)
+      }
       
       # Then join 'body_df' and 'clean_df'
       
@@ -254,8 +262,8 @@ for (i in range[!range %in% c(70,74)]) {
         clean_df %>%
         full_join(
           body_df %>% ungroup() %>% select(-type_name, -atu_id), 
-          by = "tale_title"
-        )
+          by = c("tale_title","provenance")
+        ) 
       
       df <- bind_rows(df,x)
     }
@@ -267,8 +275,11 @@ aat <-
   df  %>%
   # Privilege columns based on source (.y = messy body text, .x = structured html)
   mutate(
-    text = if_else(!is.na(text.y),text.y,text.x),
-    provenance = if_else(!is.na(provenance.x),provenance.x,provenance.y),
+    text = if_else(
+      !is.na(text.y) & str_length(text.y) > str_length(text.x),
+      text.y,text.x
+    ),
+    # provenance = if_else(!is.na(provenance.x),provenance.x,provenance.y),
     source = if_else(!is.na(source.x),source.x,source.y),
     notes = if_else(!is.na(notes.x),notes.x,notes.y),
     copyright = if_else(!is.na(copyright.x),copyright.x,copyright.y)
@@ -280,14 +291,30 @@ aat <-
     !str_detect(
       tale_title,
       regex(
-        "contents|^links to |^links$|related links|^footnote$|^\\{footnote|notes and bibliography",ignore_case = T
+        "contents|^links to |^links$|related links|^footnote$|^\\{footnote|notes and bibliography",
+        ignore_case = T
       )
     )
   ) %>%
   filter(!str_detect(text,"^Return to D. L. Ashliman's folktexts|^Return to:$")) %>%
-  mutate(tale_title = str_squish(tale_title)) %>%
+  mutate(
+    type_name = str_replace_all(type_name,"\\n"," "),
+    tale_title = str_squish(tale_title)
+  ) %>%
   mutate_all(list(~if_else(str_detect(.,"^NA$|^NULL$"),NA_character_,.))) %>%
-  filter(!is.na(type_name))
+  filter(!is.na(type_name)) %>%
+  # If a title is duplicated, append parenthetical tag
+  group_by(atu_id) %>%
+  mutate(
+    dup_title = duplicated(tale_title,fromLast = T) | duplicated(tale_title,fromLast = F),
+    tale_title = if_else(
+      dup_title, 
+      paste0(tale_title," (",str_to_title(title_tag),")"),
+      tale_title
+    )
+  ) %>%
+  select(-dup_title) %>%
+  distinct(.keep_all = T)
 
 write_csv(aat,"data/aat.csv")
 
@@ -298,6 +325,9 @@ complete <-
     n = n_distinct(tale_title),
     tales = paste(tale_title,collapse = "; ")
   ) %>%
-  full_join(links, by = c("type_name","atu_id"))
+  full_join(
+    links %>% mutate(type_name = str_replace_all(type_name,"\\n"," ")), 
+    by = c("type_name","atu_id")
+  )
 
 rm(list = c("df","pg","x","i","site_url","links"))
