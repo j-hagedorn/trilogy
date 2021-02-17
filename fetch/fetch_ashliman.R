@@ -20,8 +20,7 @@ links <-
     short_name = str_remove(url,".html")
   ) %>%
   filter(!str_detect(url,"^http")) %>%
-  # Only single letter
-  filter(!str_detect(url,"#[a-z]$")) %>%
+  filter(!str_detect(url,"#[a-z]$")) %>% # Only single letter
   filter(!str_detect(url,"^ashliman.html$|^folktexts.html$|^folktexts2.html$|^folklinks.html$")) %>%
   filter(!str_detect(type_name,regex("essay",ignore_case = T))) %>%
   distinct() %>%
@@ -58,11 +57,10 @@ links <-
 
 df <- tibble()
 
-# i = 78
+# i = 109
 
 range <- 1:length(links$url)
 
-# remain: 23, 36, 70, 74, 78, 83
 # errors: c(70,74)
 
 for (i in range[!range %in% c(70,74)]) {
@@ -133,12 +131,13 @@ for (i in range[!range %in% c(70,74)]) {
       
       # If there is a TOC, locate and remove it
       if (sum(str_detect(body_df$mess_text,regex("table of contents|^contents$",ignore_case = T)), na.rm = T) > 0) {
-        body_df  <- 
+        body_df <- 
           body_df %>%
           # divide front matter from tales
           mutate(
             div   = case_when(
               str_detect(mess_text,"folktexts, a library of folktales") ~ T,
+              str_detect(mess_text,"Return to D. L. Ashliman's folktexts, a") ~ T, # one off for 'Crop Division...' tales
               sum(str_detect(mess_text,"folktexts, a library of folktales")) == 0 & str_detect(mess_text,"Links to related sites") ~ T,
               T ~ F
             ),
@@ -268,6 +267,7 @@ for (i in range[!range %in% c(70,74)]) {
         ) 
       
       df <- bind_rows(df,x)
+      
     }
   )
   
