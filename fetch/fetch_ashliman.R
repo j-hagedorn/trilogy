@@ -6,6 +6,8 @@ pg <-
   read_html(site_url) %>%
   html_nodes("a") 
 
+# Obtain urls for all sub-pages on Folktexts website, filtering for annotated ones
+
 links <- 
   tibble(
     type_name = pg %>% html_text(),
@@ -52,7 +54,6 @@ links <-
   ) %>%
   select(type_name,atu_id,url = rev_url)
   
-
 # for each sub-page...
 
 df <- tibble()
@@ -61,6 +62,7 @@ df <- tibble()
 
 range <- 1:length(links$url)
 
+# 78
 # errors: c(70,74)
 
 for (i in range[!range %in% c(70,74)]) {
@@ -137,7 +139,7 @@ for (i in range[!range %in% c(70,74)]) {
           mutate(
             div   = case_when(
               str_detect(mess_text,"folktexts, a library of folktales") ~ T,
-              str_detect(mess_text,"Return to D. L. Ashliman's folktexts, a") ~ T, # one off for 'Crop Division...' tales
+              # str_detect(mess_text,"Return to D. L. Ashliman's folktexts, a") ~ T, # one off for 'Crop Division...' tales
               sum(str_detect(mess_text,"folktexts, a library of folktales")) == 0 & str_detect(mess_text,"Links to related sites") ~ T,
               T ~ F
             ),
@@ -277,9 +279,11 @@ aat <-
   df  %>%
   # Privilege columns based on source (.y = messy body text, .x = structured html)
   mutate(
-    text = if_else(
-      !is.na(text.y) & str_length(text.y) > str_length(text.x),
-      text.y,text.x
+    text = case_when(
+      !is.na(text.x) & !is.na(text.y) & (str_length(text.y) > str_length(text.x)) ~ text.y,
+      !is.na(text.x) & !is.na(text.y) & (str_length(text.y) < str_length(text.x)) ~ text.x,
+      is.na(text.x) & !is.na(text.y) ~ text.y,
+      TRUE ~ text.x
     ),
     # provenance = if_else(!is.na(provenance.x),provenance.x,provenance.y),
     source = if_else(!is.na(source.x),source.x,source.y),
@@ -301,7 +305,10 @@ aat <-
   filter(!str_detect(text,"^Return to D. L. Ashliman's folktexts|^Return to:$")) %>%
   mutate(
     type_name = str_replace_all(type_name,"\\n"," "),
-    tale_title = str_squish(tale_title)
+    type_name = str_remove(type_name,"^Type.*: "),
+    tale_title = str_squish(tale_title),
+    atu_id = recode(atu_id, `2033` = "0020c"),
+    source = str_remove(source,"^Source:|^Source: ")
   ) %>%
   mutate_all(list(~if_else(str_detect(.,"^NA$|^NULL$"),NA_character_,.))) %>%
   filter(!is.na(type_name)) %>%
@@ -315,21 +322,25 @@ aat <-
       tale_title
     )
   ) %>%
-  select(-dup_title) %>%
+  select(-dup_title,-title_tag) %>%
   distinct(.keep_all = T)
 
 write_csv(aat,"data/aat.csv")
 
 complete <-
   aat %>%
-  group_by(type_name, atu_id) %>%
+  group_by(atu_id) %>%
   summarise(
-    n = n_distinct(tale_title),
+    pages = paste(unique(type_name),collapse = "; "),
+    n_tales = n_distinct(tale_title),
     tales = paste(tale_title,collapse = "; ")
   ) %>%
   full_join(
-    links %>% mutate(type_name = str_replace_all(type_name,"\\n"," ")), 
-    by = c("type_name","atu_id")
+    links %>% group_by(atu_id) %>%
+      summarise(
+        urls = paste(url,collapse = "; ")
+      ), 
+    by = c("atu_id")
   )
 
-rm(list = c("df","pg","x","i","site_url","links"))
+rm(list = c("pg","x","i","site_url","sub_pg","nobody","body_df","clean_df","range"))
