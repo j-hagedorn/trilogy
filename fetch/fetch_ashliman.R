@@ -275,7 +275,7 @@ for (i in range[!range %in% c(70,74)]) {
   
 }
 
-aat <-
+aft <-
   df  %>%
   # Privilege columns based on source (.y = messy body text, .x = structured html)
   mutate(
@@ -312,6 +312,7 @@ aat <-
   ) %>%
   mutate_all(list(~if_else(str_detect(.,"^NA$|^NULL$"),NA_character_,.))) %>%
   filter(!is.na(type_name)) %>%
+  filter(!(str_detect(text,"^Revised ") & str_length(text) < 30)) %>%
   # If a title is duplicated, append parenthetical tag
   group_by(atu_id) %>%
   mutate(
@@ -323,12 +324,16 @@ aat <-
     )
   ) %>%
   select(-dup_title,-title_tag) %>%
+  mutate(
+    data_source = "Ashliman's Folktexts",
+    date_obtained = lubridate::today()
+  ) %>%
   distinct(.keep_all = T)
 
-write_csv(aat,"data/aat.csv")
+write_csv(aft,"data/aft.csv")
 
 complete <-
-  aat %>%
+  aft %>%
   group_by(atu_id) %>%
   summarise(
     pages = paste(unique(type_name),collapse = "; "),
@@ -341,6 +346,7 @@ complete <-
         urls = paste(url,collapse = "; ")
       ), 
     by = c("atu_id")
-  )
+  ) %>%
+  arrange(desc(n_tales))
 
 rm(list = c("pg","x","i","site_url","sub_pg","nobody","body_df","clean_df","range"))
