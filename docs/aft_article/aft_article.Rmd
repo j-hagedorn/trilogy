@@ -39,6 +39,11 @@ biblio-style: spbasic
 output: rticles::springer_article
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F,message = T,error = T)
+library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin)
+```
+
 # Introduction {#intro}
 
 We believe that a rendezvous between folk narrative studies and data science is already taking place on the Semantic Web as its venue. Limited in its scope for now, a next step in the evolution of Digital Humanities, this event has been long overdue, and will include more and more cultural artifacts of all ages and regions worldwide.
@@ -47,7 +52,7 @@ Regardless of how long it will take, and if one or more generations of multidisc
 
 We anticipate that, due to shortcomings on the funding side of the above equation, and to reduce any further delays, crowdsourcing of the problem via Github can be a legitimate approach, calling in data science for toolkit development. We will argue for this development below. When it comes to data science, missing folktale and myth datasets for machine learning, in English, and with semantic markup either by ATU or TMI tags, are a major bottleneck though. Likewise, for ontology building, ultimately one might need to convert the equivalents of a Roscher, a Pauly-Wissova, or respective monographs with specialist field knowledge over time. We [will] report related developments and considerations elsewhere (papers: Olympians, Burkert).
 
-On the other hand, the methodology aspect of the above has seen progress. Recently, Yarlott &amp;Finlayson have published a comprehensive overview of tale research (2016). Our vision subscribes to and includes their statements but notes the potential for more accomplishments. Further, we welcome and acknowledge results and proposals by (d’Huy, Tehrani, Berezhkin, Thangerlini, Meder, Karsdorp etc) who have been active in the dataset building and text analytics arena, or the ontology building efforts of (Declerck, Lendvai etc) as another research track. However, apparently these approaches and toolkits can be considerably extended as shown e.g. by Lendvai et al (Verona), and the direction we suggest points at the integration of more and more sophisticated NLP solutions, combined with evolving datasets in a data science framework, where the respective semantics is increasingly modelled by evolving ontologies and vector spaces (practically vector fields) vs. dynamic graphs, instead of static ones (D4.5, arXiv 1 &amp; 2). Such developments will have to be extended to knowledge graphs as well. We also note in passing that, as suggested by Ofek et al and Darányi et al, the analysis of tale types as motif strings in the framework of text variation invites the metaphor of narrative genomics (refs).
+On the other hand, the methodology aspect of the above has seen progress. Recently, Yarlott & Finlayson have published a comprehensive overview of tale research (2016). Our vision subscribes to and includes their statements but notes the potential for more accomplishments. Further, we welcome and acknowledge results and proposals by (d’Huy, Tehrani, Berezhkin, Thangerlini, Meder, Karsdorp etc) who have been active in the dataset building and text analytics arena, or the ontology building efforts of (Declerck, Lendvai etc) as another research track. However, apparently these approaches and toolkits can be considerably extended as shown e.g. by Lendvai et al (Verona), and the direction we suggest points at the integration of more and more sophisticated NLP solutions, combined with evolving datasets in a data science framework, where the respective semantics is increasingly modelled by evolving ontologies and vector spaces (practically vector fields) vs. dynamic graphs, instead of static ones (D4.5, arXiv 1 &amp; 2). Such developments will have to be extended to knowledge graphs as well. We also note in passing that, as suggested by Ofek et al and Darányi et al, the analysis of tale types as motif strings in the framework of text variation invites the metaphor of narrative genomics (refs).
 
 Our research problem for the current paper is as follows. Regarding folk narrative research, consider the case of two standard reference tools, the TMI and the ATU. The TMI has x_1 motifs (or, cf Yarlott & Finlayson, x_2), whereas the ATU uses y of them to model tale structures as motif strings on a global scale. It is justified to ask, where have w % of those motifs in the TMI disappeared by the time they were applied to the ATU; or, how can an important monograph acquire canonical status with such a discrepancy in its background? In our eyes, the explanation goes back to the very different comparison capacities of the human mind vs the computer, leading to differently robust deductions, and to remedy this situation is to call in data science.
 
@@ -61,11 +66,126 @@ Text with citations by \cite{Galyardt14mmm}.
 
 as required. Don't forget to give each section and subsection a unique label (see Sect. \ref{related_research}).
 
-# Steps of dataset normalization {#data_cleaning}
+# Data Harvesting and Cleaning {#data_cleaning}
 
-# Features of the dataset {#data_features}
+## Steps
 
-## Data dictionary
+```{r site_links}
+# See fetch_ashliman.R script for source
+site_url <- "http://www.pitt.edu/~dash/folktexts.html"
+
+pg <-
+  read_html(site_url) %>%
+  html_nodes("a") 
+
+# Obtain urls for all sub-pages on Folktexts website, filtering for annotated ones
+
+links <- 
+  tibble(
+    type_name = pg %>% html_text(),
+    url = pg %>% html_attr("href")
+  ) %>%
+  filter(!is.na(url)) %>%
+  mutate(
+    rev_url = case_when(
+      str_detect(url,"^http") ~ url,
+      T ~ paste0("http://www.pitt.edu/~dash/",url)
+    ),
+    short_name = str_remove(url,".html")
+  ) %>%
+  filter(!str_detect(url,"^http")) %>%
+  filter(!str_detect(url,"#[a-z]$")) %>% # Only single letter
+  filter(!str_detect(url,"^ashliman.html$|^folktexts.html$|^folktexts2.html$|^folklinks.html$")) %>%
+  filter(!str_detect(type_name,regex("essay",ignore_case = T))) %>%
+  distinct() %>%
+  # Recode html names which do not contain their tale types
+  mutate(
+    rev_name = recode(
+      short_name,
+      `alibaba`      = "type0676",
+      `animalindian` = "type0402",
+      `norway034`    = "type0402",
+      `norway133`    = "type0133",
+      `type2033`     = "type0020c",
+      `friday`       = "type0779j*",
+      `frog`         = "type0440",
+      `hand`         = "type0958e*",
+      `type1066`     = "type1343",
+      `hog`          = "type0441",
+      `monkey`       = "type0441",
+      `melusina`     = "type4080",
+      `norway010`    = "type1408",
+      `norway120`    = "type0313",
+      `midwife`      = "type5070"
+    )
+  ) %>%
+  filter(str_detect(rev_name,regex("^type",ignore_case = T))) %>%
+  mutate(
+    atu_id = str_remove(rev_name,"^type"),
+    atu_id = str_remove(atu_id,"jack$|ast$|#longfellow$")
+  ) %>%
+  select(type_name,atu_id,url = rev_url)
+```
+
+Web-scraping of the AFT site was completed using the `rvest` package in the `R` statistical programming language.  The full script is available on GitHub, and the following high-level summary of data-cleaning steps is provided to allow for an understanding of the methods used and their limitations:
+
+1. Obtain URLs and associated label text for all "child" pages of the main website to create a dataframe of page names and URLs.^[The main URL for the site is `http://www.pitt.edu/~dash/folktexts.html`]
+2. Remove any links pointed to external websites, since these would require separate web-scraping logic to be developed.
+3. Retain all links with the form `type...`, which Ashliman used to denote pages containing tales belonging to a type.  Recode links which do not follow this form, but which contain tales belonging to an ATU type.  For example, the page for *Animal Brides and Animal Bridegrooms* was recoded as belonging to ATU type 0402.
+4. Extract the ATU type ID from the URL for each page.
+
+The steps above result in a dataframe listing `r nrow(links)` webpages, each associated with a tale type and containing the page name, the page URL, and the associated ATU ID for each.  This list of page URLs was looped through, using the following steps to the HTML within each page:
+
+5. Extract HTML nodes from the page using CSS selectors (i.e. `body`, `h1`, `li` , `p`, `h3`, `a`) and create a dataframe using the text, name and attribute elements of the nodes.
+6. Remove the table of contents and other superfluous text other than the tales, their titles, and other associated metadata (e.g. source documents, notes, etc.).
+7. Since not all paragraphs had HTML tags, using a straightforward scraping technique would result in tales with missing sections.  Therefore, we separated the `body` of each page into a separate dataframe, unnested the text by lines,^[Using the `tidytext::unnest_tokens()` function.] and used a fuzzy-joining method to align the missing body text with the well-formatted HTML.^[Using the `fuzzyjoin::stringdist_full_join()` function, we used the *Jaro-Winkler* method and set the maximum distance for a match to 1.]
+8. Join to the dataframe of extracted data elements from other URLs.
+
+The resulting dataframe compiled the available tales from the original list of `r nrow(links)` webpages.  To this dataframe, the following steps were applied:
+
+9. Select the longest `text`, choosing between the tagged HTML version and the version extracted from the `body`.
+10. Select the available metadata from the tagged HTML versions where those existed, using the alternate versions only if those were `NA`.
+11. Remove irrelevant entries using regular expressions.
+12. Create unique tale titles where these were duplicated across multiple variants of tales.
+13. Clean tale text data (e.g. removing remnant HTML tags, extra spaces, replacing internal double quotes with single quotes).
+
+## Limitations
+
+Unable to scrape broken links
+Following pages from the initial set of URLs were unable to be scraped, due to errors gen.
+Only one tale per 
+
+# Features of the Annotated FolkTales (`aft`) dataset {#data_features}
+
+```{r aft}
+aft <- read_csv("../../data/aft.csv")
+```
+
+## Rationale: Tidy data
+
+allows inspection and reasoning about effects of transformation and modeling
+dataframe as common object across R (in `tidyverse`) and Python (in `pandas`) 
+variants allow for nested structures and graph-based structures
+
+
+## Data Dictionary
+
+The `aft` (i.e. *Annotated Folk Tales*) dataframe contains `r nrow(aft)` rows, each corresponding to a single tale.  Its `r ncol(aft)` columns are described briefly below:
+
+- `type_name` : The name associated with the Aarne-Thompson-Uther (ATU) tale type identifier.
+- `atu_id` : The Aarne-Thompson-Uther (ATU) tale type identifier which classifies the tale.
+- `tale_title` : The title of the tale. 
+- `provenance` : The person, place or tradition from which the tale came.  In Ashliman's collection, this refers variously to the person recording the tales (*e.g. Giambattista Basile*), the country or region from which the version of the tale came (*e.g. North Africa*), or the larger collection of tales in which the tale is found (e.g. *The Kathasaritsagara*). 
+- `notes` : Additional notes related to the tale.
+- `source` : The bibliographic citation for the original published source of the tale.
+- `copyright` : Any copyright information published alongside the tales in their scraped sources.
+- `text` : The full text of the tale identified in `tale_title`.
+- `data_source` : The source of the annotated tales.  At the time of this writing, the source of all tales is "Ashliman's Folktexts".
+- `date_obtained` : The date on which the data set identified as a `data_source` was last downloaded and compiled.
+
+## Descriptive Statistics
+
+
 
 # Conclusion and Future Research {#data_features}
 
