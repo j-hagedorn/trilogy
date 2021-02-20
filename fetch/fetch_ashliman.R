@@ -1,4 +1,4 @@
-library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin)
+library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin); library(textclean)
 
 site_url <- "http://www.pitt.edu/~dash/folktexts.html"
 
@@ -325,6 +325,11 @@ aft <-
   ) %>%
   select(-dup_title,-title_tag) %>%
   mutate(
+    text = text %>% 
+      str_remove_all(fixed("\\")) %>%
+      str_replace_all('[\"]', "'") %>%
+      str_squish() %>%
+      replace_html(replacement = ""),
     data_source = "Ashliman's Folktexts",
     date_obtained = lubridate::today()
   ) %>%
