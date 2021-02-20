@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.12)  18 FEB 2021 06:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.12)  20 FEB 2021 16:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -392,21 +392,35 @@ tex.map}] [2]
 
 LaTeX Warning: Citation `Galyardt14mmm' on page 3 undefined on input line 184.
 
-(./aft_article.bbl [3pdfTeX warning (ext4): destination with the same identifie
-r (name{data_features}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.15 
-     ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 217.
+[3]
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 291.
 [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 217.
+Overfull \hbox (97.7462pt too wide) in paragraph at lines 308--308
+[]\OT1/cmtt/m/n/10 ## -- Column specification ---------------------------------
+-----------------------[] 
+ []
+
+
+Overfull \hbox (1.28137pt too wide) in paragraph at lines 351--353
+[]\OT1/cmtt/m/n/10 date[]obtained \OT1/cmr/m/n/10 : The date on which the data 
+set iden-ti-fied as a \OT1/cmtt/m/n/10 data[]source
+ []
+
+pdfTeX warning (ext4): destination with the same identifier (name{data_features
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.359 ...nd Future Research}\label{data_features}}
+                                                   [5] (./aft_article.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 374.
+[6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 374.
 (./aft_article.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 217.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 217.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 374.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 374.
 Package rerunfilecheck Info: File `aft_article.out' has not changed.
-(rerunfilecheck)             Checksum: 1F8AF231848ED67F32A2993FCF9FB9EA;363.
+(rerunfilecheck)             Checksum: 267E50B48E22D0B5EFA9A92120B66257;365.
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
@@ -414,32 +428,36 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 217.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 374.
  ) 
 Here is how much of TeX's memory you used:
- 5844 strings out of 482938
- 89127 string characters out of 5958840
- 351899 words of memory out of 5000000
- 20986 multiletter control sequences out of 15000+600000
- 539549 words of font info for 49 fonts, out of 8000000 for 9000
+ 5880 strings out of 482938
+ 89506 string characters out of 5958840
+ 353075 words of memory out of 5000000
+ 20994 multiletter control sequences out of 15000+600000
+ 540069 words of font info for 51 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,8n,30p,228b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,8n,30p,228b,456s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmbsy10.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmbx10.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/joshh/AppData/Roaming/Ti
 nyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/joshh/AppD
 ata/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Use
-rs/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7
+rs/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6
 .pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr8.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy10.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/Users/joshh/AppData/Roaming/Ti
-nyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on aft_article.pdf (4 pages, 123295 bytes).
+onts/cm/cmr7.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr8.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/joshh/AppData/Roaming/Tiny
+TeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/Users/joshh/AppDat
+a/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb><c:/Users
+/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10
+.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmtt8.pfb>
+Output written on aft_article.pdf (6 pages, 166434 bytes).
 PDF statistics:
- 109 PDF objects out of 1000 (max. 8388607)
- 92 compressed objects within 1 object stream
- 23 named destinations out of 1000 (max. 500000)
+ 164 PDF objects out of 1000 (max. 8388607)
+ 141 compressed objects within 2 object streams
+ 49 named destinations out of 1000 (max. 500000)
  49 words of extra memory for PDF output out of 10000 (max. 10000000)
 
