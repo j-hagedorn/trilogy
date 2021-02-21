@@ -40,7 +40,7 @@ output: rticles::springer_article
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = F,message = T,error = T)
+knitr::opts_chunk$set(echo = F,message = T,error = T,warning = T)
 library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin)
 ```
 
@@ -153,7 +153,7 @@ The resulting dataframe compiled the available tales from the original list of `
 
 Unable to scrape broken links
 Following pages from the initial set of URLs were unable to be scraped, due to errors gen.
-Only one tale per 
+Only one tale type per tale, intent is to store multiple ATUs as a nested list
 
 # Features of the Annotated FolkTales (`aft`) dataset {#data_features}
 
@@ -175,7 +175,7 @@ The `aft` (i.e. *Annotated Folk Tales*) dataframe contains `r nrow(aft)` rows, e
 - `type_name` : The name associated with the Aarne-Thompson-Uther (ATU) tale type identifier.
 - `atu_id` : The Aarne-Thompson-Uther (ATU) tale type identifier which classifies the tale.
 - `tale_title` : The title of the tale. 
-- `provenance` : The person, place or tradition from which the tale came.  In Ashliman's collection, this refers variously to the person recording the tales (*e.g. Giambattista Basile*), the country or region from which the version of the tale came (*e.g. North Africa*), or the larger collection of tales in which the tale is found (e.g. *The Kathasaritsagara*). 
+- `provenance` : The person, place or tradition from which the tale came.  In Ashliman's collection, this refers variously to the person recording the tales (*e.g. Giambattista Basile*), the country or region from which the version of the tale came (*e.g. North Africa*), or the larger collection of tales in which the tale is found (*e.g. The Kathasaritsagara*). 
 - `notes` : Additional notes related to the tale.
 - `source` : The bibliographic citation for the original published source of the tale.
 - `copyright` : Any copyright information published alongside the tales in their scraped sources.
@@ -185,6 +185,11 @@ The `aft` (i.e. *Annotated Folk Tales*) dataframe contains `r nrow(aft)` rows, e
 
 ## Descriptive Statistics
 
+average number of tales per type
+
+sum total of text words in the corpus
+
+average number of text words in a tale type 
 
 
 # Conclusion and Future Research {#data_features}
