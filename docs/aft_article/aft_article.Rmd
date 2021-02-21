@@ -40,7 +40,7 @@ output: rticles::springer_article
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = F,message = T,error = T,warning = T)
+knitr::opts_chunk$set(echo = F,message = F,error = F,warning = F)
 library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin)
 ```
 
