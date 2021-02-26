@@ -40,10 +40,41 @@ output: rticles::springer_article
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = F,message = F,error = F,warning = F)
+knitr::opts_chunk$set(
+  echo = F,message = F,error = F,warning = F,
+  fig.width=6,fig.asp = 0.618,dpi=300,dev = "cairo_pdf"
+)
 library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin)
 ```
 
+```{r themes, echo=FALSE, message=FALSE}
+extrafont::loadfonts(device="win")
+font_family = "Gill Sans MT"
+
+theme_bar <- 
+  theme_minimal() + 
+  theme(
+    plot.title.position = "plot",
+    text = element_text(family = font_family),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(size=.1, color="grey" ),
+    panel.grid.minor.y = element_line(size=.1, color="grey" ),
+    axis.text.x.bottom = element_text()
+  )
+
+theme_bar_flip <- 
+  theme_minimal() + 
+  theme(
+    plot.title.position = "plot",
+    text = element_text(family = font_family),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.x = element_line(size=.1, color="grey" ),
+    panel.grid.minor.x = element_line(size=.1, color="grey" ),
+    axis.text.x.bottom = element_text()
+  )
+```
 # Introduction {#intro}
 
 We believe that a rendezvous between folk narrative studies and data science is already taking place on the Semantic Web as its venue. Limited in its scope for now, a next step in the evolution of Digital Humanities, this event has been long overdue, and will include more and more cultural artifacts of all ages and regions worldwide.
@@ -185,14 +216,66 @@ The `aft` (i.e. *Annotated Folk Tales*) dataframe contains `r nrow(aft)` rows, e
 
 ## Descriptive Statistics
 
-average number of tales per type
+#### Length of tales. 
+
+The `r nrow(aft)` tales in the dataset average `r round(mean(str_count(aft$text, '\\w+')), digits = 1)` words in length, though the individual texts vary with a minimum of `r min(str_count(aft$text, '\\w+'))` words and a maximum of `r max(str_count(aft$text, '\\w+'))`.  The histogram below shows the distribution of tale lengths:
+
+```{r word_hist, fig.asp = 0.36}
+
+aft %>%
+  mutate(count_words = str_count(aft$text, '\\w+')) %>%
+  ggplot(aes(x = count_words)) +
+  geom_histogram(
+    binwidth = 250
+  ) +
+  labs(
+    title = "Distribution of tale text length",
+    caption = "Each bar represents a range of 250 (e.g. 0-250, 251-500, etc.)",
+    x = "# of words",
+    y = "# of tales"
+  ) +
+  theme_bar
+
+```
+
+#### Number of tales by ATU type
+
+```{r by_type}
+
+by_type <- 
+  aft %>%
+  group_by(atu_id) %>%
+  summarize(
+    type_name = min(type_name),
+    n_tales = n()
+  )
+
+```
+
+The tales compiled in the `aft` are annotated by Aarne-Thompson-Uther (ATU) tale type, and represent `r n_distinct(aft$atu_id)` distinct types.  There are an average of `r mean(by_type$n_tales)` tales in each tale type, with a range of `r min(by_type$n_tales)` to `r max(by_type$n_tales)`.
+
+```{r, fig.asp=1.66}
+
+by_type %>%
+  ggplot(aes(x = fct_reorder(atu_id,n_tales), y = n_tales)) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "Number of tales, by tale type",
+    x = "ATU Tale Type"
+  ) +
+  theme_bar_flip
+
+```
+
+
 
 sum total of text words in the corpus
 
-average number of text words in a tale type 
+average number of text words in a tale, perhaps by type 
 
 
-# Conclusion and Future Research {#data_features}
+# Conclusion and Future Research {#conclusion}
 
 #### Paragraph headings 
 
