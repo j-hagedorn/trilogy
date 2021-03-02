@@ -193,7 +193,7 @@ The resulting dataframe compiled the available tales from the original list of `
 aft <- read_csv("../../data/aft.csv")
 ```
 
-## Rationale
+## Guiding Principles
 
 The following features guided our selection of tools and format for the code and data: 
 
@@ -203,8 +203,6 @@ The following features guided our selection of tools and format for the code and
 - *Common form*: We have chosen to use the dataframe as the structure of the dataset, and specifically the "tidy" dataframe described by Wickham, in which (a) Each variable forms a column, (b) Each observation forms a row, and (c) a single type of observational unit forms the dataframe \cite{wickham_tidy_2014}.
 - *Common tools*: It must also be structured in a way that allows for use with the standard tools of the trade of data science.  These tools are continuously evolving, yet the dataframe is likely to continue to be common object across R (in `tidyverse`) and Python (in `pandas`).  In addition, it can be read easily from a `.csv` format by Excel users to allow for ease of investigation.
 - *Modifiable form*: Text analysis has traditionally used other types of data structures to model its quantitative features (e.g. document-term matrices, term co-occurrence matrices), and dataframes have been incorporated into tidy data workflows and available packages such as `quanteda` or `tidytext`.  This allows for reshaping the data into sparse matrices, nested structures, and graph-based structures as dictated by the needs of a given .
-
-
 
 ## Data Dictionary
 
@@ -261,20 +259,41 @@ by_type <-
 
 The tales compiled in the `aft` are annotated by Aarne-Thompson-Uther (ATU) tale type, and represent `r n_distinct(aft$atu_id)` distinct types.  There are an average of `r mean(by_type$n_tales)` tales in each tale type, with a range of `r min(by_type$n_tales)` to `r max(by_type$n_tales)`.
 
-```{r, fig.asp=1.66}
+```{r type_hist, fig.asp = 0.36}
 
 by_type %>%
-  ggplot(aes(x = fct_reorder(atu_id,n_tales), y = n_tales)) +
-  geom_col() +
-  coord_flip() +
+  ggplot(aes(x = n_tales)) +
+  geom_histogram() +
   labs(
-    title = "Number of tales, by tale type",
-    x = "ATU Tale Type"
+    title = "Distribution of tale type membership",
+    subtitle = "How many tales are included in each type?",
+    x = "# of tales",
+    y = "# of tale types"
   ) +
-  theme_bar_flip
+  theme_bar
 
 ```
 
+The tale types with the largest representative group of tales in the corpus is shown below:
+
+```{r, fig.asp = 0.5}
+
+by_type %>%
+  top_n(10,n_tales) %>%
+  mutate(label = fct_reorder(paste0(type_name," (",atu_id,")"),n_tales)) %>%
+  ggplot(aes(x = n_tales, y = label)) +
+  geom_point(size = 3) +
+  geom_segment(aes(yend = label), xend = 0) +
+  labs(
+    title = "Top tale types",
+    subtitle = "Ten tale types with the largest number of representative tales",
+    y = "ATU Tale Type",
+    x = "# of tales"
+  ) +
+  theme_bar_flip +
+  xlim(0,25)
+
+```
 
 
 sum total of text words in the corpus
