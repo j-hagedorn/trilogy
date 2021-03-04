@@ -1,6 +1,6 @@
 ---
-title: Bag-of-tales
-subtitle: Converting the Ashliman Folktexts Collection into a Dataset for Machine Learning
+title: A bag-of-tales from Santa
+subtitle: Converting the Ashliman Folktexts Collection into a dataset for machine learning
 titlerunning: Bag-of-tales
 authorrunning: Darányi, S. & Hagedorn, J.
 thanks: | 
@@ -32,6 +32,10 @@ keywords:
 
 abstract: |
   Computational motif identification in folktales is an open research problem. To move ahead in this area, the field would benefit from shared test data for machine learning, putting experimentation in focus. Folklore databases including text collections in multiple languages do exist, but not in dataset form for data science, and are currently not shared, making their results non-reproducible, an obstacle to scientific progress. The need for significant preprocessing adds insult to injury, rendering the outcome both incomparable and subject to multidisciplinary criticism. As a first step to remedy this problem, we converted the Ashliman Folktexts Collection into a public dataset for supervised tale type learning, itself a precondition for scalable motif identification. In the future, this dataset can be upgraded in several respects to serve as the basis for springboard experiments with the Thompson Motif Index and the Aarne-Thompson-Uther tale typology, paving the way for ontology development.
+<<<<<<< Updated upstream
+=======
+  Add Marcia Zeng, Semantic enrichment overview. Add relevant research.
+>>>>>>> Stashed changes
 
 bibliography: bibliography.bib
 biblio-style: spbasic
