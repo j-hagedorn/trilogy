@@ -96,13 +96,15 @@ Text with citations by \cite{Galyardt14mmm}.
 
 # The Ashliman Folktexts collection {#aft_collection}
 
-as required. Don't forget to give each section and subsection a unique label (see Sect. \ref{related_research}).
+
+
+While some previous studies reference the corpus, it is often only a smaller portion of the entire set of texts \cite{reiter_nlp_2014}.
 
 # Support for Reproducibility in Folklore Studies
 
 Reproducibility is a defining characteristic of science, yet a wide gamut of scientific fields have been plagued by a "replicability crisis": a situation where trusted research findings have been impossible to reproduce [cite].  While the problem has come to the fore in the health and social sciences, it has been acknowledged in disciplines as broad as archaeology [cite], political science [cite], biology [cite], and economics [cite]. 
 
-Strides have been made in the digital humanities to emulate these efforts, with the *Journal for Open Humanities Data* [cite] being a noteworthy exception to the more common practice.
+Strides have been made in the digital humanities to emulate these efforts, with the *Journal of Open Humanities Data*  being a noteworthy exception to the more common practice.
 
 Reproducible research entails that study results be accompanied by:
 
@@ -115,13 +117,20 @@ Reproducible research entails that study results be accompanied by:
 The following features guided our selection of tools and format for the code and data: 
 
 - *Open data*: In order to use tale data consistently, it must be made freely and openly available to anyone. The dataset is therefore distributed under a Creative Commons license [cite].
-- *Extensible data*: The dataset can be added to or modified, in order to develop a more complete repository of tales.  This can be done by submitting pull requests to the project's GitHub repository.
+- *Extensible data*: The dataset can be added to or modified, in order to develop a more complete repository of tales.  This can be done by submitting pull requests to the project's GitHub repository (see Sect. \ref{grow} for additional details).
 - *Open code*: Allowing any user to view and run the code that produces the dataset, as well as downstream analyses which use the dataset.  This allows for inspection, refinement and reasoning about the effects of transformation and statistical modeling on the data.
 - *Common form*: We have chosen to use the dataframe as the structure of the dataset, and specifically the "tidy" dataframe described by Wickham, in which (a) Each variable forms a column, (b) Each observation forms a row, and (c) a single type of observational unit forms the dataframe \cite{wickham_tidy_2014}.
 - *Common tools*: The data must also be structured in a way that allows for use with the standard tools of the trade of data science.  These tools are continuously evolving, yet the dataframe is likely to continue to be common object across R (in `tidyverse`) and Python (in `pandas`).  In addition, it can be read easily from a `.csv` format by Excel users to allow for ease of investigation.
 - *Modifiable form*: Text analysis has traditionally used other types of data structures to model its quantitative features (e.g. document-term matrices, term co-occurrence matrices), and dataframes have been incorporated into tidy data workflows and available packages such as `quanteda` or `tidytext`.  This allows for reshaping the data into sparse matrices, nested structures, and graph-based structures as dictated by the needs of a given analysis, while starting from a common source dataset (i.e. the `aft`).
 
-## Growing the Corpus
+## Growing the Corpus {#grow}
+
+- motifs, tale types and tale corpus are incomplete, but that does not mean they should be thrown out
+- need structure for adding new tales
+- pull request provides structure for submission and review of changes
+- this can also be used to identify and correct errors (so publish and PR)
+- for reproducible research, articles using the datasets should use the url with the current commit's SHA to indicate the state of the dataset at the time the analysis was run.
+
 
 # Data Harvesting and Cleaning {#data_cleaning}
 
@@ -231,7 +240,7 @@ The `aft` (i.e. *Annotated Folk Tales*) dataframe contains `r nrow(aft)` rows, e
 - `source` : The bibliographic citation for the original published source of the tale.
 - `copyright` : Any copyright information published alongside the tales in their scraped sources.
 - `text` : The full text of the tale identified in `tale_title`.
-- `data_source` : The source of the annotated tales.  At the time of this writing, the source of all tales is "Ashliman's Folktexts".
+- `data_source` : The source of the annotated tales.  At the time of this writing, the source of all tales is "Ashliman's Folktexts", but this will change as the [dataset grows](#grow).
 - `date_obtained` : The date on which the data set identified as a `data_source` was last downloaded and compiled.
 
 ## Descriptive Statistics
@@ -314,6 +323,12 @@ by_type %>%
 # Conclusion and Future Research {#conclusion}
 
 ## Future 
+
+The intent of the repository is to provide:
+
+a set of all defined mythological and folktale motifs
+a set of 'types', or recipes describing a sequence of motifs which are commonly used together in myths and tales
+a collection of myths and tales that have been annotated as belonging to a 'type'
 
 - TMI
 - ATU
