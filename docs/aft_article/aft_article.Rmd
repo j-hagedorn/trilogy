@@ -91,13 +91,13 @@ The structure of this paper is as follows. In Section 2, we bring examples of re
 
 # Relevant Related Research {#related_research}
 
-Text with citations by \cite{Galyardt14mmm}.
+
 
 # The Ashliman Folktexts collection {#aft_collection}
 
 
 
-While some previous studies reference the corpus, it is often only a smaller portion of the entire set of texts \cite{reiter_nlp_2014}.
+While some previous studies reference the corpus, these often only include a smaller portion of the entire set of texts \cite{reiter_nlp_2014}.
 
 # Support for Reproducibility in Folklore Studies
 
@@ -318,18 +318,16 @@ by_type %>%
 
 ```
 
-
 # Conclusion and Future Research {#conclusion}
 
 ## Future 
 
 The intent of the repository is to provide:
 
-a set of all defined mythological and folktale motifs
-a set of 'types', or recipes describing a sequence of motifs which are commonly used together in myths and tales
-a collection of myths and tales that have been annotated as belonging to a 'type'
+- a set of all defined mythological and folktale motifs
+- a set of 'types', or recipes describing a sequence of motifs which are commonly used together in myths and tales
+- a collection of myth and tale texts that have been annotated as belonging to a 'type'
 
-- TMI
-- ATU
+
 
 
