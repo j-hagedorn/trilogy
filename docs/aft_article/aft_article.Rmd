@@ -88,14 +88,31 @@ A sufficient overlap between these definitions suggests that such higher order c
 
 Our research problem for the current paper is this: consider the case of two standard reference tools, the TMI, and the Aarne-Thompson-Uther tale type index (ATU, 2004). A count in the TMI indicated the presence of …. motifs, whereas Yarlott and Finlayson counted 46,248 motifs and sub-motifs from over 614 collections, 41,796 of which had references to tales or tale types (2016). However, based on our count the ATU uses only …. (…%) of them to model tale structures as motif strings. One is then prompted to ask, where have …. % of motifs in the TMI disappeared, and how can an important monograph acquire almost canonical status with such a discrepancy in its background? In our eyes, the explanation may go back to the very different comparison capacities of the human mind vs. the computer, leading to differently robust deductions, and for a remedy to this situation one needs to call in data science. Namely if we want to apply machine learning for motif identification and extraction, we need suitable datasets which enable research teams to replicate each other's results. Below we take a step in this direction.
 
-The structure of this paper is as follows. In Section 2, we bring examples of related research.  In Section 3, we discuss Ashliman’s Folktexts tale collection. In Section 4 data cleaning and data restructuring aspects are presented which lead to a dataset for machine learning. Section 5 is a brief outline of potential research directions for the future.
+The structure of this paper is as follows. In Section 2, we bring examples of related research.  In Section 3, Ashliman’s Folktexts tale collection is introduced. In Section 4 we explain our motivation to support reproducible research in computational folkloristics, with Section 5 offering details of data harvesting and cleaning. Section 6 brings details about the new annotated dataset for machine learning, while in Section 7 we add our conclusions and plans for future research.
 
 
-# Relevant Related Research {#related_research}
+# Related research {#related_research}
 
+Instead of enumerating important steps in computational folkloristics (Abello et al 2012) in a chronological manner, for the sake of brevity we present related progress in the context of evolving semantics as the subject in study. In interaction with vector space based methods to represent increasingly condensed semantic content by means of embeddings, and with predication based semantic indexing (Cohen and Widdows), this emerging new paradigm can be observed e.g. in digital preservation (D4.4, D4.5). In computational folk narrative studies, two trends are converging in this broader context.
+
+## Converging trends
+
+Those interested in the nature of progress in the field of computational folkloristics can observe two major trends whose convergence will be underlying the results of the next decade. The first of these is focus on the evolutionary aspect of motif and/or tale type distributions, either with regard to certain tale types (eg Tehrani, d’Huy and Tehrani, Karsdorp and van den Bosch 2013, Karsdorp 2016), or geographical distribution of globally occurring motifs (Berezhkin, d’Huy), or both (refs). Strikingly, there is a certain genetically inspired thinking in the background ultimately going back to the modelling capacities inherent in Dawkins’ meme theory (ref), comparing tale types as motif sequences to 'narrative DNA' (Darányi et al 2012, Ofek et al, Meder MUSE), or looking at the evolution of narrative/storytelling networks as a quasi-biological process based on mutation (Karsdorp). Such views must have been informed by certain similarities with bioinformatics in terms of network motif identification (ref), a problem analog with ours. An early example of this idea was based on the recombination of narrative elements as its driving mechanism, unfortunately available in Hungarian only (Darányi), leading to another publication (Voigt et al 1999).
+
+The second major trend one can observe, that of computing embeddings [define embedding] of increasingly condensed word and sentence semantics and beyond (refs), must be familiar from information retrieval, machine learning, data science or knowledge representation. Many computational folkloristics results manifest early examples of this paradigm (Darányi Infonautica, Tangherlini, West African, etc). One aspect of such methods is that they share distributional semantics for a default, and locate content in vector space.
+
+Significantly, another method of sentence semantics encoding connects to quantum theory (QT) inspired text processing methods, another research direction in artificial intelligence (Widdows). On a parallel track, the first publications looking at mythologies from a QT perspective were published a while ago (CF, Attis), expected to cross-pollinate current practice. However, vector spaces are not really suitable to investigate semantic evolution in any respect, the concept asking for vector fields to model the inherent dynamics of content (arxiv 1, 2). Unfortunately no semantic theory is available to explain factors behind language change or conceptual dynamics (JASIST) in terms of vector fields for the time being.
+
+As the computing of results for the above both trends require datasets, we briefly look at their availability next.
+
+## Databases and datasets
+
+D’Huy et al with U. Datasets extracted from databases must exist but are not published. Berezhkin dataset in Russian only. This is a catch-22 situation: A Dutch will never repeat the experiment and a non-Dutch will never be able to do so. The same holds for Russian, Estonian, Hungarian, etc. The closest to a lingua franca, no pun intended, is to default on English. GS survey returns practically nil. Meder survey, Ilyefalvi, all articles rely on ones of own manufacturing, plus neither are in the public domain. Evolving datasets even less so (Karsdorp 2016). One of the exceptions that qualified in every respect, and was graciously donated to the digital humanities (DH) and data science community, is Prof DL Ashliman’s Folktexts (http).
 
 
 # The Ashliman Folktexts collection {#aft_collection}
+
+<!-- (We should decide if AFT refers to the Ashliman Folktexts collection, or Annotated Folktales, but in the title and elsewhere we have sticked with the first option this far) -->
 
 ```{r site_links}
 # See fetch_ashliman.R script for source
@@ -187,7 +204,6 @@ The following features guided our selection of tools and format for the code and
 ## Growing the Corpus {#grow}
 
 - motifs, tale types and tale corpus are incomplete, but that does not mean they should be thrown out
-- only in English
 - need structure for adding new tales
 - pull request provides structure for submission and review of changes
 - this can also be used to identify and correct errors (so publish and PR)
@@ -197,8 +213,6 @@ The following features guided our selection of tools and format for the code and
 # Data Harvesting and Cleaning {#data_cleaning}
 
 ## Steps
-
-
 
 Web-scraping of the AFT site was completed using the `rvest` package in the `R` statistical programming language.  The full script is available on GitHub, and the following high-level summary of data-cleaning steps is provided to allow for an understanding of the methods used and their limitations:
 
