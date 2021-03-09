@@ -18,9 +18,11 @@ authors:
   email: josh.hagedorn@gmail.com
 
 keywords:
-- key
-- dictionary
-- word
+- folktale
+- mythology
+- motif
+- reproducibility
+- machine learning
 
 #PACS: 
 #- PAC1
@@ -95,46 +97,6 @@ The structure of this paper is as follows. In Section 2, we bring examples of re
 
 # The Ashliman Folktexts collection {#aft_collection}
 
-
-
-While some previous studies reference the corpus, these often only include a smaller portion of the entire set of texts \cite{reiter_nlp_2014}.
-
-# Support for Reproducibility in Folklore Studies
-
-Reproducibility is a defining characteristic of science, yet a wide gamut of scientific fields have been plagued by a "replicability crisis": a situation where trusted research findings have been impossible to reproduce [cite].  While the problem has come to the fore in the health and social sciences, it has been acknowledged in disciplines as broad as archaeology [cite], political science [cite], biology [cite], and economics [cite]. 
-
-Strides have been made in the digital humanities to emulate these efforts, with the *Journal of Open Humanities Data*  being a noteworthy exception to the more common practice.
-
-Reproducible research entails that study results be accompanied by:
-
-1. a detailed description of the methods used to obtain and operate on the data
-2. the full dataset(s) used in the study 
-3. the full code used to transform the data and compute the results
-
-## Guiding Principles
-
-The following features guided our selection of tools and format for the code and data: 
-
-- *Open data*: In order to use tale data consistently, it must be made freely and openly available to anyone. The dataset is therefore distributed under a Creative Commons license [cite].
-- *Extensible data*: The dataset can be added to or modified, in order to develop a more complete repository of tales.  This can be done by submitting pull requests to the project's GitHub repository (see Sect. \ref{grow} for additional details).
-- *Open code*: Allowing any user to view and run the code that produces the dataset, as well as downstream analyses which use the dataset.  This allows for inspection, refinement and reasoning about the effects of transformation and statistical modeling on the data.
-- *Common form*: We have chosen to use the dataframe as the structure of the dataset, and specifically the "tidy" dataframe described by Wickham, in which (a) Each variable forms a column, (b) Each observation forms a row, and (c) a single type of observational unit forms the dataframe \cite{wickham_tidy_2014}.
-- *Common tools*: The data must also be structured in a way that allows for use with the standard tools of the trade of data science.  These tools are continuously evolving, yet the dataframe is likely to continue to be common object across R (in `tidyverse`) and Python (in `pandas`).  In addition, it can be read easily from a `.csv` format by Excel users to allow for ease of investigation.
-- *Modifiable form*: Text analysis has traditionally used other types of data structures to model its quantitative features (e.g. document-term matrices, term co-occurrence matrices), and dataframes have been incorporated into tidy data workflows and available packages such as `quanteda` or `tidytext`.  This allows for reshaping the data into sparse matrices, nested structures, and graph-based structures as dictated by the needs of a given analysis, while starting from a common source dataset (i.e. the `aft`).
-
-## Growing the Corpus {#grow}
-
-- motifs, tale types and tale corpus are incomplete, but that does not mean they should be thrown out
-- need structure for adding new tales
-- pull request provides structure for submission and review of changes
-- this can also be used to identify and correct errors (so publish and PR)
-- for reproducible research, articles using the datasets should use the url with the current commit's SHA to indicate the state of the dataset at the time the analysis was run.
-
-
-# Data Harvesting and Cleaning {#data_cleaning}
-
-## Steps
-
 ```{r site_links}
 # See fetch_ashliman.R script for source
 site_url <- "http://www.pitt.edu/~dash/folktexts.html"
@@ -145,7 +107,7 @@ pg <-
 
 # Obtain urls for all sub-pages on Folktexts website, filtering for annotated ones
 
-links <- 
+all_links <- 
   tibble(
     type_name = pg %>% html_text(),
     url = pg %>% html_attr("href")
@@ -183,7 +145,10 @@ links <-
       `norway120`    = "type0313",
       `midwife`      = "type5070"
     )
-  ) %>%
+  ) 
+
+links <-
+  all_links %>%
   filter(str_detect(rev_name,regex("^type",ignore_case = T))) %>%
   mutate(
     atu_id = str_remove(rev_name,"^type"),
@@ -191,6 +156,49 @@ links <-
   ) %>%
   select(type_name,atu_id,url = rev_url)
 ```
+
+The 'Folktexts' site has been populated and maintained since 1996 by D.L. Ashliman, professor emeritus from the University of Pittsburgh.  While some other sites may have a more lavish design, Ashliman's is the largest and most extensively annotated.  It serves as a respected scholarly resource for folklorists, with a large and curated set of tale texts.  While we have only included tales from pages with clear ATU annotations (n = `r nrow(links)` pages), the total content of the website is much larger (n = `r nrow(all_links)` pages), and includes various creation myths, stories of changelings, Faust legends, and more.  
+
+Despite the richness of this resource, it has not frequently been used in folklore research as a larger corpus.  While some previous studies reference the Ashliman corpus, these often only include a smaller portion of the entire set of texts \cite{reiter_nlp_2014}.  To our knowledge, none of the published studies provide an openly-accessible corpus of the data for use in promoting subsequent research.
+
+# Support for Reproducibility in Folklore Studies
+
+Reproducibility is a defining characteristic of science, yet a wide gamut of scientific fields have been plagued by a "replicability crisis": a situation where trusted research findings have been impossible to reproduce [cite].  While the problem has come to the fore in the health and social sciences, it has been acknowledged in disciplines as broad as archaeology [cite], political science [cite], biology [cite], and economics [cite]. 
+
+Reproducible research entails that study results be accompanied by:
+
+1. a detailed description of the methods used to obtain and operate on the data
+2. the full dataset(s) used in the study 
+3. the full code used to transform the data and compute the results
+
+In recent years some strides have been made in the digital humanities to emulate these efforts, with the *Journal of Open Humanities Data*  being a noteworthy exception to the more common practice.
+
+## Guiding Principles
+
+The following features guided our selection of tools and format for the code and data: 
+
+- *Open data*: In order to use tale data consistently, it must be made freely and openly available to anyone. The dataset is therefore distributed under a Creative Commons license [cite].
+- *Extensible data*: The dataset can be added to or modified, in order to develop a more complete repository of tales.  This can be done by submitting pull requests to the project's GitHub repository (see Sect. \ref{grow} for additional details).
+- *Open code*: Allowing any user to view and run the code that produces the dataset, as well as downstream analyses which use the dataset.  This allows for inspection, refinement and reasoning about the effects of transformation and statistical modeling on the data.
+- *Common form*: We have chosen to use the dataframe as the structure of the dataset, and specifically the "tidy" dataframe described by Wickham, in which (a) Each variable forms a column, (b) Each observation forms a row, and (c) a single type of observational unit forms the dataframe \cite{wickham_tidy_2014}.
+- *Common tools*: The data must also be structured in a way that allows for use with the standard tools of the trade of data science.  These tools are continuously evolving, yet the dataframe is likely to continue to be common object across R (in `tidyverse`) and Python (in `pandas`).  In addition, it can be read easily from a `.csv` format by Excel users to allow for ease of investigation.
+- *Modifiable form*: Text analysis has traditionally used other types of data structures to model its quantitative features (e.g. document-term matrices, term co-occurrence matrices), and dataframes have been incorporated into tidy data workflows and available packages such as `quanteda` or `tidytext`.  This allows for reshaping the data into sparse matrices, nested structures, and graph-based structures as dictated by the needs of a given analysis, while starting from a common source dataset (i.e. the `aft`).
+
+## Growing the Corpus {#grow}
+
+- motifs, tale types and tale corpus are incomplete, but that does not mean they should be thrown out
+- only in English
+- need structure for adding new tales
+- pull request provides structure for submission and review of changes
+- this can also be used to identify and correct errors (so publish and PR)
+- for reproducible research, articles using the datasets should use the url with the current commit's SHA to indicate the state of the dataset at the time the analysis was run.
+
+
+# Data Harvesting and Cleaning {#data_cleaning}
+
+## Steps
+
+
 
 Web-scraping of the AFT site was completed using the `rvest` package in the `R` statistical programming language.  The full script is available on GitHub, and the following high-level summary of data-cleaning steps is provided to allow for an understanding of the methods used and their limitations:
 
