@@ -174,7 +174,7 @@ links <-
   select(type_name,atu_id,url = rev_url)
 ```
 
-The 'Folktexts' site has been populated and maintained since 1996 by D.L. Ashliman, professor emeritus from the University of Pittsburgh.  While some other sites may have a more lavish design, Ashliman's is the largest and most extensively annotated.  It serves as a respected scholarly resource for folklorists, with a large and curated set of tale texts.  While we have only included tales from pages with clear ATU annotations (n = `r nrow(links)` pages), the total content of the website is much larger (n = `r nrow(all_links)` pages), and includes various creation myths, stories of changelings, Faust legends, and more.  
+The '*Folktexts*' site has been populated and maintained since 1996 by D.L. Ashliman, professor emeritus from the University of Pittsburgh.  While some other sites may have a more lavish design, Ashliman's is the largest and most extensively annotated.  It serves as a respected scholarly resource for folklorists, with a large and curated set of tale texts.  While we have only included tales from pages with clear ATU annotations (n = `r nrow(links)` pages) in this dataset, the total content of the website is much larger (n = `r nrow(all_links)` pages), and includes various creation myths, stories of changelings, Faust legends, and more.  
 
 Despite the richness of this resource, it has not frequently been used in folklore research as a larger corpus.  While some previous studies reference the Ashliman corpus, these often only include a smaller portion of the entire set of texts \cite{reiter_nlp_2014}.  To our knowledge, none of the published studies provide an openly-accessible corpus of the data for use in promoting subsequent research.
 
@@ -214,7 +214,7 @@ The following features guided our selection of tools and format for the code and
 
 ## Steps
 
-Web-scraping of the AFT site was completed using the `rvest` package in the `R` statistical programming language.  The full script is available on GitHub, and the following high-level summary of data-cleaning steps is provided to allow for an understanding of the methods used and their limitations:
+Web-scraping of the *Folktexts* site was completed using the `rvest` package in the `R` statistical programming language.  The full script is available on GitHub, and the following high-level summary of data-cleaning steps is provided to allow for an understanding of the methods used and their limitations:
 
 1. Obtain URLs and associated label text for all "child" pages of the main website to create a dataframe of page names and URLs.^[The main URL for the site is `http://www.pitt.edu/~dash/folktexts.html`]
 2. Remove any links pointed to external websites, since these would require separate web-scraping logic to be developed.
@@ -264,6 +264,8 @@ The `aft` (i.e. *Annotated Folk Tales*) dataframe contains `r nrow(aft)` rows, e
 - `data_source` : The source of the annotated tales.  At the time of this writing, the source of all tales is "Ashliman's Folktexts", but this will change as the [dataset grows](#grow).
 - `date_obtained` : The date on which the data set identified as a `data_source` was last downloaded and compiled.
 
+To provide a sense of the appearance of the dataset, the 
+
 ## Descriptive Statistics
 
 #### Length of tales. 
@@ -302,7 +304,7 @@ by_type <-
 
 ```
 
-The tales compiled in the `aft` are annotated by Aarne-Thompson-Uther (ATU) tale type, and represent `r n_distinct(aft$atu_id)` distinct types.  There are an average of `r mean(by_type$n_tales)` tales in each tale type, with a range of `r min(by_type$n_tales)` to `r max(by_type$n_tales)`.
+The tales compiled in the `aft` data are annotated by Aarne-Thompson-Uther (ATU) tale type, and represent `r n_distinct(aft$atu_id)` distinct types.  There are an average of `r mean(by_type$n_tales)` tales in each tale type, with a range of `r min(by_type$n_tales)` to `r max(by_type$n_tales)`.
 
 ```{r type_hist, fig.asp = 0.36}
 
