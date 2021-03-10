@@ -323,7 +323,7 @@ aft <-
       tale_title
     )
   ) %>%
-  select(-dup_title,-title_tag) %>%
+  select(-dup_title,-title_tag,-copyright) %>%
   mutate(
     text = text %>% 
       str_remove_all(fixed("\\")) %>%
