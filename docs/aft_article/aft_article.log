@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.14)  10 MAR 2021 15:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.14)  10 MAR 2021 22:22
 entering extended mode
 **./aft_article.tex
 (aft_article.tex
@@ -578,25 +578,25 @@ LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <13> not available
 (Font)              size <12> substituted on input line 69.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 71--91
+Underfull \hbox (badness 10000) in paragraph at lines 71--93
 
  []
 
 
 LaTeX Warning: Citation `alma991024476189703276' on page 1 undefined on input l
-ine 106.
+ine 108.
 
 
 LaTeX Warning: Citation `nla.cat-vn1542191' on page 1 undefined on input line 1
-07.
-
-
-LaTeX Warning: Citation `white1976analysis' on page 1 undefined on input line 1
 09.
 
 
+LaTeX Warning: Citation `white1976analysis' on page 1 undefined on input line 1
+11.
+
+
 LaTeX Warning: Citation ` nla.cat-vn2560920' on page 1 undefined on input line 
-112.
+114.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -604,97 +604,38 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [1{C:/Users/SDA/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 
 LaTeX Warning: Citation `daranyi2010proceedings' on page 2 undefined on input l
-ine 117.
+ine 119.
 
 
 LaTeX Warning: Citation `2d77156b39724b4b86eeca60d508f678' on page 2 undefined 
-on input line 120.
+on input line 122.
 
 
 LaTeX Warning: Citation ` nla.cat-vn857541' on page 2 undefined on input line 1
-23.
+25.
 
 
-LaTeX Warning: Citation `uther2004types' on page 2 undefined on input line 132.
+LaTeX Warning: Citation `uther2004types' on page 2 undefined on input line 134.
 
 
 
 LaTeX Warning: Citation `yarlott_et_al:OASIcs:2016:6708' on page 2 undefined on
- input line 135.
+ input line 137.
 
 
 LaTeX Warning: Citation `10.1145/2209249.2209267' on page 2 undefined on input 
-line 160.
-
-
-LaTeX Warning: Citation `DBLP:journals/jbi/CohenWSDR12' on page 2 undefined on 
-input line 165.
-
-
-LaTeX Warning: Citation `kontopoulos2016pericles' on page 2 undefined on input 
-line 166.
-
-
-LaTeX Warning: Citation `kontopoulos2016deliverable' on page 2 undefined on inp
-ut line 167.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[2]
-
-LaTeX Warning: Citation `dur17330' on page 3 undefined on input line 176.
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 176.
-
-("C:\Users\SDA\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 176.
-
-LaTeX Warning: Citation `45bb5e2c15424346b27631d8e1d16c8a' on page 3 undefined 
-on input line 177.
-
-
-LaTeX Warning: Citation `r.dawkins1976the-selfish-gen' on page 3 undefined on i
-nput line 182.
-
-
-LaTeX Warning: Citation `daranyi2012toward' on page 3 undefined on input line 1
-83.
-
-
-LaTeX Warning: Citation `45bb5e2c15424346b27631d8e1d16c8a' on page 3 undefined 
-on input line 188.
-
-
-Overfull \hbox (68.76471pt too wide) in paragraph at lines 172--193
-\OT1/cmr/m/n/10 bu-tions, ei-ther with re-gard to cer-tain tale types [\OT1/cmr
-/bx/n/10 ?\OT1/cmr/m/n/10 ], cite\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 2d77156b3972
-4b4b86eeca60d508f678\OMS/cmsy/m/n/10 g\OT1/cmr/m/n/10 ,
- []
-
-
-Overfull \hbox (15.3812pt too wide) in paragraph at lines 172--193
-\OT1/cmr/m/n/10 types as mo-tif se-quences to `nar-ra-tive DNA'[\OT1/cmr/bx/n/1
-0 ?\OT1/cmr/m/n/10 ], cite\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 ofek[]et[]al:OASIcs
-:2013:4150\OMS/cmsy/m/n/10 g\OT1/cmr/m/n/10 ,
- []
-
-
-LaTeX Warning: Citation `article' on page 3 undefined on input line 199.
+line 162.
 
 ! Undefined control sequence.
-l.200 Related methods fall back on \italicize
-                                             {distributional semantics}. 
+l.164 \italicize
+                {evolving semantics}. In interaction with vector space based 
 Here is how much of TeX's memory you used:
- 6079 strings out of 493634
- 86601 string characters out of 3136055
+ 6048 strings out of 493634
+ 86011 string characters out of 3136055
  178536 words of memory out of 3000000
- 9420 multiletter control sequences out of 15000+200000
+ 9395 multiletter control sequences out of 15000+200000
  10505 words of font info for 38 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 29i,7n,30p,252b,339s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,5n,30p,252b,339s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 !  ==> Fatal error occurred, no output PDF file produced!
