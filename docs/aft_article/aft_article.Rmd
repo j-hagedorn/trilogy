@@ -44,7 +44,7 @@ output: rticles::springer_article
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = F,message = F,error = F,warning = F,
-  fig.asp = 0.618,dpi=300,dev = "cairo_pdf"
+  fig.width = 5,fig.asp = 0.618,dpi=300,dev = "cairo_pdf"
 )
 library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin); library(kableExtra)
 ```
@@ -82,11 +82,7 @@ theme_bar_flip <-
 
 Ever since the concept of a motif was introduced some 200 years ago, the quest to identify content elements above word level has been a standard preoccupation in literary science \cite{frenzel_weltlit_1992}, \cite{seigneuret_dictionary_1988}. There, a motif stands for a recurrent theme, whereas in musicology, a motive is considered "the smallest structural unit possessing thematic identity" \cite{white_analysis_1976}. In a similar vein, Stith Thompson defined motifs in folktale research as "the smallest element in a tale having a power to persist in tradition" \cite{thompson_folktale_1977} (1946).
 
-A sufficient overlap between these definitions suggests that such higher order content units exist as narrative building blocks in a generic sense, but their automatic extraction by computational means has eluded folk narrative studies so far \cite{daranyi_proceedings_2010}. In spite of the suggestion that topics identified by Labeled Latent Dirichlet Allocation (L-LDA) had an analogous function with motifs in a database of Dutch and Frisian folktales \cite{karsdorp_topic_2013}, we consider finding characteristic patterns of semantic content an open research problem. One reason for our skepticism is that in Thompson’s Motif Index of Folk Literature \cite{thompson_motif_index} alone, over 45000 motifs are listed on a global scale, but many more e.g. regional motif indexes exist whose material would doubtlessly inflate that number. As we will argue below, digital humanities (DH) in general, and folk narrative studies in particular, are not up to the task of a scalable pattern hunt yet.
-
-<!-- Add numbers from TMI/ATU mapping -->
-
-Our research problem for the current paper is this: consider the case of two standard reference tools, the TMI, and the Aarne-Thompson-Uther tale typology \cite{uther_types_2004}. A count in the TMI indicated the presence of …. motifs, whereas Yarlott and Finlayson counted 46,248 motifs and sub-motifs from over 614 collections, 41,796 of which had references to tales or tale types \cite{yarlott_motif_2016}. However, based on our count the ATU uses only …. (…%) of them to model tale structures as motif strings. One is then prompted to ask, where have …. % of motifs in the TMI disappeared, and how can an important monograph acquire almost canonical status with such a discrepancy in its background? In our eyes, the explanation may go back to the very different comparison capacities of the human mind vs. the computer, leading to differently robust deductions, and for a remedy to this situation one needs to call in data science. Namely if we want to apply machine learning for motif identification and extraction, we need suitable datasets which enable research teams to replicate each other's results. Below we take a small step in this direction.
+A sufficient overlap between these definitions suggests that such higher order content units exist as narrative building blocks in a generic sense, but their automatic extraction by computational means has eluded folk narrative studies so far \cite{daranyi_proceedings_2010}. In spite of the suggestion that topics identified by Labeled Latent Dirichlet Allocation (L-LDA) had an analogous function with motifs in a database of Dutch and Frisian folktales \cite{karsdorp_topic_2013}, we consider finding characteristic patterns of semantic content an open research problem. One reason for our skepticism is that in Thompson’s Motif Index of Folk Literature \cite{thompson_motif_index} alone, over 45000 motifs are listed on a global scale, but many more e.g. regional motif indexes exist whose material would doubtlessly inflate that number. As we will argue below, digital humanities (DH) in general, and folk narrative studies in particular, are not up to the task of a scalable pattern hunt yet.  If we want to apply machine learning for motif identification and extraction, we need suitable datasets which enable research teams to replicate each other's results. Below we take a small step in this direction.
 
 The structure of this paper is as follows. In Section 2, we bring examples of related research.  In Section 3, Ashliman’s Folktexts tale collection is introduced. In Section 4 we explain our motivation to support reproducible research in computational folkloristics, with Section 5 offering details of data harvesting and cleaning. Section 6 brings details about the new annotated dataset for machine learning, while in Section 7 we add our conclusions and plans for future research.
 
@@ -206,7 +202,7 @@ In recent years the digital humanities have made some strides to emulate these e
 
 ## Guiding Principles
 
-The following features guided our selection of tools and format for the code and data: 
+The following features guided our selection of tools and format for the code and data:
 
 - *Open data*: In order to use tale data consistently, it must be made freely and openly available to anyone. The dataset is therefore distributed under a Creative Commons license [cite].
 - *Extensible data*: The dataset can be added to or modified, in order to develop a more complete repository of tales.  This can be done by submitting pull requests to the project's GitHub repository (see Sect. \ref{grow} for additional details).
@@ -347,7 +343,13 @@ The tale types with the largest representative group of tales in the corpus is s
 
 by_type %>%
   top_n(10,n_tales) %>%
-  mutate(label = fct_reorder(paste0(type_name," (",atu_id,")"),n_tales)) %>%
+  mutate(
+    label = fct_reorder(
+      paste0(
+        if_else(is.na(word(type_name,-5,-1)),type_name,word(type_name,-5,-1)),
+        " (",atu_id,")"),n_tales
+    )
+  ) %>%
   ggplot(aes(x = n_tales, y = label)) +
   geom_point(size = 3) +
   geom_segment(aes(yend = label), xend = 0) +
