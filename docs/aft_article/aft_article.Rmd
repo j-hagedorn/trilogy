@@ -44,9 +44,9 @@ output: rticles::springer_article
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = F,message = F,error = F,warning = F,
-  fig.width=6,fig.asp = 0.618,dpi=300,dev = "cairo_pdf"
+  fig.asp = 0.618,dpi=300,dev = "cairo_pdf"
 )
-library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin)
+library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin); library(kableExtra)
 ```
 
 ```{r themes, echo=FALSE, message=FALSE}
@@ -188,13 +188,13 @@ links <-
   select(type_name,atu_id,url = rev_url)
 ```
 
-The '*Folktexts*' site has been populated and maintained since 1996 by D.L. Ashliman, professor emeritus from the University of Pittsburgh.  While some other sites may have a more lavish design, Ashliman's is the largest and most extensively annotated.  It serves as a respected scholarly resource for folklorists, with a large and curated set of tale texts.  While we have only included tales from pages with clear ATU annotations (n = `r nrow(links)` pages) in this dataset, the total content of the website is much larger (n = `r nrow(all_links)` pages), and includes various creation myths, stories of changelings, Faust legends, and more.  
+The '*Folktexts*' site has been populated and maintained since 1996 by D.L. Ashliman, professor emeritus from the University of Pittsburgh.  While some other sites may sport a more lavish design, Ashliman's is the largest and most extensively annotated.  It serves as a respected scholarly resource for folklorists, with a large and curated set of tale texts.  While we have only included tales from pages with clear ATU annotations (n = `r nrow(links)` pages) in this dataset, the total content of the website is much larger (n = `r nrow(all_links)` pages), and includes various creation myths, stories of changelings, Faust legends, and more.  
 
 Despite the richness of this resource, it has not frequently been used in folklore research as a larger corpus.  While some previous studies reference the Ashliman corpus, these often only include a smaller portion of the entire set of texts \cite{reiter_nlp_2014}.  To our knowledge, none of the published studies provide an openly-accessible corpus of the data for use in promoting subsequent research.
 
 # Support for Reproducibility in Folklore Studies
 
-Reproducibility is a defining characteristic of science, yet a wide gamut of scientific fields have been plagued by a "replicability crisis": a situation where trusted research findings have been impossible to reproduce [cite].  While the problem has come to the fore in the health and social sciences, it has been acknowledged in disciplines as broad as archaeology [cite], political science [cite], biology [cite], and economics [cite]. 
+Reproducibility is a defining characteristic of science, yet a wide gamut of scientific fields have been plagued by a "replicability crisis": a situation where trusted research findings have been impossible to reproduce \cite{goodman_what_2016}, \cite{pasquier_if_2017}.  While the problem has come to the fore in the health and social sciences, it has been acknowledged in disciplines as broad as archaeology \cite{marwick_computational_2017}, public health \cite{harris_use_2018}, biology \cite{kuhne_improving_2009}, and economics \cite{mccullough_open_2009}. 
 
 Reproducible research entails that study results be accompanied by:
 
@@ -202,7 +202,7 @@ Reproducible research entails that study results be accompanied by:
 2. the full dataset(s) used in the study 
 3. the full code used to transform the data and compute the results
 
-In recent years some strides have been made in the digital humanities to emulate these efforts, with the *Journal of Open Humanities Data*  being a noteworthy exception to the more common practice.
+In recent years the digital humanities have made some strides to emulate these efforts, with venues such as the *Journal of Open Humanities Data*  being a noteworthy exception to the more common practice.
 
 ## Guiding Principles
 
@@ -251,7 +251,7 @@ The resulting dataframe compiled the available tales from the original list of `
 
 ## Limitations
 
-Web-scraping is an inherently messy exercise, as the data contained in web pages are often not formatted with the intent of being analyzed.  Due to a broken link in the website, we were unable to obtain tales related to `r paste0(links$type_name[23]," (",links$atu_id[23],")")`.  In addition, the pages for the following tale types were unable to be scraped, due to errors generated in the `R` session: `r paste(links$type_name[c(70,74,165,172,174,198)],collapse = ", ")`.
+Web-scraping is an inherently messy exercise, as the data contained in web pages are often not formatted with the intent of being analyzed.  Due to a broken link in the website, we were unable to obtain tales related to `r paste0(links$type_name[23]," (",links$atu_id[23],")")`.  In addition, the pages for the following tale types were unable to be scraped, due to errors generated in the `R` session: *`r paste(links$type_name[c(70,74,165,172,174,198)],collapse = ", ")`*.
 
 The `provenance` field does not meet the definition of "tidy" outlined above, since multiple types of descriptors (i.e. *country*, *region*, *tale collection*) are stored in a single column.  While additional cleaning may be able to distinguish some of these, we have chosen to leave it as entered in the original.
 
@@ -273,7 +273,6 @@ The `aft` (i.e. *Annotated Folk Tales*) dataframe contains `r nrow(aft)` rows, e
 - `provenance` : The person, place or tradition from which the tale came.  In Ashliman's collection, this refers variously to the person recording the tales (*e.g. Giambattista Basile*), the country or region from which the version of the tale came (*e.g. North Africa*), or the larger collection of tales in which the tale is found (*e.g. The Kathasaritsagara*). 
 - `notes` : Additional notes related to the tale.
 - `source` : The bibliographic citation for the original published source of the tale.
-- `copyright` : Any copyright information published alongside the tales in their scraped sources.
 - `text` : The full text of the tale identified in `tale_title`.
 - `data_source` : The source of the annotated tales.  At the time of this writing, the source of all tales is "Ashliman's Folktexts", but this will change as the [dataset grows](#grow).
 - `date_obtained` : The date on which the data set identified as a `data_source` was last downloaded and compiled.
@@ -285,7 +284,7 @@ aft %>%
   select(-type_name,-notes,-data_source,-date_obtained) %>%
   mutate_all(~str_trunc(.,width = 15)) %>%
   head() %>%
-  knitr::kable(format = "latex")
+  knitr::kable(format = "latex", booktabs = T)
 ```
 
 
@@ -300,11 +299,9 @@ The `r nrow(aft)` tales in the dataset average `r round(mean(str_count(aft$text,
 aft %>%
   mutate(count_words = str_count(aft$text, '\\w+')) %>%
   ggplot(aes(x = count_words)) +
-  geom_histogram(
-    binwidth = 250
-  ) +
+  geom_histogram(binwidth = 250) +
   labs(
-    title = "Distribution of tale text length",
+    # title = "Distribution of tale text length",
     caption = "Each bar represents a range of 250 (e.g. 0-250, 251-500, etc.)",
     x = "# of words",
     y = "# of tales"
@@ -327,7 +324,7 @@ by_type <-
 
 ```
 
-The tales compiled in the `aft` data are annotated by Aarne-Thompson-Uther (ATU) tale type, and represent `r n_distinct(aft$atu_id)` distinct types.  There are an average of `r mean(by_type$n_tales)` tales in each tale type, with a range of `r min(by_type$n_tales)` to `r max(by_type$n_tales)`.
+The tales compiled in the `aft` data are annotated by Aarne-Thompson-Uther (ATU) tale type, and represent `r n_distinct(aft$atu_id)` distinct types.  There are an average of `r round(mean(by_type$n_tales), digits = 1)` tales in each tale type, with a range of `r min(by_type$n_tales)` to `r max(by_type$n_tales)`.
 
 ```{r type_hist, fig.asp = 0.36}
 
