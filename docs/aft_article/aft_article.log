@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.14)  15 MAR 2021 17:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.14)  15 MAR 2021 19:31
 entering extended mode
 **./aft_article.tex
 (aft_article.tex
@@ -788,77 +788,129 @@ LaTeX Warning: Citation `daranyi_conceptual_2016' on page 4 undefined on input
 line 241.
 
 
-LaTeX Warning: Citation `reiter_nlp_2014' on page 4 undefined on input line 287
-.
+LaTeX Warning: Citation `10.1145/2209249.2209267' on page 4 undefined on input 
+line 268.
+
+
+LaTeX Warning: Citation `article' on page 4 undefined on input line 269.
+
+
+LaTeX Warning: Citation `article' on page 4 undefined on input line 270.
+
+
+LaTeX Warning: Citation `IlyefalviEmese2018TTma' on page 4 undefined on input l
+ine 271.
+
+
+LaTeX Warning: Citation `Berezkin2017PeoplingOT' on page 4 undefined on input l
+ine 276.
+
+
+LaTeX Warning: Citation `2d77156b39724b4b86eeca60d508f678' on page 4 undefined 
+on input line 282.
+
+
+LaTeX Warning: Citation `45bb5e2c15424346b27631d8e1d16c8a' on page 4 undefined 
+on input line 283.
+
+
+LaTeX Warning: Citation `dur15770' on page 4 undefined on input line 286.
+
+
+LaTeX Warning: Citation `dur17330' on page 4 undefined on input line 286.
+
+
+LaTeX Warning: Citation `dur11481' on page 4 undefined on input line 287.
+
+
+LaTeX Warning: Citation `Bortolini9140' on page 4 undefined on input line 287.
+
+
+LaTeX Warning: Citation `DecKostSch2017' on page 4 undefined on input line 287.
+
+
+
+LaTeX Warning: Citation `inproceedings' on page 4 undefined on input line 288.
 
 [4]
 
-LaTeX Warning: Citation `wickham_tidy_2014' on page 5 undefined on input line 3
-48.
+LaTeX Warning: Citation `info11050236' on page 5 undefined on input line 297.
 
-[5] [6] [7]
+
+LaTeX Warning: Citation `reiter_nlp_2014' on page 5 undefined on input line 322
+.
+
+[5]
+
+LaTeX Warning: Citation `wickham_tidy_2014' on page 6 undefined on input line 3
+83.
+
+[6] [7]
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 512.
-
-Overfull \hbox (1.28137pt too wide) in paragraph at lines 554--556
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 547.
+[8]
+Overfull \hbox (1.28137pt too wide) in paragraph at lines 589--591
 []\OT1/cmtt/m/n/10 date[]obtained \OT1/cmr/m/n/10 : The date on which the data 
 set iden-ti-fied as a \OT1/cmtt/m/n/10 data[]source
  []
 
 
-Overfull \hbox (28.23962pt too wide) in paragraph at lines 561--578
+Overfull \hbox (28.23962pt too wide) in paragraph at lines 596--613
 [][] 
  []
 
 
-Underfull \vbox (badness 1472) has occurred while \output is active []
-
-[8]
-<aft_article_files/figure-latex/word_hist-1.pdf, id=123, 433.62pt x 155.58125pt
+<aft_article_files/figure-latex/word_hist-1.pdf, id=127, 433.62pt x 155.58125pt
 >
 File: aft_article_files/figure-latex/word_hist-1.pdf Graphic file (type pdf)
 <use aft_article_files/figure-latex/word_hist-1.pdf>
 Package pdftex.def Info: aft_article_files/figure-latex/word_hist-1.pdf used on
- input line 589.
+ input line 624.
 (pdftex.def)             Requested size: 433.61894pt x 155.58086pt.
 
-Overfull \hbox (110.61894pt too wide) in paragraph at lines 589--590
+Overfull \hbox (110.61894pt too wide) in paragraph at lines 624--625
 [][] 
  []
 
 
-<aft_article_files/figure-latex/type_hist-1.pdf, id=124, 433.62pt x 155.58125pt
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[9]
+<aft_article_files/figure-latex/type_hist-1.pdf, id=136, 433.62pt x 155.58125pt
 >
 File: aft_article_files/figure-latex/type_hist-1.pdf Graphic file (type pdf)
 <use aft_article_files/figure-latex/type_hist-1.pdf>
 Package pdftex.def Info: aft_article_files/figure-latex/type_hist-1.pdf used on
- input line 600.
+ input line 635.
 (pdftex.def)             Requested size: 433.61894pt x 155.58086pt.
 
-Overfull \hbox (110.61894pt too wide) in paragraph at lines 600--601
+Overfull \hbox (110.61894pt too wide) in paragraph at lines 635--636
 [][] 
  []
 
 
-<aft_article_files/figure-latex/unnamed-chunk-2-1.pdf, id=125, 433.62pt x 216.8
-1pt> [9 <./aft_article_files/figure-latex/word_hist-1.pdf> <./aft_article_files
-/figure-latex/type_hist-1.pdf
-
-pdfTeX warning: pdflatex.exe (file ./aft_article_files/figure-latex/type_hist-1
-.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->]
+<aft_article_files/figure-latex/unnamed-chunk-2-1.pdf, id=137, 433.62pt x 216.8
+1pt>
 File: aft_article_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type p
 df)
 <use aft_article_files/figure-latex/unnamed-chunk-2-1.pdf>
 Package pdftex.def Info: aft_article_files/figure-latex/unnamed-chunk-2-1.pdf u
-sed on input line 605.
+sed on input line 640.
 (pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
 
-Overfull \hbox (110.61894pt too wide) in paragraph at lines 605--606
+Overfull \hbox (110.61894pt too wide) in paragraph at lines 640--641
 [][] 
  []
 
-(aft_article.bbl
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[10 <./aft_article_files/figure-latex/word_hist-1.pdf> <./aft_article_files/fig
+ure-latex/type_hist-1.pdf
+
+pdfTeX warning: pdflatex.exe (file ./aft_article_files/figure-latex/type_hist-1
+.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>] (aft_article.bbl
 Underfull \hbox (badness 1163) in paragraph at lines 13--17
 \OT1/cmr/m/n/8 TR (2012) Com-pu-ta-tional Folk-loris-tics. Com-mu-ni-ca-tions o
 f the ACM 55(7):60--
@@ -893,7 +945,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--28
  / www . pnas . org / content / 114 / 34 / 9140$[]\OT1/cmr/m/n/8 ,
  []
 
-[10 <./aft_article_files/figure-latex/unnamed-chunk-2-1.pdf>]
+[11 <./aft_article_files/figure-latex/unnamed-chunk-2-1.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 68--71
 []
  []
@@ -926,11 +978,11 @@ l.115   Beygelzimer A, d\textquotesingle
                                          Alch\'{e}-Buc F, Fox E, Garnett R (...
  
 Here is how much of TeX's memory you used:
- 6217 strings out of 493634
- 88968 string characters out of 3136055
- 183573 words of memory out of 3000000
- 9482 multiletter control sequences out of 15000+200000
+ 6232 strings out of 493634
+ 89244 string characters out of 3136055
+ 182574 words of memory out of 3000000
+ 9495 multiletter control sequences out of 15000+200000
  11371 words of font info for 41 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 29i,8n,30p,252b,448s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,8n,30p,252b,450s stack positions out of 5000i,500n,10000p,200000b,50000s
 !  ==> Fatal error occurred, no output PDF file produced!
