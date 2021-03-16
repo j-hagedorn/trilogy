@@ -344,7 +344,9 @@ aft <-
     data_source = "Ashliman's Folktexts",
     date_obtained = lubridate::today()
   ) %>%
-  distinct(.keep_all = T)
+  distinct(.keep_all = T) %>%
+  # At least one word
+  filter(str_count(text, '\\w+') > 0) 
 
 write_csv(aft,"data/aft.csv")
 
