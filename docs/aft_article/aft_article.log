@@ -1,0 +1,1004 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2021.3.15)  17 MAR 2021 06:56
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**aft_article.tex
+(./aft_article.tex
+LaTeX2e <2020-10-01> patch level 4
+L3 programming layer <2021-02-18> (./svjour3.cls
+Document Class: svjour3 2007/05/08 v3.2 
+LaTeX document class for Springer journals
+Class Springer-SVJour3 Info: extra/valid Springer sub-package (-> *.clo) 
+(Springer-SVJour3)           not found in option list of \documentclass
+(Springer-SVJour3)           - autoactivating "global" style.
+(./svglov3.clo
+File: svglov3.clo 2009/12/18 v3.2 style option for standardised journals
+SVJour Class option: svglov3.clo for standardised journals
+)
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 147.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 148.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 149.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 150.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 151.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 152.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 153.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 154.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 155.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 156.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 157.
+\logodepth=\dimen138
+\headerboxheight=\dimen139
+\betweenumberspace=\dimen140
+\aftertext=\dimen141
+\headlineindent=\dimen142
+\c@inst=\count179
+\c@auth=\count180
+\instindent=\dimen143
+\authrun=\box47
+\authorrunning=\toks15
+\titrun=\box48
+\titlerunning=\toks16
+\combirun=\box49
+\c@lastpage=\count181
+\rubricwidth=\dimen144
+\c@section=\count182
+\c@subsection=\count183
+\c@subsubsection=\count184
+\c@paragraph=\count185
+\c@subparagraph=\count186
+\spthmsep=\dimen145
+\c@theorem=\count187
+\c@case=\count188
+\c@conjecture=\count189
+\c@corollary=\count190
+\c@definition=\count191
+\c@example=\count192
+\c@exercise=\count193
+\c@lemma=\count194
+\c@note=\count195
+\c@problem=\count196
+\c@property=\count197
+\c@proposition=\count198
+\c@question=\count199
+\c@solution=\count266
+\c@remark=\count267
+\c@figure=\count268
+\c@table=\count269
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\figcapgap=\dimen146
+\tabcapgap=\dimen147
+\figgap=\dimen148
+\bibindent=\dimen149
+\@tempcntc=\count270
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.st
+y
+Package: amsmath 2020/09/23 v2.17i AMS math features
+\@mathmargin=\skip49
+For additional information on amsmath, use the `?' option.
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.st
+y
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen150
+))
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen151
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count271
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count272
+\leftroot@=\count273
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count274
+\DOTSCASE@=\count275
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box50
+\strutbox@=\box51
+\big@size=\dimen152
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count276
+\c@MaxMatrixCols=\count277
+\dotsspace@=\muskip16
+\c@parentequation=\count278
+\dspbrk@lvl=\count279
+\tag@help=\toks18
+\row@=\count280
+\column@=\count281
+\maxfields@=\count282
+\andhelp@=\toks19
+\eqnshift@=\dimen153
+\alignsep@=\dimen154
+\tagshift@=\dimen155
+\tagwidth@=\dimen156
+\totwidth@=\dimen157
+\lineht@=\dimen158
+\@envbody=\toks20
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.
+sty
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.st
+y
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks22
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.
+sty
+Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graph
+ics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdfte
+x.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen159
+\Gin@req@width=\dimen160
+) (c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/inputenc.st
+y
+Package: inputenc 2020/08/01 v1.3d Input encoding file
+\inpenc@prehook=\toks23
+\inpenc@posthook=\toks24
+) (c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.
+sty
+Package: hyperref 2021-02-27 v7.00k Hypertext links for LaTeX
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.
+sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+) (c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.st
+y
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdfte
+xcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwar
+err.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvsetkeys/kvsetk
+eys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvd
+efinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfesc
+ape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.st
+y
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/letltxmacro/letltx
+macro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.st
+y
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoption
+s.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+)
+\@linkdim=\dimen161
+\Hy@linkcounter=\count283
+\Hy@pagecounter=\count284
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.de
+f
+File: pd1enc.def 2021-02-27 v7.00k Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref-
+langpatches.def
+File: hyperref-langpatches.def 2021-02-27 v7.00k Hyperref: patches for babel la
+nguages
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.
+sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmd
+s.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count285
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2021-02-27 v7.00k Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4192.
+Package hyperref Info: Link nesting OFF on input line 4197.
+Package hyperref Info: Hyper index ON on input line 4200.
+Package hyperref Info: Plain pages OFF on input line 4207.
+Package hyperref Info: Backreferencing OFF on input line 4212.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4445.
+\c@Hy@tempcnt=\count286
+LaTeX Info: Redefining \url on input line 4804.
+\XeTeXLinkMargin=\dimen162
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.st
+y
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigin
+tcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count287
+\Field@Width=\dimen163
+\Fld@charsize=\dimen164
+Package hyperref Info: Hyper figures OFF on input line 6075.
+Package hyperref Info: Link nesting OFF on input line 6080.
+Package hyperref Info: Hyper index ON on input line 6083.
+Package hyperref Info: backreferencing OFF on input line 6090.
+Package hyperref Info: Link coloring OFF on input line 6095.
+Package hyperref Info: Link coloring with OCG OFF on input line 6100.
+Package hyperref Info: PDF/A mode OFF on input line 6105.
+LaTeX Info: Redefining \ref on input line 6145.
+LaTeX Info: Redefining \pageref on input line 6149.
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.
+sty
+Package: atbegshi-ltx 2020/08/17 v1.0a Emulation of the original atbegshi packa
+ge
+with kernel methods
+)
+\Hy@abspage=\count288
+\c@Item=\count289
+\c@Hfootnote=\count290
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.d
+ef
+File: hpdftex.def 2021-02-27 v7.00k Hyperref driver for pdfTeX
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx
+.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
+e
+with kernel methods
+)
+\Fld@listcount=\count291
+\c@bookmark@seq@number=\count292
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rer
+unfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/un
+iquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip52
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.
+sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen165
+\lightrulewidth=\dimen166
+\cmidrulewidth=\dimen167
+\belowrulesep=\dimen168
+\belowbottomsep=\dimen169
+\aboverulesep=\dimen170
+\abovetopsep=\dimen171
+\cmidrulesep=\dimen172
+\cmidrulekern=\dimen173
+\defaultaddspace=\dimen174
+\@cmidla=\count293
+\@cmidlb=\count294
+\@aboverulesep=\dimen175
+\@belowrulesep=\dimen176
+\@thisruleclass=\count295
+\@lastruleclass=\count296
+\@thisrulewidth=\dimen177
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.st
+y
+Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
+\LTleft=\skip53
+\LTright=\skip54
+\LTpre=\skip55
+\LTpost=\skip56
+\LTchunksize=\count297
+\LTcapwidth=\dimen178
+\LT@head=\box52
+\LT@firsthead=\box53
+\LT@foot=\box54
+\LT@lastfoot=\box55
+\LT@cols=\count298
+\LT@rows=\count299
+\c@LT@tables=\count300
+\c@LT@chunks=\count301
+\LT@p@ftn=\toks25
+) (c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
+\col@sep=\dimen179
+\ar@mcellbox=\box56
+\extrarowheight=\dimen180
+\NC@list=\toks26
+\extratabsurround=\skip57
+\backup@length=\skip58
+\ar@cellbox=\box57
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.
+sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip59
+\multirow@cntb=\count302
+\multirow@dima=\skip60
+\bigstrutjot=\dimen181
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.st
+y
+\wrapoverhang=\dimen182
+\WF@size=\dimen183
+\c@WF@wrappedlines=\count303
+\WF@box=\box58
+\WF@everypar=\toks27
+Package: wrapfig 2003/01/31  v 3.6
+) (c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count304
+\float@exts=\toks28
+\float@box=\box59
+\@float@everytoks=\toks29
+\@floatcapt=\box60
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.
+sty
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2020/02/24 v1.2b Standard LaTeX Color (DPC)
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color
+.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 147.
+)
+\everycr=\toks30
+\minrowclearance=\skip61
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscap
+e.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/lscape.st
+y
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+) (c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tabu/tabu.sty
+Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.
+sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box61
+\sift@deathcycles=\count305
+\@vwid@loff=\dimen184
+\@vwid@roff=\dimen185
+)
+\c@taburow=\count306
+\tabu@nbcols=\count307
+\tabu@cnt=\count308
+\tabu@Xcol=\count309
+\tabu@alloc=\count310
+\tabu@nested=\count311
+\tabu@target=\dimen186
+\tabu@spreadtarget=\dimen187
+\tabu@naturalX=\dimen188
+\tabucolX=\dimen189
+\tabu@Xsum=\dimen190
+\extrarowdepth=\dimen191
+\abovetabulinesep=\dimen192
+\belowtabulinesep=\dimen193
+\tabustrutrule=\dimen194
+\tabu@thebody=\toks31
+\tabu@footnotes=\toks32
+\tabu@box=\box62
+\tabu@arstrutbox=\box63
+\tabu@hleads=\box64
+\tabu@vleads=\box65
+\tabu@cellskip=\skip62
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttable/thr
+eeparttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box66
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttablex/th
+reeparttablex.sty
+Package: threeparttablex 2013/07/23 v0.3 by daleif
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/environ/environ.st
+y
+Package: environ 2014/05/04 v0.3 A new way to define environments
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspa
+ces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+\TPTL@width=\skip63
+) (c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box67
+\UL@hyphenbox=\box68
+\UL@skip=\skip64
+\UL@hook=\toks33
+\UL@height=\dimen195
+\UL@pe=\count312
+\UL@pixel=\dimen196
+\ULC@box=\box69
+Package: ulem 2019/11/18
+\ULdepth=\dimen197
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/makecell/makecell.
+sty
+Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
+\rotheadsize=\dimen198
+\c@nlinenum=\count313
+\TeXr@lab=\toks34
+) (c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.st
+y
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color
+.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+LaTeX Info: Redefining \color on input line 709.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backen
+d-pdftex.def
+File: l3backend-pdftex.def 2021-03-02 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count314
+\l__pdf_internal_box=\box70
+) (./aft_article.aux)
+\openout1 = `aft_article.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+Unknown journal: specify \journalname{<name of your journal>} in preambel
+
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epsto
+pdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/epstop
+df-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package hyperref Info: Link coloring OFF on input line 51.
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.s
+ty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.
+sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/g
+ettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count315
+)
+LaTeX Info: Redefining \ref on input line 51.
+LaTeX Info: Redefining \pageref on input line 51.
+LaTeX Info: Redefining \nameref on input line 51.
+(./aft_article.out) (./aft_article.out)
+\@outlinefile=\write3
+\openout3 = `aft_article.out'.
+
+SVJour3 warning: Missing \journalname
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <13> not available
+(Font)              size <12> substituted on input line 83.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 85--107
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[1{c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdf
+tex.map}]
+Overfull \hbox (130.08423pt too wide) in paragraph at lines 160--170
+\OT1/cmr/m/n/10 use in on-tol-ogy build-ing [[]].
+ []
+
+
+Overfull \hbox (8.7218pt too wide) in paragraph at lines 160--170
+\OT1/cmr/m/n/10 and the Aarne-Thompson-Uther tale ty-pol-ogy (ATU) [[]].
+ []
+
+
+Overfull \hbox (77.83405pt too wide) in paragraph at lines 160--170
+\OT1/cmr/m/n/10 Im-por-tant ex-ten-sions to these, and to our cur-rent work, ex
+-ist e.g. by [[]]
+ []
+
+
+Overfull \hbox (27.41743pt too wide) in paragraph at lines 174--197
+\OT1/cmr/m/n/10 to cer-tain tale types [[]], [[]],
+ []
+
+
+Overfull \hbox (438.19615pt too wide) in paragraph at lines 174--197
+\OT1/cmr/m/n/10 [[]], [[]], [[]],
+ []
+
+
+Overfull \hbox (9.19511pt too wide) in paragraph at lines 174--197
+\OT1/cmr/m/n/10 [[]] or ge-o-graph-
+ []
+
+
+Overfull \hbox (181.77887pt too wide) in paragraph at lines 174--197
+\OT1/cmr/m/n/10 i-cal dis-tri-bu-tion of glob-ally oc-cur-ring nar-ra-tive mo-t
+ifs [[]].
+ []
+
+
+Overfull \hbox (104.63878pt too wide) in paragraph at lines 174--197
+\OT1/cmr/m/n/10 DNA' [[]], [[]],
+ []
+
+
+Overfull \hbox (11.7784pt too wide) in paragraph at lines 174--197
+\OT1/cmr/m/n/10 [[]],
+ []
+
+
+Overfull \hbox (549.12929pt too wide) in paragraph at lines 174--197
+\OT1/cmr/m/it/10 man-tics\OT1/cmr/m/n/10 , an emerg-ing re-search area, e.g. in
+ dig-i-tal preser-va-tion [[]],
+ []
+
+
+Overfull \hbox (287.97363pt too wide) in paragraph at lines 174--197
+\OT1/cmr/m/n/10 [[]]. 
+ []
+
+[2]
+Overfull \hbox (20.834pt too wide) in paragraph at lines 198--209
+\OT1/cmr/m/n/10 stracts de-scrib-ing nar-ra-tives [[]], tale types [[]],
+ []
+
+
+Overfull \hbox (148.02872pt too wide) in paragraph at lines 210--229
+\OT1/cmr/m/n/10 out-come of mass com-par-i-son. Clus-ter anal-y-sis [[]],
+ []
+
+
+Overfull \hbox (83.02647pt too wide) in paragraph at lines 210--229
+\OT1/cmr/m/n/10 prin-ci-pal com-po-nent anal-y-sis (PCA) [[]], LDA [[]],
+ []
+
+
+Overfull \hbox (65.05518pt too wide) in paragraph at lines 210--229
+\OT1/cmr/m/n/10 deep learn-ing by re-cur-rent neu-ral net-works (RNN) [[]],
+ []
+
+
+Overfull \hbox (70.88853pt too wide) in paragraph at lines 210--229
+\OT1/cmr/m/n/10 sup-port vec-tor ma-chines (SVM) [[]]
+ []
+
+
+Overfull \hbox (207.19559pt too wide) in paragraph at lines 210--229
+\OT1/cmr/m/n/10 se, the no-tion ask-ing for vec-tor fields in-stead [[]],
+ []
+
+
+Overfull \hbox (44.63982pt too wide) in paragraph at lines 210--229
+\OT1/cmr/m/n/10 [[]].
+ []
+
+[3]
+Overfull \hbox (187.9733pt too wide) in paragraph at lines 230--244
+\OT1/cmr/m/n/10 creas-ingly con-densed and ge-o-met-ri-cally lo-cated types of 
+mean-ing [[]],
+ []
+
+
+Overfull \hbox (40.77861pt too wide) in paragraph at lines 230--244
+\OT1/cmr/m/n/10 [[]], [[]],
+ []
+
+
+Overfull \hbox (282.59862pt too wide) in paragraph at lines 230--244
+\OT1/cmr/m/n/10 [[]], [[]], [[]]
+ []
+
+
+Overfull \hbox (110.94527pt too wide) in paragraph at lines 230--244
+\OT1/cmr/m/n/10 meth-ods, a re-search di-rec-tion in ar-ti-fi-cial in-tel-li-ge
+nce [[]].
+ []
+
+
+Overfull \hbox (67.2219pt too wide) in paragraph at lines 230--244
+\OT1/cmr/m/n/10 a QT per-spec-tive were pub-lished a while ago [[]],
+ []
+
+
+LaTeX Warning: Citation `2d77156b39724b4b86eeca60d508f678' on page 4 undefined 
+on input line 283.
+
+
+LaTeX Warning: Citation `45bb5e2c15424346b27631d8e1d16c8a' on page 4 undefined 
+on input line 284.
+
+
+Overfull \hbox (11.88965pt too wide) in paragraph at lines 269--285
+\OT1/cmr/m/n/10 [[]] are still miss-ing. Based on [[]] and [[]],
+ []
+
+
+LaTeX Warning: Citation `dur15770' on page 4 undefined on input line 287.
+
+
+LaTeX Warning: Citation `dur17330' on page 4 undefined on input line 287.
+
+
+LaTeX Warning: Citation `dur11481' on page 4 undefined on input line 288.
+
+
+Overfull \hbox (457.51538pt too wide) in paragraph at lines 286--295
+\OT1/cmr/m/n/10 their ar-ti-cles in-clude e.g. [\OT1/cmr/bx/n/10 ?\OT1/cmr/m/n/
+10 ], [\OT1/cmr/bx/n/10 ?\OT1/cmr/m/n/10 ], [\OT1/cmr/bx/n/10 ?\OT1/cmr/m/n/10 
+] and [[]].
+ []
+
+
+Overfull \hbox (302.44559pt too wide) in paragraph at lines 286--295
+\OT1/cmr/m/n/10 Also, [[]] and [[]]
+ []
+
+[4]
+Overfull \hbox (62.33403pt too wide) in paragraph at lines 296--304
+[]\OT1/cmr/m/n/10 The best ex-am-ple we have been look-ing for was [[]]
+ []
+
+
+Overfull \hbox (162.751pt too wide) in paragraph at lines 329--338
+\OT1/cmr/m/n/10 trusted re-search find-ings have been im-pos-si-ble to re-pro-d
+uce [[]],
+ []
+
+
+Overfull \hbox (132.20915pt too wide) in paragraph at lines 329--338
+\OT1/cmr/m/n/10 [[]].
+ []
+
+
+Overfull \hbox (38.00073pt too wide) in paragraph at lines 329--338
+\OT1/cmr/m/n/10 pub-lic health [[]],
+ []
+
+[5] [6] [7]
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 548.
+[8]
+Overfull \hbox (1.28137pt too wide) in paragraph at lines 587--589
+[]\OT1/cmtt/m/n/10 date[]obtained \OT1/cmr/m/n/10 : The date on which the data 
+set iden-ti-fied as a \OT1/cmtt/m/n/10 data[]source
+ []
+
+
+Overfull \hbox (28.23955pt too wide) in paragraph at lines 594--607
+[][] 
+ []
+
+<aft_article_files/figure-latex/word_hist-1.pdf, id=317, 361.35pt x 129.48375pt
+>
+File: aft_article_files/figure-latex/word_hist-1.pdf Graphic file (type pdf)
+<use aft_article_files/figure-latex/word_hist-1.pdf>
+Package pdftex.def Info: aft_article_files/figure-latex/word_hist-1.pdf  used o
+n input line 618.
+(pdftex.def)             Requested size: 361.34912pt x 129.48341pt.
+
+Overfull \hbox (38.34912pt too wide) in paragraph at lines 618--619
+[][] 
+ []
+
+
+Underfull \vbox (badness 2452) has occurred while \output is active []
+
+[9]
+<aft_article_files/figure-latex/type_hist-1.pdf, id=326, 361.35pt x 129.48375pt
+>
+File: aft_article_files/figure-latex/type_hist-1.pdf Graphic file (type pdf)
+<use aft_article_files/figure-latex/type_hist-1.pdf>
+Package pdftex.def Info: aft_article_files/figure-latex/type_hist-1.pdf  used o
+n input line 629.
+(pdftex.def)             Requested size: 361.34912pt x 129.48341pt.
+
+Overfull \hbox (38.34912pt too wide) in paragraph at lines 629--630
+[][] 
+ []
+
+<aft_article_files/figure-latex/unnamed-chunk-2-1.pdf, id=327, 361.35pt x 180.6
+75pt>
+File: aft_article_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type p
+df)
+<use aft_article_files/figure-latex/unnamed-chunk-2-1.pdf>
+Package pdftex.def Info: aft_article_files/figure-latex/unnamed-chunk-2-1.pdf  
+used on input line 634.
+(pdftex.def)             Requested size: 361.34912pt x 180.67455pt.
+
+Overfull \hbox (38.34912pt too wide) in paragraph at lines 634--635
+[][] 
+ []
+
+
+Underfull \vbox (badness 2564) has occurred while \output is active []
+
+[10 <./aft_article_files/figure-latex/word_hist-1.pdf> <./aft_article_files/fig
+ure-latex/type_hist-1.pdf
+
+pdfTeX warning: pdflatex.exe (file ./aft_article_files/figure-latex/type_hist-1
+.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> <./aft_article_files/figure-latex/unnamed-chunk-2-1.pdf
+
+pdfTeX warning: pdflatex.exe (file ./aft_article_files/figure-latex/unnamed-chu
+nk-2-1.pdf): PDF inclusion: multiple pdfs with page group included in a single 
+page
+>] (./aft_article.bbl
+Underfull \hbox (badness 1163) in paragraph at lines 13--17
+\OT1/cmr/m/n/8 TR (2012) Com-pu-ta-tional Folk-loris-tics. Com-mu-ni-ca-tions o
+f the ACM 55(7):60--
+ []
+
+
+Overfull \hbox (193.5284pt too wide) in paragraph at lines 35--42
+[]
+ []
+
+
+Underfull \hbox (badness 2452) in paragraph at lines 35--42
+\OT1/cmr/m/n/8 Bortolini E, Pa-gani L, Crema ER, Sarno S, Bar-bi-eri C, Boat-ti
+ni A, Sazz-
+ []
+
+
+Underfull \hbox (badness 3930) in paragraph at lines 35--42
+\OT1/cmr/m/n/8 JJ (2017) In-fer-ring pat-terns of folk-tale dif-fu-sion us-ing 
+ge-nomic data. Pro-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\OT1/cmr/m/n/8 ceed-ings of the Na-tional Academy of Sci-ences 114(34):9140--91
+45, DOI 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--42
+\OT1/cmr/m/n/8 10 . 1073 / pnas . 1614395114$, URL []$\OT1/cmtt/m/n/8 https : /
+ / www . pnas . org / content / 114 / 34 / 9140$[]\OT1/cmr/m/n/8 ,
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 82--85
+[]
+ []
+
+
+Underfull \hbox (badness 2903) in paragraph at lines 82--85
+\OT1/cmr/m/n/8 A Phys-i-cal Metaphor to Study Se-man-tic Drift. CoRR abs/1608.0
+1298, URL
+ []
+
+
+Underfull \hbox (badness 1292) in paragraph at lines 90--93
+[]\OT1/cmr/m/n/8 Declerck T, Sch^^?afer L (2017) Port-ing past clas-si-fi-ca-ti
+on
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 96--99
+[]
+ []
+
+
+Underfull \hbox (badness 2503) in paragraph at lines 121--124
+[]\OT1/cmr/m/n/8 Frenzel E (1992) Stoffe der Weltlit-er-atur : ein Lexikon dich
+-tungs-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--133
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 150--155
+\OT1/cmtt/m/n/8 publication / 328105114 _ The _ Theoretical _ Methodological _ 
+and _ Technical _ Issues _
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 150--155
+\OT1/cmtt/m/n/8 of _ Digital _ Folklore _ Databases _ and _ Computational _ Fol
+kloristics / links /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 150--155
+\OT1/cmtt/m/n/8 5f045ab2a6fdcc4ca452fdc5 / The -[] Theoretical -[] Methodologic
+al -[] and -[] Technical -[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 150--155
+\OT1/cmtt/m/n/8 Issues -[] of -[] Digital -[] Folklore -[] Databases -[] and -[
+] Computational -[] Folkloristics . pdf$[]\OT1/cmr/m/n/8 ,
+ []
+
+
+Underfull \hbox (badness 1817) in paragraph at lines 161--165
+\OT1/cmr/m/n/8 Per-spec-tive. PhD The-sis, Rad-boud Uni-ver-siteit, URL []$\OT1
+/cmtt/m/n/8 http : / / www . karsdorp . io /
+ []
+
+
+Overfull \hbox (194.20345pt too wide) in paragraph at lines 169--173
+[]
+ []
+
+[12]
+Overfull \hbox (188.74643pt too wide) in paragraph at lines 177--181
+[]
+ []
+
+
+Underfull \hbox (badness 6995) in paragraph at lines 220--224
+[]\OT1/cmr/m/n/8 Meder T,
+ []
+
+
+Underfull \hbox (badness 1178) in paragraph at lines 236--241
+[]\OT1/cmr/m/n/8 Nguyen D, Tri-eschnigg D,
+ []
+
+
+Overfull \hbox (61.8168pt too wide) in paragraph at lines 254--257
+[]
+ []
+
+[13]
+Underfull \hbox (badness 1253) in paragraph at lines 327--331
+[]\OT1/cmr/m/n/8 Thuillard M, d'Huy J,
+ []
+
+
+Underfull \hbox (badness 1852) in paragraph at lines 344--348
+\OT1/cmr/m/n/8 23, DOI $10 . 18637 / jss . v059 . i10$, URL []$\OT1/cmtt/m/n/8 
+https : / / www . jstatsoft . org / index . php / jss /
+ []
+
+) [14] (./aft_article.aux)
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 1.0pt have occurred.
+
+Package rerunfilecheck Info: File `aft_article.out' has not changed.
+(rerunfilecheck)             Checksum: 68B865A61400388666D7CD24F74C632C;1445.
+ ) 
+Here is how much of TeX's memory you used:
+ 10614 strings out of 480970
+ 156780 string characters out of 5906243
+ 490632 words of memory out of 5000000
+ 27527 multiletter control sequences out of 15000+600000
+ 411604 words of font info for 56 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 71i,9n,74p,434b,466s stack positions out of 5000i,500n,10000p,200000b,80000s
+ <c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/e
+c/tcrm0800.600pk><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmbsy10.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/Users/joshh/AppData/Roaming/T
+inyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/joshh/App
+Data/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Us
+ers/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+6.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr7.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr8.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/joshh/AppData/Roaming/Tin
+yTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/Users/joshh/AppDa
+ta/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb><c:/User
+s/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt1
+0.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmtt8.pfb>
+Output written on aft_article.pdf (14 pages, 240695 bytes).
+PDF statistics:
+ 514 PDF objects out of 1000 (max. 8388607)
+ 403 compressed objects within 5 object streams
+ 126 named destinations out of 1000 (max. 500000)
+ 72 words of extra memory for PDF output out of 10000 (max. 10000000)
+
