@@ -21,7 +21,7 @@ If you find issues with any of the datasets or scripts, please file an issue on 
 
 # Please use, cite, and make suggestions
 
-This work is licensed under a [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) open license.  Its contents are in the public domain, or permissions have been granted by the copyright holder for inclusion.  
+This work is licensed under a [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) open license.  Its contents are either in the public domain, or permissions have been granted by the copyright holder for inclusion.  
 
 To cite the use of this repository or its data in publications, please reference the repository as well as the works which it derives from:
 
