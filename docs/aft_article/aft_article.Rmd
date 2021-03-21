@@ -1,7 +1,7 @@
 ---
 title: Bearing a bag-of-tales`:`
-subtitle: An open annotated folktale corpus for reproducible research
-titlerunning: Bag-of-tales
+subtitle: An open corpus of annotated folktales for reproducible research
+titlerunning: Bearing a bag-of-tales
 authorrunning: Hagedorn, J. & Darányi, S.
 thanks: | 
     Grants or other notes about the article that should go on the front 
@@ -34,7 +34,7 @@ keywords:
 # - MSC code 2
 
 abstract: |
-  Computational motif identification in folktales is an open research problem. To move ahead in this area, the field would benefit from shared test data for machine learning, putting experimentation in focus. Folklore databases including text collections in multiple languages do exist, but less so in dataset form for data science, and are currently in general not shared, making their results non-reproducible, an obstacle to scientific progress. The need for significant preprocessing adds insult to injury, rendering the outcome both incomparable and subject to multidisciplinary criticism. As a first step to remedy this problem, we report work in progress, having converted the Ashliman Folktexts Collection into a public dataset for supervised tale type learning, itself a precondition for scalable motif identification. In the future, this dataset can be upgraded in several respects to serve as the basis for springboard experiments with the Thompson Motif Index and the Aarne-Thompson-Uther tale typology, paving the way for ontology development.
+  Motifs in folktales and myths have been identified and articulated by scholars, and the computational identification and discovery of such motifs is an area of ongoing research.  Achieving this goal means meeting scientific requirements (that methods be comparable and replicable) and requirements for collaboration (that multi-disciplinary teams can reliably access data).  To support those requirements, access to consistent reference datasets is needed.  Unfortunately, these datasets are not openly available in a format that supports their use in data science. The minimal reference datasets for motif identification include: known motifs (e.g. the Thompson Motif Index), known sequences of motifs occurring in tales (e.g. the Aarne-Thompson-Uther tale typology), and actual tale texts annotated with these motif sequences.  Here we report work in progress toward this goal, having converted the Ashliman Folktexts collection into a public dataset of annotated tale texts.
 
 bibliography: bibliography.bib
 biblio-style: spmpsci
@@ -215,13 +215,34 @@ The following features guided our selection of tools and format for the code and
 - *Common tools*: The data must also be structured in a way that allows for use with the standard tools of the trade of data science.  These tools are continuously evolving, yet the dataframe is likely to continue to be common object across R (in `tidyverse`) and Python (in `pandas`).  In addition, it can be read easily from a `.csv` format by Excel users to allow for ease of investigation.
 - *Modifiable form*: Text analysis has traditionally used other types of data structures to model its quantitative features (e.g. document-term matrices, term co-occurrence matrices), and dataframes have been incorporated into tidy data workflows and available packages such as `quanteda` or `tidytext`.  This allows for reshaping the data into sparse matrices, nested structures, and graph-based structures as dictated by the needs of a given analysis, while starting from a common source dataset (i.e. the `aft`).
 
-## Growing the Corpus {#grow}
+## Accessing the Corpus
 
-- motifs, tale types and tale corpus are incomplete, but that does not mean they should be thrown out
-- need structure for adding new tales
-- pull request provides structure for submission and review of changes
-- this can also be used to identify and correct errors (so publish and PR)
-- for reproducible research, articles using the datasets should use the url with the current commit's SHA to indicate the state of the dataset at the time the analysis was run.
+The current version of the `aft` dataset is located on the `trilogy` GitHub repository.  For reproducible research, analyses using the dataset should use the URL identifying the current version of the dataset at the time the analysis was run.
+
+To get a permanent link for reproducible research:
+
+1. Navigate to the [dataset's URL](https://github.com/j-hagedorn/trilogy/blob/master/data/aft.csv).
+2. Press the `y` button on the keyboard to get a permanent link to the exact version of the dataset.^[See the GitHub documentation on "[Getting permanent links to files](https://docs.github.com/en/github/managing-files-in-a-repository/getting-permanent-links-to-files)" for more information.]  Even as the dataset changes, other researchers will be able to use this link to run their code against the same version you used.
+3. Select the link to "View Raw", which will display the raw `.csv` file.  The URL will change its form, and also include an access token.
+4. Copy this URL.  It is the key which will allow for reproducing any analysis using the dataset.
+
+Once a permanent link has been copied, read the data into the desired environment.  An example of how to access the dataset are given below using the `R` language, though similarly simple commands exist for Python and other languages:
+
+```
+aft <- read.csv("https://raw.githubusercontent.com/j-hagedorn/trilogy/.../data/aft.csv?token=...")
+```
+
+While Excel is not recommended as a tool for reproducible research, users who wish to view the file in Excel can complete steps 1-4 above and then follow Excel instructions to import data from external data sources using the same URL.
+
+## Growing and Refining the Corpus {#grow}
+
+Existing lists of motifs and tale types are incomplete \cite{dhuy_unbiased_2017}, and thus any corpus of texts is also bound to be incomplete if its contents are limited to tales annotated using these lists.
+
+We intend for the corpus to be supplemented over time, both through our own efforts and through the efforts of folklorists around the world.  The open-source *Git* framework for collaboratively developing code provides a stable and well-documented structure for collaboratively maintaining a standard reference corpus.
+ 
+A new set of annotated tales can be submitted via a "pull request" in *GitHub*, which would include a script to fetch new texts and transform them into the dataframe structure used by the `aft` dataset^[Similar to the `fetch_ashliman.R` script used to obtain the initial dataset.], as well as any source files required to run the script.  Pull requests provide a structure for submission of changes, as well as for testing and review of newly introduced code.  Collaborators are encouraged to publish descriptions of their contributions as well: for instance, as a short data paper to the *Journal of Open Humanities Data*.
+
+In addition to growing the corpus, the *Git* framework allows for the ongoing improvement of data quality.  Users of the dataset  can file an issue on the repository in order to identify improvements to the data, or submit pull-requests proposing fixes to the existing scripts.  This functionality allows for the corpus to serve as a communal resource, and we welcome inquiries and suggestions about how best to manage this resource as a "commons" \cite{vollan_cooperation_2010}.
 
 # Data Harvesting and Cleaning {#data_cleaning}
 
