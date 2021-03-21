@@ -83,7 +83,7 @@ theme_bar_flip <-
 
 Ever since the concept of a motif was introduced some 200 years ago, the quest to identify elements of content above the word level has been a standard preoccupation in literary science \cite{frenzel_weltlit_1992}, \cite{seigneuret_dictionary_1988}. There, a motif stands for a recurrent theme, whereas in musicology a motif is considered "the smallest structural unit possessing thematic identity" \cite{white_analysis_1976}. In the vein of folktale research, Stith Thompson defined motifs as "the smallest element in a tale having a power to persist in tradition" \cite{thompson_folktale_1977}.
 
-The sufficient overlap between these definitions suggests that such higher-order content units exist as narrative building blocks in a generic sense, yet their automatic extraction by computational means has eluded folk narrative studies so far \cite{daranyi_proceedings_2010}. Despite the suggestion that topics identified by Labeled Latent Dirichlet Allocation (L-LDA) had an analogous function with motifs in a database of Dutch and Frisian folktales \cite{karsdorp_topic_2013}, we consider finding characteristic patterns of semantic content an open research problem. One reason for our skepticism is that in Thompson’s Motif Index of Folk Literature \cite{thompson_motif_index} alone, over 45000 motifs are listed on a global scale, but many more e.g. regional motif indexes exist whose material would doubtlessly inflate that number. As we will argue below, digital humanities (DH) in general, and folk narrative studies in particular, are not up to the task of a scalable pattern hunt yet.  If we want to apply machine learning for motif identification and extraction, we need suitable datasets which enable research teams to replicate each other's results. Below we take a small step in this direction.
+The sufficient overlap between these definitions suggests that such higher-order content units exist as narrative building blocks in a generic sense, yet their automatic extraction by computational means has eluded folk narrative studies so far \cite{daranyi_proceedings_2010}. Despite the suggestion that topics identified by Labeled Latent Dirichlet Allocation (L-LDA) had an analogous function with motifs in a database of Dutch and Frisian folktales \cite{karsdorp_topic_2013}, we consider finding characteristic patterns of semantic content an open research problem. One reason for our skepticism is that in Thompson’s Motif Index of Folk Literature \cite{thompson_motif_index} alone, over 45000 motifs are listed on a global scale, but many more e.g. regional motif indexes exist whose material would doubtlessly inflate that number. As we will argue below, digital humanities (DH) in general, and folk narrative studies in particular, are not up to the task of a scalable pattern hunt yet.  If we want to apply machine learning for motif identification and extraction, we need suitable datasets which enable research teams to replicate each other's results. Below we report an initial step in this direction.
 
 The structure of this paper is as follows. In Section 2, we bring examples of related research.  In Section 3, Ashliman’s Folktexts tale collection is introduced. In Section 4 we explain our motivation to support reproducible research in computational folkloristics, with Section 5 offering details of data harvesting and cleaning. Section 6 brings details about the new annotated dataset for machine learning, while in Section 7 we add our conclusions and plans for future research.
 
@@ -106,14 +106,16 @@ As the computing of results for the above both trends require datasets, we brief
 
 ## Databases and datasets
 
-Progress in computational folkloristics presupposes that experiments can be repeated by international teams to make sure that the results are robust, so that recommended methodologies can emerge based on their ranking. On the other hand, such trustworthiness of algorithmic solutions can result only from public datasets accessible over the Internet, with as few bottlenecks as possible. Once teams of folklorists and data scientists share their respective expertise to interpret and curate the results, it will become pointless to lament about any loss of authority, or unsolvable problems in the face of scalability. It’s a tea for two situation.
+Progress in computational folkloristics presupposes that experiments can be repeated by international teams to make sure that the results are robust, so that recommended methodologies can emerge based on their ranking. In order to be trusted, results must be replicable, which entails access to public datasets accessible over the Internet with as few bottlenecks as possible. Once teams of folklorists and data scientists share their respective expertise to interpret and curate the results, it will become pointless to lament about any loss of authority, or unsolvable problems in the face of scalability. It’s a tea for two situation.
 
-Moving away now from the problem of text migration combined with text evolution over millennia across the globe, below we focus on a more modest problem. Having recently scanned the field for open access datasets of ATU-annotated tales in English as a kind of *lingua franca* (no pun intended), i.e. suitable for motif detection by machine learning, we can confirm the following:
+Moving away now from the problem of text migration combined with text evolution over millennia across the globe, below we focus on a more tractable problem. Having recently scanned the field for open access datasets of ATU-annotated tales in English as a kind of *lingua franca* (no pun intended), i.e. suitable for motif detection by machine learning, we can confirm the following:
 
 - We could not identify such datasets on GitHub^[https://github.com/awesomedata/awesome-public-datasets], Kaggle^[https://www.kaggle.com/datasets] or Google^[https://datasetsearch.research.google.com/];
 - Big folklore collections anticipated by \cite{tangherlini_trawling_2013} and \cite{tangherlini_bigfolk} are still missing. Based on \cite{meder_dutch_2010} and \cite{ilyefalvi_theoretical_2018}, the largest databases seem to be the Dutch Folktale Database of the Meertens Institute, and the Danish Folklore Archive’s Tang Kristensen Collection, the former in the magnitude of around 50.000 texts, the latter at around 35.000 texts \cite{tangherlini_trawling_2013}. Other important databases exist,  \cite{berezkin_peopling_2017} but are either beyond public access, in their original languages only, or both. The notable exception is the Meertens Institute whose texts are of course in Dutch and Frisian plus a number of local dialects, but can be read in English translation as well. Typically, authors who work with these databases extract their research datasets but do not make them public for any number of reasons \cite{karsdorp_topic_2013}, \cite{karsdorp_retelling_2016}.
-- Other researchers who have shared their data as supporting material for their articles include e.g. \cite{tehrani_oral_2016}, \cite{silva_comparative_2016}, \cite{tehrani_riding_2013} and \cite{bortolini_inferring_2017}. Also, \cite{declerck_linked_2017} and \cite{declerck_ontologies_2017} report that recently, a large amount of ATU data have been made available online by the Multilingual Folk Tale Database^[https://www.mftd.org], offering also annotation facilities for tales in multilingual versions. A step in the right direction as it sounds, as this paper goes to press, we have no information about the conditions of their usability yet.
-- The best example we have been looking for was \cite{lo_exploring_2020} who have published their dataset on Github as well.^[https://github.com/GossaLo/afr-neural-folktales/] Another fine candidate for such a dataset was Prof D.L. Ashliman’s Folktexts Collection whose conversion  to the desired format will be described below. Importantly, Prof. Ashliman graciously agreed to donate his collection to the digital humanities (DH) and data science research communities.
+- Other researchers who have shared their data as supporting material for their articles include e.g. \cite{tehrani_oral_2016}, \cite{silva_comparative_2016}, \cite{tehrani_riding_2013} and \cite{bortolini_inferring_2017}. Also, \cite{declerck_linked_2017} and \cite{declerck_ontologies_2017} report that recently, a large amount of ATU data have been made available online by the Multilingual Folk Tale Database (MFTD)^[https://www.mftd.org], offering also annotation facilities for tales in multilingual versions. While this is a step in the right direction, the data is made available in a format which allows for browsing of portions of the database, but not for easy access to the corpus in its entirety.  That being said, the English texts and related metadata contained in the MFTD might be a useful addition to the `aft` dataset.
+- We found only a single recent study \cite{lo_exploring_2020} which published a corresponding tale corpus to promote reproducibility.^[https://github.com/GossaLo/afr-neural-folktales/]
+
+Among the annotated tale collections which were publicly-available on the internet, the most promising candidate was Prof D.L. Ashliman’s Folktexts collection.  The process of the conversion of this collection to the desired format will be described below. Importantly, Prof. Ashliman graciously agreed to donate his collection to the digital humanities (DH) and data science research communities.
 
 # The Ashliman Folktexts collection {#aft_collection}
 
@@ -188,9 +190,9 @@ links <-
   select(type_name,atu_id,url = rev_url)
 ```
 
-The '*Folktexts*' site has been populated and maintained since 1996 by D.L. Ashliman, professor emeritus from the University of Pittsburgh.  While some other sites may sport a more lavish design, Ashliman's is the largest and most extensively annotated.  It serves as a respected scholarly resource for folklorists, with a large and curated set of tale texts.  While we have only included tales from pages with clear ATU annotations (n = `r nrow(links)` pages) in this dataset, the total content of the website is much larger (n = `r nrow(all_links)` pages), and includes various creation myths, stories of changelings, Faust legends, and more.  
+The '*Folktexts*' site has been populated and maintained since 1996 by D.L. Ashliman, professor emeritus from the University of Pittsburgh.  While some other sites may sport a more lavish design, Ashliman's is the largest and most extensively annotated.  It serves as a respected scholarly resource for folklorists, with a large and curated set of tale texts.  While our dataset includes only tales from pages with clear ATU annotations (n = `r nrow(links)` pages), the total content of the website is much larger (n = `r nrow(all_links)` pages), and includes various creation myths, stories of changelings, Faust legends, and more.  It is the ATU annotation that makes this corpus particularly valuable as a training dataset for classification methods.
 
-Despite the richness of this resource, it has not frequently been used in folklore research as a larger corpus.  While some previous studies reference the Ashliman corpus, these often only include a smaller portion of the entire set of texts \cite{reiter_nlp_2014}.  To our knowledge, none of the published studies provide an openly-accessible corpus of the data for use in promoting subsequent research.
+Despite the richness of this resource, it has not frequently been used in folklore research as a larger corpus.  Some previous studies reference the Ashliman corpus, yet these often only include a smaller portion of the entire set of texts \cite{reiter_nlp_2014}.  To our knowledge, none of the published studies provide an openly-accessible corpus of the data for use in promoting subsequent research.
 
 # Support for Reproducibility in Folklore Studies
 
@@ -288,7 +290,7 @@ aft <- read_csv("../../data/aft.csv")
 
 The `aft` (i.e. *Annotated Folktales*) dataframe contains `r nrow(aft)` rows, each corresponding to a single tale.  Its `r ncol(aft)` columns are described briefly below:
 
-- `type_name` : The name associated with the Aarne-Thompson-Uther (ATU) tale type identifier.
+- `type_name` : The name associated with the Aarne-Thompson-Uther (ATU) tale type identifier.^[Note that this field currently uses the name of the associated Folktexts webpage, which may not precisely match the ATU description.]
 - `atu_id` : The Aarne-Thompson-Uther (ATU) tale type identifier which classifies the tale.
 - `tale_title` : The title of the tale. 
 - `provenance` : The person, place or tradition from which the tale came.  In Ashliman's collection, this refers variously to the person recording the tales (e.g. Giambattista Basile), the country or region from which the version of the tale came (e.g. North Africa), or the larger collection of tales in which the tale is found (e.g. The Kathasaritsagara). 
@@ -300,7 +302,7 @@ The `aft` (i.e. *Annotated Folktales*) dataframe contains `r nrow(aft)` rows, ea
 
 The table below shows prints the initial characters of fields from the first 6 rows of the dataset, in order to illustrate its appearance:
 
-```{r}
+```{r fig.cap="Example output of the dataset"}
 aft %>%
   select(-type_name,-notes,-data_source,-date_obtained) %>%
   mutate_all(~str_trunc(.,width = 15)) %>%
@@ -315,7 +317,7 @@ aft %>%
 
 The `r nrow(aft)` tales in the dataset average `r round(mean(str_count(aft$text, '\\w+')), digits = 1)` words in length, though the individual texts vary with a minimum of `r min(str_count(aft$text, '\\w+'))` words and a maximum of `r max(str_count(aft$text, '\\w+'))`.  The histogram below shows the distribution of tale lengths:
 
-```{r word_hist, fig.asp = 0.36}
+```{r word_hist, fig.cap="Distribution of tale lengths", fig.asp = 0.36}
 
 aft %>%
   mutate(count_words = str_count(aft$text, '\\w+')) %>%
@@ -346,14 +348,12 @@ by_type <-
 
 The tales compiled in the `aft` data are annotated by Aarne-Thompson-Uther (ATU) tale type, and represent `r n_distinct(aft$atu_id)` distinct types.  There are an average of `r round(mean(by_type$n_tales), digits = 1)` tales in each tale type, with a range of `r min(by_type$n_tales)` to `r max(by_type$n_tales)`.
 
-```{r type_hist, fig.asp = 0.36}
+```{r type_hist, fig.cap="Distribution of tale type membership size", fig.asp = 0.36}
 
 by_type %>%
   ggplot(aes(x = n_tales)) +
   geom_histogram() +
   labs(
-    title = "Distribution of tale type membership",
-    subtitle = "How many tales are included in each type?",
     x = "# of tales",
     y = "# of tale types"
   ) +
@@ -363,7 +363,7 @@ by_type %>%
 
 The tale types with the largest representative group of tales in the corpus is shown below:
 
-```{r, fig.asp = 0.5}
+```{r, fig.cap="Ten tale types with the largest number of representative tales", fig.asp = 0.5}
 
 by_type %>%
   top_n(10,n_tales) %>%
@@ -378,9 +378,7 @@ by_type %>%
   geom_point(size = 3) +
   geom_segment(aes(yend = label), xend = 0) +
   labs(
-    title = "Top tale types",
-    subtitle = "Ten tale types with the largest number of representative tales",
-    y = "ATU Tale Type",
+    y = "Tale Type (ATU)",
     x = "# of tales"
   ) +
   theme_bar_flip +
