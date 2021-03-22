@@ -1,9 +1,14 @@
-library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin)
+library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin); library(textclean)
 
 site_url <- "http://www.pitt.edu/~dash/folktexts.html"
+site_url2 <- "http://www.pitt.edu/~dash/folktexts2.html"
 
 pg <-
   read_html(site_url) %>%
+  html_nodes("a") 
+
+pg2 <-
+  read_html(site_url2) %>%
   html_nodes("a") 
 
 # Obtain urls for all sub-pages on Folktexts website, filtering for annotated ones
@@ -12,6 +17,12 @@ links <-
   tibble(
     type_name = pg %>% html_text(),
     url = pg %>% html_attr("href")
+  ) %>%
+  bind_rows(
+    tibble(
+      type_name = pg2 %>% html_text(),
+      url = pg2 %>% html_attr("href")
+    )
   ) %>%
   filter(!is.na(url)) %>%
   mutate(
@@ -50,7 +61,7 @@ links <-
   filter(str_detect(rev_name,regex("^type",ignore_case = T))) %>%
   mutate(
     atu_id = str_remove(rev_name,"^type"),
-    atu_id = str_remove(atu_id,"jack$|ast$|#longfellow$")
+    atu_id = str_remove(atu_id,"jack$|ast$|#longfellow$|#nigeria$|Blit$|fairy$|#shewolf$|abc$")
   ) %>%
   select(type_name,atu_id,url = rev_url)
   
@@ -63,9 +74,9 @@ df <- tibble()
 range <- 1:length(links$url)
 
 # 78
-# errors: c(70,74)
+# errors: c(70,74,165,172,174,198)
 
-for (i in range[!range %in% c(70,74)]) {
+for (i in range[!range %in% c(70,74,165,172,174,198)]) {
 
   print(i)
   
@@ -323,12 +334,19 @@ aft <-
       tale_title
     )
   ) %>%
-  select(-dup_title,-title_tag) %>%
+  select(-dup_title,-title_tag,-copyright) %>%
   mutate(
+    text = text %>% 
+      str_remove_all(fixed("\\")) %>%
+      str_replace_all('[\"]', "'") %>%
+      str_squish() %>%
+      replace_html(replacement = ""),
     data_source = "Ashliman's Folktexts",
     date_obtained = lubridate::today()
   ) %>%
-  distinct(.keep_all = T)
+  distinct(.keep_all = T) %>%
+  # At least one word
+  filter(str_count(text, '\\w+') > 0) 
 
 write_csv(aft,"data/aft.csv")
 
