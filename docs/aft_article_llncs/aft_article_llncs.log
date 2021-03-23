@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.12.0 (TeX Live 2020/W32TeX)  (format=lualatex 2021.3.22)  23 MAR 2021 05:56
+This is LuaHBTeX, Version 1.12.0 (TeX Live 2020/W32TeX)  (format=lualatex 2021.3.22)  23 MAR 2021 06:57
  restricted system commands enabled.
 **aft_article_llncs.tex
 (./aft_article_llncs.tex
@@ -1140,89 +1140,69 @@ Missing character: There is no ́ (U+0301) in font ec-lmr10!
 Missing character: There is no ́ (U+0301) in font ec-lmr9!
 ] [3] [4
 Missing character: There is no ́ (U+0301) in font ec-lmr9!
-] [5]
-Overfull \hbox (167.37497pt too wide) in paragraph at lines 221--221
-[]\T1/lmtt/m/n/10 aft <- read.csv("https://raw.githubusercontent.com/j-hagedorn/
-trilogy/.../data/aft.csv?token=...")[] 
- []
-
-[6
+] [5] [6
 Missing character: There is no ́ (U+0301) in font ec-lmr9!
-] [7] [8
+] [7]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 269.
+[8
 Missing character: There is no ́ (U+0301) in font ec-lmr9!
 ]
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 301.
-[9]
-<aft_article_llncs_files/figure-latex/wordhist-1.pdf, id=293, 469.755pt x 168.63
+<aft_article_llncs_files/figure-latex/wordhist-1.pdf, id=278, 469.755pt x 168.63
 pt>
 File: aft_article_llncs_files/figure-latex/wordhist-1.pdf Graphic file (type pdf
 )
 <use aft_article_llncs_files/figure-latex/wordhist-1.pdf>
 Package luatex.def Info: aft_article_llncs_files/figure-latex/wordhist-1.pdf  us
-ed on input line 360.
+ed on input line 328.
 (luatex.def)             Requested size: 347.12354pt x 124.60927pt.
-<aft_article_llncs_files/figure-latex/typehist-1.pdf, id=294, 469.755pt x 168.63
-pt>
-File: aft_article_llncs_files/figure-latex/typehist-1.pdf Graphic file (type pdf
-)
-<use aft_article_llncs_files/figure-latex/typehist-1.pdf>
-Package luatex.def Info: aft_article_llncs_files/figure-latex/typehist-1.pdf  us
-ed on input line 369.
-(luatex.def)             Requested size: 347.12354pt x 124.60927pt.
-<aft_article_llncs_files/figure-latex/unnamed-chunk-2-1.pdf, id=295, 469.755pt x
+<aft_article_llncs_files/figure-latex/unnamed-chunk-2-1.pdf, id=279, 469.755pt x
  234.8775pt>
 File: aft_article_llncs_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (t
 ype pdf)
 <use aft_article_llncs_files/figure-latex/unnamed-chunk-2-1.pdf>
 Package luatex.def Info: aft_article_llncs_files/figure-latex/unnamed-chunk-2-1.
-pdf  used on input line 375.
+pdf  used on input line 337.
 (luatex.def)             Requested size: 347.12354pt x 173.56291pt.
-[10
-Missing character: There is no ́ (U+0301) in font ec-lmr9!
-
+[9
 warning  (pdf backend): ignoring duplicate destination with the name 'table.1.1'
 
 
 warning  (pdf backend): ignoring duplicate destination with the name 'figure.1.1
 '
-<./aft_article_llncs_files/figure-latex/wordhist-1.pdf>] [11
-warning  (pdf backend): ignoring duplicate destination with the name 'figure.1.2
-'
-
-warning  (pdf backend): ignoring duplicate destination with the name 'figure.1.3
-'
-<./aft_article_llncs_files/figure-latex/typehist-1.pdf><./aft_article_llncs_file
-s/figure-latex/unnamed-chunk-2-1.pdf>]
+<./aft_article_llncs_files/figure-latex/wordhist-1.pdf>]
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10'.
 (microtype)             Ignoring protrusion settings for this character.
-[12
+[10
 Missing character: There is no ́ (U+0301) in font ec-lmr9!
+
+warning  (pdf backend): ignoring duplicate destination with the name 'figure.1.2
+'
+<./aft_article_llncs_files/figure-latex/unnamed-chunk-2-1.pdf>] [11
+Missing character: There is no ’ (U+2019) in font ec-lmr10!
+Missing character: There is no “ (U+201C) in font ec-lmr10!
 Missing character: There is no ’ (U+2019) in font ec-lmr10!
 ]
-Overfull \hbox (14.51744pt too wide) in paragraph at lines 413--413
+Overfull \hbox (14.51744pt too wide) in paragraph at lines 375--375
 []\T1/lmr/m/n/10 Elis-a-beth Fren-zel. \T1/lmr/m/it/10 Stoffe der Weltlit-er-atu
 r : ein Lexikon dich-tungs-geschichtlicher
  []
 
-[13
-Missing character: There is no “ (U+201C) in font ec-lmr10!
-Missing character: There is no ’ (U+2019) in font ec-lmr10!
-Missing character: There is no ’ (U+2019) in font ec-lmr10!
-Missing character: There is no ’ (U+2019) in font ec-lmr10!
-] [14
+[12
 Missing character: There is no ́ (U+0301) in font ec-lmr9!
+Missing character: There is no ’ (U+2019) in font ec-lmr10!
+Missing character: There is no ’ (U+2019) in font ec-lmr10!
 ]
-Overfull \hbox (2.93523pt too wide) in paragraph at lines 413--413
+Overfull \hbox (2.93523pt too wide) in paragraph at lines 375--375
 \T1/lmr/m/n/10 Doha, Qatar: As-so-ci-a-tion for Com-pu-ta-tional Lin-guis-tics, Oct. 2014, pp. 1532
  []
 
-[15
+[13
 Missing character: There is no – (U+2013) in font ec-lmr10!
-] [16
+] [14
 Missing character: There is no ́ (U+0301) in font ec-lmr9!
-] [17] (./aft_article_llncs.aux)
+] [15] (./aft_article_llncs.aux)
 Package rerunfilecheck Info: File `aft_article_llncs.out' has not changed.
 (rerunfilecheck)             Checksum: 09203D868266E9433480E46316240478;511.
 Package logreq Info: Writing requests to 'aft_article_llncs.run.xml'.
@@ -1231,13 +1211,13 @@ Package logreq Info: Writing requests to 'aft_article_llncs.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 21805 strings out of 478534
+ 21781 strings out of 478534
  100000,1373583 words of node,token memory allocated
- 1225 words of node memory still in use:
-   5 hlist, 1 vlist, 1 rule, 4 disc, 20 glue, 4 kern, 48 glyph, 50 attribute, 73
- glue_spec, 26 attribute_list, 1 write, 6 pdf_action nodes
-   avail lists: 1:2,2:1630,3:380,4:206,5:529,6:98,7:7882,8:82,9:339,10:22,11:656
- 40689 multiletter control sequences out of 65536+600000
+ 1224 words of node memory still in use:
+   5 hlist, 1 vlist, 1 rule, 4 disc, 19 glue, 4 kern, 48 glyph, 50 attribute, 73
+ glue_spec, 26 attribute_list, 1 write, 7 pdf_action nodes
+   avail lists: 1:2,2:1744,3:410,4:204,5:512,6:98,7:7883,8:91,9:319,10:22,11:656
+ 40681 multiletter control sequences out of 65536+600000
  57 fonts using 4106691 bytes
  73i,9n,71p,2722b,1691s stack positions out of 5000i,500n,10000p,200000b,200000s
 {c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}
@@ -1261,10 +1241,10 @@ TeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/joshh/AppData/Roaming/T
 inyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/joshh/AppData/Roami
 ng/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/joshh/AppData/R
 oaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb>
-Output written on aft_article_llncs.pdf (17 pages, 424225 bytes).
+Output written on aft_article_llncs.pdf (15 pages, 411484 bytes).
 
-PDF statistics: 473 PDF objects out of 1000 (max. 8388607)
- 425 compressed objects within 5 object streams
- 155 named destinations out of 1000 (max. 131072)
+PDF statistics: 447 PDF objects out of 1000 (max. 8388607)
+ 404 compressed objects within 5 object streams
+ 145 named destinations out of 1000 (max. 131072)
  9 words of extra memory for PDF output out of 10000 (max. 100000000)
 
