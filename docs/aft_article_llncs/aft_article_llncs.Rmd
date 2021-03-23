@@ -93,7 +93,7 @@ Moving away now from the problem of text migration combined with text evolution 
 
 - We could not identify such datasets on GitHub^[https://github.com/awesomedata/awesome-public-datasets], Kaggle^[https://www.kaggle.com/datasets] or Google^[https://datasetsearch.research.google.com/];
 - Big folklore collections anticipated by \cite{tangherlini_trawling_2013} and \cite{tangherlini_bigfolk} are still missing. Based on \cite{meder_dutch_2010} and \cite{ilyefalvi_theoretical_2018}, the largest databases seem to be the Dutch Folktale Database of the Meertens Institute, and the Danish Folklore Archive’s Tang Kristensen Collection, the former in the magnitude of around 50.000 texts, the latter at around 35.000 texts \cite{tangherlini_trawling_2013}. Other important databases exist,  \cite{berezkin_peopling_2017} but are either beyond public access, in their original languages only, or both. The notable exception is the Meertens Institute whose texts are of course in Dutch and Frisian plus a number of local dialects, but can be read in English translation as well. Typically, authors who work with these databases extract their research datasets but do not make them public for any number of reasons \cite{karsdorp_topic_2013}, \cite{karsdorp_retelling_2016}.
-- Other researchers who have shared their data as supporting material for their articles include e.g. \cite{tehrani_oral_2016}, \cite{silva_comparative_2016}, \cite{tehrani_riding_2013} and \cite{bortolini_inferring_2017}. Also, \cite{declerck_linked_2017} and \cite{declerck_ontologies_2017} report that recently, a large amount of ATU data have been made available online by the Multilingual Folk Tale Database (MFTD)^[https://www.mftd.org], offering also annotation facilities for tales in multilingual versions. While this is a step in the right direction, the data is made available in a format which allows for browsing of portions of the database, but not for easy access to the corpus in its entirety.  That being said, the English texts and related metadata contained in the MFTD might be a useful addition to the `aft` dataset.
+- Other researchers who have shared their data as supporting material for their articles include e.g. \cite{tehrani_oral_2016}, \cite{silva_comparative_2016}, \cite{tehrani_riding_2013} and \cite{bortolini_inferring_2017}. Also, \cite{declerck_linked_2017} and \cite{declerck_ontologies_2017} report that recently, a large amount of ATU data have been made available online by the Multilingual Folk Tale Database (MFTD)^[https://www.mftd.org], offering also annotation facilities for tales in multilingual versions. While this is a step in the right direction, the data is made available in a format which allows for browsing of portions of the database, but not for easy access to the corpus in its entirety.
 - We found only a single recent study \cite{lo_exploring_2020} which published a corresponding tale corpus to promote reproducibility.^[https://github.com/GossaLo/afr-neural-folktales/]
 
 Among the annotated tale collections which were publicly-available on the internet, the most promising candidate was Prof D.L. Ashliman’s Folktexts collection.  The process of the conversion of this collection to the desired format will be described below. Importantly, Prof. Ashliman graciously agreed to donate his collection to the digital humanities (DH) and data science research communities.
@@ -192,19 +192,17 @@ In recent years the digital humanities have made some strides to emulate these e
 The following features guided our selection of tools and format for the code and data:
 
 - *Open data*: In order to use tale data consistently, it must be made freely and openly available to anyone. The dataset is therefore distributed under a Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)^[https://creativecommons.org/licenses/by-sa/4.0/].
-- *Extensible data*: The dataset can be added to or modified, in order to develop a more complete repository of tales.  This can be done by submitting pull requests to the project's GitHub repository (see Sect. \ref{grow} for additional details).
+- *Extensible data*: The dataset can be added to or modified, in order to develop a more complete repository of tales.  This can be done by submitting pull requests to the project's GitHub repository.
 - *Open code*: Allowing any user to view and run the code that produces the dataset, as well as downstream analyses which use the dataset.  This allows for inspection, refinement and reasoning about the effects of transformation and statistical modeling on the data.
 - *Common form*: We have chosen to use the dataframe as the structure of the dataset, and specifically the "tidy" dataframe described by Wickham, in which (a) each variable forms a column, (b) each observation forms a row, and (c) a single type of observational unit forms the dataframe \cite{wickham_tidy_2014}.
 - *Common tools*: The data must also be structured in a way that allows for use with the standard tools of the trade of data science.  These tools are continuously evolving, yet the dataframe is likely to continue to be common object across R (in `tidyverse`) and Python (in `pandas`).  In addition, it can be read easily from a `.csv` format by Excel users to allow for ease of investigation.
 - *Modifiable form*: Text analysis has traditionally used other types of data structures to model its quantitative features (e.g. document-term matrices, term co-occurrence matrices), and dataframes have been incorporated into tidy data workflows and available packages such as `quanteda` or `tidytext`.  This allows for reshaping the data into sparse matrices, nested structures, and graph-based structures as dictated by the needs of a given analysis, while starting from a common source dataset (i.e. the `aft`).
 
-## Accessing the Corpus
+## Accessing and Growing the Corpus
 
-The current version of the `aft` dataset is located on the `trilogy` GitHub repository.  
+The current version of the `aft` dataset is located on the `trilogy` GitHub repository, where a vignette^[https://github.com/j-hagedorn/trilogy/blob/master/docs/vignettes/getting_started.md] provides information on how to access the dataset, use it in reproducible research, and improve it.
 
-Existing lists of motifs and tale types are incomplete \cite{dhuy_unbiased_2017}, and thus any corpus of texts is also bound to be incomplete if its contents are limited to tales annotated using these lists.
-
-This functionality allows for the corpus to serve as a communal resource, and we welcome inquiries and suggestions about how best to manage this resource as a "commons" \cite{vollan_cooperation_2010}.
+Existing lists of motifs and tale types are incomplete \cite{dhuy_unbiased_2017}, and thus any corpus of texts is also bound to be incomplete if its contents are limited to tales annotated using these lists.  Open-source *Git* functionality allows motifs, tale types and annotated tales to be added over time, and for the corpus to serve as a communal resource.  We welcome inquiries and suggestions about how best to manage this resource as a "commons" \cite{vollan_cooperation_2010}.
 
 # Data Harvesting and Cleaning {#data_cleaning}
 
@@ -306,22 +304,7 @@ by_type <-
 
 ```
 
-The tales compiled in the `aft` data are annotated by Aarne-Thompson-Uther (ATU) tale type, and represent `r n_distinct(aft$atu_id)` distinct types.  There are an average of `r round(mean(by_type$n_tales), digits = 1)` tales in each tale type, with a range of `r min(by_type$n_tales)` to `r max(by_type$n_tales)`.
-
-```{r typehist, fig.cap="Distribution of tale type membership size", fig.asp = 0.36}
-
-by_type %>%
-  ggplot(aes(x = n_tales)) +
-  geom_histogram() +
-  labs(
-    x = "# of tales",
-    y = "# of tale types"
-  ) +
-  theme_bar
-
-```
-
-The tale types with the largest representative group of tales in the corpus is shown below:
+The tales compiled in the `aft` data are annotated by Aarne-Thompson-Uther (ATU) tale type, and represent `r n_distinct(aft$atu_id)` distinct types.  There are an average of `r round(mean(by_type$n_tales), digits = 1)` tales in each tale type, with a range of `r min(by_type$n_tales)` to `r max(by_type$n_tales)`.  The tale types with the largest representative group of tales in the corpus is shown below:
 
 ```{r, fig.cap="Ten tale types with the largest number of representative tales", fig.asp = 0.5}
 
