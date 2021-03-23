@@ -5,8 +5,7 @@ output:
     variant: gfm
 ---
 
-```{r}
-library(tidyverse)
+```{r,comment=NA,message=F,warning=F}
 knitr::opts_chunk$set(echo=T,prompt=F,tidy=T,comment=NA,message=F,warning=F)
 ```
 
@@ -17,6 +16,7 @@ It is assumed that users of this data may have different levels of proficiency w
 If you cloned the GitHub repository on your local machine and have R installed, you can simply run the following:
 
 ```{r load, eval=FALSE}
+library(tidyverse)
 tmi <- read_csv("data/tmi.csv")
 # atu <- read_csv("data/atu.csv")
 aft <- read_csv("data/aft.csv")
@@ -31,11 +31,7 @@ If you want to pull the raw flat files from the web using another coding languag
 3. Click the *View Raw* button to display the raw data format.
 4. Copy the URL from the browser.
 
-You can then read the data into Python, R, or other environments.
-
-# Downloading to Excel
-
-Users who are comfortable using MS Excel can access the raw flat files using the URLs mentioned above and [import them into Excel](https://support.office.com/en-za/article/Import-or-export-text-txt-or-csv-files-5250ac4c-663c-47ce-937b-339e391393ba) using the steps outlined in the link.
+You can then read the data into Python, R, or other environments.  Users who are comfortable using MS Excel can access the raw flat files using the URLs mentioned above and [import them into Excel](https://support.office.com/en-za/article/Import-or-export-text-txt-or-csv-files-5250ac4c-663c-47ce-937b-339e391393ba) using the steps outlined in the link.
 
 # Use in Reproducible Research
 
@@ -43,7 +39,7 @@ For reproducible research, analyses using the dataset should use the URL identif
 
 To get a permanent link for reproducible research:
 
-1. Navigate to the dataset's URL.  For example, https://github.com/j-hagedorn/trilogy/blob/master/data/aft.csv).
+1. Navigate to the dataset's URL.  For example, https://github.com/j-hagedorn/trilogy/blob/master/data/aft.csv.
 2. Press the `y` button on the keyboard to get a permanent link to the exact version of the dataset.  Even as the dataset changes, other researchers will be able to use this link to run their code against the same version you used.  See the GitHub documentation on "[Getting permanent links to files](https://docs.github.com/en/github/managing-files-in-a-repository/getting-permanent-links-to-files)" for more information.  
 3. Select the link to *View Raw*, which will display the raw `.csv` file.  The URL will change its form, and also include an access token.
 4. Copy this URL.  It is the key which will allow for reproducing any analysis using the dataset.
@@ -51,7 +47,7 @@ To get a permanent link for reproducible research:
 Once a permanent link has been copied, read the data into the desired environment.  An example of how to access the dataset is given below using the `R` language, though similarly simple commands exist for Python and other languages:
 
 ```
-aft <- read_csv("https://raw.githubusercontent.com/j-hagedorn/trilogy/.../data/aft.csv?token=...")
+aft <- read_csv("https://raw.githubusercontent.com/j-hagedorn/trilogy/YOUR_SHA_HERE/data/aft.csv?token=YOUR_TOKEN_HERE")
 ```
 
 Please note that Excel is not recommended as a tool for reproducible research, as the methods used to transform the data after download are not captured in a replicable format.

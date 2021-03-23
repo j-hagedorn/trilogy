@@ -1,19 +1,4 @@
 ``` r
-library(tidyverse)
-```
-
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
-
-    ## v ggplot2 3.3.2     v purrr   0.3.4
-    ## v tibble  3.0.4     v dplyr   1.0.2
-    ## v tidyr   1.1.2     v stringr 1.4.0
-    ## v readr   1.4.0     v forcats 0.5.0
-
-    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-``` r
 knitr::opts_chunk$set(echo=T,prompt=F,tidy=T,comment=NA,message=F,warning=F)
 ```
 
@@ -27,6 +12,7 @@ If you cloned the GitHub repository on your local machine and have R
 installed, you can simply run the following:
 
 ``` r
+library(tidyverse)
 tmi <- read_csv("data/tmi.csv")
 # atu <- read_csv("data/atu.csv")
 aft <- read_csv("data/aft.csv")
@@ -43,12 +29,9 @@ language (e.g. Python), use the following steps:
 3.  Click the *View Raw* button to display the raw data format.
 4.  Copy the URL from the browser.
 
-You can then read the data into Python, R, or other environments.
-
-# Downloading to Excel
-
-Users who are comfortable using MS Excel can access the raw flat files
-using the URLs mentioned above and [import them into
+You can then read the data into Python, R, or other environments. Users
+who are comfortable using MS Excel can access the raw flat files using
+the URLs mentioned above and [import them into
 Excel](https://support.office.com/en-za/article/Import-or-export-text-txt-or-csv-files-5250ac4c-663c-47ce-937b-339e391393ba)
 using the steps outlined in the link.
 
@@ -61,7 +44,7 @@ was run.
 To get a permanent link for reproducible research:
 
 1.  Navigate to the dataset’s URL. For example,
-    <https://github.com/j-hagedorn/trilogy/blob/master/data/aft.csv>).
+    <https://github.com/j-hagedorn/trilogy/blob/master/data/aft.csv>.
 2.  Press the `y` button on the keyboard to get a permanent link to the
     exact version of the dataset. Even as the dataset changes, other
     researchers will be able to use this link to run their code against
@@ -80,7 +63,7 @@ environment. An example of how to access the dataset is given below
 using the `R` language, though similarly simple commands exist for
 Python and other languages:
 
-    aft <- read_csv("https://raw.githubusercontent.com/j-hagedorn/trilogy/.../data/aft.csv?token=...")
+    aft <- read_csv("https://raw.githubusercontent.com/j-hagedorn/trilogy/YOUR_SHA_HERE/data/aft.csv?token=YOUR_TOKEN_HERE")
 
 Please note that Excel is not recommended as a tool for reproducible
 research, as the methods used to transform the data after download are
