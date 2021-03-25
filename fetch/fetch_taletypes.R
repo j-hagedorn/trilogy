@@ -60,5 +60,6 @@ df <-
   fill(atu_id,.direction = "down") %>%
   fill(tale_name,.direction = "down") %>%
   ungroup() %>%
-  filter(!is.na(atu_id)) 
+  filter(!is.na(atu_id)) %>%
+  filter(text != "")
   
