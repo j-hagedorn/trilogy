@@ -5,7 +5,7 @@ output:
     variant: gfm
 ---
 
-```{r,comment=NA,message=F,warning=F}
+```{r,echo=F,comment=NA,message=F,warning=F}
 knitr::opts_chunk$set(echo=T,prompt=F,tidy=T,comment=NA,message=F,warning=F)
 ```
 
@@ -58,3 +58,7 @@ We intend for the `trilogy` corpus to be supplemented over time, both through ou
  
 1. *Supplementing the corpus with new texts*. A new set of annotated tales can be submitted via a "pull request" in *GitHub*.  Submissions should include a script to fetch new texts and transform them into the dataframe structure used by the `aft` dataset, as well as any source files required to run the script.  For an example, see the `fetch/fetch_ashliman.R` script used to obtain the initial dataset.  Pull requests provide a structure for submission of changes, as well as for testing and review of newly introduced code.  Collaborators are encouraged to publish descriptions of their contributions as well: for instance, as a short data paper to the [*Journal of Open Humanities Data*](https://openhumanitiesdata.metajnl.com/).
 2. *Improving data quality*. In addition to growing the corpus, the *Git* framework allows for the ongoing improvement of data quality.  Users of the dataset  can file an issue on the repository in order to identify improvements to the data, or submit pull-requests proposing fixes to the existing scripts.
+
+# Inspecting Source Scripts
+
+For the purposes of reproducibility and continual methodological improvement, we have shared the scripts used to obtain and clean these datasets in the `fetch/` subfolder.  The `tmi` dataset was built with the `fetch_motifs.R` script, the `atu` with the `fetch_taletypes.R` script, and the `aat` with the `fetch_ashliman.R`script.  Additional considerations and notes regarding the development of the datasets can be found in the `docs/` folder.
