@@ -44,22 +44,16 @@ repository as well as the works from which it derives:
         copyright = {© 1996-2021},
         shorttitle = {Ashliman's {Folktexts}},
         url = {http://www.pitt.edu/~dash/folktexts.html},
-        language = {English},
-        journal = {Folktexts},
         author = {Ashliman, D.L.}
     }
     
     @book{thompson_motif_index,
-        address = {Bloomington},
-        edition = {Revised and enlarged edition},
         title = {Motif-index of folk-literature; a classification of narrative elements in folktales, ballads, myths, fables, mediaeval romances, exempla, fabliaux, jest-books, and local legends.},
         shorttitle = {Thompson's {Motif} {Index}},
-        url = {https://catalog.hathitrust.org/Record/001276245},
-        language = {English},
         publisher = {Indiana University Press},
+        address = {Bloomington},
         author = {Thompson, Stith},
-        year = {1955},
-        keywords = {Bibliography., Classification., Folk literature, Folklore, Themes, motives.}
+        year = {1955}
     }
 
 ## Collaboration
