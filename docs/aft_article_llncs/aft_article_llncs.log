@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.12.0 (TeX Live 2020/W32TeX)  (format=lualatex 2021.3.22)  24 MAR 2021 20:08
+This is LuaHBTeX, Version 1.12.0 (TeX Live 2020/W32TeX)  (format=lualatex 2021.3.22)  25 MAR 2021 06:22
  restricted system commands enabled.
 **aft_article_llncs.tex
 (./aft_article_llncs.tex
@@ -1148,7 +1148,7 @@ LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
 [8
 Missing character: There is no ́ (U+0301) in font ec-lmr9!
 ]
-<aft_article_llncs_files/figure-latex/wordhist-1.pdf, id=278, 469.755pt x 168.63
+<aft_article_llncs_files/figure-latex/wordhist-1.pdf, id=277, 469.755pt x 168.63
 pt>
 File: aft_article_llncs_files/figure-latex/wordhist-1.pdf Graphic file (type pdf
 )
@@ -1156,7 +1156,7 @@ File: aft_article_llncs_files/figure-latex/wordhist-1.pdf Graphic file (type pdf
 Package luatex.def Info: aft_article_llncs_files/figure-latex/wordhist-1.pdf  us
 ed on input line 328.
 (luatex.def)             Requested size: 347.12354pt x 124.60927pt.
-<aft_article_llncs_files/figure-latex/unnamed-chunk-2-1.pdf, id=279, 469.755pt x
+<aft_article_llncs_files/figure-latex/unnamed-chunk-2-1.pdf, id=278, 469.755pt x
  234.8775pt>
 File: aft_article_llncs_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (t
 ype pdf)
@@ -1212,36 +1212,34 @@ Here is how much of LuaTeX's memory you used:
  1224 words of node memory still in use:
    5 hlist, 1 vlist, 1 rule, 4 disc, 19 glue, 4 kern, 48 glyph, 50 attribute, 73
  glue_spec, 26 attribute_list, 1 write, 7 pdf_action nodes
-   avail lists: 1:1,2:1781,3:424,4:207,5:524,6:103,7:7886,8:89,9:319,10:22,11:65
-6
+   avail lists: 1:1,2:1781,3:424,4:207,5:524,6:103,7:7704,8:89,9:319,10:22,11:64
+0
  40681 multiletter control sequences out of 65536+600000
  57 fonts using 4106691 bytes
  73i,9n,71p,2722b,1691s stack positions out of 5000i,500n,10000p,200000b,200000s
 {c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}
 {c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc
 }{c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
-}{c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit
-.enc}{c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ma
-thsy.enc}<c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/l
-m/lmbx10.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/publ
-ic/lm/lmbx12.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/
-public/lm/lmbx9.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/typ
-e1/public/lm/lmcsc10.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/font
-s/type1/public/lm/lmmi7.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/f
-onts/type1/public/lm/lmr10.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dis
-t/fonts/type1/public/lm/lmr6.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-d
-ist/fonts/type1/public/lm/lmr7.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf
--dist/fonts/type1/public/lm/lmr9.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/tex
-mf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX
-/texmf-dist/fonts/type1/public/lm/lmri9.pfb><c:/Users/joshh/AppData/Roaming/Tiny
-TeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/joshh/AppData/Roaming/T
-inyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/joshh/AppData/Roami
-ng/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/joshh/AppData/R
-oaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb>
-Output written on aft_article_llncs.pdf (15 pages, 410490 bytes).
+}{c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy
+.enc}<c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lm
+bx10.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/l
+m/lmbx12.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/publ
+ic/lm/lmbx9.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/p
+ublic/lm/lmcsc10.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts/ty
+pe1/public/lm/lmr10.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fonts
+/type1/public/lm/lmr6.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/fon
+ts/type1/public/lm/lmr7.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist/f
+onts/type1/public/lm/lmr9.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-dist
+/fonts/type1/public/lm/lmri10.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-
+dist/fonts/type1/public/lm/lmri9.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/tex
+mf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/
+texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/joshh/AppData/Roaming/Tiny
+TeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/joshh/AppData/Roaming/
+TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb>
+Output written on aft_article_llncs.pdf (15 pages, 407936 bytes).
 
-PDF statistics: 448 PDF objects out of 1000 (max. 8388607)
- 405 compressed objects within 5 object streams
+PDF statistics: 443 PDF objects out of 1000 (max. 8388607)
+ 401 compressed objects within 5 object streams
  145 named destinations out of 1000 (max. 131072)
  9 words of extra memory for PDF output out of 10000 (max. 100000000)
 
