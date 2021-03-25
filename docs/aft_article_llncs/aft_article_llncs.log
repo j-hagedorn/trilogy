@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.12.0 (TeX Live 2020/W32TeX)  (format=lualatex 2021.3.22)  23 MAR 2021 06:57
+This is LuaHBTeX, Version 1.12.0 (TeX Live 2020/W32TeX)  (format=lualatex 2021.3.22)  24 MAR 2021 20:08
  restricted system commands enabled.
 **aft_article_llncs.tex
 (./aft_article_llncs.tex
@@ -1180,9 +1180,7 @@ Missing character: There is no ́ (U+0301) in font ec-lmr9!
 warning  (pdf backend): ignoring duplicate destination with the name 'figure.1.2
 '
 <./aft_article_llncs_files/figure-latex/unnamed-chunk-2-1.pdf>] [11
-Missing character: There is no ’ (U+2019) in font ec-lmr10!
 Missing character: There is no “ (U+201C) in font ec-lmr10!
-Missing character: There is no ’ (U+2019) in font ec-lmr10!
 ]
 Overfull \hbox (14.51744pt too wide) in paragraph at lines 375--375
 []\T1/lmr/m/n/10 Elis-a-beth Fren-zel. \T1/lmr/m/it/10 Stoffe der Weltlit-er-atu
@@ -1198,9 +1196,7 @@ Overfull \hbox (2.93523pt too wide) in paragraph at lines 375--375
 \T1/lmr/m/n/10 Doha, Qatar: As-so-ci-a-tion for Com-pu-ta-tional Lin-guis-tics, Oct. 2014, pp. 1532
  []
 
-[13
-Missing character: There is no – (U+2013) in font ec-lmr10!
-] [14
+[13] [14
 Missing character: There is no ́ (U+0301) in font ec-lmr9!
 ] [15] (./aft_article_llncs.aux)
 Package rerunfilecheck Info: File `aft_article_llncs.out' has not changed.
@@ -1216,7 +1212,8 @@ Here is how much of LuaTeX's memory you used:
  1224 words of node memory still in use:
    5 hlist, 1 vlist, 1 rule, 4 disc, 19 glue, 4 kern, 48 glyph, 50 attribute, 73
  glue_spec, 26 attribute_list, 1 write, 7 pdf_action nodes
-   avail lists: 1:2,2:1744,3:410,4:204,5:512,6:98,7:7883,8:91,9:319,10:22,11:656
+   avail lists: 1:1,2:1781,3:424,4:207,5:524,6:103,7:7886,8:89,9:319,10:22,11:65
+6
  40681 multiletter control sequences out of 65536+600000
  57 fonts using 4106691 bytes
  73i,9n,71p,2722b,1691s stack positions out of 5000i,500n,10000p,200000b,200000s
@@ -1241,10 +1238,10 @@ TeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/joshh/AppData/Roaming/T
 inyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/joshh/AppData/Roami
 ng/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/joshh/AppData/R
 oaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb>
-Output written on aft_article_llncs.pdf (15 pages, 411484 bytes).
+Output written on aft_article_llncs.pdf (15 pages, 410490 bytes).
 
-PDF statistics: 447 PDF objects out of 1000 (max. 8388607)
- 404 compressed objects within 5 object streams
+PDF statistics: 448 PDF objects out of 1000 (max. 8388607)
+ 405 compressed objects within 5 object streams
  145 named destinations out of 1000 (max. 131072)
  9 words of extra memory for PDF output out of 10000 (max. 100000000)
 
