@@ -5,7 +5,7 @@ abstract: |
   Motifs in folktales and myths have been identified and articulated by scholars, and the computational identification and discovery of such motifs is an area of ongoing research.  Achieving this goal means meeting scientific requirements (that methods be comparable and replicable) and requirements for collaboration (that multi-disciplinary teams can reliably access data).  To support those requirements, access to consistent reference datasets is needed.  Unfortunately, these datasets are not openly available in a format that supports their use in data science. The minimal reference datasets for motif identification include: known motifs (e.g. the Thompson Motif Index), known sequences of motifs occurring in tales (e.g. the Aarne-Thompson-Uther tale typology), and actual tale texts annotated with these motif sequences.  Here we report work in progress toward this goal, having converted the Ashliman Folktexts collection into a public dataset of annotated tale texts.
 keywords: "annotated folktales \\and mythology \\and motif \\and reproducible research \\and machine learning \\and version control"
 bibliography: ["bibliography.bib"]
-# biblio-style: "apalike"
+# biblio-style: "abbrv"
 link-citations: true
 output:
   bookdown::pdf_document2:
@@ -21,7 +21,6 @@ output:
 
 ```{r knitr_init, echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, paged.print=TRUE}
 ## Global options
-# https://www.youtube.com/watch?v=xxpMU7TPHtQ
 library(knitr)
 #options(max.print="75")
 opts_chunk$set(echo=F,cache=F,prompt=F,tidy=T,comment=NA,message=F,warning=F,out.width='100%',dpi=300,dev = "cairo_pdf")
@@ -40,7 +39,7 @@ theme_bar <-
   theme_minimal() + 
   theme(
     plot.title.position = "plot",
-    text = element_text(family = font_family),
+    text = element_text(family = font_family,size = 13),
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
     panel.grid.major.y = element_line(size=.1, color="grey" ),
@@ -282,9 +281,9 @@ aft %>%
   ggplot(aes(x = count_words)) +
   geom_histogram(binwidth = 250) +
   labs(
-    caption = "Each bar represents a range of 250 (e.g. 0-250, 251-500, etc.)",
-    x = "n words",
-    y = "n tales"
+    caption = "Each bar represents a range of 250 (e.g. 0-250 words, 251-500, etc.)",
+    x = "Number of words in tale",
+    y = "Number of tales"
   ) +
   theme_bar
 
@@ -322,9 +321,10 @@ by_type %>%
   geom_segment(aes(yend = label), xend = 0) +
   labs(
     y = "Tale Type (ATU)",
-    x = "# of tales"
+    x = "Number of tales"
   ) +
   theme_bar_flip +
+  theme(axis.text=element_text(size=11)) +
   xlim(0,31)
 
 ```
