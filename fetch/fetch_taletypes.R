@@ -62,4 +62,5 @@ df <-
   ungroup() %>%
   filter(!is.na(atu_id)) %>%
   filter(text != "")
+
   
