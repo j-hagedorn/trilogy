@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.12.0 (TeX Live 2020/W32TeX)  (format=lualatex 2021.3.22)  25 MAR 2021 06:22
+This is LuaHBTeX, Version 1.12.0 (TeX Live 2020/W32TeX)  (format=lualatex 2021.3.22)  25 MAR 2021 13:35
  restricted system commands enabled.
 **aft_article_llncs.tex
 (./aft_article_llncs.tex
@@ -1134,20 +1134,10 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 [1
 
 {c:/Users/joshh/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex
-.map}
-Missing character: There is no ́ (U+0301) in font ec-lmr10!
-] [2
-Missing character: There is no ́ (U+0301) in font ec-lmr9!
-] [3] [4
-Missing character: There is no ́ (U+0301) in font ec-lmr9!
-] [5] [6
-Missing character: There is no ́ (U+0301) in font ec-lmr9!
-] [7]
+.map}] [2] [3] [4] [5] [6] [7]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 269.
-[8
-Missing character: There is no ́ (U+0301) in font ec-lmr9!
-]
+[8]
 <aft_article_llncs_files/figure-latex/wordhist-1.pdf, id=277, 469.755pt x 168.63
 pt>
 File: aft_article_llncs_files/figure-latex/wordhist-1.pdf Graphic file (type pdf
@@ -1175,20 +1165,17 @@ Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10'.
 (microtype)             Ignoring protrusion settings for this character.
 [10
-Missing character: There is no ́ (U+0301) in font ec-lmr9!
-
 warning  (pdf backend): ignoring duplicate destination with the name 'figure.1.2
 '
 <./aft_article_llncs_files/figure-latex/unnamed-chunk-2-1.pdf>] [11
 Missing character: There is no “ (U+201C) in font ec-lmr10!
 ]
-Overfull \hbox (14.51744pt too wide) in paragraph at lines 375--375
+Overfull \hbox (11.96187pt too wide) in paragraph at lines 375--375
 []\T1/lmr/m/n/10 Elis-a-beth Fren-zel. \T1/lmr/m/it/10 Stoffe der Weltlit-er-atu
-r : ein Lexikon dich-tungs-geschichtlicher
+r: ein Lexikon dich-tungs-geschichtlicher
  []
 
 [12
-Missing character: There is no ́ (U+0301) in font ec-lmr9!
 Missing character: There is no ’ (U+2019) in font ec-lmr10!
 Missing character: There is no ’ (U+2019) in font ec-lmr10!
 ]
@@ -1196,9 +1183,7 @@ Overfull \hbox (2.93523pt too wide) in paragraph at lines 375--375
 \T1/lmr/m/n/10 Doha, Qatar: As-so-ci-a-tion for Com-pu-ta-tional Lin-guis-tics, Oct. 2014, pp. 1532
  []
 
-[13] [14
-Missing character: There is no ́ (U+0301) in font ec-lmr9!
-] [15] (./aft_article_llncs.aux)
+[13] [14] [15] (./aft_article_llncs.aux)
 Package rerunfilecheck Info: File `aft_article_llncs.out' has not changed.
 (rerunfilecheck)             Checksum: 09203D868266E9433480E46316240478;511.
 Package logreq Info: Writing requests to 'aft_article_llncs.run.xml'.
@@ -1209,10 +1194,10 @@ Package logreq Info: Writing requests to 'aft_article_llncs.run.xml'.
 Here is how much of LuaTeX's memory you used:
  21781 strings out of 478534
  100000,1373583 words of node,token memory allocated
- 1224 words of node memory still in use:
-   5 hlist, 1 vlist, 1 rule, 4 disc, 19 glue, 4 kern, 48 glyph, 50 attribute, 73
+ 1217 words of node memory still in use:
+   5 hlist, 1 vlist, 1 rule, 4 disc, 19 glue, 4 kern, 47 glyph, 50 attribute, 73
  glue_spec, 26 attribute_list, 1 write, 7 pdf_action nodes
-   avail lists: 1:1,2:1781,3:424,4:207,5:524,6:103,7:7704,8:89,9:319,10:22,11:64
+   avail lists: 1:1,2:1781,3:424,4:207,5:524,6:103,7:7720,8:89,9:319,10:22,11:64
 0
  40681 multiletter control sequences out of 65536+600000
  57 fonts using 4106691 bytes
@@ -1236,7 +1221,7 @@ mf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/Users/joshh/AppData/Roaming/TinyTeX/
 texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/joshh/AppData/Roaming/Tiny
 TeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/joshh/AppData/Roaming/
 TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt9.pfb>
-Output written on aft_article_llncs.pdf (15 pages, 407936 bytes).
+Output written on aft_article_llncs.pdf (15 pages, 408097 bytes).
 
 PDF statistics: 443 PDF objects out of 1000 (max. 8388607)
  401 compressed objects within 5 object streams
