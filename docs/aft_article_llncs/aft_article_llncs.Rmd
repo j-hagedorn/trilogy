@@ -8,6 +8,8 @@ bibliography: ["bibliography.bib"]
 # biblio-style: "abbrv"
 link-citations: true
 output:
+  word_document:
+    toc: true
   bookdown::pdf_document2:
     fig_caption: true
     keep_tex: false
@@ -23,7 +25,7 @@ output:
 ## Global options
 library(knitr)
 #options(max.print="75")
-opts_chunk$set(echo=F,cache=F,prompt=F,tidy=T,comment=NA,message=F,warning=F,out.width='100%',dpi=300,dev = "cairo_pdf")
+opts_chunk$set(echo=F,cache=F,prompt=F,tidy=T,comment=NA,message=F,warning=F,out.width='100%',dpi=300 ,dev = "cairo_pdf")
 opts_knit$set(width=100)
 # Load required libraries
 library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin); library(kableExtra)
