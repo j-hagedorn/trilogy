@@ -61,6 +61,47 @@ df <-
   fill(tale_name,.direction = "down") %>%
   ungroup() %>%
   filter(!is.na(atu_id)) %>%
-  filter(text != "")
+  filter(text != "") %>%
+  group_by(chapter,division,sub_division,atu_id,tale_name) %>%
+  fill(type,.direction = "down") %>%
+  mutate(type = if_else(is.na(type),"tale_type",type)) %>%
+  group_by(chapter,division,sub_division,atu_id,tale_name,type) %>%
+  summarize(text = paste(text,collapse = " ")) %>%
+  group_by(chapter,division,sub_division,atu_id,tale_name) %>%
+  pivot_wider(names_from = type, values_from = text) %>%
+  ungroup() %>%
+  mutate(
+    litvar  = str_remove(litvar,"^Literature/Variants:|^Literature/Variants: "),
+    remarks = str_remove(remarks,"^Remarks:|^Remarks: "),
+    combos  = str_remove(combos,"^Combinations:|^Combinations: "),
+    combos  = str_remove(combos,"^ This type is usually combined with one or more other types, esp.")
+  )
+
+
+tst <-
+  df %>%
+  select(atu_id,tale_type) %>%
+  mutate(
+    motif_seq = str_extract_all(tale_type,"\\[[A-Z][1-9](.*?)\\]") 
+  ) %>%
+  select(-tale_type) %>%
+  unnest(motif_seq) %>%
+  mutate(
+    motif_seq = str_remove_all(motif_seq,"cf. |Cf. |e.g. ")
+  )
+
 
   
+# Motifs/motif sequences
+# - "[A1371.1, E34]" 
+# 
+# 
+# Reference to type from previous ATU version
+# - "*(Including the previous Types . and .)" 
+# - "...(Previously Type .)$"
+# 
+# Comparison to similar tale type
+# - "cf. Type ."
+# 
+# Forms the tale takes:
+#   - "*([1-9])"  
