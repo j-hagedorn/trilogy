@@ -71,6 +71,7 @@ df <-
   pivot_wider(names_from = type, values_from = text) %>%
   ungroup() %>%
   mutate(
+    atu_id  = str_trim(atu_id),
     litvar  = str_remove(litvar,"^Literature/Variants:|^Literature/Variants: "),
     remarks = str_remove(remarks,"^Remarks:|^Remarks: "),
     combos  = str_remove(combos,"^Combinations:|^Combinations: "),
@@ -88,14 +89,23 @@ tst <-
   unnest(motif_seq) %>%
   mutate(
     motif_seq = str_remove_all(motif_seq,"cf. |Cf. |e.g. ")
-  )
+  ) %>%
+  filter(!is.na(motif_seq)) %>%
+  group_by(atu_id) %>%
+  mutate(motif_order = row_number()) %>%
+  select(atu_id,motif_order,motif_seq)
 
 
   
 # Motifs/motif sequences
 # - "[A1371.1, E34]" 
 # 
-# 
+# Reference to motif at beginning of sequence which is not explicitly named
+# - A1750ff.
+#
+# Reference to range of motifs in sequence not explicitly named
+# - F611.1.11�F611.1.15
+#
 # Reference to type from previous ATU version
 # - "*(Including the previous Types . and .)" 
 # - "...(Previously Type .)$"
