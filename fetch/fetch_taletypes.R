@@ -79,21 +79,37 @@ df <-
   )
 
 
-tst <-
+seq_df <-
   df %>%
   select(atu_id,tale_type) %>%
-  mutate(
-    motif_seq = str_extract_all(tale_type,"\\[[A-Z][1-9](.*?)\\]") 
-  ) %>%
+  mutate(motifs = str_extract_all(tale_type,"\\[[A-Z][1-9](.*?)\\]") ) %>%
   select(-tale_type) %>%
-  unnest(motif_seq) %>%
-  mutate(
-    motif_seq = str_remove_all(motif_seq,"cf. |Cf. |e.g. ")
-  ) %>%
-  filter(!is.na(motif_seq)) %>%
+  unnest(motifs) %>%
+  mutate(motifs = str_remove_all(motifs,"cf. |Cf. |e.g. ")) %>%
+  filter(!is.na(motifs)) %>%
   group_by(atu_id) %>%
   mutate(motif_order = row_number()) %>%
-  select(atu_id,motif_order,motif_seq)
+  select(atu_id,motif_order,motifs) %>%
+  mutate(
+    motifs = str_remove_all(motifs,"^\\[|\\]$"),
+    # Split into list of elements
+    motifs = str_split(motifs,",|;")
+  ) %>%
+  unnest(motifs) %>%
+  mutate(motifs = str_trim(motifs)) 
+
+tst <-
+  seq_df %>%
+  pivot_wider(
+    names_from = motif_order, 
+    names_prefix = "ord_",
+    values_from = motifs,
+  ) %>%
+  mutate_at(
+    vars(starts_with("ord_")),
+    list(~unnest_longer(.))
+  )
+  unnest(`1`)
 
 
   
