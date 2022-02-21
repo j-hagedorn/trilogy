@@ -94,34 +94,43 @@ seq_df <-
     motifs = str_remove_all(motifs,"^\\[|\\]$"),
     # Split into list of elements
     motifs = str_split(motifs,",|;")
-  ) %>%
+  ) %>% 
+  ungroup() %>%
+  # Convert all lists to same length for unnesting
+  mutate(motifs = map(motifs, `length<-`, max(lengths(motifs)))) %>%
   unnest(motifs) %>%
-  mutate(motifs = str_trim(motifs)) 
-
-tst <-
-  seq_df %>%
+  mutate(motifs = str_trim(motifs)) %>%
   pivot_wider(
     names_from = motif_order, 
     names_prefix = "ord_",
     values_from = motifs,
+  ) %>% 
+  unnest() %>%
+  filter(if_any(-atu_id,~!is.na(.))) %>%
+  group_by(atu_id) %>%
+  # Need to address these issues, here (before expanding):
+  # Reference to motif at beginning of sequence which is not explicitly named (e.g. "A1750ff.")
+  # Reference to range of motifs in sequence not explicitly named (e.g. "F611.1.11�F611.1.15")
+  fill(starts_with("ord_"), .direction = "down") %>%
+  expand(
+    ord_1, ord_2, ord_3, ord_4, ord_5, ord_6, ord_7, ord_8,
+    ord_9, ord_10,ord_11,ord_12,ord_13,ord_14,ord_15,ord_16, 
+    ord_17,ord_18,ord_19,ord_20,ord_21,ord_22
   ) %>%
-  mutate_at(
-    vars(starts_with("ord_")),
-    list(~unnest_longer(.))
-  )
-  unnest(`1`)
+  mutate(tale_variant = row_number()) %>%
+  group_by(atu_id,tale_variant) %>%
+  pivot_longer(
+    starts_with("ord_"),names_to = "motif_order", values_to = "motif"
+  ) %>%
+  filter(!is.na(motif)) %>%
+  mutate(
+    motif_order = str_remove(motif_order,"^ord_"),
+    motif_order = as.numeric(motif_order)
+  ) %>%
+  distinct()
 
 
-  
-# Motifs/motif sequences
-# - "[A1371.1, E34]" 
-# 
-# Reference to motif at beginning of sequence which is not explicitly named
-# - A1750ff.
-#
-# Reference to range of motifs in sequence not explicitly named
-# - F611.1.11�F611.1.15
-#
+# Cleaning Issues
 # Reference to type from previous ATU version
 # - "*(Including the previous Types . and .)" 
 # - "...(Previously Type .)$"
@@ -129,5 +138,7 @@ tst <-
 # Comparison to similar tale type
 # - "cf. Type ."
 # 
-# Forms the tale takes:
-#   - "*([1-9])"  
+
+atu_combos <-
+  df %>%
+  select(atu_id, combos)
