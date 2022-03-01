@@ -1,30 +1,31 @@
 ---
 title: "Bearing a bag-of-tales: An open corpus of annotated folktales for reproducible research"
-author-inputfile: "authors.tex" 
+# author-inputfile: "authors_johd.tex" 
 abstract: |
   Motifs in folktales and myths have been identified and articulated by scholars, and the computational identification and discovery of such motifs is an area of ongoing research.  Achieving this goal means meeting scientific requirements (that methods be comparable and replicable) and requirements for collaboration (that multi-disciplinary teams can reliably access data).  To support those requirements, access to consistent reference datasets is needed.  Unfortunately, these datasets are not openly available in a format that supports their use in data science. The minimal reference datasets for motif identification include: known motifs (e.g. the Thompson Motif Index), known sequences of motifs occurring in tales (e.g. the Aarne-Thompson-Uther tale typology), and actual tale texts annotated with these motif sequences.  Here we report work in progress toward this goal, having converted the Ashliman Folktexts collection into a public dataset of annotated tale texts.
 keywords: "annotated folktales \\and mythology \\and motif \\and reproducible research \\and machine learning \\and version control"
 bibliography: ["bibliography.bib"]
-# biblio-style: "apalike"
+csl: apa.csl
 link-citations: true
 output:
+  
+  word_document:
+
   bookdown::pdf_document2:
     fig_caption: true
     keep_tex: false
-    latex_engine: lualatex
-    template: lncs-template.tex
+    latex_engine: xelatex
+    template: johd-template.tex
     md_extensions: +footnotes
     citation_package: biblatex
     dev: pdf
-    
 ---
 
 ```{r knitr_init, echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE, paged.print=TRUE}
 ## Global options
-# https://www.youtube.com/watch?v=xxpMU7TPHtQ
 library(knitr)
 #options(max.print="75")
-opts_chunk$set(echo=F,cache=F,prompt=F,tidy=T,comment=NA,message=F,warning=F,out.width='100%',dpi=300,dev = "cairo_pdf")
+opts_chunk$set(echo=F,cache=F,prompt=F,tidy=T,comment=NA,message=F,warning=F,out.width='100%',dpi=400,dev = "cairo_pdf")
 opts_knit$set(width=100)
 # Load required libraries
 library(tidyverse); library(httr); library(rvest); library(tidytext); library(fuzzyjoin); library(kableExtra)
@@ -33,14 +34,14 @@ library(tidyverse); library(httr); library(rvest); library(tidytext); library(fu
 ```
 
 ```{r themes, echo=FALSE, message=FALSE}
-extrafont::loadfonts(device="win")
+extrafont::loadfonts(device="win", quiet = T)
 font_family = "Gill Sans MT"
 
 theme_bar <- 
   theme_minimal() + 
   theme(
     plot.title.position = "plot",
-    text = element_text(family = font_family),
+    text = element_text(family = font_family,size = 13),
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
     panel.grid.major.y = element_line(size=.1, color="grey" ),
@@ -59,48 +60,49 @@ theme_bar_flip <-
     panel.grid.minor.x = element_line(size=.1, color="grey" ),
     axis.text.x.bottom = element_text()
   )
+
 ```
 
-# Introduction {#intro}
+# Context and motivation {#intro}
 
-Ever since the concept of a motif was introduced some 200 years ago, the quest to identify elements of content above the word level has been a standard preoccupation in literary science \cite{frenzel_weltlit_1992}, \cite{seigneuret_dictionary_1988}. There, a motif stands for a recurrent theme, whereas in musicology a motif is considered "the smallest structural unit possessing thematic identity" \cite{white_analysis_1976}. In the vein of folktale research, Stith Thompson defined motifs as "the smallest element in a tale having a power to persist in tradition" \cite{thompson_folktale_1977}.
+Ever since the concept of a motif was introduced some 200 years ago, the quest to identify elements of content above the word level has been a standard preoccupation in literary science [@frenzel_weltlit_1992; @seigneuret_dictionary_1988]. There, a motif stands for a recurrent theme, whereas in musicology a motif is considered "the smallest structural unit possessing thematic identity" [@white_analysis_1976]. In the vein of folktale research, Stith Thompson defined motifs as "the smallest element in a tale having a power to persist in tradition" [@thompson_folktale_1977].
 
-The sufficient overlap between these definitions suggests that such higher-order content units exist as narrative building blocks in a generic sense, yet their automatic extraction by computational means has eluded folk narrative studies so far \cite{daranyi_proceedings_2010}. Despite the suggestion that topics identified by Labeled Latent Dirichlet Allocation (L-LDA) had an analogous function with motifs in a database of Dutch and Frisian folktales \cite{karsdorp_topic_2013}, we consider finding characteristic patterns of semantic content an open research problem. One reason for our skepticism is that in Thompson’s Motif Index of Folk Literature \cite{thompson_motif_index} alone, over 45000 motifs are listed on a global scale, but many more e.g. regional motif indexes exist whose material would doubtlessly inflate that number. As we will argue below, digital humanities (DH) in general, and folk narrative studies in particular, are not up to the task of a scalable pattern hunt yet.  If we want to apply machine learning for motif identification and extraction, we need suitable datasets which enable research teams to replicate each other's results. Below we report an initial step in this direction.
+The sufficient overlap between these definitions suggests that such higher-order content units exist as narrative building blocks in a generic sense, yet their automatic extraction by computational means has eluded folk narrative studies so far [@daranyi_proceedings_2010]. Despite the suggestion that topics identified by Labeled Latent Dirichlet Allocation (L-LDA) had an analogous function with motifs in a database of Dutch and Frisian folktales [@karsdorp_topic_2013], we consider finding characteristic patterns of semantic content an open research problem. One reason for our skepticism is that in Thompson’s Motif Index of Folk Literature [@thompson_motif_index] alone, over 45000 motifs are listed on a global scale, but many more e.g. regional motif indexes exist whose material would doubtlessly inflate that number. As we will argue below, digital humanities (DH) in general, and folk narrative studies in particular, are not up to the task of a scalable pattern hunt yet.  If we want to apply machine learning for motif identification and extraction, we need suitable datasets which enable research teams to replicate each other's results. Below we report an initial step in this direction.
 
 The structure of this paper is as follows. In Section 2, we bring examples of related research.  In Section 3, Ashliman’s Folktexts tale collection is introduced. In Section 4 we explain our motivation to support reproducible research in computational folkloristics, with Section 5 offering details of data harvesting and cleaning. Section 6 brings details about the new annotated dataset for machine learning, while in Section 7 we add our conclusions and plans for future research.
 
-# Related research {#related_research}
+## Related research {#related_research}
 
-As our pilot was not concerned with the structural analysis of folk narratives, we left out from this brief overview significant research results concerning e.g. the automatic detection of Proppian functions \cite{finlayson_inferring_2016}, or their use in ontology building \cite{declerck_ontologies_2017}. Instead, our focus will be on precursory efforts to automatic motif detection using two standard tools, the Thompson Motif Index (TMI) \cite{thompson_motif_index}, and the Aarne-Thompson-Uther tale typology (ATU) \cite{uther_types_2004}. Important extensions to these, and to our current work, exist e.g. by \cite{declerck_porting_2017} and \cite{declerck_linked_2017}.  Also, there exists a thin line between motifs in tales vs. motifs in myths: Walter Burkert proposes that "Myth belongs to the more general class of traditional tale" \cite{burkert_structure_1982}, whereas Martin P. Nilsson argued for the abundance of folktale motifs in Minoan-Mycenaean religion and its successive layers in classical Greek religion \cite{nilsson_history_1925}, \cite{nilsson_mycenaean_1972}.
+As our pilot was not concerned with the structural analysis of folk narratives, we left out from this brief overview significant research results concerning e.g. the automatic detection of Proppian functions [@finlayson_inferring_2016], or their use in ontology building [@declerck_ontologies_2017]. Instead, our focus will be on precursory efforts to automatic motif detection using two standard tools, the Thompson Motif Index (TMI) [@thompson_motif_index], and the Aarne-Thompson-Uther tale typology (ATU) [@uther_types_2004]. Important extensions to these, and to our current work, exist e.g. by [@declerck_porting_2017] and [@declerck_linked_2017].  Also, there exists a thin line between motifs in tales vs. motifs in myths: Walter Burkert proposed that "Myth belongs to the more general class of traditional tale" [@burkert_structure_1982], whereas Martin P. Nilsson argued for the abundance of folktale motifs in Minoan-Mycenaean religion and its successive layers in classical Greek religion [@nilsson_history_1925; @nilsson_mycenaean_1972].
 
-## Converging trends
+### Converging trends
 
-In a broader context, one can observe two major trends in computational folkloristics \cite{abello_computational_2012} whose convergence will be underlying the results of the next decade. The first is focus on the evolutionary aspect of motif and/or tale type distributions, either with regard to certain tale types \cite{silva_comparative_2016}, \cite{karsdorp_topic_2013}, \cite{karsdorp_retelling_2016}, \cite{tehrani_riding_2013}, \cite{bortolini_inferring_2017}, \cite{dhuy_unbiased_2017} or geographical distribution of globally occurring narrative motifs \cite{thuillard_large-scale_2018}. Strikingly, there is a certain genetically-inspired thinking in the background, perhaps going back to the modeling capacities inherent in Dawkins' meme theory \cite{dawkins_selfish}, comparing tale types as motif sequences to 'narrative DNA' \cite{daranyi_toward_2012}, \cite{ofek_linking_2013}, \cite{meder_automatic_2016}, \cite{murphy_genotype_2015}, or looking at the evolution of narrative/story networks as a quasi-biological process based on the mutation and recombination of narrative elements \cite{karsdorp_retelling_2016}. Such views possibly rely on certain similarities with bioinformatics in terms of network motif identification \cite{qin_network_2012}, a problem analog with ours. The aforementioned context is that of *evolving semantics*, an emerging research area, e.g. in digital preservation \cite{kontopoulos2016pericles}, \cite{kontopoulos2016deliverable}.
+In a broader context, one can observe two major trends in computational folkloristics [@abello_computational_2012] whose convergence will be underlying the results of the next decade. The first is focus on the evolutionary aspect of motif and/or tale type distributions, either with regard to certain tale types [@silva_comparative_2016; @karsdorp_topic_2013; @karsdorp_retelling_2016; @tehrani_riding_2013; @bortolini_inferring_2017; @dhuy_unbiased_2017] or to the geographical distribution of globally occurring narrative motifs [@thuillard_large-scale_2018]. Strikingly, there is a certain genetically-inspired thinking in the background, perhaps going back to the modeling capacities inherent in Dawkins' meme theory [@dawkins_selfish], comparing tale types as motif sequences to 'narrative DNA' [@daranyi_toward_2012; @ofek_linking_2013; @meder_automatic_2016; @murphy_genotype_2015], or looking at the evolution of narrative/story networks as a quasi-biological process based on the mutation and recombination of narrative elements [@karsdorp_retelling_2016]. Such views possibly rely on certain similarities with bioinformatics in terms of network motif identification [@qin_network_2012], a problem analog with ours. The aforementioned context is that of *evolving semantics*, an emerging research area, e.g. in digital preservation [@kontopoulos2016pericles; @kontopoulos2016deliverable].
 
-The second trend is to use probabilistic and/or multivariate statistical methods for the analysis of binary or non-binary matrices of events over cases, where events can be e.g. index terms, motifs, motif sequences etc., and cases as an umbrella term stand for documents in general, e.g. abstracts describing narratives \cite{berezkin_spread_2015}, tale types \cite{uther_types_2004}, and so on, ultimately constituting text corpora or databases. On such collections, one can then experiment with e.g. sub-corpus topic modeling (STM) by Latent Dirichlet Allocation (LDA) as a means of supervised passage exploration in partly unknown corpora \cite{tangherlini_trawling_2013}.
+The second trend is to use probabilistic and/or multivariate statistical methods for the analysis of binary or non-binary matrices of events over cases, where events can be e.g. index terms, motifs, motif sequences etc., and cases as an umbrella term stand for documents in general, e.g. abstracts describing narratives [@berezkin_spread_2015], tale types [@uther_types_2004], and so on, ultimately constituting text corpora or databases. On such collections, one can then experiment with e.g. sub-corpus topic modeling (STM) by Latent Dirichlet Allocation (LDA) as a means of supervised passage exploration in partly unknown corpora [@tangherlini_trawling_2013].
 
-The little one can say about the plethora of methods tested is that, regardless of the corpora, their regionality and the analytical units whose distributions characterize the body of texts in question, they express similarity between items in terms of distance, with more similar items forming dense groups as the outcome of mass comparison. Cluster analysis \cite{thuillard_large-scale_2018},  principal component analysis (PCA) \cite{berezkin_spread_2015}, LDA \cite{karsdorp_topic_2013}, deep learning by recurrent neural networks (RNN) \cite{lo_exploring_2020}, or support vector machines (SVM) \cite{nguyen_automatic_2012} share the same nature of being static snapshots of collections though. Of course there is an inherent contradiction in addressing text evolution, a dynamic phenomenon, by tools tailored to static measurements, but it seems to be the case that vector spaces are not really suitable to investigate semantic evolution per se, the notion asking for vector fields instead \cite{wittek_monitoring_2015}, \cite{daranyi_physical_2016}. Unfortunately, no semantic theory is available to explain factors behind language change or conceptual dynamics \cite{daranyi_demonstrating_2013} in terms of vector fields for the time being.
+The little one can say about the plethora of methods tested is that, regardless of the corpora, their regionality and the analytical units whose distributions characterize the body of texts in question, they express similarity between items in terms of distance, with more similar items forming dense groups as the outcome of mass comparison. Cluster analysis [@thuillard_large-scale_2018],  principal component analysis (PCA) [@berezkin_spread_2015], LDA [@karsdorp_topic_2013], deep learning by recurrent neural networks (RNN) [@lo_exploring_2020], or support vector machines (SVM) [@nguyen_automatic_2012] share the same nature of being static snapshots of collections though. Of course there is an inherent contradiction in addressing text evolution, a dynamic phenomenon, by tools tailored to static measurements, but it seems to be the case that vector spaces are not really suitable to investigate semantic evolution per se, the notion asking for vector fields instead [@wittek_monitoring_2015; @daranyi_physical_2016]. Unfortunately, no semantic theory is available to explain factors behind language change or conceptual dynamics [@daranyi_demonstrating_2013] in terms of vector fields for the time being.
 
-Whereas the above approaches, and their extensions to embeddings with increasingly condensed and geometrically located types of meaning \cite{mikolov2013efficient}, \cite{pennington-etal-2014-glove}, \cite{rothe-schutze-2015-autoextend}, \cite{DBLP:journals/corr/LeM14}, \cite{reimers2019sentencebert}, \cite{NEURIPS2019_cb12d7f9} rely on *distributional semantics* captured by term co-occurrences, we note in passing that another method of encoding sentence semantics, reliant on *compositional semantics*, connects to quantum theory (QT) inspired text processing methods, a research direction in artificial intelligence \cite{DBLP:journals/corr/abs-2101-04255}. The first publications looking at the structural study of Greek mythology from a QT perspective were published a while ago \cite{daranyi_sphynxs_2014}, \cite{daranyi_conceptual_2016}, expected to pave the way for similar efforts.
+Whereas the above approaches, and their extensions to embeddings with increasingly condensed and geometrically located types of meaning [@mikolov2013efficient; @pennington-etal-2014-glove; @rothe-schutze-2015-autoextend; @DBLP:journals/corr/LeM14; @reimers2019sentencebert; @NEURIPS2019_cb12d7f9] rely on *distributional semantics* captured by term co-occurrences, we note in passing that another method of encoding sentence semantics, reliant on *compositional semantics*, connects to quantum theory (QT) inspired text processing methods, a research direction in artificial intelligence [@DBLP:journals/corr/abs-2101-04255]. The first publications looking at the structural study of Greek mythology from a QT perspective were published a while ago [@daranyi_sphynxs_2014; @daranyi_conceptual_2016], expected to pave the way for similar efforts.
 
 As the computing of results for the above both trends require datasets, we briefly look at their availability next.
 
-## Databases and datasets
+### Databases and datasets
 
 Progress in computational folkloristics presupposes that experiments can be repeated by international teams to make sure that the results are robust, so that recommended methodologies can emerge based on their ranking. In order to be trusted, results must be replicable, which entails access to public datasets accessible over the Internet with as few bottlenecks as possible. Once teams of folklorists and data scientists share their respective expertise to interpret and curate the results, it will become pointless to lament about any loss of authority, or unsolvable problems in the face of scalability. It’s a tea for two situation.
 
 Moving away now from the problem of text migration combined with text evolution over millennia across the globe, below we focus on a more tractable problem. Having recently scanned the field for open access datasets of ATU-annotated tales in English as a kind of *lingua franca* (no pun intended), i.e. suitable for motif detection by machine learning, we can confirm the following:
 
 - We could not identify such datasets on GitHub^[https://github.com/awesomedata/awesome-public-datasets], Kaggle^[https://www.kaggle.com/datasets] or Google^[https://datasetsearch.research.google.com/];
-- Big folklore collections anticipated by \cite{tangherlini_trawling_2013} and \cite{tangherlini_bigfolk} are still missing. Based on \cite{meder_dutch_2010} and \cite{ilyefalvi_theoretical_2018}, the largest databases seem to be the Dutch Folktale Database of the Meertens Institute, and the Danish Folklore Archive’s Tang Kristensen Collection, the former in the magnitude of around 50.000 texts, the latter at around 35.000 texts \cite{tangherlini_trawling_2013}. Other important databases exist,  \cite{berezkin_peopling_2017} but are either beyond public access, or in their original languages only, or both. The notable exception is the Meertens Institute whose texts are of course in Dutch and Frisian plus a number of local dialects, but can be read in English translation as well. Typically, authors who work with these databases extract their research datasets but do not make them public for any number of reasons \cite{karsdorp_topic_2013}, \cite{karsdorp_retelling_2016}.
-- Other researchers who have shared their data as supporting material for their articles include e.g. \cite{tehrani_oral_2016}, \cite{silva_comparative_2016}, \cite{tehrani_riding_2013} and \cite{bortolini_inferring_2017}. Also, \cite{declerck_linked_2017} and \cite{declerck_ontologies_2017} report that recently, a large amount of ATU data have been made available online by the Multilingual Folk Tale Database (MFTD)^[https://www.mftd.org], offering also annotation facilities for tales in multilingual versions. While this is a step in the right direction, the data is made available in a format which allows for browsing of portions of the database, but not for easy access to the corpus in its entirety.
-- We found only a single recent study \cite{lo_exploring_2020} which published a corresponding tale corpus to promote reproducibility.^[https://github.com/GossaLo/afr-neural-folktales/]
+- Big folklore collections anticipated by @tangherlini_trawling_2013 and @tangherlini_bigfolk are still missing. Based on @meder_dutch_2010 and @ilyefalvi_theoretical_2018, the largest databases seem to be the Dutch Folktale Database of the Meertens Institute, and the Danish Folklore Archive’s Tang Kristensen Collection, the former in the magnitude of around 50.000 texts, the latter at around 35.000 texts [@tangherlini_trawling_2013]. Other important databases exist,  [@berezkin_peopling_2017] but are either beyond public access, or in their original languages only, or both. The notable exception is the Meertens Institute whose texts are of course in Dutch and Frisian plus a number of local dialects, but can be read in English translation as well. Typically, authors who work with these databases extract their research datasets but do not make them public for any number of reasons [@karsdorp_topic_2013; @karsdorp_retelling_2016].
+- Other researchers who have shared their data as supporting material for their articles include e.g. [@tehrani_oral_2016; @silva_comparative_2016; @tehrani_riding_2013; @bortolini_inferring_2017]. Also, @declerck_linked_2017 and @declerck_ontologies_2017 report that recently, a large amount of ATU data have been made available online by the Multilingual Folk Tale Database (MFTD)^[https://www.mftd.org], offering also annotation facilities for tales in multilingual versions. While this is a step in the right direction, the data are made available in a format which allows for browsing of portions of the database, but not for easy access to the corpus in its entirety.
+- We found only a single recent study [@lo_exploring_2020] which published a corresponding tale corpus to promote reproducibility.^[https://github.com/GossaLo/afr-neural-folktales/]
 
-Among the annotated tale collections which were publicly-available on the internet, the most promising candidate was Prof D.L. Ashliman’s Folktexts collection.  The process of the conversion of this collection to the desired format will be described below. Importantly, Prof. Ashliman graciously agreed to donate his collection to the digital humanities (DH) and data science research communities.
+Among the annotated tale collections which were publicly-available on the internet, the most promising candidate was Prof D.L. Ashliman’s Folktexts collection.  The process of the conversion of this collection to the desired format will be described below. Importantly, Prof. Ashliman graciously agreed to donate his collection to the digital humanities and data science research communities.
 
-# The Ashliman Folktexts collection {#aft_collection}
+### The Ashliman Folktexts collection {#aft_collection}
 
-```{r site_links}
+```{r site_links, eval=FALSE, include=FALSE}
 # See fetch_ashliman.R script for source
 site_url <- "http://www.pitt.edu/~dash/folktexts.html"
 site_url2 <- "http://www.pitt.edu/~dash/folktexts2.html"
@@ -169,15 +171,27 @@ links <-
     atu_id = str_remove(atu_id,"jack$|ast$|#longfellow$|#nigeria$|Blit$|fairy$|#shewolf$|abc$")
   ) %>%
   select(type_name,atu_id,url = rev_url)
+
+saveRDS(all_links,"all_links.rds")
+saveRDS(links,"links.rds")
+
 ```
+
+```{r}
+all_links <- readRDS("all_links.rds")
+links <- readRDS("links.rds")
+```
+
 
 The '*Folktexts*' site has been populated and maintained since 1996 by D.L. Ashliman, Professor Emeritus from the University of Pittsburgh.  While some other sites may sport a more lavish design, Ashliman's is the largest and most extensively annotated.  It serves as a respected scholarly resource for folklorists, with a large and curated set of tale texts.  While our dataset includes only tales from pages with clear ATU annotations (n = `r nrow(links)` pages), the total content of the website is much larger (n = `r nrow(all_links)` pages), and includes various creation myths, stories of changelings, Faust legends, and more.  It is the ATU annotation that makes this corpus particularly valuable as a training dataset for classification methods.
 
-Despite the richness of this resource, it has not frequently been used in folklore research as a larger corpus.  Some previous studies reference the Ashliman corpus, yet these often only include a smaller portion of the entire set of texts \cite{reiter_nlp_2014}.  To our knowledge, none of the published studies provide an openly-accessible corpus of the data for use in promoting subsequent research.
+Despite the richness of this resource, it has not frequently been used in folklore research as a larger corpus.  Some previous studies reference the Ashliman corpus, yet these often only include a smaller portion of the entire set of texts [@reiter_nlp_2014].  To our knowledge, none of the published studies provide an openly-accessible corpus of the data for use in promoting subsequent research.
 
-# Support for Reproducibility in Folklore Studies
+# Method
 
-Reproducibility is a defining characteristic of science, yet a wide gamut of scientific fields have been plagued by a "replicability crisis": a situation where trusted research findings have been impossible to reproduce \cite{goodman_what_2016}, \cite{pasquier_if_2017}.  While the problem has come to the fore in the health and social sciences, it has been acknowledged in disciplines as broad as archaeology \cite{marwick_computational_2017}, public health \cite{harris_use_2018}, biology \cite{kuhne_improving_2009}, and economics \cite{mccullough_open_2009}. 
+## Support for Reproducibility in Folklore Studies
+
+Reproducibility is a defining characteristic of science, yet a wide gamut of scientific fields have been plagued by a "replicability crisis": a situation where trusted research findings have been impossible to reproduce [@goodman_what_2016; @pasquier_if_2017].  While the problem has come to the fore in the health and social sciences, it has been acknowledged in disciplines as broad as archaeology [@marwick_computational_2017], public health [@harris_use_2018], biology [@kuhne_improving_2009], and economics [@mccullough_open_2009]. 
 
 Reproducible research entails that study results be accompanied by:
 
@@ -187,26 +201,26 @@ Reproducible research entails that study results be accompanied by:
 
 In recent years the digital humanities have made some strides to emulate these efforts, with venues such as the *Journal of Open Humanities Data*  being a noteworthy exception to the more common practice.
 
-## Guiding Principles
+### Guiding Principles
 
 The following features guided our selection of tools and format for the code and data:
 
 - *Open data*: In order to use tale data consistently, it must be made freely and openly available to anyone. The dataset is therefore distributed under a Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)^[https://creativecommons.org/licenses/by-sa/4.0/].
 - *Extensible data*: The dataset can be added to or modified, in order to develop a more complete repository of tales.  This can be done by submitting pull requests to the project's GitHub repository.
 - *Open code*: Allowing any user to view and run the code that produces the dataset, as well as downstream analyses which use the dataset.  This allows for inspection, refinement and reasoning about the effects of transformation and statistical modeling on the data.
-- *Common form*: We have chosen to use the dataframe as the structure of the dataset, and specifically the "tidy" dataframe described by Wickham, in which (a) each variable forms a column, (b) each observation forms a row, and (c) a single type of observational unit forms the dataframe \cite{wickham_tidy_2014}.
+- *Common form*: We have chosen to use the dataframe as the structure of the dataset, and specifically the "tidy" dataframe described by Wickham, in which (a) each variable forms a column, (b) each observation forms a row, and (c) a single type of observational unit forms the dataframe [@wickham_tidy_2014].
 - *Common tools*: The data must also be structured in a way that allows for use with the standard tools of the trade of data science.  These tools are continuously evolving, yet the dataframe is likely to continue to be common object across R (in `tidyverse`) and Python (in `pandas`).  In addition, it can be read easily from a `.csv` format by Excel users to allow for ease of investigation.
 - *Modifiable form*: Text analysis has traditionally used other types of data structures to model its quantitative features (e.g. document-term matrices, term co-occurrence matrices), and dataframes have been incorporated into tidy data workflows and available packages such as `quanteda` or `tidytext`.  This allows for reshaping the data into sparse matrices, nested structures, and graph-based structures as dictated by the needs of a given analysis, while starting from a common source dataset (i.e. the `aft`).
 
-## Accessing and Growing the Corpus
+### Accessing and Growing the Corpus
 
 The current version of the `aft` dataset is located on the `trilogy` GitHub repository, where a vignette^[https://github.com/j-hagedorn/trilogy/blob/master/docs/vignettes/getting_started.md] provides information on how to access the dataset, use it in reproducible research, and improve it.
 
-Existing lists of motifs and tale types are incomplete \cite{dhuy_unbiased_2017}, and thus any corpus of texts is also bound to be incomplete if its contents are limited to tales annotated using these lists.  Open-source *Git* functionality allows motifs, tale types and annotated tales to be added over time, and for the corpus to serve as a communal resource.  We welcome inquiries and suggestions about how best to manage this resource as a "commons" \cite{vollan_cooperation_2010}.
+Existing lists of motifs and tale types are incomplete [@dhuy_unbiased_2017], and thus any corpus of texts is also bound to be incomplete if its contents are limited to tales annotated using these lists.  Open-source *Git* functionality allows motifs, tale types and annotated tales to be added over time, and for the corpus to serve as a communal resource.  We welcome inquiries and suggestions about how best to manage this resource as a "commons" [@vollan_cooperation_2010].
 
-# Data Harvesting and Cleaning {#data_cleaning}
+## Data Harvesting and Cleaning {#data_cleaning}
 
-## Steps
+### Steps
 
 Web-scraping of the *Folktexts* site was completed using the `rvest` package in the `R` statistical programming language.  The full script is available on GitHub, and the following high-level summary of data-cleaning steps is provided to allow for an understanding of the methods used and their limitations:
 
@@ -230,7 +244,7 @@ The resulting dataframe compiled the available tales from the original list of `
 12. Create unique tale titles where these were duplicated across multiple variants of tales.
 13. Clean tale text data (e.g. removing remnant HTML tags, extra spaces, replacing internal double quotes with single quotes).
 
-## Limitations
+### Limitations
 
 Web-scraping is an inherently messy exercise, as the data contained in web pages are often not formatted with the intent of being analyzed.  Due to a broken link in the website, we were unable to obtain tales related to *`r links$type_name[23]`* (`r links$atu_id[23]`).  In addition, the pages for the following tale types were unable to be scraped, due to errors generated in the `R` session: *`r paste(links$type_name[c(70,74,165,172,174,198)],collapse = ", ")`*.
 
@@ -238,13 +252,15 @@ The `provenance` field does not meet the definition of "tidy" outlined above, si
 
 The final limitation is purposefully adopted for the sake of downstream analyses.  We have included only tales which were annotated with a single tale type, despite the existence of some tales which can be characterized by multiple types.  This decision was made in order to allow for the initial version of the dataset to be simple in its structure, and in order for machine learning to have a relatively unambiguous corpus of motif sequences to match, if using the tales as a training dataset.  If required by future analyses, our intent is to store multiple ATUs as nested lists per tale within the dataframe.
 
-# Features of the Annotated Folktales (`aft`) dataset {#data_features}
+# Results and discussion
+
+## Features of the Annotated Folktales (`aft`) dataset {#data_features}
 
 ```{r aft}
 aft <- read_csv("../../data/aft.csv")
 ```
 
-## Data Dictionary
+### Data Dictionary
 
 The `aft` (i.e. *Annotated Folktales*) dataframe contains `r nrow(aft)` rows, each corresponding to a single tale.  Its `r ncol(aft)` columns are described briefly below:
 
@@ -260,16 +276,39 @@ The `aft` (i.e. *Annotated Folktales*) dataframe contains `r nrow(aft)` rows, ea
 
 The table below shows prints the initial characters of fields from the first 6 rows of the dataset, in order to illustrate its appearance:
 
-```{r}
-aft %>%
+```{r fig.width= 8}
+library(flextable)
+
+table <-
+  aft %>%
   select(-type_name,-notes,-data_source,-date_obtained) %>%
-  mutate_all(~str_trunc(.,width = 15)) %>%
-  head() %>%
-  knitr::kable(caption = "Example output of the dataset",format = "latex", booktabs = T)
+  mutate_all(~str_trunc(.,width = 25)) %>%
+  head() 
+
+set_flextable_defaults(
+  font.family = font_family,
+  font.size = 10,
+  font.color = "black",
+  # 
+  table.layout = "fixed",
+  # digits = 1,
+  # theme_fun = "theme_box"
+)
+
+table %>%
+  flextable() %>%
+  set_caption("Example output of the dataset")
+
+# %>%
+  # knitr::kable(
+  #   caption = "Example output of the dataset" #,
+  #   format = "latex", 
+  #   booktabs = T
+  # )
 ```
 
 
-## Descriptive Statistics
+### Descriptive Statistics
 
 #### Length of tales. 
 
@@ -282,11 +321,13 @@ aft %>%
   ggplot(aes(x = count_words)) +
   geom_histogram(binwidth = 250) +
   labs(
-    caption = "Each bar represents a range of 250 (e.g. 0-250, 251-500, etc.)",
-    x = "n words",
-    y = "n tales"
+    caption = "Each bar represents a range of 250 (e.g. 0-250 words, 251-500, etc.)",
+    x = "Number of words in tale",
+    y = "Number of tales"
   ) +
   theme_bar
+
+ggsave("wordhist.png", units="in", width=5, height=2, dpi=450)
 
 ```
 
@@ -322,16 +363,19 @@ by_type %>%
   geom_segment(aes(yend = label), xend = 0) +
   labs(
     y = "Tale Type (ATU)",
-    x = "# of tales"
+    x = "Number of tales"
   ) +
   theme_bar_flip +
+  theme(axis.text=element_text(size=11)) +
   xlim(0,31)
+
+ggsave("lollipop.png", units="in", width=5, height=3, dpi=450)
 
 ```
 
-# Conclusion and Future Research {#conclusion}
+# Implications/Applications {#conclusion}
 
-Under a Creative Commons license, we published on GitHub an open-access, ATU annotated dataset of `r nrow(aft)` tales for motif detection by machine learning. This dataset resulted from the conversion of the Ashliman Folktexts Collection, and is hoped to become the core of an expanding assemblage to the same end. Over time it will be updated with additional information to help reproducible experimentation with supervised tale type learning.
+Under a Creative Commons license, we published on GitHub an open-access, ATU annotated dataset of `r nrow(aft)` tales for motif detection by machine learning. This dataset resulted from the conversion of the Ashliman Folktexts collection, and is hoped to become the core of an expanding assemblage to the same end. Over time it will be updated with additional information to help reproducible experimentation with supervised tale type learning.
 
 In our upcoming work, we plan to extend the repository to provide:
 
@@ -341,6 +385,14 @@ In our upcoming work, we plan to extend the repository to provide:
 
 # Acknowledgements {-}
 
-We thank Professor D.L. Ashliman (University of Pittsburgh) for his permission to use the data from his annotated Folktexts as a publicly available resource.
+The authors thank Professor D.L. Ashliman (University of Pittsburgh) for his permission to use the data from his annotated Folktexts as a publicly available resource.
+
+# Competing interests {-}
+
+The authors have no competing interests to declare.
+
+# Supplementary Files
+
+The repository contains our scripts, datasets, and documentation referenced in this article. DOI: https://doi.org/10.5281/zenodo.5835162
 
 # References
