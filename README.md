@@ -1,3 +1,7 @@
+
+
+[![DOI](https://zenodo.org/badge/320919473.svg)](https://zenodo.org/badge/latestdoi/320919473)
+
 # What’s here?
 
 This repository houses tidy data of key catalogs and collections of

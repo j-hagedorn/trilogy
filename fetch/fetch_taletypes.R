@@ -1,11 +1,11 @@
 
 library(tidyverse)
 
-df <-
+atu_df <-
   read_lines("fetch/ATU.Master.Hels.txt") %>%
   as_tibble() %>%
   rename(text = value) %>%
-   # Remove front matter and index
+  # Remove front matter and index
   slice(173:16129) %>%
   mutate(
     type = case_when(
@@ -79,13 +79,16 @@ df <-
   )
 
 
-seq_df <-
-  df %>%
+atu_seq <-
+  atu_df %>%
   select(atu_id,tale_type) %>%
   mutate(motifs = str_extract_all(tale_type,"\\[[A-Z][1-9](.*?)\\]") ) %>%
   select(-tale_type) %>%
   unnest(motifs) %>%
-  mutate(motifs = str_remove_all(motifs,"cf. |Cf. |e.g. ")) %>%
+  mutate(
+    motifs = str_remove_all(motifs,"cf. |Cf. |e.g. "),
+    motifs = str_remove(motifs, "Type [^\\]]+")  
+  ) %>%
   filter(!is.na(motifs)) %>%
   group_by(atu_id) %>%
   mutate(motif_order = row_number()) %>%
@@ -129,16 +132,16 @@ seq_df <-
   ) %>%
   distinct()
 
-
-# Cleaning Issues
-# Reference to type from previous ATU version
-# - "*(Including the previous Types . and .)" 
-# - "...(Previously Type .)$"
-# 
-# Comparison to similar tale type
-# - "cf. Type ."
-# 
-
 atu_combos <-
-  df %>%
-  select(atu_id, combos)
+  atu_df %>%
+  select(atu_id, combos) %>%
+  mutate(
+    combos = str_squish(combos),
+    combos = str_remove_all(combos, "This type is usually combined with episodes of one or more other types"),
+    combos = str_remove_all(combos, "and |also |and also |esp |\\."),
+    combos = str_split(combos,",")
+  ) %>%
+  unnest(combos) %>%
+  mutate(combos = str_trim(combos))
+
+
