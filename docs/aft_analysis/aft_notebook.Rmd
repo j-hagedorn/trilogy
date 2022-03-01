@@ -1,0 +1,31 @@
+---
+title: "Notes for AFT Article"
+output: html_document
+date: '2022-03-01'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+aft <- read_csv("..data/aft.csv")
+tmi <- read_csv("..data/tmi.csv")
+source("..fetch/fetch_taletypes.R")
+```
+
+# Cleaning
+
+-   Finish ATU sequences
+-   Clean up ID matches between `atu_df` and `aft`
+-   Reconcile use of older ATU ID by some `aft` texts
+
+# Exploratory analysis: What's in the AFT corpus?
+
+## Tale Types
+
+-   By ATU Chapter/Division (n)
+-   Proportion of ATU represented by `aft`
+-   Find higher-order morphology in AFT. morphometric = set of motif groups that are combined in a tale type
+
+## Content
+
+-   collocation/word frequency
+-   topic modeling
