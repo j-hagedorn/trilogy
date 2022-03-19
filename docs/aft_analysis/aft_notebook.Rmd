@@ -5,14 +5,16 @@ date: '2022-03-01'
 ---
 
 ```{r setup, include=FALSE}
+library(tidyverse)
 knitr::opts_chunk$set(echo = TRUE)
-aft <- read_csv("..data/aft.csv")
-tmi <- read_csv("..data/tmi.csv")
-source("..fetch/fetch_taletypes.R")
+aft <- read_csv("../../data/aft.csv")
+tmi <- read_csv("../../data/tmi.csv")
+# source("fetch/fetch_taletypes.R")
 ```
 
 # Cleaning
 
+-   Clean up tale names regex in `atu`
 -   Finish ATU sequences
 -   Clean up ID matches between `atu_df` and `aft`
 -   Reconcile use of older ATU ID by some `aft` texts
@@ -24,6 +26,75 @@ source("..fetch/fetch_taletypes.R")
 -   By ATU Chapter/Division (n)
 -   Proportion of ATU represented by `aft`
 -   Find higher-order morphology in AFT. morphometric = set of motif groups that are combined in a tale type
+
+```{r unmatched_in_atu, eval=FALSE, include=FALSE}
+
+tst <-
+  aft %>%
+  select(atu_id,type_name) %>%
+  mutate(
+    atu_id = str_remove(atu_id, "^0+"),
+    atu_id = str_to_upper(atu_id)
+  ) %>%
+  anti_join(atu_df %>% select(chapter:tale_name), by = "atu_id") %>%
+  distinct()
+
+```
+
+```{r}
+
+aft_in_atu <-
+  aft %>%
+  select(atu_id,type_name) %>%
+  mutate(
+    atu_id = str_remove(atu_id, "^0+"),
+    atu_id = str_to_upper(atu_id),
+    in_aft = T
+  ) %>%
+  full_join(atu_df %>% select(chapter:tale_name), by = "atu_id") %>%
+  filter(!is.na(chapter)) %>%
+  mutate(in_aft = ifelse(!is.na(in_aft),T,F))
+
+```
+
+### By ATU Chapter
+
+```{r}
+
+aft_in_atu %>%
+  group_by(atu_id,chapter,tale_name) %>%
+  summarize(n = n()) %>%
+  # filter(n > 1) %>%
+  group_by(chapter) %>%
+  summarize(
+    n_types = n_distinct(atu_id),
+    n_tales = sum(n)
+  ) %>%
+  mutate(tales_per = n_tales / n_types) %>%
+  arrange(desc(tales_per))
+
+```
+
+```{r}
+
+tst <-
+  aft_in_atu %>%
+  group_by(chapter,division) %>%
+  summarize(
+    n_types = n_distinct(atu_id),
+    n_tales = n()
+  ) %>%
+  filter(!is.na(division))
+
+plotly::plot_ly(
+  tst,
+  type = 'treemap',
+  labels = ~division,
+  parents = ~chapter,
+  values = ~n_types
+)
+
+```
 
 ## Content
 
