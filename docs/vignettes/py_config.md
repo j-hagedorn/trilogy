@@ -13,8 +13,10 @@ Assumes that Python (using Miniconda) has been installed.
     the following command: `source my_env/bin/activate`
 5.  *In terminal*: Install packages
     `pip install numpy pandas matplotlib spacy`
-6.  *In console*: Install package `install.packages("reticulate")`
-7.  Configure `reticulate` to point to the Python executable in your
+6.  *In terminal*: Load English tokenizer, tagger, parser and NER with
+    `python -m spacy download en_core_web_sm`
+7.  *In console*: Install package `install.packages("reticulate")`
+8.  Configure `reticulate` to point to the Python executable in your
     `virtualenv` by creating an `.Rprofile` file in your project
     directory, with the following contents:
     `Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python")`

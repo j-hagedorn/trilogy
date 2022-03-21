@@ -16,6 +16,7 @@ Based on the documentation included [here](https://support.rstudio.com/hc/en-us/
 2.  *In terminal*: Navigate into RStudio project directory using: `cd "C:/Users/joshh/Documents/GitHub/trilogy"`
 3.  *In terminal*: Create new virtual environment in a folder called `my_env` within project directory using the following command: `virtualenv my_env`
 4.  *In terminal*: Activate the `virtualenv` in current project using the following command: `source my_env/bin/activate`
-5.  *In terminal*: Install packages `pip install numpy pandas matplotlib spacy`
+5.  *In terminal*: Install packages `pip install numpy pandas matplotlib spacy pytextrank`
+6.  *In terminal*: Load English tokenizer, tagger, parser and NER with `python -m spacy download en_core_web_sm`
 6.  *In console*: Install package `install.packages("reticulate")`
 7.  Configure `reticulate` to point to the Python executable in your `virtualenv` by creating an `.Rprofile` file in your project directory, with the following contents: `Sys.setenv(RETICULATE_PYTHON = "my_env/bin/python")`
