@@ -17,7 +17,13 @@ list(doc._.phrases)
 
 [(i, i.label_, i.vector_norm) for i in doc.sents]
 
+# Concatenate multiple texts
 
+# s = ""
+# for item in df.text[0:22]:
+#     s += item
+# 
+# doc2 = nlp(s)
 
 # List of token attributes: https://spacy.io/api/token#attributes
 
