@@ -4,7 +4,6 @@ import spacy
 import pytextrank
 import pandas as pd
 nlp = spacy.load("en_core_web_sm")
-tr = ptr.TextRank()
 nlp.add_pipe('textrank')
 
 # Get df from R environment
