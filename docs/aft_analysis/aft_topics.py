@@ -17,7 +17,7 @@ import spacy
 
 # Plotting tools
 import pyLDAvis
-import pyLDAvis.gensim  # don't skip this
+import pyLDAvis.gensim_models  # don't skip this
 import matplotlib.pyplot as plt
 # %matplotlib inline
 
@@ -94,7 +94,7 @@ words = remove_stopwords(words)
 
 # Create Dictionary
 id2word = corpora.Dictionary(words)
-texts = words
+texts = lemmas
 # Term Document Frequency
 corpus = [id2word.doc2bow(text) for text in texts]
 # print(corpus[:1])
