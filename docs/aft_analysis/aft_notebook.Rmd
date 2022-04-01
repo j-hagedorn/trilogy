@@ -1,31 +1,29 @@
 ---
 title: "Notes for AFT Article"
 output: html_document
-date: '2022-03-01'
+date:  '`r Sys.Date()`'
 ---
 
 ```{r setup, include=FALSE}
 library(tidyverse)
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = F, warning = F, message = F)
 aft <- read_csv("../../data/aft.csv")
 tmi <- read_csv("../../data/tmi.csv")
-# source("fetch/fetch_taletypes.R")
+atu <- read_csv("../../data/atu.csv")
 ```
 
 # Cleaning
 
 -   Clean up tale names regex in `atu`
 -   Finish ATU sequences
--   Clean up ID matches between `atu_df` and `aft`
+-   Clean up ID matches between `atu` and `aft`
 -   Reconcile use of older ATU ID by some `aft` texts
 
 # Exploratory analysis: What's in the AFT corpus?
 
 ## Tale Types
 
--   By ATU Chapter/Division (n)
 -   Proportion of ATU represented by `aft`
--   Find higher-order morphology in AFT. morphometric = set of motif groups that are combined in a tale type
 
 ```{r unmatched_in_atu, eval=FALSE, include=FALSE}
 
@@ -36,12 +34,14 @@ tst <-
     atu_id = str_remove(atu_id, "^0+"),
     atu_id = str_to_upper(atu_id)
   ) %>%
-  anti_join(atu_df %>% select(chapter:tale_name), by = "atu_id") %>%
+  anti_join(atu %>% select(chapter:tale_name), by = "atu_id") %>%
   distinct()
 
 ```
 
-```{r}
+```{r merge_aft_atu}
+
+# Merge AFT with ATU and filter unmatched items from ATU
 
 aft_in_atu <-
   aft %>%
@@ -51,15 +51,18 @@ aft_in_atu <-
     atu_id = str_to_upper(atu_id),
     in_aft = T
   ) %>%
-  full_join(atu_df %>% select(chapter:tale_name), by = "atu_id") %>%
+  full_join(atu %>% select(chapter:tale_name), by = "atu_id") %>%
   filter(!is.na(chapter)) %>%
   mutate(in_aft = ifelse(!is.na(in_aft),T,F))
 
 ```
 
-### By ATU Chapter
+### By ATU Chapter/Division
+
+Summary stats by ATU chapter:
 
 ```{r}
+library(formattable)
 
 aft_in_atu %>%
   group_by(atu_id,chapter,tale_name) %>%
@@ -71,34 +74,87 @@ aft_in_atu %>%
     n_tales = sum(n)
   ) %>%
   mutate(tales_per = n_tales / n_types) %>%
-  arrange(desc(tales_per))
+  arrange(desc(tales_per)) %>%
+  formattable(
+    list(
+      n_tales = color_bar("#1BB6AFFF"),
+      n_types = color_bar("#EC921DFF"),
+      tales_per = color_tile("transparent", "#EF562AFF")
+    )
+  )
+
 
 ```
 
+The treemap below shows the nested sets of the ATU into which AFT texts fall, by `chapter`, `division`, and `sub_division`.
+
 ```{r}
 
-tst <-
+aft_tree <-
   aft_in_atu %>%
   group_by(chapter,division) %>%
   summarize(
     n_types = n_distinct(atu_id),
     n_tales = n()
   ) %>%
-  filter(!is.na(division))
+  filter(!is.na(division)) %>%
+  rename(parent = chapter, labels = division) %>%
+  bind_rows(
+    aft_in_atu %>%
+    filter(!is.na(division)) %>%
+    group_by(chapter) %>%
+    summarize(
+      n_types = n_distinct(atu_id),
+      n_tales = n()
+    ) %>%
+    mutate(parent = "root") %>%
+    rename(labels = chapter)
+  ) %>%
+  bind_rows(
+    aft_in_atu %>%
+    filter(!is.na(division)) %>%
+    group_by(division, sub_division) %>%
+    summarize(
+      n_types = n_distinct(atu_id),
+      n_tales = n()
+    ) %>%
+    rename(parent = division, labels = sub_division)
+  ) # %>%
+  # bind_rows(
+  #   aft_in_atu %>%
+  #   filter(!is.na(division)) %>%
+  #   group_by(sub_division, tale_name) %>%
+  #   summarize(
+  #     n_types = n_distinct(atu_id),
+  #     n_tales = n()
+  #   ) %>%
+  #   rename(parent = sub_division, labels = tale_name)
+  # )
 
 plotly::plot_ly(
-  tst,
+  aft_tree,
   type = 'treemap',
-  labels = ~division,
-  parents = ~chapter,
-  values = ~n_types
+  labels = ~labels,
+  parents = ~parent,
+  values = ~n_tales
 )
 
 ```
 
 ## Content
 
-- Phrases using 
--   collocation/word frequency
--   topic modeling
+Entities
+
+- Find a well performing model for NER (cf. https://huggingface.co/flair/ner-english-ontonotes-fast, https://huggingface.co/stanfordnlp/stanza-en)
+- Find a way to label the name of a main character (example Miller, prince, etc.) as more than simply a noun
+- Pull out subject and predicate from sentence.  Explore verbs related to subjects.
+
+Common phrases using: 
+
+- TextRank
+- collocation/word frequency
+
+Topic modeling
+
+- Define cleaning tasks and stop words to improve topic models performance; right now they are too close together, with a few main clusters of topics that are difficult to distinguish
 
