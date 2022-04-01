@@ -144,6 +144,7 @@ atu_combos <-
   unnest(combos) %>%
   mutate(combos = str_trim(combos))
 
+write_csv(atu_df,"data/atu.csv")
 
 
 
