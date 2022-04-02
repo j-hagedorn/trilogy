@@ -19,6 +19,27 @@ atu <- read_csv("../../data/atu.csv")
 -   Clean up ID matches between `atu` and `aft`
 -   Reconcile use of older ATU ID by some `aft` texts
 
+```{r}
+
+aft <- 
+  aft %>%
+  mutate(
+    atu_id = str_remove(atu_id, "^0+"),
+    atu_id = str_to_upper(atu_id),
+    atu_id = recode(
+      atu_id,
+      `676`='954',
+      `333A`='333',
+      `6070B`='113A',
+      `47E`='47B',
+      `285D`='285A',
+      `170A`='2034F'
+    )
+  ) 
+
+```
+
+
 # Exploratory analysis: What's in the AFT corpus?
 
 ## Tale Types
@@ -41,19 +62,17 @@ tst <-
 
 ```{r merge_aft_atu}
 
-# Merge AFT with ATU and filter unmatched items from ATU
+# Merge AFT with ATU and filter unmatched items from AFT
 
 aft_in_atu <-
   aft %>%
   select(atu_id,type_name) %>%
-  mutate(
-    atu_id = str_remove(atu_id, "^0+"),
-    atu_id = str_to_upper(atu_id),
-    in_aft = T
-  ) %>%
+  mutate(in_aft = T) %>%
   full_join(atu %>% select(chapter:tale_name), by = "atu_id") %>%
-  filter(!is.na(chapter)) %>%
-  mutate(in_aft = ifelse(!is.na(in_aft),T,F))
+  filter(!is.na(chapter)) %>% # remove items in AFT but not ATU
+  mutate(in_aft = ifelse(!is.na(in_aft),T,F)) %>%
+  group_by(atu_id,chapter,division,sub_division,tale_name) %>%
+  summarize(n_tales = sum(in_aft))
 
 ```
 
@@ -65,20 +84,25 @@ Summary stats by ATU chapter:
 library(formattable)
 
 aft_in_atu %>%
-  group_by(atu_id,chapter,tale_name) %>%
-  summarize(n = n()) %>%
-  # filter(n > 1) %>%
+  mutate(with_tale = n_tales > 0) %>%
   group_by(chapter) %>%
   summarize(
     n_types = n_distinct(atu_id),
-    n_tales = sum(n)
+    n_types_with_tale = sum(with_tale),
+    n_tales = sum(n_tales)
   ) %>%
-  mutate(tales_per = n_tales / n_types) %>%
+  mutate(
+    pct_with_tales = round(n_types_with_tale / n_types * 100, digits = 1),
+    tales_per = round(n_tales / n_types_with_tale, digits = 1)
+  ) %>%
   arrange(desc(tales_per)) %>%
+  select(-n_types_with_tale) %>%
   formattable(
     list(
       n_tales = color_bar("#1BB6AFFF"),
-      n_types = color_bar("#EC921DFF"),
+      # n_types_with_tale = color_bar("#EC921DFF"),
+      n_types = color_bar("#1BB6AFFF"),
+      pct_with_tales = color_tile("transparent", "#EF562AFF"),
       tales_per = color_tile("transparent", "#EF562AFF")
     )
   )
@@ -95,7 +119,7 @@ aft_tree <-
   group_by(chapter,division) %>%
   summarize(
     n_types = n_distinct(atu_id),
-    n_tales = n()
+    n_tales = sum(n_tales)
   ) %>%
   filter(!is.na(division)) %>%
   rename(parent = chapter, labels = division) %>%
@@ -105,7 +129,7 @@ aft_tree <-
     group_by(chapter) %>%
     summarize(
       n_types = n_distinct(atu_id),
-      n_tales = n()
+      n_tales = sum(n_tales)
     ) %>%
     mutate(parent = "root") %>%
     rename(labels = chapter)
@@ -116,7 +140,7 @@ aft_tree <-
     group_by(division, sub_division) %>%
     summarize(
       n_types = n_distinct(atu_id),
-      n_tales = n()
+      n_tales = sum(n_tales)
     ) %>%
     rename(parent = division, labels = sub_division)
   ) # %>%
@@ -126,7 +150,7 @@ aft_tree <-
   #   group_by(sub_division, tale_name) %>%
   #   summarize(
   #     n_types = n_distinct(atu_id),
-  #     n_tales = n()
+  #     n_tales = sum(n_tales)
   #   ) %>%
   #   rename(parent = sub_division, labels = tale_name)
   # )
@@ -143,18 +167,24 @@ plotly::plot_ly(
 
 ## Content
 
-Entities
+### Entities
 
 - Find a well performing model for NER (cf. https://huggingface.co/flair/ner-english-ontonotes-fast, https://huggingface.co/stanfordnlp/stanza-en)
 - Find a way to label the name of a main character (example Miller, prince, etc.) as more than simply a noun
 - Pull out subject and predicate from sentence.  Explore verbs related to subjects.
 
-Common phrases using: 
+### Common phrases 
+
+
+```{python}
+
+```
+
 
 - TextRank
 - collocation/word frequency
 
-Topic modeling
+### Topic modeling
 
 - Define cleaning tasks and stop words to improve topic models performance; right now they are too close together, with a few main clusters of topics that are difficult to distinguish
 
