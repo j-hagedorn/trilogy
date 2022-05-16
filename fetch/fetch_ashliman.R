@@ -401,7 +401,8 @@ incomplete <-
     by = c("atu_id")
   ) %>%
   arrange(desc(n_tales)) %>%
-  filter(is.na(n_tales))
+  filter(is.na(n_tales)) %>%
+  inner_join(atu %>% select(atu_id), by = "atu_id")
 
 rm(
   list = c(
