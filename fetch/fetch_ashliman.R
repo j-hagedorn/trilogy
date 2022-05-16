@@ -74,9 +74,13 @@ df <- tibble()
 range <- 1:length(links$url)
 
 # 78
-# errors: c(70,74,165,172,174,198)
+# errors: c(76, 169, 178, 204)
 
-for (i in range[!range %in% c(70,74,165,172,174,198)]) {
+# warnings on: 16, 19, 23, 24, 44, 63, 81, 82, 87, 94, 110, 122, 133, 142, 160, 165, 185, 186, 190, 195, 
+
+# for (i in range[!range %in% c(70,74,165,172,174,198)]) { # Pages generating errors from initial harvest 
+
+for (i in range[!range %in% c(76, 169, 178, 204)]) { # Pages generating errors from next harvest
 
   print(i)
   
@@ -286,7 +290,8 @@ for (i in range[!range %in% c(70,74,165,172,174,198)]) {
   
 }
 
-aft <-
+aft_v2 <-
+# aft_v1 <- # Same code run for earlier harvest
   df  %>%
   # Privilege columns based on source (.y = messy body text, .x = structured html)
   mutate(
@@ -344,27 +349,54 @@ aft <-
     data_source = "Ashliman's Folktexts",
     date_obtained = lubridate::today()
   ) %>%
+  mutate(
+    atu_id = str_remove(atu_id, "^0+"),
+    atu_id = str_to_upper(atu_id),
+    atu_id = recode(
+      atu_id,
+      `676`='954',
+      `333A`='333',
+      `6070B`='113A',
+      `47E`='47B',
+      `285D`='285A',
+      `170A`='2034F'
+    )
+  ) %>%
   distinct(.keep_all = T) %>%
   # At least one word
   filter(str_count(text, '\\w+') > 0) 
 
-write_csv(aft,"data/aft.csv")
+# write_csv(aft_v1,"data/aft_v1.csv") # First harvest
+# write_csv(aft_v2,"data/aft_v2.csv") # Second harvest
 
-complete <-
+aft <- 
+  aft_v1 %>%
+  bind_rows(aft_v2 %>% anti_join(aft_v1,by = "tale_title")) %>%
+  select(-type_name) %>%
+  distinct()
+
+# write_csv(aft,"data/aft.csv")
+
+incomplete <-
   aft %>%
   group_by(atu_id) %>%
   summarise(
-    pages = paste(unique(type_name),collapse = "; "),
     n_tales = n_distinct(tale_title),
     tales = paste(tale_title,collapse = "; ")
   ) %>%
   full_join(
-    links %>% group_by(atu_id) %>%
+    links %>% 
+    mutate(
+      atu_id = str_remove(atu_id, "^0+"),
+      atu_id = str_to_upper(atu_id)
+    ) %>%
+    group_by(atu_id) %>%
       summarise(
         urls = paste(url,collapse = "; ")
       ), 
     by = c("atu_id")
   ) %>%
-  arrange(desc(n_tales))
+  arrange(desc(n_tales)) %>%
+  filter(is.na(n_tales))
 
 rm(list = c("pg","x","i","site_url","sub_pg","nobody","body_df","clean_df","range"))
