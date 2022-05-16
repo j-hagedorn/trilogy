@@ -369,11 +369,15 @@ aft_v2 <-
 # write_csv(aft_v1,"data/aft_v1.csv") # First harvest
 # write_csv(aft_v2,"data/aft_v2.csv") # Second harvest
 
+atu <- read_csv("data/atu_df.csv")
+
 aft <- 
-  aft_v1 %>%
-  bind_rows(aft_v2 %>% anti_join(aft_v1,by = "tale_title")) %>%
+  aft_v1 %>% # Combine various harvests
+  bind_rows(aft_v2 %>% anti_join(aft_v1,by = "tale_title")) %>% 
   select(-type_name) %>%
-  distinct()
+  distinct() %>%
+  inner_join(atu %>% select(atu_id), by = "atu_id") # Remove all ID not in ATU
+
 
 # write_csv(aft,"data/aft.csv")
 
