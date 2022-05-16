@@ -399,4 +399,9 @@ incomplete <-
   arrange(desc(n_tales)) %>%
   filter(is.na(n_tales))
 
-rm(list = c("pg","x","i","site_url","sub_pg","nobody","body_df","clean_df","range"))
+rm(
+  list = c(
+    "pg","pg2","x","i","site_url","site_url2","sub_pg",
+    "nobody","body_df","clean_df","range","aft_v1","aft_v2"
+  )
+)
