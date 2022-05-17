@@ -366,8 +366,8 @@ aft_v2 <-
   # At least one word
   filter(str_count(text, '\\w+') > 0) 
 
-# write_csv(aft_v1,"data/aft_v1.csv") # First harvest
-# write_csv(aft_v2,"data/aft_v2.csv") # Second harvest
+# write_csv(aft_v1,"data/process_files/aft_v1.csv") # First harvest
+# write_csv(aft_v2,"data/process_files/aft_v2.csv") # Second harvest
 
 atu <- read_csv("data/atu_df.csv")
 
