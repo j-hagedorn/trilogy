@@ -368,7 +368,9 @@ aft_v2 <-
 
 # write_csv(aft_v1,"data/process_files/aft_v1.csv") # First harvest
 # write_csv(aft_v2,"data/process_files/aft_v2.csv") # Second harvest
-
+manual_aft <- read_csv("data/process_files/manual_aft.csv")
+aft_v1 <- read_csv("data/process_files/aft_v1.csv")
+aft_v2 <- read_csv("data/process_files/aft_v2.csv")
 atu <- read_csv("data/atu_df.csv")
 
 aft <- 
@@ -376,6 +378,7 @@ aft <-
   bind_rows(aft_v2 %>% anti_join(aft_v1,by = "tale_title")) %>% 
   select(-type_name) %>%
   distinct() %>%
+  bind_rows(manual_aft) %>%
   inner_join(atu %>% select(atu_id), by = "atu_id") # Remove all ID not in ATU
 
 
@@ -407,6 +410,6 @@ incomplete <-
 rm(
   list = c(
     "pg","pg2","x","i","site_url","site_url2","sub_pg",
-    "nobody","body_df","clean_df","range","aft_v1","aft_v2"
+    "nobody","body_df","clean_df","range","aft_v1","aft_v2","manual_aft"
   )
 )
