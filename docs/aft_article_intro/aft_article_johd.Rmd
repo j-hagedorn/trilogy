@@ -281,7 +281,7 @@ library(flextable)
 
 table <-
   aft %>%
-  select(-type_name,-notes,-data_source,-date_obtained) %>%
+  select(-notes,-data_source,-date_obtained) %>%
   mutate_all(~str_trunc(.,width = 25)) %>%
   head() 
 
@@ -305,6 +305,18 @@ table %>%
   #   format = "latex", 
   #   booktabs = T
   # )
+
+aft_summary <-
+  aft %>%
+  # mutate(text = iconv(text, to = 'latin1')) %>%
+  mutate(
+    n_words = str_count(aft$text, '\\w+'),
+    n_sentences = quanteda::nsentence(text),
+    n_tokens = quanteda::ntoken(text),
+    n_types = quanteda::ntype(text)
+  ) %>%
+  select(atu_id,tale_title,starts_with("n_"))
+
 ```
 
 
