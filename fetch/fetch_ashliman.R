@@ -381,7 +381,6 @@ aft <-
   bind_rows(manual_aft) %>%
   inner_join(atu %>% select(atu_id), by = "atu_id") # Remove all ID not in ATU
 
-
 # write_csv(aft,"data/aft.csv")
 
 incomplete <-
