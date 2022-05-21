@@ -299,13 +299,6 @@ table %>%
   flextable() %>%
   set_caption("Example output of the dataset")
 
-# %>%
-  # knitr::kable(
-  #   caption = "Example output of the dataset" #,
-  #   format = "latex", 
-  #   booktabs = T
-  # )
-
 aft_summary <-
   aft %>%
   # mutate(text = iconv(text, to = 'latin1')) %>%
@@ -313,9 +306,27 @@ aft_summary <-
     n_words = str_count(aft$text, '\\w+'),
     n_sentences = quanteda::nsentence(text),
     n_tokens = quanteda::ntoken(text),
-    n_types = quanteda::ntype(text)
+    n_types = quanteda::ntype(text),
+    tokens_per_sentence = n_tokens/n_sentences
   ) %>%
-  select(atu_id,tale_title,starts_with("n_"))
+  left_join(
+    atu %>% select(atu_id,chapter,division,sub_division,tale_name), 
+    by = ("atu_id")
+  ) %>%
+  select(
+    atu_id,chapter,division,tale_name,tale_title,
+    starts_with("n_"),tokens_per_sentence
+  ) 
+
+aft_stats <-
+  aft_summary %>%
+  summarize(
+    n_tales = n(),
+    n_types = n_distinct(atu_id),
+    avg_tokens = mean(n_tokens),
+    avg_sentences = mean(n_sentences)
+  )
+  
 
 ```
 
@@ -328,9 +339,8 @@ The `r nrow(aft)` tales in the dataset average `r round(mean(str_count(aft$text,
 
 ```{r wordhist, fig.cap="Distribution of tale lengths", fig.asp = 0.36}
 
-aft %>%
-  mutate(count_words = str_count(aft$text, '\\w+')) %>%
-  ggplot(aes(x = count_words)) +
+aft_summary %>%
+  ggplot(aes(x = n_words)) +
   geom_histogram(binwidth = 250) +
   labs(
     caption = "Each bar represents a range of 250 (e.g. 0-250 words, 251-500, etc.)",
