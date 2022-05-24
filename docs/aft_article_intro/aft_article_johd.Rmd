@@ -35,7 +35,9 @@ library(tidyverse); library(httr); library(rvest); library(tidytext); library(fu
 
 ```{r themes, echo=FALSE, message=FALSE}
 extrafont::loadfonts(device="win", quiet = T)
-font_family = "Gill Sans MT"
+library(showtext)
+font_add_google("Merriweather","merriweather") 
+font_family = "merriweather"
 
 theme_bar <- 
   theme_minimal() + 
@@ -104,6 +106,8 @@ Among the annotated tale collections which were publicly-available on the intern
 
 ```{r site_links, eval=FALSE, include=FALSE}
 # See fetch_ashliman.R script for source
+library(httr); library(rvest)
+
 site_url <- "http://www.pitt.edu/~dash/folktexts.html"
 site_url2 <- "http://www.pitt.edu/~dash/folktexts2.html"
 
@@ -276,29 +280,26 @@ The `aft` (i.e. *Annotated Folktales*) dataframe contains `r nrow(aft)` rows, ea
 
 The table below shows prints the initial characters of fields from the first 6 rows of the dataset, in order to illustrate its appearance:
 
-```{r fig.width= 8}
-library(flextable)
+```{r dpi=300,fig.retina=1,fig.width= 8}
+library(huxtable)
+showtext_auto()
 
-table <-
-  aft %>%
+t <-
+aft %>%
   select(-notes,-data_source,-date_obtained) %>%
   mutate_all(~str_trunc(.,width = 25)) %>%
-  head() 
-
-set_flextable_defaults(
-  font.family = font_family,
-  font.size = 10,
-  font.color = "black",
-  # 
-  table.layout = "fixed",
-  # digits = 1,
-  # theme_fun = "theme_box"
-)
-
-table %>%
-  flextable() %>%
+  head() %>%
+  hux() %>%
   set_caption("Example output of the dataset")
 
+```
+
+
+### Descriptive Statistics
+
+#### Length of tales. 
+
+```{r}
 aft_summary <-
   aft %>%
   # mutate(text = iconv(text, to = 'latin1')) %>%
@@ -321,35 +322,44 @@ aft_summary <-
 aft_stats <-
   aft_summary %>%
   summarize(
-    n_tales = n(),
-    n_types = n_distinct(atu_id),
-    avg_tokens = mean(n_tokens),
-    avg_sentences = mean(n_sentences)
-  )
-  
+    `Number of tales` = n(),
+    `Number of tale types` = n_distinct(atu_id),
+    `Mean tokens per tale` = round(mean(n_tokens), digits = 1),
+    `Median tokens per tale` = round(median(n_tokens), digits = 1),
+    `Minimum tokens per tale` = round(min(n_tokens), digits = 1),
+    `Maximum tokens per tale` = round(max(n_tokens), digits = 1),
+    `Mean sentences per tale` = round(mean(n_sentences), digits = 1),
+    `Median sentences per tale` = round(median(n_sentences), digits = 1),
+  ) %>%
+  mutate_all(list(~as.character(.))) %>%
+  tibble::rownames_to_column() %>%  
+  pivot_longer(-rowname) %>% 
+  pivot_wider(names_from=rowname, values_from=value) %>%
+  rename(Measure = name, Value = `1`)
 
+aft_stats %>%
+  hux() %>%
+  set_font(font_family) %>%
+  set_align(-1, 2, ".") %>%
+  set_caption("Summary statistics")
 ```
-
-
-### Descriptive Statistics
-
-#### Length of tales. 
 
 The `r nrow(aft)` tales in the dataset average `r round(mean(str_count(aft$text, '\\w+')), digits = 1)` words in length, though the individual texts vary with a minimum of `r min(str_count(aft$text, '\\w+'))` words and a maximum of `r max(str_count(aft$text, '\\w+'))`.  The histogram below shows the distribution of tale lengths:
 
 ```{r wordhist, fig.cap="Distribution of tale lengths", fig.asp = 0.36}
 
 aft_summary %>%
-  ggplot(aes(x = n_words)) +
+  ggplot(aes(x = n_tokens)) +
   geom_histogram(binwidth = 250) +
   labs(
-    caption = "Each bar represents a range of 250 (e.g. 0-250 words, 251-500, etc.)",
-    x = "Number of words in tale",
+    caption = "Each bar represents a range of 250 (e.g. 0-250 tokens, 251-500, etc.)",
+    x = "Number of tokens in tale",
     y = "Number of tales"
-  ) +
+  ) + 
+  xlim(c(-200, 6000)) +
   theme_bar
 
-ggsave("wordhist.png", units="in", width=5, height=2, dpi=450)
+ggsave("wordhist.png", units="in", width=5, height=2, dpi=200)
 
 ```
 
@@ -358,11 +368,11 @@ ggsave("wordhist.png", units="in", width=5, height=2, dpi=450)
 ```{r by_type}
 
 by_type <- 
-  aft %>%
-  group_by(atu_id) %>%
+  aft_summary %>%
+  group_by(atu_id, tale_name) %>%
   summarize(
-    type_name = min(type_name),
-    n_tales = n()
+    n_tales = n(),
+    avg_tokens_tale = round(mean(n_tokens), digits = 1)
   )
 
 ```
@@ -372,13 +382,18 @@ The tales compiled in the `aft` data are annotated by Aarne-Thompson-Uther (ATU)
 ```{r, fig.cap="Ten tale types with the largest number of representative tales", fig.asp = 0.5}
 
 by_type %>%
+  ungroup() %>%
   top_n(10,n_tales) %>%
   mutate(
-    label = fct_reorder(
-      paste0(
-        if_else(is.na(word(type_name,-5,-1)),type_name,word(type_name,-5,-1)),
-        " (",atu_id,")"),n_tales
-    )
+    label = paste0(
+      if_else(
+        is.na(word(tale_name,1,5)),
+        tale_name,
+        word(tale_name,1,5)
+      ),
+      " (",atu_id,")"
+    ),
+    label = fct_reorder(label, n_tales)
   ) %>%
   ggplot(aes(x = n_tales, y = label)) +
   geom_point(size = 3) +
@@ -391,9 +406,22 @@ by_type %>%
   theme(axis.text=element_text(size=11)) +
   xlim(0,31)
 
-ggsave("lollipop.png", units="in", width=5, height=3, dpi=450)
+ggsave("lollipop.png", units="in", width=5, height=3, dpi=200)
 
 ```
+
+```{r}
+t <-
+  by_type %>%
+  ungroup() %>%
+  top_n(10,n_tales) %>%
+  arrange(desc(n_tales)) %>%
+  hux() %>%
+  set_font(font_family) %>%
+  set_align(-1, 2, ".") %>%
+  set_caption("Ten tale types with the largest number of representative tales")
+```
+
 
 # Implications/Applications {#conclusion}
 
