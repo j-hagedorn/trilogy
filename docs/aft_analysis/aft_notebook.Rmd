@@ -29,11 +29,6 @@ Additional cleaning of datasets needed:
 
 tst <-
   aft %>%
-  select(atu_id,type_name) %>%
-  mutate(
-    atu_id = str_remove(atu_id, "^0+"),
-    atu_id = str_to_upper(atu_id)
-  ) %>%
   anti_join(atu %>% select(chapter:tale_name), by = "atu_id") %>%
   distinct()
 
@@ -45,7 +40,7 @@ tst <-
 
 aft_in_atu <-
   aft %>%
-  select(atu_id,type_name) %>%
+  select(atu_id) %>%
   mutate(in_aft = T) %>%
   full_join(atu %>% select(chapter:tale_name), by = "atu_id") %>%
   filter(!is.na(chapter)) %>% # remove items in AFT but not ATU
