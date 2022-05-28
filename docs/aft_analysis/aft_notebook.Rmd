@@ -171,6 +171,11 @@ To do:
 
 Notes/questions from Sándor:
 
+Atu markup segments motif abstracts
+TMI defines motifs by 1-2 sentences
+Relate words in both, cooccurrence
+Relate this cooccurrence matrix to AFT types
+
 Given three resources, each providing a fragment of the problem. Is this enough for a solution? TMI: a list of motif names, but not definitions. ATU: a list of motif strings aka tale types, built from TMI items. AFT: a selection of tale types as exemplification for the ATU, with frequent enough examples for some of the motif strings in some of the 8 topical genres.
 
 8 genres with frequent enough examples of respective, typical motif strings built from the LEGO kit called the TMI. X samples of text with inherent motif strings for backbones; backbones as motif-based markup; motif “definition”, all three in running text. Motif is a 1-2 sentence summary of some recurrent content element with a function in the plot, relating actors in situations with tools of their resolution. Tale type is an abstract, linking situations in shorthand, from setting through complication to resolution. Can real motifs from typical texts be extracted by means of theoretical strings of theoretical motifs? Is there a way to validate the TMI by automatic means, like in an ML experiment, out of many? Are these three resources enough to reach our goal?
