@@ -14,30 +14,9 @@ atu <- read_csv("../../data/atu.csv")
 
 # Cleaning
 
+Additional cleaning of datasets needed:
 -   Clean up tale names regex in `atu`
 -   Finish ATU sequences
--   Clean up ID matches between `atu` and `aft`
--   Reconcile use of older ATU ID by some `aft` texts
-
-```{r}
-
-aft <- 
-  aft %>%
-  mutate(
-    atu_id = str_remove(atu_id, "^0+"),
-    atu_id = str_to_upper(atu_id),
-    atu_id = recode(
-      atu_id,
-      `676`='954',
-      `333A`='333',
-      `6070B`='113A',
-      `47E`='47B',
-      `285D`='285A',
-      `170A`='2034F'
-    )
-  ) 
-
-```
 
 
 # Exploratory analysis: What's in the AFT corpus?
@@ -165,16 +144,17 @@ plotly::plot_ly(
 
 ```
 
-## Content
+## Textual Content
 
 ### Entities
+
+To do:
 
 - Find a well performing model for NER (cf. https://huggingface.co/flair/ner-english-ontonotes-fast, https://huggingface.co/stanfordnlp/stanza-en)
 - Find a way to label the name of a main character (example Miller, prince, etc.) as more than simply a noun
 - Pull out subject and predicate from sentence.  Explore verbs related to subjects.
 
 ### Common phrases 
-
 
 ```{python}
 
@@ -187,3 +167,30 @@ plotly::plot_ly(
 
 - Define cleaning tasks and stop words to improve topic models performance; right now they are too close together, with a few main clusters of topics that are difficult to distinguish
 
+# Motif identification?
+
+Notes/questions from Sándor:
+
+Given three resources, each providing a fragment of the problem. Is this enough for a solution? TMI: a list of motif names, but not definitions. ATU: a list of motif strings aka tale types, built from TMI items. AFT: a selection of tale types as exemplification for the ATU, with frequent enough examples for some of the motif strings in some of the 8 topical genres.
+
+8 genres with frequent enough examples of respective, typical motif strings built from the LEGO kit called the TMI. X samples of text with inherent motif strings for backbones; backbones as motif-based markup; motif “definition”, all three in running text. Motif is a 1-2 sentence summary of some recurrent content element with a function in the plot, relating actors in situations with tools of their resolution. Tale type is an abstract, linking situations in shorthand, from setting through complication to resolution. Can real motifs from typical texts be extracted by means of theoretical strings of theoretical motifs? Is there a way to validate the TMI by automatic means, like in an ML experiment, out of many? Are these three resources enough to reach our goal?
+
+Match between label (TMI) and ill-bounded/demarcated text fragment over an AFT set. Can we find a transformation which converts the set of segments into the label? By means of abstraction/abstracting. Text summarisation in Python and DL available. Reverse problem: how to arrive at text set from label as string. Depends on set size and topic composition, possibly a set of particular mixes.
+
+Given a label and a set of text segments to arrive at that label by DL. Which architecture/method yields the best heuristics? Approximate transformation by back propagation (?). Consult JEK.
+
+Add MFTL. LRRH. Custom-built for experimentation, for researchers with interest in the intersection of data science and folk tale studies. For work in progress.
+
+For every motif in string, correlation between TMI label and ATU segment content vs ATU segment content and AFT segment set, manually marked up.
+
+Convert type sample to robust conceptual equivalent.
+
+- Do you think you could build a 3-d matrix (tensor) from the trilogy, or respective- motifs and types constrained by the AFT? E.g. axis x would be the TMI-based motifs aka concept strings; axis y would be ATU types aka motif strings; and axis z would be the AFT where some types are exemplified by text sets. 
+
+Then we could expose this tensor to all kinds of analysis, including DL by CNN (Johan's favourite), or co-clustering (my bet).
+
+As food for thought, consider this as a working hypothesis: "a motif is a multiple co-occurrence of concept strings anchored in the trilogy". Whatever the outcome, negative or positive, the hypothesis can be tested, and we could learn if this definition can be falsified. 
+
+Plus look at the visuals from co-clustering results for 'multiple cooccurrence' as a GS query. Just 150 hits which sounds quite promising for explaining the idea by references from multiple domains, ie methodological cross-pollination.
+
+By concept strings in the TMI I would expect some normalization of word forms to concepts just like eg Propp's characters, actions/functions, situations etc. There we could perhaps look into ontologies if they exist. Thierry Declerck's work comes to mind.
