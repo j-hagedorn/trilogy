@@ -5,3 +5,6 @@
 fetch/ATU.Master.Hels.txt
 
 *.tex
+/.idea/
+/src/test/
+/target/
