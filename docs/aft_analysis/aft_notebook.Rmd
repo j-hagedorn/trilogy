@@ -171,13 +171,24 @@ TMI defines motifs by 1-2 sentences
 Relate words in both, cooccurrence
 Relate this cooccurrence matrix to AFT types
 
-Given three resources, each providing a fragment of the problem. Is this enough for a solution? TMI: a list of motif names, but not definitions. ATU: a list of motif strings aka tale types, built from TMI items. AFT: a selection of tale types as exemplification for the ATU, with frequent enough examples for some of the motif strings in some of the 8 topical genres.
+Each of the three resources provides a fragment of the problem. Is this enough for a solution? 
 
-8 genres with frequent enough examples of respective, typical motif strings built from the LEGO kit called the TMI. X samples of text with inherent motif strings for backbones; backbones as motif-based markup; motif “definition”, all three in running text. Motif is a 1-2 sentence summary of some recurrent content element with a function in the plot, relating actors in situations with tools of their resolution. Tale type is an abstract, linking situations in shorthand, from setting through complication to resolution. Can real motifs from typical texts be extracted by means of theoretical strings of theoretical motifs? Is there a way to validate the TMI by automatic means, like in an ML experiment, out of many? Are these three resources enough to reach our goal?
+- *TMI*: a list of brief motif names with IDs and defined relationships in up to 6 hierarchical levels.
+- *ATU*: a list of tale types with both (a) summary descriptions, and (b) motif sequences built from TMI items. Includes `chapter` and `division` groups
+- *AFT*: a selection of representative tale texts annotated with ATU tale types.
+
+Are the genres (`chapter` and `division`) of tale types structurally distinct, in terms of the motif sequences from which they are made?
+
+Can we assume that a tale text annotated as a specific `tale_type` contains one of the variants of motif sequences which are defined in the ATU for that tale type?
+If so, how might we discover the occurrence of motifs within unstructured tale texts?
+  How might we develop a clean, well-annotated set of texts with motif-based markup, given the large number of motifs?
+Can real motifs from tale texts be extracted by means of theoretical strings of theoretical motifs?
+Is there a way to validate the TMI by automatic means, like in an ML experiment, out of many?
+
 
 Match between label (TMI) and ill-bounded/demarcated text fragment over an AFT set. Can we find a transformation which converts the set of segments into the label? By means of abstraction/abstracting. Text summarisation in Python and DL available. Reverse problem: how to arrive at text set from label as string. Depends on set size and topic composition, possibly a set of particular mixes.
 
-Given a label and a set of text segments to arrive at that label by DL. Which architecture/method yields the best heuristics? Approximate transformation by back propagation (?). Consult JEK.
+Given a label and a set of text segments to arrive at that label by DL. Which architecture/method yields the best heuristics? Approximate transformation by back-propagation (?). Consult JEK.
 
 Add MFTL. LRRH. Custom-built for experimentation, for researchers with interest in the intersection of data science and folk tale studies. For work in progress.
 
@@ -200,3 +211,11 @@ The idea was this: multiple, because in a set representing a type, the reason wh
 So to derive them, we should extract pregrouped word forms to cover concepts, and preserve their order how they pop up. Say for strike = kill, hurt, wound, emasculate, castrate, etc could yield the Verb part in SVO form; dispatcher = king, ruler, monarch, father, fairy Queen etc, could be the Subject, and so on. Any ideas welcome on how one might speed up this part of the building process.
 
 Another way to put it could be this:  "The AFT is type-based. The ATU is motif (motif string) based. The TMI is concept string based. So the bottleneck is to extract from the AFT words that constitute concepts in specific sequences to manifest motifs, so that such motif sequences then constitute types." Where the expectation is that in order to comply, word sequences from the AFT should be the same as in the TMI; such word sequences would be set members of a concept string.
+
+Suppose we can convert the motifs inherent in the 182 AFT types to SBERT embeddings. Thereby we get a distribution of located sentence content based on motif definition.
+
+Next we take the same 182 type descriptions aka tale abstracts, segmented by motif numbers into respective chunks. Their SBERT as the bottom line could lead to similarity 1 between the TMI and ATU embeddings.
+
+In step 3 one would have to screen the text of type subsets for the -- probably variable -- size of the optimal chunk where its SBERT value is most similar to sim 1. I don't know how to carry out this screening, but maybe you get an idea.
+
+The same logic might work without the TMI step as well, although we would have a more nuanced overview with it included.
