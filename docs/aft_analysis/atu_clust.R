@@ -32,7 +32,7 @@ library(logisticPCA)
 
 logpca_cv = cv.lpca(m, ks = 2, ms = 1:10)
 p0lot(logpca_cv)
-.
+
 library(tidymodels); library(embed)
 
 split <- seq.int(1, 150, by = 9)
