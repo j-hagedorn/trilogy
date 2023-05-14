@@ -2,7 +2,7 @@
 library(tidyverse)
 
 atu_df <-
-  read_lines("fetch/ATU.Master.Hels.txt") %>%
+  read_lines("fetch/ATU.Master.Hels.txt", locale = locale(encoding = "UTF-8")) %>%
   as_tibble() %>%
   rename(text = value) %>%
   # Remove front matter and index
@@ -71,12 +71,24 @@ atu_df <-
   pivot_wider(names_from = type, values_from = text) %>%
   ungroup() %>%
   mutate(
+    chapter = str_to_title(chapter),
+    division = str_to_title(division),
+    division = str_replace(division, "\\?", "\\-"),
+    sub_division = str_to_title(sub_division),
+    sub_division = str_replace(sub_division, "\\?", "\\-"),
     atu_id  = str_trim(atu_id),
+    tale_name = str_remove(tale_name, "\\.$"),
     litvar  = str_remove(litvar,"^Literature/Variants:|^Literature/Variants: "),
     remarks = str_remove(remarks,"^Remarks:|^Remarks: "),
     combos  = str_remove(combos,"^Combinations:|^Combinations: "),
     combos  = str_remove(combos,"^ This type is usually combined with one or more other types, esp.")
-  )
+  ) %>%
+  mutate_at(
+    vars(tale_name:remarks),
+    list(~str_remove_all(., "\\?"))
+  ) %>%
+  mutate_all(list(~str_squish(.)))
+
 
 atu_seq <-
   atu_df %>%
@@ -131,7 +143,6 @@ atu_seq <-
   ) %>%
   distinct()
 
-
 atu_combos <-
   atu_df %>%
   select(atu_id, combos) %>%
@@ -142,8 +153,12 @@ atu_combos <-
     combos = str_split(combos,",")
   ) %>%
   unnest(combos) %>%
-  mutate(combos = str_trim(combos))
+  mutate(
+    combos = str_squish(combos),
+    combos = if_else(combos == "",NA_character_,combos)
+  )
 
-
-
+# write_csv(atu_df,"data/atu_df.csv")
+# write_csv(atu_seq,"data/atu_seq.csv")
+# write_csv(atu_combos,"data/atu_combos.csv")
 
