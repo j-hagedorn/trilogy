@@ -219,3 +219,20 @@ Next we take the same 182 type descriptions aka tale abstracts, segmented by mot
 In step 3 one would have to screen the text of type subsets for the -- probably variable -- size of the optimal chunk where its SBERT value is most similar to sim 1. I don't know how to carry out this screening, but maybe you get an idea.
 
 The same logic might work without the TMI step as well, although we would have a more nuanced overview with it included.
+
+###
+
+nigel osbourne 
+x-system
+
+unseen species problem
+---
+
+bert topic
+we haave
+
+can we use gpt to come up with dummy variants of the stories, thus increasing its size
+
+how could we create dummy variants
+
+# Extract triples from TMI
