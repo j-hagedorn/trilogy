@@ -1,10 +1,16 @@
 ---
 title: "Motif Triples"
+execute: 
+  eval: false
+  echo: false
+  warning: false
+  error: false
 format: html
 editor: visual
 ---
 
 ```{r setup, include=FALSE}
+#| eval: true
 library(tidyverse)
 # knitr::opts_chunk$set(echo = F, warning = F, message = F)
 # aft <- read_csv("../../data/aft.csv")
@@ -16,8 +22,11 @@ library(tidyverse)
 ### Import raw text
 
 ```{r}
+#| eval: true
 tmi <- read_csv("../../data/tmi.csv")
 tmi_text <- tmi %>% select(id,motif_name) %>% slice(1:35)
+
+head(tmi_text)
 ```
 
 ### Text cleaning and pre-processing
@@ -26,15 +35,111 @@ tmi_text <- tmi %>% select(id,motif_name) %>% slice(1:35)
 
 Tag text using *Spacy* to obtain: \['Document', 'Sentence', 'Word', 'Word', 'EntityType', 'EntityIOB', 'Lemma', 'POS', 'POSTag', 'Start', 'End', 'Dependency'\]
 
-```{python}
-tmi_text_py = r.tmi_text
-import pandas as pd
+```{python import_load}
+
 import spacy
+import re
+import pandas as pd
+import textacy
 nlp = spacy.load("en_core_web_sm")
-import en_core_web_sm
-nlp = en_core_web_sm.load()
+
+tmi_text_py = r.tmi_text
 docs = list(nlp.pipe(tmi_text_py.motif_name))
 ```
+
+### Get POS and token attributes
+
+```{python tokenize}
+
+def extract_tokens_plus_meta(doc:spacy.tokens.doc.Doc):
+    """Extract tokens and metadata from individual spaCy doc."""
+    return [
+        (i.text, i.i, i.lemma_, i.ent_type_, i.ent_iob_,
+         i.pos_, i.tag_, i.dep_, i.is_sent_start, i.is_sent_end,
+         i.is_alpha, i.is_digit, i.is_punct) for i in doc
+    ]
+
+def tidy_tokens(docs):
+    """Extract tokens and metadata from list of spaCy docs."""
+    
+    cols = [
+        "doc_id", "token", "token_order", "lemma","ent_type","ent_iob",
+        "pos","tag","dep", "is_sent_start","is_sent_end", 
+        "is_alpha", "is_digit", "is_punct"
+    ]
+    
+    meta_df = []
+    for ix, doc in enumerate(docs):
+        meta = extract_tokens_plus_meta(doc)
+        meta = pd.DataFrame(meta)
+        meta.columns = cols[1:]
+        meta = meta.assign(doc_id = ix).loc[:, cols]
+        meta_df.append(meta)
+        
+    return pd.concat(meta_df) 
+
+df_tokens = tidy_tokens(docs)
+
+```
+
+### Get SVO triples
+
+Note that the following script still needs to be optimized to apply to a dataframe so that we can retain additional metadata from the source dataframe.
+
+#### Using pattern matching in spaCy
+
+```{python}
+blob_df = tmi_text_py['motif_name'].tolist() 
+blob_df = ' '.join(blob_df) 
+doc = nlp(blob_df) 
+lst_docs = [sent for sent in doc.sents]  
+
+```
+
+#### Using textacy triple extraction
+
+Extract subject-verb-object (SVO) triples from sentences using [function](https://textacy.readthedocs.io/en/latest/api_reference/extract.html#triples) from `textacy` package.
+
+```{python triple_textacy}
+dic = {"id":[], "text":[], "entity":[], "relation":[], "object":[]}
+
+for n, sentence in enumerate(lst_docs):
+    lst_generators = list(textacy.extract.subject_verb_object_triples(sentence))  
+    for sent in lst_generators:
+        subj = "_".join(map(str, sent.subject))
+        obj  = "_".join(map(str, sent.object))
+        relation = "_".join(map(str, sent.verb))
+        dic["id"].append(n)
+        dic["text"].append(sentence.text)
+        dic["entity"].append(subj)
+        dic["object"].append(obj)
+        dic["relation"].append(relation)
+
+## create dataframe
+triple_df = pd.DataFrame(dic)
+```
+
+------------------------------------------------------------------------
+
+### Coreference Resolution
+
+Still need work on this, see:
+
+-   [Sample project](https://github.com/explosion/projects/tree/v3/experimental/coref) using [spaCy experimental](https://github.com/explosion/spacy-experimental)
+
+```{python}
+from spacy_experimental.coref.coref_component import DEFAULT_COREF_MODEL 
+from spacy_experimental.coref.coref_util 
+import DEFAULT_CLUSTER_PREFIX  
+
+coref = nlp.add_pipe("experimental_coref") 
+# This usually happens under the hood 
+processed = coref(doc) 
+```
+
+------------------------------------------------------------------------
+
+Test getting spaCy output as dataframe
 
 ```{python}
 from dframcy import DframCy
@@ -87,3 +192,25 @@ Finally, the triples are lemmatized so that while creating a knowledge graph, bo
 ### Final triples
 
 ### Knowledge graph representation
+
+```{r}
+library(tidygraph); library(igraph)
+
+triple_df <- py$triple_df
+
+nodes <-
+  triple_df %>%
+  select(node_key = entity) %>%
+  bind_rows(
+    triple_df %>% select(node_key = object)
+  ) %>%
+  distinct(node_key)
+
+edges <-
+  triple_df %>%
+  select(from = entity,to = object,relation)
+
+graph_obj <- tbl_graph(nodes = nodes,edges = edges)
+
+write_graph(graph_obj, file = "ccbhc_reqs.graphml", format = "graphml")
+```
