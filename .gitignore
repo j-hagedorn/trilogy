@@ -8,3 +8,7 @@ fetch/ATU.Master.Hels.txt
 /.idea/
 /src/test/
 /target/
+*.css
+*.css
+*.woff
+*.js
