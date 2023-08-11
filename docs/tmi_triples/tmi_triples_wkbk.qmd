@@ -90,10 +90,14 @@ Note that the following script still needs to be optimized to apply to a datafra
 
 ```{python}
 blob_df = tmi_text_py['motif_name'].tolist() 
-blob_df = ' '.join(blob_df) 
+blob_df = '. '.join(blob_df) 
 doc = nlp(blob_df) 
 lst_docs = [sent for sent in doc.sents]  
 
+```
+
+```{python}
+tmi_text_py['sents'] = tmi_text_py['motif_name'].apply(lambda x: list(nlp(x).sents))
 ```
 
 #### Using textacy triple extraction
