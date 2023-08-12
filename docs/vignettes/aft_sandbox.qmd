@@ -1,0 +1,69 @@
+---
+title: "AFT Sandbox"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+#| eval: true
+library(tidyverse)
+aft <- read_csv("../../data/aft.csv")
+aft_text <- 
+  aft %>% 
+  filter(provenance == "Italy") %>% 
+  mutate(id = row_number()) %>% 
+  select(id,text) 
+
+```
+
+------------------------------------------------------------------------
+
+```{python import_load}
+
+import spacy
+import re
+import pandas as pd
+import textacy
+nlp = spacy.load("en_core_web_sm")
+
+aft = r.aft_text
+doc = nlp(aft.text[0])
+```
+
+```{python}
+
+cols = ("text", "lemma", "POS", "explain", "stopword")
+rows = []
+
+for t in doc:
+  row = [t.text, t.lemma_, t.pos_, spacy.explain(t.pos_), t.is_stop]
+  rows.append(row)
+  
+df = pd.DataFrame(rows, columns = cols)
+```
+
+```{python}
+
+for sent in doc.sents:
+  print(">", sent.start, sent.end)
+  
+sentences = [sent.text for sent in doc.sents]
+
+for sentence in sentences:
+    doc = nlp(sentence)
+    svo = textacy.extract.subject_verb_object_triples(doc)
+    print(list(svo))
+```
+
+```{python}
+
+for chunk in doc.noun_chunks:
+  print(chunk.text)
+
+```
+
+```{python}
+
+for ent in doc.ents:
+  print(ent.text, ent.label_)
+```
