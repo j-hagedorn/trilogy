@@ -1,6 +1,8 @@
 
 library(tidyverse); library(tidygraph)
 
+tmi <- read_csv("data/tmi.csv")
+
 # Clean up messiness
 df <- tmi %>% filter(!duplicated(id)) 
 
