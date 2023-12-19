@@ -1,0 +1,238 @@
+---
+title: "Notes for AFT Article"
+output: html_document
+date:  '`r Sys.Date()`'
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = F, warning = F, message = F)
+aft <- read_csv("../../data/aft.csv")
+tmi <- read_csv("../../data/tmi.csv")
+atu <- read_csv("../../data/atu.csv")
+```
+
+# Cleaning
+
+Additional cleaning of datasets needed:
+-   Clean up tale names regex in `atu`
+-   Finish ATU sequences
+
+
+# Exploratory analysis: What's in the AFT corpus?
+
+## Tale Types
+
+-   Proportion of ATU represented by `aft`
+
+```{r unmatched_in_atu, eval=FALSE, include=FALSE}
+
+tst <-
+  aft %>%
+  anti_join(atu %>% select(chapter:tale_name), by = "atu_id") %>%
+  distinct()
+
+```
+
+```{r merge_aft_atu}
+
+# Merge AFT with ATU and filter unmatched items from AFT
+
+aft_in_atu <-
+  aft %>%
+  select(atu_id) %>%
+  mutate(in_aft = T) %>%
+  full_join(atu %>% select(chapter:tale_name), by = "atu_id") %>%
+  filter(!is.na(chapter)) %>% # remove items in AFT but not ATU
+  mutate(in_aft = ifelse(!is.na(in_aft),T,F)) %>%
+  group_by(atu_id,chapter,division,sub_division,tale_name) %>%
+  summarize(n_tales = sum(in_aft))
+
+```
+
+### By ATU Chapter/Division
+
+Summary stats by ATU chapter:
+
+```{r}
+library(formattable)
+
+aft_in_atu %>%
+  mutate(with_tale = n_tales > 0) %>%
+  group_by(chapter) %>%
+  summarize(
+    n_types = n_distinct(atu_id),
+    n_types_with_tale = sum(with_tale),
+    n_tales = sum(n_tales)
+  ) %>%
+  mutate(
+    pct_with_tales = round(n_types_with_tale / n_types * 100, digits = 1),
+    tales_per = round(n_tales / n_types_with_tale, digits = 1)
+  ) %>%
+  arrange(desc(tales_per)) %>%
+  select(-n_types_with_tale) %>%
+  formattable(
+    list(
+      n_tales = color_bar("#1BB6AFFF"),
+      # n_types_with_tale = color_bar("#EC921DFF"),
+      n_types = color_bar("#1BB6AFFF"),
+      pct_with_tales = color_tile("transparent", "#EF562AFF"),
+      tales_per = color_tile("transparent", "#EF562AFF")
+    )
+  )
+
+
+```
+
+The treemap below shows the nested sets of the ATU into which AFT texts fall, by `chapter`, `division`, and `sub_division`.
+
+```{r}
+
+aft_tree <-
+  aft_in_atu %>%
+  group_by(chapter,division) %>%
+  summarize(
+    n_types = n_distinct(atu_id),
+    n_tales = sum(n_tales)
+  ) %>%
+  filter(!is.na(division)) %>%
+  rename(parent = chapter, labels = division) %>%
+  bind_rows(
+    aft_in_atu %>%
+    filter(!is.na(division)) %>%
+    group_by(chapter) %>%
+    summarize(
+      n_types = n_distinct(atu_id),
+      n_tales = sum(n_tales)
+    ) %>%
+    mutate(parent = "root") %>%
+    rename(labels = chapter)
+  ) %>%
+  bind_rows(
+    aft_in_atu %>%
+    filter(!is.na(division)) %>%
+    group_by(division, sub_division) %>%
+    summarize(
+      n_types = n_distinct(atu_id),
+      n_tales = sum(n_tales)
+    ) %>%
+    rename(parent = division, labels = sub_division)
+  ) # %>%
+  # bind_rows(
+  #   aft_in_atu %>%
+  #   filter(!is.na(division)) %>%
+  #   group_by(sub_division, tale_name) %>%
+  #   summarize(
+  #     n_types = n_distinct(atu_id),
+  #     n_tales = sum(n_tales)
+  #   ) %>%
+  #   rename(parent = sub_division, labels = tale_name)
+  # )
+
+plotly::plot_ly(
+  aft_tree,
+  type = 'treemap',
+  labels = ~labels,
+  parents = ~parent,
+  values = ~n_tales
+)
+
+```
+
+## Textual Content
+
+### Entities
+
+To do:
+
+- Find a well performing model for NER (cf. https://huggingface.co/flair/ner-english-ontonotes-fast, https://huggingface.co/stanfordnlp/stanza-en)
+- Find a way to label the name of a main character (example Miller, prince, etc.) as more than simply a noun
+- Pull out subject and predicate from sentence.  Explore verbs related to subjects.
+
+### Common phrases 
+
+```{python}
+
+```
+
+- TextRank
+- collocation/word frequency
+
+### Topic modeling
+
+- Define cleaning tasks and stop words to improve topic models performance; right now they are too close together, with a few main clusters of topics that are difficult to distinguish
+
+# Motif identification?
+
+Notes/questions from Sándor:
+
+Atu markup segments motif abstracts
+TMI defines motifs by 1-2 sentences
+Relate words in both, cooccurrence
+Relate this cooccurrence matrix to AFT types
+
+Each of the three resources provides a fragment of the problem. Is this enough for a solution? 
+
+- *TMI*: a list of brief motif names with IDs and defined relationships in up to 6 hierarchical levels.
+- *ATU*: a list of tale types with both (a) summary descriptions, and (b) motif sequences built from TMI items. Includes `chapter` and `division` groups
+- *AFT*: a selection of representative tale texts annotated with ATU tale types.
+
+Are the genres (`chapter` and `division`) of tale types structurally distinct, in terms of the motif sequences from which they are made?
+
+Can we assume that a tale text annotated as a specific `tale_type` contains one of the variants of motif sequences which are defined in the ATU for that tale type?
+If so, how might we discover the occurrence of motifs within unstructured tale texts?
+  How might we develop a clean, well-annotated set of texts with motif-based markup, given the large number of motifs?
+Can real motifs from tale texts be extracted by means of theoretical strings of theoretical motifs?
+Is there a way to validate the TMI by automatic means, like in an ML experiment, out of many?
+
+
+Match between label (TMI) and ill-bounded/demarcated text fragment over an AFT set. Can we find a transformation which converts the set of segments into the label? By means of abstraction/abstracting. Text summarisation in Python and DL available. Reverse problem: how to arrive at text set from label as string. Depends on set size and topic composition, possibly a set of particular mixes.
+
+Given a label and a set of text segments to arrive at that label by DL. Which architecture/method yields the best heuristics? Approximate transformation by back-propagation (?). Consult JEK.
+
+Add MFTL. LRRH. Custom-built for experimentation, for researchers with interest in the intersection of data science and folk tale studies. For work in progress.
+
+For every motif in string, correlation between TMI label and ATU segment content vs ATU segment content and AFT segment set, manually marked up.
+
+Convert type sample to robust conceptual equivalent.
+
+- Do you think you could build a 3-d matrix (tensor) from the trilogy, or respective- motifs and types constrained by the AFT? E.g. axis x would be the TMI-based motifs aka concept strings; axis y would be ATU types aka motif strings; and axis z would be the AFT where some types are exemplified by text sets. 
+
+Then we could expose this tensor to all kinds of analysis, including DL by CNN (Johan's favourite), or co-clustering (my bet).
+
+As food for thought, consider this as a working hypothesis: "a motif is a multiple co-occurrence of concept strings anchored in the trilogy". Whatever the outcome, negative or positive, the hypothesis can be tested, and we could learn if this definition can be falsified. 
+
+Plus look at the visuals from co-clustering results for 'multiple cooccurrence' as a GS query. Just 150 hits which sounds quite promising for explaining the idea by references from multiple domains, ie methodological cross-pollination.
+
+By concept strings in the TMI I would expect some normalization of word forms to concepts just like eg Propp's characters, actions/functions, situations etc. There we could perhaps look into ontologies if they exist. Thierry Declerck's work comes to mind.
+
+The idea was this: multiple, because in a set representing a type, the reason why the type exists is that the 'motif', or its precursors, exist in several non-identical versions. Hence co-occurrence (could be even upgraded to attention to stress contextuality contributing to the meaning of X). Concept strings refers to two facts: (a) multiple lexemes / word forms / synonyms / functional equivalents will occur, all of them manifestations of concepts key to the identity of a particular motif; and (b) such verbal concept manifestations will occur in a particular sequence. This should hold for the AFT because it is type-based; to the ATU because it is motif-based; and the TMI, because it is concept-based (or so do I hope). E.g. the robustness of TMI motifs could perhaps be increased by merging and adding the vocabularies of subtypes to that of the key entry. After such a parametrized normalization process, documented for posteriority while being built, a 3-d tensor should arise.
+
+So to derive them, we should extract pregrouped word forms to cover concepts, and preserve their order how they pop up. Say for strike = kill, hurt, wound, emasculate, castrate, etc could yield the Verb part in SVO form; dispatcher = king, ruler, monarch, father, fairy Queen etc, could be the Subject, and so on. Any ideas welcome on how one might speed up this part of the building process.
+
+Another way to put it could be this:  "The AFT is type-based. The ATU is motif (motif string) based. The TMI is concept string based. So the bottleneck is to extract from the AFT words that constitute concepts in specific sequences to manifest motifs, so that such motif sequences then constitute types." Where the expectation is that in order to comply, word sequences from the AFT should be the same as in the TMI; such word sequences would be set members of a concept string.
+
+Suppose we can convert the motifs inherent in the 182 AFT types to SBERT embeddings. Thereby we get a distribution of located sentence content based on motif definition.
+
+Next we take the same 182 type descriptions aka tale abstracts, segmented by motif numbers into respective chunks. Their SBERT as the bottom line could lead to similarity 1 between the TMI and ATU embeddings.
+
+In step 3 one would have to screen the text of type subsets for the -- probably variable -- size of the optimal chunk where its SBERT value is most similar to sim 1. I don't know how to carry out this screening, but maybe you get an idea.
+
+The same logic might work without the TMI step as well, although we would have a more nuanced overview with it included.
+
+###
+
+nigel osbourne 
+x-system
+
+unseen species problem
+---
+
+bert topic
+we haave
+
+can we use gpt to come up with dummy variants of the stories, thus increasing its size
+
+how could we create dummy variants
+
+# Extract triples from TMI
