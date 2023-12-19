@@ -88,10 +88,11 @@ atu_df <-
     list(~str_remove_all(., "\\?"))
   ) %>%
   mutate_all(list(~str_squish(.))) %>%
-  # Manually remove duplicates
+  # Manually remove duplicates where there is a clear preference
   filter(!(atu_id == "934D" & tale_name == "Nothing Happens without God")) %>%
-  mutate(tale_name = str_replace(tale_name,"^934D1 ",""))
-
+  mutate(tale_name = str_replace(tale_name,"^934D1 ","")) %>%
+  # Otherwise, keep initial version (this only removes 802A*)
+  distinct(atu_id, .keep_all = T)
 
 atu_seq <-
   atu_df %>%
