@@ -87,7 +87,10 @@ atu_df <-
     vars(tale_name:remarks),
     list(~str_remove_all(., "\\?"))
   ) %>%
-  mutate_all(list(~str_squish(.)))
+  mutate_all(list(~str_squish(.))) %>%
+  # Manually remove duplicates
+  filter(!(atu_id == "934D" & tale_name == "Nothing Happens without God")) %>%
+  mutate(tale_name = str_replace(tale_name,"^934D1 ",""))
 
 
 atu_seq <-
