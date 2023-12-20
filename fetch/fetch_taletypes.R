@@ -153,14 +153,55 @@ atu_combos <-
   mutate(
     combos = str_squish(combos),
     combos = str_remove_all(combos, "This type is usually combined with episodes of one or more other types"),
-    combos = str_remove_all(combos, "and |also |and also |esp |\\."),
+    combos = str_remove_all(combos, "This type is often combined with one or more other types"),
+    combos = str_remove_all(combos, "This tale is often combined with one or more other tales"),
+    combos = str_remove_all(combos, "Various combinations but no type frequently|Sometimes combined with"),
+    combos = str_remove_all(combos, "Usually in combination with|Usually combined with|\\(only version 3\\)"),
+    combos = str_replace_all(combos, "; frequently introduced by Type",","),
+    combos = str_replace_all(combos, "sometimes of |and |also |and also |of |esp |\\.|;",","),
     combos = str_split(combos,",")
   ) %>%
   unnest(combos) %>%
   mutate(
     combos = str_squish(combos),
-    combos = if_else(combos == "",NA_character_,combos)
-  )
+    combos = if_else(combos %in% c("","esp","lying"),NA_character_,combos),
+    range = if_else(str_detect(combos,"�"),combos, NA_character_)
+  ) %>%
+  separate(range,c("from","to"),sep = "�") %>%
+  mutate(
+    to = if_else(
+      str_detect(to,"^[A-Z]$"),
+      paste0(str_remove(from,"[A-Z]$"),to),
+      to
+    ),
+    from = if_else(
+      str_detect(from,"^[A-Z]$"),
+      paste0(str_remove(to,"[A-Z]$"),from),
+      from
+    )
+  ) 
+
+x <- 
+  atu_df %>% select(atu_id) %>% arrange(atu_id) %>%
+  left_join(
+    atu_combos,
+    join_by(between(atu_id,from,to))
+  ) %>%
+  rename(atu_id = atu_id.y, atu_id_combo = atu_id.x) %>%
+  filter(!is.na(atu_id)) %>%
+  select(atu_id,atu_id_combo,from,to)
+  
+atu_combos <-
+  atu_combos %>%
+  mutate(combos = if_else(str_detect(combos,"�"),NA_character_,combos)) %>%
+  select(atu_id,combos) %>%
+  left_join(x %>% select(atu_id,atu_id_combo), by = 'atu_id') %>%
+  mutate(combos = if_else(is.na(combos),atu_id_combo,combos)) %>%
+  select(atu_id,combos) %>%
+  distinct(.keep_all = T) %>%
+  filter(!is.na(combos))
+
+rm(x)
 
 # write_csv(atu_df,"data/atu_df.csv")
 # write_csv(atu_seq,"data/atu_seq.csv")
