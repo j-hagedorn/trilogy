@@ -57,9 +57,7 @@ The `atu_combos` dataset has one row for each possible combination of a given `a
 #### Variables
 
 - `atu_id`
-- `tale_variant`
-- `motif_order`
-- `motif`
+- `combo`
 
 ## AFT
 
