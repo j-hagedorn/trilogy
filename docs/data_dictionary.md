@@ -8,13 +8,12 @@ The `tmi` dataset contains the Thompson Motif Index (TMI), with each row represe
 
 #### Variables
 
-- `id`: 
-- `chapter_name`:
-- `motif_name`:
-- `notes`: 
-- `level`: 
-- `chapter_id`: 
-- `level_0`-`level_6`:
+- `id`: the unique identified motif identifier.  This includes identifiers at various hierarchical levels (for instance, *A13*, *A13.1*, and *A13.1.1* each has a single row in this dataset, despite occurring at different hierarchical levels).
+- `chapter_id`,`chapter_name`: The identifier and name of the highest-level grouping of motifs, called chapters.  These include groupings such as: *Myths*, *Animals*, *Tabu*, *Magic*, *Death*, *Marvels*, etc.
+- `motif_name`: The text description of the motif.
+- `notes`: Various notes related to the motif, including information on additional descriptions, countries of origin, literature sources, etc.
+- `level`: The level of the TMI hierarchy which the motif is from (0-6). 
+- `level_0`-`level_6`: The hierarchical level groups under which the motif falls.  For example, the motif *A15.4.1* (Potter As Creator) includes *A0* at `level_0`, *A10* at `level_1`, *A15* at `level_2`, *A15.4* at `level_3`, and *A15.4.1* at `level_4`, and is NA at `level_5` and `level_6`.
 
 ## ATU
 
@@ -28,8 +27,8 @@ The `atu_df` dataset has one row for each tale type from the index.  The followi
 
 #### Variables
 
-- `chapter`
-- `division`
+- `chapter`: The highest level groupings into which tale types are classified.  Includes: *Anecdotes And Jokes*, *Animal Tales*, *Formula Tales*, *Tales Of Magic*, etc.
+- `division`: The next highest level of groupings into which tale types are classified.  Example: *Stories About A Fool 1200-1349*.
 - `sub_division`
 - `atu_id`
 - `tale_name`
