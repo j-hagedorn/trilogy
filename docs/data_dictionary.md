@@ -29,10 +29,10 @@ The `atu_df` dataset has one row for each tale type from the index.  The followi
 
 - `chapter`: The highest level groupings into which tale types are classified.  Includes: *Anecdotes And Jokes*, *Animal Tales*, *Formula Tales*, *Tales Of Magic*, etc.
 - `division`: The next highest level of groupings into which tale types are classified.  Example: *Stories About A Fool 1200-1349*.
-- `sub_division`
-- `atu_id`
-- `tale_name`
-- `litvar`
+- `sub_division`: The lowest level of groupings into which tale types are classified.
+- `atu_id`: The tale type identifier.  This dataset contains one row per `atu_id`.
+- `tale_name`: The descriptive name for the tale type, corresponding to an `atu_id`.
+- `litvar`: A list of literary variants of the tale type, from different collections.
 - `provenance`
 - `tale_type`
 - `remarks`
