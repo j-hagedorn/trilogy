@@ -40,14 +40,14 @@ The `atu_df` dataset has one row for each tale type from the index.  The followi
 
 ### Motif Sequences
 
-The `atu_seq` dataset has one row for each occurrence of a TMI motif within a tale type from the ATU index.  The following variables are available for each occurrence of a motif identified within:
+The `atu_seq` dataset has one row for each occurrence of a TMI motif within a tale type from the ATU index.  The following variables are available for each occurrence of a motif identified within the `tale_type` description from the `atu_df` dataset.  For some tales, multiple combinations of motifs are noted as possible permutations of the tale (for example, ATU 605A is a story in "*A young man, born of an animal... or from a giant... [B631, F611.1.1, F611.1.11-F611.1.15, T516] develops great strength (at the forge, in the forest, in war, by suckling for many years [F611.2.1, F611.2.3]...)*").  In these instances, all of the possible permutations are listed as specific variants of the tale type.  When ranges of motifs are referenced (e.g. *F611.1.11-F611.1.15*, above) all motifs within that range are included and provided with different variants.
 
 #### Variables
 
-- `atu_id`
-- `tale_variant`
-- `motif_order`
-- `motif`
+- `atu_id`: The tale type identifier.  This field can be used to join this dataset with the `atu_df` to get additional data regarding the tale type.
+- `tale_variant`: The specific permutation of the tale type, as described above.
+- `motif_order`: The order in which the motif is mentioned within the text of the `tale_type` description.  Since the `tale_type` description most often summarizes the story in chronological order, this field is a rough approximation of the order in which motifs occur within the tale.
+- `motif`: The identifier for the motif.  This field can be used to join to the `tmi` dataset to get additional data related to the motif.
 
 ### Tale Combinations
 
