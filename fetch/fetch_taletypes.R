@@ -1,4 +1,5 @@
 library(tidyverse)
+tmi <- read_csv("data/tmi.csv")
 
 atu_df <-
   read_lines("fetch/ATU.Master.Hels.txt", locale = locale(encoding = "UTF-8")) %>%
@@ -132,17 +133,21 @@ atu_seq <-
 # Solved: Reference to range of motifs in sequence not explicitly named (e.g. "F611.1.11�F611.1.15")
 motif_ranges <- 
   atu_seq %>%
-  # filter(str_detect(ord_1,"�")) %>%
-  filter(if_any(starts_with("ord_"),~str_detect(.,"�"))) %>%
+  filter(if_any(starts_with("ord_"),~str_detect(.,"�|ff"))) %>%
   pivot_longer(
     starts_with("ord_"),names_to = "motif_order", values_to = "motif_range"
   ) %>%
-  filter(str_detect(motif_range,"�")) %>%
+  filter(str_detect(motif_range,"�|ff")) %>%
   mutate(
     id = str_remove(motif_range,"�.*$"),
     ord_init = str_remove(motif_range,"�.*$"),
-    ord_last = str_remove(motif_range,"^.*�")
-  )
+    ord_last = str_remove(motif_range,"^.*�"),
+    regex_formula = if_else(
+      str_detect(motif_range,"ff"),
+      paste0("^",str_remove(motif_range,"ff.*$"),".*$"),
+      NA_character_
+    )
+  ) 
 
 x <-
   tmi %>% select(id) %>%
@@ -152,7 +157,15 @@ x <-
   ) %>%
   select(motif_range,motif_id = id.x)
 
-y <-
+# Still working on the 'ff.' suffix here
+# y <-
+#   motif_ranges %>%
+#   fuzzyjoin::regex_left_join(
+#     tmi %>% select(id),
+#     by = c(regex_formula = 'id')
+#   )
+
+atu_seq <-
   atu_seq %>%
   left_join(x,by = c('ord_1' = 'motif_range')) %>%
   mutate(ord_1 = if_else(str_detect(ord_1,"�"),motif_id,ord_1))%>%
@@ -197,6 +210,9 @@ y <-
     motif_order = as.numeric(motif_order)
   ) %>%
   distinct()
+
+# Remove temporary dataframes
+rm(motif_ranges); rm(x); rm(y)
 
 atu_combos <-
   atu_df %>%
