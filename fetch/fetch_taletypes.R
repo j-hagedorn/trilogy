@@ -101,7 +101,9 @@ atu_seq <-
   unnest(motifs) %>%
   mutate(
     motifs = str_remove_all(motifs,"cf. |Cf. |e.g. "),
-    motifs = str_remove(motifs, "Type [^\\]]+")  
+    motifs = str_remove(motifs, "Type [^\\]]+"),
+    motifs = str_replace_all(motifs,";",","),
+    motifs = str_replace(motifs,", \\]","]")
   ) %>%
   filter(!is.na(motifs)) %>%
   group_by(atu_id) %>%
@@ -123,12 +125,62 @@ atu_seq <-
     values_from = motifs,
   ) %>% 
   unnest() %>%
-  filter(if_any(-atu_id,~!is.na(.))) %>%
+  filter(if_any(-atu_id,~!is.na(.))) 
+
+# Need to discretely list ranges of motifs before expanding:
+# Not yet: Reference to motif at beginning of sequence which is not explicitly named (e.g. "A1750ff.")
+# Solved: Reference to range of motifs in sequence not explicitly named (e.g. "F611.1.11�F611.1.15")
+motif_ranges <- 
+  atu_seq %>%
+  # filter(str_detect(ord_1,"�")) %>%
+  filter(if_any(starts_with("ord_"),~str_detect(.,"�"))) %>%
+  pivot_longer(
+    starts_with("ord_"),names_to = "motif_order", values_to = "motif_range"
+  ) %>%
+  filter(str_detect(motif_range,"�")) %>%
+  mutate(
+    id = str_remove(motif_range,"�.*$"),
+    ord_init = str_remove(motif_range,"�.*$"),
+    ord_last = str_remove(motif_range,"^.*�")
+  )
+
+x <-
+  tmi %>% select(id) %>%
+  inner_join(
+    motif_ranges,
+    join_by(between(id,ord_init,ord_last))
+  ) %>%
+  select(motif_range,motif_id = id.x)
+
+y <-
+  atu_seq %>%
+  left_join(x,by = c('ord_1' = 'motif_range')) %>%
+  mutate(ord_1 = if_else(str_detect(ord_1,"�"),motif_id,ord_1))%>%
+  select(-motif_id) %>%
+  left_join(x,by = c('ord_2' = 'motif_range')) %>%
+  mutate(ord_2 = if_else(str_detect(ord_2,"�"),motif_id,ord_2))%>%
+  select(-motif_id) %>%
+  left_join(x,by = c('ord_3' = 'motif_range')) %>%
+  mutate(ord_3 = if_else(str_detect(ord_3,"�"),motif_id,ord_3))%>%
+  select(-motif_id) %>%
+  left_join(x,by = c('ord_4' = 'motif_range')) %>%
+  mutate(ord_4 = if_else(str_detect(ord_4,"�"),motif_id,ord_4))%>%
+  select(-motif_id) %>%
+  left_join(x,by = c('ord_5' = 'motif_range')) %>%
+  mutate(ord_5 = if_else(str_detect(ord_5,"�"),motif_id,ord_5))%>%
+  select(-motif_id) %>%
+  left_join(x,by = c('ord_6' = 'motif_range')) %>%
+  mutate(ord_6 = if_else(str_detect(ord_6,"�"),motif_id,ord_6))%>%
+  select(-motif_id) %>%
+  left_join(x,by = c('ord_7' = 'motif_range')) %>%
+  mutate(ord_7 = if_else(str_detect(ord_7,"�"),motif_id,ord_7))%>%
+  select(-motif_id) %>%
+  left_join(x,by = c('ord_8' = 'motif_range')) %>%
+  mutate(ord_8 = if_else(str_detect(ord_8,"�"),motif_id,ord_8))%>%
+  select(-motif_id) %>%
+  # Now fill down into NA areas by group
   group_by(atu_id) %>%
-  # Need to address these issues, here (before expanding):
-  # Reference to motif at beginning of sequence which is not explicitly named (e.g. "A1750ff.")
-  # Reference to range of motifs in sequence not explicitly named (e.g. "F611.1.11�F611.1.15")
-  fill(starts_with("ord_"), .direction = "down") %>%
+  fill(starts_with("ord_"), .direction = "down") %>% 
   expand(
     ord_1, ord_2, ord_3, ord_4, ord_5, ord_6, ord_7, ord_8,
     ord_9, ord_10,ord_11,ord_12,ord_13,ord_14,ord_15,ord_16, 
