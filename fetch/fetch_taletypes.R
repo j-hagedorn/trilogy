@@ -128,9 +128,8 @@ atu_seq <-
   unnest() %>%
   filter(if_any(-atu_id,~!is.na(.))) 
 
-# Need to discretely list ranges of motifs before expanding:
-# Not yet: Reference to motif at beginning of sequence which is not explicitly named (e.g. "A1750ff.")
-# Solved: Reference to range of motifs in sequence not explicitly named (e.g. "F611.1.11�F611.1.15")
+# Discretely list ranges of motifs before expanding:
+# E.g. Reference to range of motifs in sequence not explicitly named (e.g. "F611.1.11�F611.1.15")
 motif_ranges <- 
   atu_seq %>%
   filter(if_any(starts_with("ord_"),~str_detect(.,"�|ff"))) %>%
@@ -156,14 +155,6 @@ x <-
     join_by(between(id,ord_init,ord_last))
   ) %>%
   select(motif_range,motif_id = id.x)
-
-# Still working on the 'ff.' suffix here
-# y <-
-#   motif_ranges %>%
-#   fuzzyjoin::regex_left_join(
-#     tmi %>% select(id),
-#     by = c(regex_formula = 'id')
-#   )
 
 atu_seq <-
   atu_seq %>%
