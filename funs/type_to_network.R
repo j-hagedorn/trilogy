@@ -22,27 +22,34 @@ atu_graph <-
 
 write_graph(atu_graph,"data/atu_graph.graphml", format = "graphml")
 
-x %>% 
-  activate(nodes) %>% 
-  as_tibble() %>% 
-  left_join(
-    tmi %>% select(id, motif_name), 
-    by = c('name' = 'id')
-  ) %>%
-  View()
+combos_graph <-
+  atu_combos %>%
+  rename(from = atu_id, to = combos) %>%
+  as_tbl_graph() 
 
-x %>%
-  ggraph() +
-  geom_edge_link() +
-  geom_node_point() +
-  geom_node_text(aes(label = name, alpha = 0.1)) +
-  theme_void()
+write_graph(combos_graph,"data/combos_graph.graphml", format = "graphml")
 
-library(visNetwork)
-
-p <-
-  x %>%
-  visIgraph() %>%
-  visIgraphLayout(layout = "layout_with_kk")
-
-visSave(p,"docs/atu_network.html")
+# x %>% 
+#   activate(nodes) %>% 
+#   as_tibble() %>% 
+#   left_join(
+#     tmi %>% select(id, motif_name), 
+#     by = c('name' = 'id')
+#   ) %>%
+#   View()
+# 
+# x %>%
+#   ggraph() +
+#   geom_edge_link() +
+#   geom_node_point() +
+#   geom_node_text(aes(label = name, alpha = 0.1)) +
+#   theme_void()
+# 
+# library(visNetwork)
+# 
+# p <-
+#   x %>%
+#   visIgraph() %>%
+#   visIgraphLayout(layout = "layout_with_kk")
+# 
+# visSave(p,"docs/atu_network.html")
