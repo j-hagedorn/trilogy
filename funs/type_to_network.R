@@ -1,6 +1,6 @@
-library(tidyverse); library(tidygraph)
+library(tidyverse); library(tidygraph); library(igraph)
 
-x <-
+atu_graph <-
   atu_seq %>%
   group_by(atu_id) %>%
   filter(tale_variant == min(tale_variant)) %>%
@@ -15,9 +15,12 @@ x <-
     coreness_in = node_coreness(mode = "in"),
     coreness_out = node_coreness(mode = "out"),
     coreness_all = node_coreness(mode = "all"),
+    constraint = node_constraint(),
     bridging = node_bridging_score(),
     connectivity = node_connectivity_impact()
   )
+
+write_graph(atu_graph,"data/atu_graph.graphml", format = "graphml")
 
 x %>% 
   activate(nodes) %>% 
