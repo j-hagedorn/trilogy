@@ -12,12 +12,21 @@ x <-
   as_tbl_graph() %>%
   activate(nodes) %>%
   mutate(
-    coreness = node_coreness(),
+    coreness_in = node_coreness(mode = "in"),
+    coreness_out = node_coreness(mode = "out"),
+    coreness_all = node_coreness(mode = "all"),
     bridging = node_bridging_score(),
     connectivity = node_connectivity_impact()
   )
 
-x %>% activate(nodes) %>% as_tibble() %>% View()
+x %>% 
+  activate(nodes) %>% 
+  as_tibble() %>% 
+  left_join(
+    tmi %>% select(id, motif_name), 
+    by = c('name' = 'id')
+  ) %>%
+  View()
 
 x %>%
   ggraph() +
