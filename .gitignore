@@ -8,3 +8,8 @@ fetch/ATU.Master.Hels.txt
 /.idea/
 /src/test/
 /target/
+
+docs/.*files/vis
+*.png
+*.css
+*.js
