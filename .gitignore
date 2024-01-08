@@ -9,7 +9,8 @@ fetch/ATU.Master.Hels.txt
 /src/test/
 /target/
 *.css
-*.css
 *.woff
 *.js
 *.html
+/vis-
+*.png
