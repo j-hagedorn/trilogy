@@ -26,7 +26,7 @@ This tale would parse to
 1692, J2136, J2461.1.7, J2461.1.7.1, J2136.5.6, J2136.5.7, J2136.5.5
 ```
 
-that is obviously wrong, as the last three motives belong to different endings, thus correctly the result should be somethink like this:
+that is obviously wrong, as the last three motives belong to different endings, the result should be somethink like this instead:
 
 ```
 1692, J2136, J2461.1.7, J2461.1.7.1, J2136.5.6
@@ -44,7 +44,7 @@ J2136.5.5.   Foolish thief cooks food and awakens household. Caught.
 
 It is difficult or just too much work to eliminate these ambiguities programmatically. A human annotation would not only be faster and cheaper, but also more efficient in this case.
 
-Let's turn to a different problem, namely the relation of the motives in the tale. Let's consider the J2461 motives that are also part of the tale:
+Let's turn to a different problem, namely the relation of the motives in the tale and its implication to the sequences. Let's consider the J2461 motives that are also part of the sequence above:
 
 ```
 J2461.1.   Literal following of instructions about actions.
@@ -52,9 +52,7 @@ J2461.1.7. Numskull told to steal something heavy brings millstone.
 J2461.1.7.1. Numskull as thief: tries to carry off grinding-stone when told by confederates to bring out heavy things. Told to bring shiny things; brings out looking glass.
 ```
 
-How can we understand the sequence of `J2461.1.7, J2461.1.7.1` ? Are they variants of the same tale or are they consecutive elements of the tale in a given order? Our parsing would suggest consecutive elements but reading the text these more look like similar motives that can be repeated in a tale multiple times.
-
-Checking out the leading motif, `J2136 Numskull brings about his own capture` looks more like the summary or type of the tale or the type of it than a motifbut our parsing would put it as the leading motif.
+How can we understand the sequence of `J2461.1.7, J2461.1.7.1` ? Are they variants of the same tale or are they consecutive elements of the tale in a given order?  Our parsing would suggest consecutive elements but reading the text these more look like similar motives that can be repeated in a tale multiple times. Also, it seems that `J2461.1.7` is a specific variant of `J2461.1.7.1` where only the 'heavy thing' element occurs. But then why is it represented as the parent class of `J2461.1.7.1`? Checking out the leading motif, `J2136 Numskull brings about his own capture` looks more like the summary or type of the tale or the type of it than a motif but our parsing would put it as the leading motif.
 
 Take an other example:
 
@@ -67,11 +65,15 @@ Take an other example:
 
 ```
 
-Taking the end motives of the second variant
+Let us look up the last motives of the second and third variant in square braces:
 
 ```
-J581  Wisdom and Folly,Foolishness Of Noise-Making When Enemies Overhear
 J2136 Numskull brings about his own capture.
+J581  Wisdom and Folly, Foolishness Of Noise-Making When Enemies Overhear
 ```
 
-We see that these two motives a synonimes and not variants.
+We see that these two motives a synonimes and not variants, represent vague categories and they are not necessarily terminal elements. The motif of the first variant is a direct quotation of the motif/tale from the Thompson catalogue, same number.
+
+As seen from the examples above the Aarne-Thompson-Uther catalogue has limitations if we consider the tales as 'chain of motives'. There is no narrative theory behind the structure of the catalogue thus it is not guaranteed that the last motif in a tale description is a terminal element, or the first is an initial element.
+
+These limitations must be considered when working with this corpus.
