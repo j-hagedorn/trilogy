@@ -379,7 +379,18 @@ aft <-
   select(-type_name) %>%
   distinct() %>%
   bind_rows(manual_aft) %>%
-  inner_join(atu %>% select(atu_id), by = "atu_id") # Remove all ID not in ATU
+  inner_join(atu %>% select(atu_id), by = "atu_id") %>% # Remove all ID not in ATU
+  mutate(
+    notes = str_replace_all(notes,"[\r\n]"," "),
+    notes = str_replace_all(notes,"\"", "'"),
+    notes = str_conv(notes,"latin1"),
+    source = str_replace_all(source,"[\r\n]"," "),
+    source = str_replace_all(source,"\"", "'"),
+    source = str_conv(source,"latin1"),
+    text = str_replace_all(text,"[\r\n]"," "),
+    text = str_replace_all(text,"\"", "'"),
+    text = str_conv(text,"latin1")
+  )
 
 # write_csv(aft,"data/aft.csv")
 
