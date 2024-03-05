@@ -1,0 +1,34 @@
+id,function,definition
+F0,Initial situation,"Some context is given for the story, with the hero and the family being introduced."
+F1,Absentation,One of the members of a family absents himself  from home.
+F2,Interdiction,An interdiction is addressed to the hero.
+F3,Violation,The interdiction is violated.
+F4,Reconnaissance,The villain makes an attempt at reconnaissance.
+F5,Delivery,The villain receives information about his victim
+F6,Trickery,The villain attempts to deceive his victim in order to take possession of him or of his belongings
+F7,Complicity,Victim submits to deception and thereby unwittingly helps his enemy
+F8,Villainy,The villain causes harm or injury to a member of the family
+F8a,Lack,A member of a family lacks something or desires to have something
+F9,Mediation,Misfortune or lack is made known; the hero is approached with a request or command; he is allowed to go or he is dispatched.
+F10,Beginning counteraction,The hero agrees to or decides upon counteraction
+F11,Departure,The hero leaves home.
+F12,First function of the Donor,"The hero is tested, interrogated, attacked etc.,  which prepares the way for his receiving either a magical agent or a helper"
+F13,The hero's reaction,The hero reacts to the actions of the future Donor.
+F14,Provision of a magical agent,The hero acquires the use of a magical agent.
+F15,Guidance,Hero is led to the whereabouts of an object of search
+F16,Struggle,The hero and the villain join in direct combat
+F17,Branding,The hero is branded
+F18,Victory,The villain is defeated
+F19,Liquidation of Lack,The initial misfortune or lack is liquidated
+F20,Return,The hero returns
+F21,Pursuit,The hero is pursued
+F22,Rescue,Rescue of the hero from pursuit
+F23,Unrecognized arrival,"Unrecognized, he arrives home or in another country"
+F24,Unfounded claims ,A false hero presents unfounded claims
+F25,Difficult task,A difficult task is proposed to the hero
+F26,Solution,The task is resolved
+F27,Recognised,The hero is recognised
+F28,Exposure,The false hero or villain is exposed
+F29,Transfiguration,The hero is given a new appearance
+F30,Punishment,The villain is punished
+F31,Wedding,The hero is married and ascends the throne

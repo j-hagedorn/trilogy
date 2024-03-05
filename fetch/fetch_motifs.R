@@ -148,7 +148,8 @@ motifs <-
   # Some cleaning
   filter(!str_detect(name,"^--")) %>%
   rename(motif_name = name) %>%
-  mutate_at(vars(level_0:level_6),list(~ifelse(is.na(.),NA_character_,paste0(chapter_id,.))))
+  mutate_at(vars(level_0:level_6),list(~ifelse(is.na(.),NA_character_,paste0(chapter_id,.)))) %>%
+  mutate(notes = str_replace_all(notes,"[\r\n]"," "))
 
 # Duplicates = 8
 # tst <- motifs %>% filter(duplicated(id,fromLast = T) | duplicated(id,fromLast = F))
