@@ -92,7 +92,7 @@ atu_df <-
   filter(!(atu_id == "934D" & tale_name == "Nothing Happens without God")) %>%
   mutate(tale_name = str_replace(tale_name,"^934D1 ","")) %>%
   # Otherwise, keep initial version (this only removes 802A*)
-  distinct(atu_id, .keep_all = T)
+  distinct(atu_id, .keep_all = T) 
 
 atu_seq <-
   atu_df %>%
@@ -258,6 +258,19 @@ atu_combos <-
   select(atu_id,combos) %>%
   distinct(.keep_all = T) %>%
   filter(!is.na(combos))
+
+# Remove characters in atu_df previously used as markers (i.e. �)
+atu_df <-
+  atu_df %>%
+  mutate(
+    division = str_replace_all(division, "�","-"),
+    sub_division = str_replace_all(sub_division, "�","-"),
+    tale_name = str_replace_all(tale_name, "�","'"),
+    tale_type = str_replace_all(tale_type, "�","'"),
+    litvar = str_conv(litvar,"latin1"),
+    provenance = str_conv(provenance,"latin1"),
+    remarks = str_conv(remarks,"latin1")
+  )
 
 rm(x)
 
