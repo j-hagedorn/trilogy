@@ -22,7 +22,7 @@ ntwk_df <-
   distinct(to, .keep_all = T) %>% ungroup() %>% 
   filter(!is.na(to) & !is.na(from))
   
-ntwk <- 
+motif_graph <- 
   ntwk_df %>% 
   as_tbl_graph(directed = T) %>% 
   activate(edges) %>% filter(!edge_is_multiple()) %>%
@@ -50,5 +50,5 @@ ntwk <-
 
 rm(ntwk_df); rm(chapter_df); rm(df)
 
-
+write_graph(motif_graph,"data/motif_graph.graphml", format = "graphml")
 
