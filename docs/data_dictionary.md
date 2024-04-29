@@ -49,8 +49,8 @@ The `atu_df` dataset has one row for each tale type from the index.  The followi
 - `litvar`: A list of literary variants of the tale type, from different collections.
 - `provenance`: The location(s) or culture(s) from which the tale type comes.
 - `tale_type`: A brief summary of the plot of the tale type.
-- `remarks`
-- `combos`
+- `remarks`: Miscellaneous remarks about the tale type, such as who first documented it, when it was documented, and where (e.g. "*...by Maurice de Sully in a French sermon in the 12th c.*").
+- `combos`: A manually documented list of `tale_id`s which are commonly combined with the tale type in practice.
 
 ### Motif Sequences
 
@@ -65,12 +65,12 @@ The `atu_seq` dataset has one row for each occurrence of a TMI motif within a ta
 
 ### Tale Combinations
 
-The `atu_combos` dataset has one row for each possible combination of a given `atu_id` with another `atu_id`, as identified in the ATU Index.  The following variables are available for each combination identified:
+The `atu_combos` dataset has one row for each possible combination of a given `atu_id` with another `atu_id`, as identified in the `combos` field of the `atu_df` dataset. The following variables are available for each combination identified:
 
 #### Variables
 
-- `atu_id`
-- `combo`
+- `atu_id`: The tale type identifier.  This field can be used to join this dataset with the `atu_df` to get additional data regarding the tale type.
+- `combo`: A tale type identifier which is noted for its occurrence in combination with `atu_id`.
 
 ## AFT
 
@@ -80,12 +80,12 @@ The Annotated Folk Tales (i.e. `aft`) dataset contains folktales that have been 
 
 #### Variables
 
-- `atu_id`
-- `tale_title`
-- `provenance`
-- `notes`
-- `source`
-- `text`
-- `data_source`
-- `date_obtained`
+- `atu_id`: The tale type identifier.  This field can be used to join this dataset with the `atu_df` to get additional data regarding the tale type.
+- `tale_title`: The specific name of the tale.  Note that this is commonly different than the text description of the tale type from `atu_df`, though sometimes they match.
+- `provenance`: Designates the country, region, tribe, and/or author from which the tale comes.
+- `notes`: Miscellaneous notes related to the tale, provided by the archiver.
+- `source`: The publication from which the tale has been derived or excerpted.
+- `text`: The narrative text of the tale itself.
+- `data_source`: The name of the corpus, website, or other source from which the tale was obtained.
+- `date_obtained`: The date on which the tale data was obtained from the `data_source`.
 
