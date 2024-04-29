@@ -10,7 +10,7 @@ This repository houses tidy data of key catalogs and collections of mythology an
   - `atu_df`, `atu_seq`, and `atu_combos`: *the Aarne-Thompson-Uther Tale Type Index*: datasets containing types of tales, the motifs which comprise them, and commonly co-occurring tale types.
   - `aft`, *Annotated Folktales*: each row contains the text of a single tale, as well as an indicator of which ATU tale type the tale exemplifies. This is intended to serve as training data for algorithms to classify tale types and find motifs and motif sequences in unstructured text. The dataset was initially seeded with [D.L. Ashliman’s corpus of annotated tales](https://www.pitt.edu/~dash/folktexts.html)
 
-Additional details regarding these datasets can be found in the [data dictionary](https://github.com/j-hagedorn/trilogy/blob/master/docs/data_dictionary.md)
+Additional details regarding these datasets can be found in the [data dictionary](https://github.com/j-hagedorn/trilogy/blob/master/docs/data_dictionary.md).
 
 # Instructions for Use and Collaboration
 
