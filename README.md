@@ -4,37 +4,19 @@
 
 # What’s here?
 
-This repository houses tidy data of key catalogs and collections of
-mythology and folklore, for use in discovery of patterns using natural
-language processing and others statistical methods. The following
-datasets are located in the `/data` sub-folder:
+This repository houses tidy data of key catalogs and collections of mythology and folklore, for use in discovery of patterns using natural language processing and others statistical methods. The following datasets are located in the `/data` sub-folder:
 
-  - `tmi`, *The Motif Index*: each row is a single motif from the
-    *Thompson Motif Index*, and also contains information regarding the
-    chapter,grand division, division, and subdivision(s) under which
-    motifs are nested, as well as the supplementary notes for each motif
-    where these exist.
-  - `atu`, *the Aarne-Thompson-Uther Tale Type Index*: IN DEVELOPMENT
-  - `aft`, *Annotated Folktales*: each row contains the text of a single
-    tale , as well as an indicator of which ATU tale type the tale
-    exemplifies. This is intended to serve as training data for
-    algorithms to classify tale types and find motifs and motif
-    sequences in unstructured text. The dataset was initially seeded
-    with [D.L. Ashliman’s corpus of annotated
-    tales](https://www.pitt.edu/~dash/folktexts.html)
+  - `tmi`, *The Motif Index*: each row is a single motif from the *Thompson Motif Index*, and also contains information regarding the chapter,grand division, division, and subdivision(s) under which motifs are nested, as well as the supplementary notes for each motif where these exist.
+  - `atu_df`, `atu_seq`, and `atu_combos`: *the Aarne-Thompson-Uther Tale Type Index*: datasets containing types of tales, the motifs which comprise them, and commonly co-occurring tale types.
+  - `aft`, *Annotated Folktales*: each row contains the text of a single tale, as well as an indicator of which ATU tale type the tale exemplifies. This is intended to serve as training data for algorithms to classify tale types and find motifs and motif sequences in unstructured text. The dataset was initially seeded with [D.L. Ashliman’s corpus of annotated tales](https://www.pitt.edu/~dash/folktexts.html)
+
+Additional details regarding these datasets can be found in the [data dictionary](https://github.com/j-hagedorn/trilogy/blob/master/docs/data_dictionary.md)
 
 # Instructions for Use and Collaboration
 
 ## Using the Data
 
-To begin using the datasets, please see the [Getting
-Started](https://github.com/j-hagedorn/trilogy/blob/master/docs/vignettes/getting_started.md)
-document for instructions. This repository is licensed under a [CC
-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) open
-license. Its contents are either in the public domain, or permissions
-have been granted by the copyright holder for inclusion. To cite the use
-of this repository or its data in publications, please reference the
-repository as well as the works from which it derives:
+To begin using the datasets, please see the [Getting Started](https://github.com/j-hagedorn/trilogy/blob/master/docs/vignettes/getting_started.md) document for instructions. This repository is licensed under a [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) open license. Its contents are either in the public domain, or permissions have been granted by the copyright holder for inclusion. To cite the use of this repository or its data in publications, please reference the repository as well as the works from which it derives:
 
     @misc{trilogy_repo,
         title = {trilogy},
@@ -62,11 +44,4 @@ repository as well as the works from which it derives:
 
 ## Collaboration
 
-We are excited to collaborate. If you find issues with any of the
-datasets or scripts, please file an issue on this repository. If you
-make improvements to the scripts, or develop new scripts to incorporate
-additional motifs, tale types, or tale texts, please submit a pull
-request. Additional instructions about contributing are available in the
-[Getting
-Started](https://github.com/j-hagedorn/trilogy/blob/master/docs/vignettes/getting_started.md)
-document.
+We are excited to collaborate. If you find issues with any of the datasets or scripts, please file an issue on this repository. If you make improvements to the scripts, or develop new scripts to incorporate additional motifs, tale types, or tale texts, please submit a pull request. Additional instructions about contributing are available in the [Getting Started](https://github.com/j-hagedorn/trilogy/blob/master/docs/vignettes/getting_started.md) document.
