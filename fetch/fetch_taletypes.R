@@ -193,14 +193,19 @@ atu_seq <-
   mutate(tale_variant = row_number()) %>%
   group_by(atu_id,tale_variant) %>%
   pivot_longer(
-    starts_with("ord_"),names_to = "motif_order", values_to = "motif"
+    starts_with("ord_"), names_to = "motif_order", values_to = "motif"
   ) %>%
   filter(!is.na(motif)) %>%
   mutate(
     motif_order = str_remove(motif_order,"^ord_"),
     motif_order = as.numeric(motif_order)
   ) %>%
-  distinct()
+  distinct() %>%
+  mutate(
+    motif = str_remove(motif,"\\.$"),
+    motif = str_remove(motif,"ff$"),
+    motif = str_remove(motif,"\\)\\. She .*$")
+  )
 
 # Remove temporary dataframes
 rm(motif_ranges); rm(x); rm(y)

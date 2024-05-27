@@ -7,14 +7,12 @@ how to access the data and start using it.
 If you cloned the GitHub repository on your local machine and have R
 installed, you can simply run the following:
 
-``` r
-library(tidyverse)
-tmi <- read_csv("../../data/tmi.csv")
-atu_df <- read_csv("../../data/atu_df.csv")
-atu_seq <- read_csv("../../data/atu_seq.csv")
-atu_combos <- read_csv("../../data/atu_combos.csv")
-aft <- read_csv("../../data/aft.csv")
-```
+    library(tidyverse)
+    tmi <- read_csv("data/tmi.csv")
+    atu_df <- read_csv("data/atu_df.csv")
+    atu_seq <- read_csv("data/atu_seq.csv")
+    atu_combos <- read_csv("data/atu_combos.csv")
+    aft <- read_csv("data/aft.csv")
 
 # Pulling from GitHub
 
