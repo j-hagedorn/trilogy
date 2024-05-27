@@ -1,7 +1,3 @@
-``` r
-knitr::opts_chunk$set(echo=T,prompt=F,tidy=T,comment=NA,message=F,warning=F)
-```
-
 It is assumed that users of this data may have different levels of
 proficiency with different data tools. Below are a few quick notes on
 how to access the data and start using it.
@@ -13,9 +9,11 @@ installed, you can simply run the following:
 
 ``` r
 library(tidyverse)
-tmi <- read_csv("data/tmi.csv")
-# atu <- read_csv("data/atu.csv")
-aft <- read_csv("data/aft.csv")
+tmi <- read_csv("../../data/tmi.csv")
+atu_df <- read_csv("../../data/atu_df.csv")
+atu_seq <- read_csv("../../data/atu_seq.csv")
+atu_combos <- read_csv("../../data/atu_combos.csv")
+aft <- read_csv("../../data/aft.csv")
 ```
 
 # Pulling from GitHub
@@ -93,3 +91,13 @@ collaboratively maintaining a standard reference corpus.
     Users of the dataset can file an issue on the repository in order to
     identify improvements to the data, or submit pull-requests proposing
     fixes to the existing scripts.
+
+# Inspecting Source Scripts
+
+For the purposes of reproducibility and continual methodological
+improvement, we have shared the scripts used to obtain and clean these
+datasets in the `fetch/` subfolder. The `tmi` dataset was built with the
+`fetch_motifs.R` script, the `atu` with the `fetch_taletypes.R` script,
+and the `aat` with the `fetch_ashliman.R`script. Additional
+considerations and notes regarding the development of the datasets can
+be found in the `docs/` folder.
