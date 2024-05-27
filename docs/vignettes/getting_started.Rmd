@@ -15,11 +15,13 @@ It is assumed that users of this data may have different levels of proficiency w
 
 If you cloned the GitHub repository on your local machine and have R installed, you can simply run the following:
 
-```{r load, eval=FALSE}
+```
 library(tidyverse)
-tmi <- read_csv("../../data/tmi.csv")
-atu <- read_csv("../../data/atu.csv")
-aft <- read_csv("../../data/aft.csv")
+tmi <- read_csv("data/tmi.csv")
+atu_df <- read_csv("data/atu_df.csv")
+atu_seq <- read_csv("data/atu_seq.csv")
+atu_combos <- read_csv("data/atu_combos.csv")
+aft <- read_csv("data/aft.csv")
 ```
 
 # Pulling from GitHub
