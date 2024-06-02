@@ -125,11 +125,19 @@ atu_seq <-
     names_prefix = "ord_",
     values_from = motifs,
   ) %>% 
-  unnest() %>%
+  unnest(
+    cols = c(
+      ord_1, ord_2, ord_3, ord_4, ord_5, ord_6, ord_7, ord_8, 
+      ord_9, ord_10, ord_11, ord_12, ord_13, ord_14, ord_15,
+      ord_16, ord_17, ord_18, ord_19, ord_20, ord_21, ord_22
+    )
+  ) %>%
   filter(if_any(-atu_id,~!is.na(.))) 
 
 # Discretely list ranges of motifs before expanding:
-# E.g. Reference to range of motifs in sequence not explicitly named (e.g. "F611.1.11�F611.1.15")
+# E.g. Explicitly list motifs in sequence when they 
+# are not explicitly named (e.g. "F611.1.11�F611.1.15")
+
 motif_ranges <- 
   atu_seq %>%
   filter(if_any(starts_with("ord_"),~str_detect(.,"�|ff"))) %>%
