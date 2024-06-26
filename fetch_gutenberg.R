@@ -33,10 +33,16 @@ lookup <-
     ~gutenberg_id, ~start_toc, ~stop_toc, ~start_text, ~stop_text,
     ############# | ######### | ######## | ########## | #########
     "4018",        14,         35,        98,          7548,
-    "2198",        23,         54,        61,          7188
+    "2198",        23,         54,        61,          7188,
+    "36241",       138,        188,       281,         4717,
+    "NA",          NA,         NA,        NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,
+    "NA",          NA,         NA,        NA,          NA
   )
 
-i <- 2
+i <- 3
 
 df <- gutenberg_download(lookup$gutenberg_id[i])
 
