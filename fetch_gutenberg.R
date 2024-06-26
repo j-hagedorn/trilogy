@@ -3,9 +3,9 @@ library(tidyverse); library(readxl); library(gutenbergr)
 x <- 
   read_excel(
     "data/process_files/tagged_folk_collections.xlsx",
-    col_names = c("site","price","rating","reviews","brand","name","type")
+    skip = 3
   ) %>%
-  select(site,name) %>%
+  select(site = Name,name = Link) %>%
   filter(str_detect(site,"\\.txt$")) %>%
   mutate(
     id = str_extract(site,"epub/\\s*(.*?)\\s*/pg"),
@@ -28,41 +28,59 @@ ref <-
 
 # Read in texts
 
+# Make a lookup table with the variables to read in each text consistently
+
 lookup <-
   tribble(
-    ~gutenberg_id, ~start_toc, ~stop_toc, ~start_text, ~stop_text,
-    ############# | ######### | ######## | ########## | #########
-    "4018",        14,         35,        98,          7548,
-    "2198",        23,         54,        61,          7188,
-    "36241",       138,        188,       281,         4717,
-    "NA",          NA,         NA,        NA,          NA,
-    "NA",          NA,         NA,        NA,          NA,
-    "NA",          NA,         NA,        NA,          NA,
-    "NA",          NA,         NA,        NA,          NA,
-    "NA",          NA,         NA,        NA,          NA
+    ~gutenberg_id, ~start_toc, ~stop_toc, ~start_text, ~stop_text, ~ignore_case,
+    ############# | ######### | ######## | ########## | ######### | ##########
+    "4018",        14,         35,        98,          7548,        F,
+    "2198",        23,         54,        61,          7188,        T,
+    "36241",       138,        188,       281,         4717,        NA,
+    "NA",          NA,         NA,        NA,          NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,          NA
   )
 
-i <- 3
+i <- 1
 
-df <- gutenberg_download(lookup$gutenberg_id[i])
+df <- 
+  gutenberg_download(lookup$gutenberg_id[i]) %>%
+  mutate(text = str_squish(text))
 
 toc <- 
   df %>% 
   slice(lookup$start_toc[i]:lookup$stop_toc[i]) %>% 
   mutate(
-    text = str_squish(text),
-    text = str_remove(text,"[0-9]+\\."),
+    text = str_remove(text,"^[0-9]+\\."),
     text = str_extract(text, "[^\\.]+"),
     text = str_squish(text)
   ) %>%
+  select(text) %>%
   .$text
+
+library(fuzzyjoin)
+
+y <- 
+  df %>%
+  stringdist_left_join(
+    toc,by = "text",method = "jw", 
+    max_dist = 0.2, distance_col = "dist"
+  )
 
 y <- 
   df %>%
   mutate(
-    text = str_squish(text),
     tale = if_else(
-      str_detect(text,regex(paste(toc,collapse = "|"),ignore_case = T)),
+      str_detect(
+        text,
+        regex(
+          paste(toc,collapse = "|"),
+          ignore_case = lookup$ignore_case[i]
+        )
+      ),
       text,NA_character_
     )
   ) %>%
