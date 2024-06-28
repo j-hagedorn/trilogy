@@ -101,11 +101,25 @@ lookup <-
     # "35564",       87,         160,       189,         2875,        T,
     "36039",       51,         78,        86,          2722,        T,
     "36241",       138,        188,       281,         4717,        F,
+    "36385",       170,        266,       363,         10893,       T,
+    "36540",       13,         56,        68,          7888,        T,
+    "36668",       57,         69,        76,          2691,        T,
+    # "36923",       102,        145,       459,         4048,        T,
+    # "37002",       72,         104,       200,         7227,        T,
+    "37472",       107,        116,       163,         3187,        T,
+    "NA",          NA,         NA,        NA,          NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,          NA,
+    "NA",          NA,         NA,        NA,          NA,          NA,
     "NA",          NA,         NA,        NA,          NA,          NA
   )
 
-i <- 57
-i <- 1
+i <- 61
 
 combo_df <- tibble()
 combo_toc <- tibble()
@@ -136,7 +150,7 @@ for (i in 1:3) {
     mutate(line = row_number()) %>%
     stringdist_left_join(
       toc %>% select(text),
-      by = "text",method = "jw", 
+      by = "text", method = "jw", 
       max_dist = 0.2, distance_col = "dist",
       ignore_case = lookup$ignore_case[i]
     ) %>%
