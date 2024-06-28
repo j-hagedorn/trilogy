@@ -1,4 +1,4 @@
-library(tidyverse); library(readxl); library(gutenbergr); library(fuzzyjoin)
+library(tidyverse); library(readxl); library(gutenbergr); library(fuzzyjoin); library(stringdist)
 
 marked <- 
   read_excel(
@@ -105,6 +105,7 @@ lookup <-
   )
 
 i <- 57
+i <- 1
 
 combo_df <- tibble()
 combo_toc <- tibble()
@@ -146,7 +147,10 @@ for (i in 1:3) {
     fill(tale) %>% 
     slice(lookup$start_text[i]:lookup$stop_text[i]) %>%
     filter(text != "") %>%
-    filter(text != tale) %>%
+    mutate(
+      str_diff = stringdist(str_to_upper(text),str_to_upper(tale), method = "jw")
+    ) %>%
+    filter(str_diff > 0.16) %>%
     group_by(gutenberg_id,tale) %>%
     summarize(text = paste(text,collapse = " ")) %>%
     ungroup()
