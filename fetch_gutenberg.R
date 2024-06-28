@@ -1,6 +1,6 @@
 library(tidyverse); library(readxl); library(gutenbergr); library(fuzzyjoin)
 
-x <- 
+marked <- 
   read_excel(
     "data/process_files/tagged_folk_collections.xlsx",
     skip = 3
@@ -17,7 +17,7 @@ x <-
 # https://www.gutenberg.org/ebooks/bookshelf/37
 
 ref <-
-  gutenberg_works(gutenberg_id %in% x$id) %>%
+  gutenberg_works(gutenberg_id %in% marked$id) %>%
   distinct(gutenberg_id,.keep_all = T) %>%
   mutate(
     link = paste0(
@@ -25,6 +25,8 @@ ref <-
       gutenberg_id,"/pg",gutenberg_id,".txt"
     )
   )
+
+rm(marked)
 
 # Read in texts
 
@@ -104,43 +106,57 @@ lookup <-
 
 i <- 57
 
-df <- 
-  gutenberg_download(lookup$gutenberg_id[i]) %>%
-  mutate(text = str_squish(text))
+combo_df <- tibble()
+combo_toc <- tibble()
 
-toc <- 
-  df %>% 
-  slice(lookup$start_toc[i]:lookup$stop_toc[i]) %>% 
-  mutate(
-    # Remove leading numbers
-    text = str_remove(text,"^[0-9]+\\."),
-    # Remove Roman numerals
-    text = str_remove(text,"^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})\\."),
-    # Remove trailing (page) numbers
-    text = str_remove(text,"[0-9]+$"),
-    text = str_squish(text)
-  ) %>%
-  filter(!is.na(text)) %>%
-  filter(text != "")
+for (i in 1:3) {
+  
+  df <- 
+    gutenberg_download(lookup$gutenberg_id[i]) %>%
+    mutate(text = str_squish(text))
+  
+  toc <- 
+    df %>% 
+    slice(lookup$start_toc[i]:lookup$stop_toc[i]) %>% 
+    mutate(
+      # Remove leading numbers
+      text = str_remove(text,"^[0-9]+\\."),
+      # Remove Roman numerals
+      text = str_remove(text,"^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})\\."),
+      # Remove trailing (page) numbers
+      text = str_remove(text,"[0-9]+$"),
+      text = str_squish(text)
+    ) %>%
+    filter(!is.na(text)) %>%
+    filter(text != "")
+  
+  y <- 
+    df %>%
+    mutate(line = row_number()) %>%
+    stringdist_left_join(
+      toc %>% select(text),
+      by = "text",method = "jw", 
+      max_dist = 0.2, distance_col = "dist",
+      ignore_case = lookup$ignore_case[i]
+    ) %>%
+    rename(text = text.x, tale = text.y) %>%
+    group_by(gutenberg_id,text,line) %>%
+    filter(dist == min(dist,na.rm = T) | is.na(dist)) %>%
+    ungroup() %>%
+    fill(tale) %>% 
+    slice(lookup$start_text[i]:lookup$stop_text[i]) %>%
+    filter(text != "") %>%
+    filter(text != tale) %>%
+    group_by(gutenberg_id,tale) %>%
+    summarize(text = paste(text,collapse = " ")) %>%
+    ungroup()
+  
+  combo_df <- combo_df %>% bind_rows(y)
+  combo_toc <- combo_toc %>% bind_rows(toc)
+  
+}
 
-y <- 
-  df %>%
-  mutate(line = row_number()) %>%
-  stringdist_left_join(
-    toc %>% select(text),
-    by = "text",method = "jw", 
-    max_dist = 0.2, distance_col = "dist",
-    ignore_case = lookup$ignore_case[i]
-  ) %>%
-  rename(text = text.x, tale = text.y) %>%
-  group_by(gutenberg_id,text,line) %>%
-  filter(dist == min(dist,na.rm = T) | is.na(dist)) %>%
-  ungroup() %>%
-  fill(tale) %>% 
-  slice(lookup$start_text[i]:lookup$stop_text[i]) %>%
-  filter(text != "") %>%
-  filter(text != tale) %>%
-  group_by(gutenberg_id,tale) %>%
-  summarize(text = paste(text,collapse = " ")) %>%
-  ungroup()
+
+
+
   
