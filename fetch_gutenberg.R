@@ -68,7 +68,17 @@ lookup <-
     # "18450",       126,        208,       650,         6943,        T,
     "18674",       49,         77,        117,         5195,        T,
     # "19713",       159,        200,       206,         6130,        F,
-    "NA",          NA,         NA,        NA,          NA,          NA,
+    "19994",       34,         179,       191,         4558,        T,
+    "22072",       71,         133,       138,         5106,        T,
+    "22096",       66,         133,       733,         3574,        F,
+    "22420",       63,         185,       197,         4212,        T,
+    "22693",       214,        280,       331,         9732,        F,
+    "24473",       89,         92,        148,         989,         F,
+    "24569",       85,         150,       175,         3252,        F,
+    "24714",       81,         115,       122,         2453,        T,
+    "24811",       73,         93,        241,         3873,        F,
+    "24948",       144,        221,       373,         4696,        T,
+    "24978",       65,         101,       111,         4123,        F,
     "NA",          NA,         NA,        NA,          NA,          NA,
     "NA",          NA,         NA,        NA,          NA,          NA,
     "NA",          NA,         NA,        NA,          NA,          NA,
@@ -79,7 +89,7 @@ lookup <-
     "NA",          NA,         NA,        NA,          NA,          NA
   )
 
-i <- 31
+i <- 41
 
 df <- 
   gutenberg_download(lookup$gutenberg_id[i]) %>%
@@ -89,9 +99,12 @@ toc <-
   df %>% 
   slice(lookup$start_toc[i]:lookup$stop_toc[i]) %>% 
   mutate(
+    # Remove leading numbers
     text = str_remove(text,"^[0-9]+\\."),
     # Remove Roman numerals
     text = str_remove(text,"^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})\\."),
+    # Remove trailing (page) numbers
+    text = str_remove(text,"[0-9]+$"),
     text = str_squish(text)
   ) %>%
   filter(!is.na(text)) %>%
