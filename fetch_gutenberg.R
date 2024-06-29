@@ -107,24 +107,24 @@ lookup <-
     # "36923",       102,        145,       459,         4048,        T,
     # "37002",       72,         104,       200,         7227,        T,
     "37472",       107,        116,       163,         3187,        T,
-    "NA",          NA,         NA,        NA,          NA,          NA,
-    "NA",          NA,         NA,        NA,          NA,          NA,
-    "NA",          NA,         NA,        NA,          NA,          NA,
-    "NA",          NA,         NA,        NA,          NA,          NA,
-    "NA",          NA,         NA,        NA,          NA,          NA,
-    "NA",          NA,         NA,        NA,          NA,          NA,
-    "NA",          NA,         NA,        NA,          NA,          NA,
+    "37532",       143,        201,       206,         7497,        T,
+    # "37884",       56,         87,        122,         4299,        T,
+    # "38112",       175,        243,       335,         7174,        T,
+    "38339",       46,         135,       301,         2838,        F,
+    "38488",       133,        154,       231,         6559,        T,
+    # "42981",       2595,       2750,      2763,        12382,       T,
+    "44536",       141,        187,       201,         5475,        T,
     "NA",          NA,         NA,        NA,          NA,          NA,
     "NA",          NA,         NA,        NA,          NA,          NA,
     "NA",          NA,         NA,        NA,          NA,          NA
   )
 
-i <- 61
+i <- 65
 
 combo_df <- tibble()
 combo_toc <- tibble()
 
-for (i in 1:3) {
+for (i in 1:62) {
   
   df <- 
     gutenberg_download(lookup$gutenberg_id[i]) %>%
