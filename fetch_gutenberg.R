@@ -135,9 +135,7 @@ lookup <-
     "51762",       78,         118,       129,         3757,        T,
     "58816",       101,        157,       166,         5349,        F,
     "60165",       57,         66,        2224,        8667,        T,
-    "66443",       81,         89,        124,         3167,        T,
-    "NA",          NA,         NA,        NA,          NA,          NA,
-    "NA",          NA,         NA,        NA,          NA,          NA
+    "66443",       81,         89,        124,         3167,        T
   )
 
 i <- 75
@@ -145,7 +143,7 @@ i <- 75
 combo_df <- tibble()
 combo_toc <- tibble()
 
-for (i in 1:62) {
+for (i in 1:nrow(lookup)) {
   
   df <- 
     gutenberg_download(lookup$gutenberg_id[i]) %>%
@@ -195,7 +193,7 @@ for (i in 1:62) {
   
 }
 
-
+write_rds(combo_df,"data/aft_v2.rds")
 
 
   
