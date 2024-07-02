@@ -141,31 +141,27 @@ lookup <-
     "5160",        12,         23,        294,         9503,        T,         F,
     "5314",        13,         224,       228,         25109,       F,         F,
     "30973",       77,         91,        183,         4504,        F,         T,
-    "677",         NA,         NA,        NA,          NA,          NA,        NA,
-    "13725",       NA,         NA,        NA,          NA,          NA,        NA,
-    "14726",       NA,         NA,        NA,          NA,          NA,        NA,
-    "20552",       NA,         NA,        NA,          NA,          NA,        NA,
-    "20916",       NA,         NA,        NA,          NA,          NA,        NA,
-    "24737",       NA,         NA,        NA,          NA,          NA,        NA,
-    "27467",       NA,         NA,        NA,          NA,          NA,        NA,
-    "28497",       NA,         NA,        NA,          NA,          NA,        NA,
-    "29551",       NA,         NA,        NA,          NA,          NA,        NA,
-    "30109",       NA,         NA,        NA,          NA,          NA,        NA,
-    "32572",       NA,         NA,        NA,          NA,          NA,        NA,
-    "34206",       NA,         NA,        NA,          NA,          NA,        NA,
-    "37488",       NA,         NA,        NA,          NA,          NA,        NA,
-    "37668",       NA,         NA,        NA,          NA,          NA,        NA,
-    "39195",       NA,         NA,        NA,          NA,          NA,        NA,
-    "39250",       NA,         NA,        NA,          NA,          NA,        NA,
-    "44746",       NA,         NA,        NA,          NA,          NA,        NA,
-    "44935",       NA,         NA,        NA,          NA,          NA,        NA,
-    "45214",       NA,         NA,        NA,          NA,          NA,        NA,
-    "46863",       NA,         NA,        NA,          NA,          NA,        NA,
-    "48771",       NA,         NA,        NA,          NA,          NA,        NA,
-    "48908",       NA,         NA,        NA,          NA,          NA,        NA,
-    "57265",       NA,         NA,        NA,          NA,          NA,        NA,
-    "57826",       NA,         NA,        NA,          NA,          NA,        NA,
+    "677",         243,        260,       282,         4888,        F,         T,
+    "13725",       44,         84,        418,         6627,        T,         T,
+    "20552",       64,         98,        105,         7161,        T,         T,
+    "20916",       159,        178,       284,         10370,       F,         T,
+    "24737",       111,        202,       209,         7191,        T,         F,
+    "27467",       42,         70,        148,         3187,        T,         T,
+    "29551",       28,         76,        153,         6534,        F,         T,
+    "30109",       33,         68,        142,         5216,        T,         T,
+    "32572",       58,         86,        109,         7180,        F,         T,
+    "37488",       127,        153,       188,         2268,        F,         T,
+    "39195",       50,         68,        256,         5875,        F,         T,
+    "39250",       96,         152,       326,         12330,       T,         F,
+    "44746",       56,         83,        1690,        10410,       T,         F,
+    "44935",       198,        400,       441,         5391,        T,         F,
+    "45214",       170,        252,       265,         6710,        T,         T,
+    "46863",       99,         137,       234,         2185,        T,         T,
+    "48771",       454,        564,       585,         15377,       T,         F,
+    "48908",       44,         65,        78,          2855,        T,         F
   )
+
+# Update reference table
 
 ref <- 
   ref %>%
@@ -176,16 +172,20 @@ ref <-
     !gutenberg_id %in% c(
       "12545", "15250", "29287", "29773", "34704", "36127", "38064", "38688", 
       "41148", "42390", "44430", "44638", "45279", "46501", "51275", "53080",
-      "55025", "56597", "67426", "68225", "9914", "24421","40588"
+      "55025", "56597", "67426", "68225", "9914", "24421", "40588", "14726",
+      "28497", "34206", "37668", "57265", "57826"
     )
   )
 
-i <- 106
+# i <- 124
+
+lookup <- ref %>% filter(clean)
+rm(ref)
 
 combo_df <- tibble()
 combo_toc <- tibble()
 
-for (i in 1:nrow(lookup %>% filter(clean))) {
+for (i in 1:nrow(lookup)) {
   
   df <- 
     gutenberg_download(lookup$gutenberg_id[i]) %>%
@@ -233,9 +233,26 @@ for (i in 1:nrow(lookup %>% filter(clean))) {
   combo_df <- combo_df %>% bind_rows(y)
   combo_toc <- combo_toc %>% bind_rows(toc)
   
+  rm(df); rm(toc); rm(y)
+  
 }
 
-write_rds(combo_df,"data/aft_v2.rds")
+df <- 
+  combo_df %>%
+  mutate(
+    n_words = str_count(text, '\\w+'),
+    n_sentences = lengths(quanteda::tokens(text, what = "sentence"))
+  ) %>%
+  filter(n_words >= 66) %>%
+  mutate(
+    tale = str_to_title(tale),
+    # Remove leading numbers
+    text = str_remove(text,"^[0-9]+\\."),
+    # Remove Roman numerals
+    text = str_remove(text,"^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})\\.")
+  )
+
+write_rds(df,"data/aft_v2.rds")
 
 
   
