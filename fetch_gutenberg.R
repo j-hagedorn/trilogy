@@ -252,6 +252,17 @@ df <-
     text = str_remove(text,"^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})\\.")
   )
 
+# Remove bracketed numbers [1]
+# Remove [Illustration]
+# Remove leading text which almost matches title
+# Remove 'CHAPTER #'
+# Remove , and . from tale title
+# Remove provenance from tale title
+# Remove Roman numerals from tale title
+# Remove text with _ surrounding it?
+# Find texts that end with : indicating that we did not get all the text
+
+
 write_rds(df,"data/aft_v2.rds")
 
 
